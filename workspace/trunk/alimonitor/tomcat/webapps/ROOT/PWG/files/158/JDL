@@ -1,0 +1,32 @@
+Executable = "aliroot_new";
+Jobtag={"comment: production of Jpsi in Central Barrel with 7 TeV differential distributions w/ realistic conditions"};
+
+Packages={"VO_ALICE@AliRoot::v4-18-Rev-08","VO_ALICE@GEANT3::v1-11-8","VO_ALICE@ROOT::v5-26-00a-1","VO_ALICE@APISCONFIG::V1.1x"};
+
+TTL = "72000";
+
+#Requirements = (other.CE=="Alice::Bari::LCG");
+
+Validationcommand ="/alice/cern.ch/user/a/aliprod/prod2007/configs_pbpb_hijing/validation.sh";
+
+InputFile= {"LF:/alice/cern.ch/user/b/brunog/JpsiFeb2010/Config.C",
+            "LF:/alice/cern.ch/user/b/brunog/JpsiFeb2010/simrun.C",
+            "LF:/alice/cern.ch/user/b/brunog/JpsiFeb2010/sim.C",
+            "LF:/alice/cern.ch/user/b/brunog/JpsiFeb2010/rec.C",
+            "LF:/alice/cern.ch/user/b/brunog/JpsiFeb2010/tag.C",
+            "LF:/alice/cern.ch/user/b/brunog/JpsiFeb2010/CreateAODfromESD.C",
+            "LF:/alice/cern.ch/user/b/brunog/JpsiFeb2010/CheckESD.C"};
+
+OutputArchive={"log_archive:stdout,stderr,*.log@ALICE::BARI::SE","root_archive.zip:galice.root,Kinematics.root,TrackRefs.root,AliAODs.root,AliESDs.root,*QA*.root@ALICE::BARI::SE"};
+OutputFile={"Run*.root@ALICE::BARI::SE"};
+
+OutputDir="/alice/cern.ch/user/b/brunog/JpsiFeb2010/out/$1/#alien_counter_03i#";
+
+JDLVariables={"Packages", "OutputDir"};
+GUIDFILE="guid.txt";
+
+splitarguments="simrun.C --run $1 --event #alien_counter# --process kJPsi7TeV --field k5kG --energy 7000";
+split="production:1-250";
+#split="production:1-15";
+
+Workdirectorysize={"10000MB"};

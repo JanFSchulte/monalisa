@@ -1,0 +1,1 @@
+/cvmfs/cms.cern.ch/slc5_amd64_gcc481/cms/cmssw/CMSSW_7_2_0_pre6/external/slc5_amd64_gcc481/bin/root

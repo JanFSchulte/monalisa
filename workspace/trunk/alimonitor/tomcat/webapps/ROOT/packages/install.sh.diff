@@ -1,0 +1,45 @@
+5,27d4
+< check_library(){
+<     lib=$1       ; shift
+<     libdirl=$1   ; shift
+<     libdirs="$*"
+<     
+<     for i in $libdirs ; do 
+< 	if [ -f "$i/$lib" ] ; then
+< 	    filetype=`stat -c %F $i/$lib`
+< 	    
+< 	    if [ "$filetype" = "symbolic link" ] ; then
+< 		filelink=`stat -c %N "$i/$lib"`
+< 		cnt=`echo "$filelink" | grep -c 62`
+< 
+< 		if [ "$cnt" = "1" ] ; then
+< 		    libjpeg="$i/$lib"
+< 		    break;
+< 		fi
+< 
+< 	    fi
+< 	fi
+<     done
+< }
+< 
+69,88d45
+< if [ "$SO" == "Darwin" ] ; then
+<     echo "Darwin platform detected : checking for required libraries"
+<     echo "Checking for libjpeg.62.dylib"
+<     
+<     libpjeg=""
+<     
+<     check_library "libjpeg.dylib" "/usr/lib" "/sw/lib" "/opt/local/lib"
+< 
+<     if [ "x$libjpeg" != "x" ] ; then
+< 	echo "libjpeg.62.dylib found in $libjpeg"
+<     else
+< 	echo "libjpeg.62.dylib not found"
+< 	echo "Please install libjpeg 6b-18"
+< 	exit 1
+<     fi
+< fi
+< 
+< 
+< 
+< 

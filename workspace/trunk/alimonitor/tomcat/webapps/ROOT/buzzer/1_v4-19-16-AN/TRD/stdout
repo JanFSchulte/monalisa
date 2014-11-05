@@ -1,0 +1,1027 @@
+Test: ClusterMonitor is at ui01-alice.cr.cnaf.infn.it:8084
+Execution machine:  wn-204-10-05-01-b.cr.cnaf.infn.it
+*****************************************************************
+* APISCONFIG V1.1x                                               *
+* Setting up close SE ....                                      *
+* Setting up API endpoints .....                                *
+* Setting up API PATH and LD_LIBRARY_PATH for shipped library.. *
+* PATH                       => /opt/exp_software/alice/SL5/alien.v2-18.28/bin:/opt/exp_software/alice/SL5/alien.v2-18.28/x86_64-unknown-linux-gnu/4.1.2/bin:/opt/exp_software/alice/SL5/alien.v2-18.28/api/bin:/opt/exp_software/alice/SL5/alien.v2-18.28/globus/bin:/usr/share/lsf/7.0/linux2.6-glibc2.3-x86_64/etc:/usr/share/lsf/7.0/linux2.6-glibc2.3-x86_64/bin:/opt/globus/bin:/opt/globus/sbin:/usr/kerberos/bin:/opt/d-cache/srm/bin:/opt/d-cache/dcap/bin:/opt/edg/bin:/opt/glite/bin:/opt/lcg/bin:/bin:/usr/bin/:/usr/mbin:/local/bin:/usr/local:/usr/ucb:/usr/local/yamss/bin:/home/alicesgm004/bin:/opt/edg/bin:/opt/edg/sbin:/opt/lsf/bin:/opt/lsf/etc:/usr/local/yamss/bin:/usr/local/yamss/bin
+* LD_LIBRARY_PATH            => /lib:/usr/lib:/opt/exp_software/alice/SL5/alien.v2-18.28/lib:/opt/exp_software/alice/SL5/alien.v2-18.28/api/lib:/opt/exp_software/alice/SL5/alien.v2-18.28/globus/lib:/opt/exp_software/alice/SL5/alien.v2-18.28/lib:/opt/exp_software/alice/SL5/alien.v2-18.28/lib64:/opt/exp_software/alice/SL5/alien.v2-18.28/lib/mysql:/opt/exp_software/alice/SL5/alien.v2-18.28/x86_64-unknown-linux-gnu/4.1.2/lib:/opt/globus/lib:/opt/d-cache/dcap/lib:/opt/d-cache/dcap/lib64:/opt/glite/lib:/opt/glite/lib64:/opt/globus/lib:/opt/lcg/lib:/opt/lcg/lib64:/usr/share/lsf/7.0/linux2.6-glibc2.3-x86_64/lib::/opt/classads/lib64/:/opt/c-ares/lib/ /opt/exp_software/alice/SL5/alien.v2-18.28/lib:/opt/exp_software/alice/SL5/alien.v2-18.28/api/lib:/opt/exp_software/alice/SL5/alien.v2-18.28/globus/lib:/opt/exp_software/alice/SL5/alien.v2-18.28/lib:/opt/exp_software/alice/SL5/alien.v2-18.28/lib64:/opt/exp_software/alice/SL5/alien.v2-18.28/lib/mysql:/opt/globus/lib
+* GCLIENT_NOGSI              => 1
+* GCLIENT_NOPROMPT           => 1
+* GCLIENT_COMMAND_MAXWAIT    => 1800
+* GCLIENT_COMMAND_RETRY      => 50
+* GCLIENT_SERVER_RESELECT    => 4
+* GCLIENT_SERVER_RECONNECT   => 2
+* GCLIENT_RETRY_DAMPING      => 4.0
+* GCLIENT_RETRY_SLEEPTIME    => 2
+*****************************************************************
+  GCLIENT_SERVER_LIST        => 137.138.99.170:10000|137.138.99.175:10000|137.138.99.167:10000|
+*****************************************************************
+  alien_CLOSE_SE             => ALICE::CNAF::SE
+*****************************************************************
+Setting the environment for ROOT
+Setting ROOTSYS to /opt/exp_software/alice/SL5/packages/VO_ALICE/ROOT/v5-26-00b-6/v5-26-00b-6
+Setting the environment for ROOT
+Setting ROOTSYS to /opt/exp_software/alice/SL5/packages/VO_ALICE/ROOT/v5-26-00b-6/v5-26-00b-6
+Setting GEANT3
+Setting AliROOT to /opt/exp_software/alice/SL5/packages/VO_ALICE/AliRoot/v4-19-16-AN
+=========================================
+############## PATH : ##############
+/opt/exp_software/alice/SL5/packages/VO_ALICE/AliRoot/v4-19-16-AN/v4-19-16-AN/bin/tgt_linuxx8664gcc:/opt/exp_software/alice/SL5/packages/VO_ALICE/ROOT/v5-26-00b-6/v5-26-00b-6/bin:/opt/exp_software/alice/SL5/packages/VO_ALICE/ROOT/v5-26-00b-6/v5-26-00b-6/bin:/opt/exp_software/alice/SL5/alien.v2-18.28/bin:/opt/exp_software/alice/SL5/alien.v2-18.28/x86_64-unknown-linux-gnu/4.1.2/bin:/opt/exp_software/alice/SL5/alien.v2-18.28/api/bin:/opt/exp_software/alice/SL5/alien.v2-18.28/globus/bin:/usr/share/lsf/7.0/linux2.6-glibc2.3-x86_64/etc:/usr/share/lsf/7.0/linux2.6-glibc2.3-x86_64/bin:/opt/globus/bin:/opt/globus/sbin:/usr/kerberos/bin:/opt/d-cache/srm/bin:/opt/d-cache/dcap/bin:/opt/edg/bin:/opt/glite/bin:/opt/lcg/bin:/bin:/usr/bin/:/usr/mbin:/local/bin:/usr/local:/usr/ucb:/usr/local/yamss/bin:/home/alicesgm004/bin:/opt/edg/bin:/opt/edg/sbin:/opt/lsf/bin:/opt/lsf/etc:/usr/local/yamss/bin:/usr/local/yamss/bin
+############## LD_LIBRARY_PATH : ##############
+/opt/exp_software/alice/SL5/packages/VO_ALICE/AliRoot/v4-19-16-AN/v4-19-16-AN/lib/tgt_linuxx8664gcc/:/opt/exp_software/alice/SL5/packages/VO_ALICE/GEANT3/v1-11-12/v1-11-12/lib/tgt_linuxx8664gcc/:/opt/exp_software/alice/SL5/packages/VO_ALICE/ROOT/v5-26-00b-6/v5-26-00b-6/lib:/opt/exp_software/alice/SL5/packages/VO_ALICE/ROOT/v5-26-00b-6/v5-26-00b-6/lib:/lib:/usr/lib:/opt/exp_software/alice/SL5/alien.v2-18.28/lib:/opt/exp_software/alice/SL5/alien.v2-18.28/api/lib:/opt/exp_software/alice/SL5/alien.v2-18.28/globus/lib:/opt/exp_software/alice/SL5/alien.v2-18.28/lib:/opt/exp_software/alice/SL5/alien.v2-18.28/lib64:/opt/exp_software/alice/SL5/alien.v2-18.28/lib/mysql:/opt/exp_software/alice/SL5/alien.v2-18.28/x86_64-unknown-linux-gnu/4.1.2/lib:/opt/globus/lib:/opt/d-cache/dcap/lib:/opt/d-cache/dcap/lib64:/opt/glite/lib:/opt/glite/lib64:/opt/globus/lib:/opt/lcg/lib:/opt/lcg/lib64:/usr/share/lsf/7.0/linux2.6-glibc2.3-x86_64/lib::/opt/classads/lib64/:/opt/c-ares/lib/
+############## ROOTSYS : ##############
+/opt/exp_software/alice/SL5/packages/VO_ALICE/ROOT/v5-26-00b-6/v5-26-00b-6
+############## which root : ##############
+/opt/exp_software/alice/SL5/packages/VO_ALICE/ROOT/v5-26-00b-6/v5-26-00b-6/bin/root
+############## ALICE_ROOT : ##############
+/opt/exp_software/alice/SL5/packages/VO_ALICE/AliRoot/v4-19-16-AN/v4-19-16-AN
+############## which aliroot : ##############
+/opt/exp_software/alice/SL5/packages/VO_ALICE/AliRoot/v4-19-16-AN/v4-19-16-AN/bin/tgt_linuxx8664gcc/aliroot
+############## system limits : ##############
+core file size          (blocks, -c) 0
+data seg size           (kbytes, -d) unlimited
+scheduling priority             (-e) 0
+file size               (blocks, -f) unlimited
+pending signals                 (-i) 204800
+max locked memory       (kbytes, -l) 32
+max memory size         (kbytes, -m) unlimited
+open files                      (-n) 1024
+pipe size            (512 bytes, -p) 8
+POSIX message queues     (bytes, -q) 819200
+real-time priority              (-r) 0
+stack size              (kbytes, -s) 16000
+cpu time               (seconds, -t) unlimited
+max user processes              (-u) 204800
+virtual memory          (kbytes, -v) unlimited
+file locks                      (-x) unlimited
+############## memory : ##############
+             total       used       free     shared    buffers     cached
+Mem:         24098      19097       5000          0        909      13931
+-/+ buffers/cache:       4256      19841
+Swap:        15264          0      15264
+=========================================
+  *******************************************
+  *                                         *
+  *        W E L C O M E  to  R O O T       *
+  *                                         *
+  *   Version  5.26/00b   9 February 2010   *
+  *                                         *
+  *  You are welcome to visit our Web site  *
+  *          http://root.cern.ch            *
+  *                                         *
+  *******************************************
+
+ROOT 5.26/00b (tags/v5-26-00b@32327, May 25 2010, 14:00:02 on linuxx8664gcc)
+
+CINT/ROOT C/C++ Interpreter version 5.17.00, Dec 21, 2008
+Type ? for help. Commands must be C++ statements.
+Enclose multiple statements between { }.
+
+Processing TaskBuzzer.C("TRD","/alice/cern.ch/user/a/alitrain/buzzer/119846_20chk.xml")...
+Running buzzer with: EVstat+TRD
+=> autoconfigure ca-dir to /opt/exp_software/alice/SL5/packages/VO_ALICE/ROOT/v5-26-00b-6/v5-26-00b-6/share/certificates
+=> Trying to connect to Server [1] root://137.138.99.175:10000 as User alicesgm004 
+***************************************
+    Getting chain of trees esdTree
+***************************************
+!!! You requested FastRead option. Using xrootd flags to reduce timeouts. Note that this may skip some files that could be accessed !!!I-AliPhysicsSelectionTask::AliPhysicsSelectionTask: Physics Event Selection enabled.
+I-AliCDBManager::Init: AliEn classes enabled in Root. AliCDBGrid factory registered.
+E-AliCDBManager::Get: Run number neither specified in query nor set in AliCDBManager! Use AliCDBManager::SetRun.
+E-AliTRDcalibDB::GetCDBEntry: Failed to get entry: TRD/Calib/DCS
+E-AliTRDcalibDB::GetNumberOfTimeBinsDCS: No DCS object found!
+W-ACLiC: /opt/exp_software/alice/SL5/packages/VO_ALICE/AliRoot/v4-19-16-AN/v4-19-16-AN/PWG1/TRD/macros is not writeable!
+W-ACLiC: Output will be written to /home/alicesgm004/alicesgm004
+I-TUnixSystem::ACLiC: creating shared library /home/alicesgm004/alicesgm004//opt/exp_software/alice/SL5/packages/VO_ALICE/AliRoot/v4-19-16-AN/v4-19-16-AN/PWG1/TRD/macros/AddTRDcheckESD_C.so
+W-ACLiC: /opt/exp_software/alice/SL5/packages/VO_ALICE/AliRoot/v4-19-16-AN/v4-19-16-AN/PWG1/TRD/macros is not writeable!
+W-ACLiC: Output will be written to /home/alicesgm004/alicesgm004
+I-TUnixSystem::ACLiC: creating shared library /home/alicesgm004/alicesgm004//opt/exp_software/alice/SL5/packages/VO_ALICE/AliRoot/v4-19-16-AN/v4-19-16-AN/PWG1/TRD/macros/AddTRDinfoGen_C.so
+W-ACLiC: /opt/exp_software/alice/SL5/packages/VO_ALICE/AliRoot/v4-19-16-AN/v4-19-16-AN/PWG1/TRD/macros is not writeable!
+W-ACLiC: Output will be written to /home/alicesgm004/alicesgm004
+I-TUnixSystem::ACLiC: creating shared library /home/alicesgm004/alicesgm004//opt/exp_software/alice/SL5/packages/VO_ALICE/AliRoot/v4-19-16-AN/v4-19-16-AN/PWG1/TRD/macros/AddTRDcheckDET_C.so
+AddTRDcheckDET <- [0]="eventInfo" [1]="tracksBarrel" [2]="tracksSA" [3]="tracksKink"
+W-ACLiC: /opt/exp_software/alice/SL5/packages/VO_ALICE/AliRoot/v4-19-16-AN/v4-19-16-AN/PWG1/TRD/macros is not writeable!
+W-ACLiC: Output will be written to /home/alicesgm004/alicesgm004
+I-TUnixSystem::ACLiC: creating shared library /home/alicesgm004/alicesgm004//opt/exp_software/alice/SL5/packages/VO_ALICE/AliRoot/v4-19-16-AN/v4-19-16-AN/PWG1/TRD/macros/AddTRDefficiency_C.so
+AddTRDefficiency <- [0]="tracksBarrel" [1]="tracksSA" [2]="tracksKink"
+W-ACLiC: /opt/exp_software/alice/SL5/packages/VO_ALICE/AliRoot/v4-19-16-AN/v4-19-16-AN/PWG1/TRD/macros is not writeable!
+W-ACLiC: Output will be written to /home/alicesgm004/alicesgm004
+I-TUnixSystem::ACLiC: creating shared library /home/alicesgm004/alicesgm004//opt/exp_software/alice/SL5/packages/VO_ALICE/AliRoot/v4-19-16-AN/v4-19-16-AN/PWG1/TRD/macros/AddTRDresolution_C.so
+AddTRDresolution <- [0]="tracksBarrel" [1]="tracksSA" [2]="tracksKink"
+W-ACLiC: /opt/exp_software/alice/SL5/packages/VO_ALICE/AliRoot/v4-19-16-AN/v4-19-16-AN/PWG1/TRD/macros is not writeable!
+W-ACLiC: Output will be written to /home/alicesgm004/alicesgm004
+I-TUnixSystem::ACLiC: creating shared library /home/alicesgm004/alicesgm004//opt/exp_software/alice/SL5/packages/VO_ALICE/AliRoot/v4-19-16-AN/v4-19-16-AN/PWG1/TRD/macros/AddTRDcheckPID_C.so
+AddTRDcheckPID <- [0]="tracksBarrel" [1]="v0List"
+I-AliAnalysisManager::PrintStatus: System information will be collected each 100 events
+task: AliPhysicsSelectionTask  ACTIVE=0 POST_LOOP=0
+   INPUT #0: TChain <-  [cAUTO_INPUT]
+   OUTPUT #0: TTree ->  [NO CONTAINER]
+   OUTPUT #1: TList ->  [cstatsout]
+   Container: cstatsout  type: TList POST_LOOP=0    = Data producer: task AliPhysicsSelectionTask    = Consumer tasks: -none-
+Filename: EventStat_temp.root
+task: checkESD  ACTIVE=0 POST_LOOP=0
+   INPUT #0: TChain <-  [cAUTO_INPUT]
+   OUTPUT #0: TTree ->  [NO CONTAINER]
+   OUTPUT #1: TObjArray ->  [checkESD]
+   Container: checkESD  type: TObjArray POST_LOOP=0    = Data producer: task checkESD    = Consumer tasks: -none-
+Filename: QAresults.root  folder: TRD_Performance
+task: genInfo  ACTIVE=0 POST_LOOP=0
+   INPUT #0: TChain <-  [cAUTO_INPUT]
+   OUTPUT #0: TTree ->  [NO CONTAINER]
+   OUTPUT #1: AliTRDeventInfo ->  [eventInfo]
+   OUTPUT #2: TObjArray ->  [tracksBarrel]
+   OUTPUT #3: TObjArray ->  [tracksSA]
+   OUTPUT #4: TObjArray ->  [tracksKink]
+   OUTPUT #5: TObjArray ->  [v0List]
+   Container: eventInfo  type: AliTRDeventInfo POST_LOOP=0    = Data producer: task genInfo    = Consumer tasks: 
+Filename: 
+      task: checkDET  ACTIVE=0 POST_LOOP=0
+         INPUT #0: TChain <-  [cAUTO_INPUT]
+         INPUT #1: TObjArray <-  [tracksBarrel]
+         INPUT #2: AliTRDeventInfo <-  [eventInfo]
+         OUTPUT #0: TTree ->  [NO CONTAINER]
+         OUTPUT #1: TObjArray ->  [checkDET]
+         Container: checkDET  type: TObjArray POST_LOOP=0          = Data producer: task checkDET          = Consumer tasks: -none-
+Filename: QAresults.root  folder: TRD_Performance
+   Container: tracksBarrel  type: TObjArray POST_LOOP=0    = Data producer: task genInfo    = Consumer tasks: 
+Filename: 
+      task: checkDET  ACTIVE=0 POST_LOOP=0
+         INPUT #0: TChain <-  [cAUTO_INPUT]
+         INPUT #1: TObjArray <-  [tracksBarrel]
+         INPUT #2: AliTRDeventInfo <-  [eventInfo]
+         OUTPUT #0: TTree ->  [NO CONTAINER]
+         OUTPUT #1: TObjArray ->  [checkDET]
+         Container: checkDET  type: TObjArray POST_LOOP=0          = Data producer: task checkDET          = Consumer tasks: -none-
+Filename: QAresults.root  folder: TRD_Performance
+      task: TRDefficiency  ACTIVE=0 POST_LOOP=0
+         INPUT #0: TChain <-  [cAUTO_INPUT]
+         INPUT #1: TObjArray <-  [tracksBarrel]
+         OUTPUT #0: TTree ->  [NO CONTAINER]
+         OUTPUT #1: TObjArray ->  [TRDefficiency]
+         Container: TRDefficiency  type: TObjArray POST_LOOP=0          = Data producer: task TRDefficiency          = Consumer tasks: -none-
+Filename: QAresults.root  folder: TRD_Performance
+      task: TRDresolution  ACTIVE=0 POST_LOOP=0
+         INPUT #0: TChain <-  [cAUTO_INPUT]
+         INPUT #1: TObjArray <-  [tracksBarrel]
+         OUTPUT #0: TTree ->  [NO CONTAINER]
+         OUTPUT #1: TObjArray ->  [TRDresolution]
+         OUTPUT #2: TObjArray ->  [TRDresolutionCl2Trk]
+         OUTPUT #3: TObjArray ->  [TRDresolutionCl2MC]
+         Container: TRDresolution  type: TObjArray POST_LOOP=0          = Data producer: task TRDresolution          = Consumer tasks: -none-
+Filename: QAresults.root  folder: TRD_Performance
+         Container: TRDresolutionCl2Trk  type: TObjArray POST_LOOP=0          = Data producer: task TRDresolution          = Consumer tasks: -none-
+Filename: 
+         Container: TRDresolutionCl2MC  type: TObjArray POST_LOOP=0          = Data producer: task TRDresolution          = Consumer tasks: -none-
+Filename: 
+      task: checkPID  ACTIVE=0 POST_LOOP=0
+         INPUT #0: TChain <-  [cAUTO_INPUT]
+         INPUT #1: TObjArray <-  [tracksBarrel]
+         INPUT #2: TObjArray <-  [v0List]
+         OUTPUT #0: TTree ->  [NO CONTAINER]
+         OUTPUT #1: TObjArray ->  [checkPID]
+         OUTPUT #2: TObjArray ->  [InfoPID]
+         Container: checkPID  type: TObjArray POST_LOOP=0          = Data producer: task checkPID          = Consumer tasks: -none-
+Filename: QAresults.root  folder: TRD_Performance
+         Container: InfoPID  type: TObjArray POST_LOOP=0          = Data producer: task checkPID          = Consumer tasks: -none-
+Filename: 
+   Container: tracksSA  type: TObjArray POST_LOOP=0    = Data producer: task genInfo    = Consumer tasks: -none-
+Filename: 
+   Container: tracksKink  type: TObjArray POST_LOOP=0    = Data producer: task genInfo    = Consumer tasks: -none-
+Filename: 
+   Container: v0List  type: TObjArray POST_LOOP=0    = Data producer: task genInfo    = Consumer tasks: 
+Filename: 
+      task: checkPID  ACTIVE=0 POST_LOOP=0
+         INPUT #0: TChain <-  [cAUTO_INPUT]
+         INPUT #1: TObjArray <-  [tracksBarrel]
+         INPUT #2: TObjArray <-  [v0List]
+         OUTPUT #0: TTree ->  [NO CONTAINER]
+         OUTPUT #1: TObjArray ->  [checkPID]
+         OUTPUT #2: TObjArray ->  [InfoPID]
+         Container: checkPID  type: TObjArray POST_LOOP=0          = Data producer: task checkPID          = Consumer tasks: -none-
+Filename: QAresults.root  folder: TRD_Performance
+         Container: InfoPID  type: TObjArray POST_LOOP=0          = Data producer: task checkPID          = Consumer tasks: -none-
+Filename: 
+StartAnalysis ESDfiltering
+===== RUNNING LOCAL ANALYSIS ESDfiltering ON TREE esdTree
+->AliAnalysisSelector->Begin: Analysis manager restored
+->AliAnalysisSelector->SlaveBegin() after Restore
+->AliAnalysisManager::SlaveBegin()
+W-AliPhysicsSelectionTask::CreateOutputObjects: No AOD Event Handler connected.
+AliPhysicsSelectionTask::CreateOutputObjects
+W-AliTRDcheckESD::CreateOutputObjects: No AOD Event Handler connected.
+W-TROOT::Append: Replacing existing TH1: hPt4pos (Potential memory leak).
+W-AliTRDinfoGen::CreateOutputObjects: No AOD Event Handler connected.
+W-AliTRDcheckDET::CreateOutputObjects: No AOD Event Handler connected.
+Histos Adding 
+W-AliTRDefficiency::CreateOutputObjects: No AOD Event Handler connected.
+W-AliTRDresolution::CreateOutputObjects: No AOD Event Handler connected.
+W-AliTRDcheckPID::CreateOutputObjects: No AOD Event Handler connected.
+<-AliAnalysisManager::SlaveBegin()
+<-AliAnalysisSelector->SlaveBegin()
+->AliAnalysisSelector->Init()
+->AliAnalysisManager::Init(esdTree)
+I-TAlienFile::Open: Accessing image 1 of alien:///alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.10/AliESDs.root in SE <ALICE::CERN::ALICEDISK>
+I-TAlienFile::Open: Accessing image 1 of alien:///alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.190/AliESDs.root in SE <ALICE::CERN::ALICEDISK>
+I-TAlienFile::Open: Accessing image 1 of alien:///alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.200/AliESDs.root in SE <ALICE::CERN::ALICEDISK>
+I-TAlienFile::Open: Accessing image 1 of alien:///alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.210/AliESDs.root in SE <ALICE::CCIN2P3::SE>
+I-TAlienFile::Open: Accessing image 1 of alien:///alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.220/AliESDs.root in SE <ALICE::CERN::ALICEDISK>
+I-TAlienFile::Open: Accessing image 1 of alien:///alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.240/AliESDs.root in SE <ALICE::CCIN2P3::SE>
+I-TAlienFile::Open: Accessing image 1 of alien:///alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.250/AliESDs.root in SE <ALICE::CCIN2P3::SE>
+I-TAlienFile::Open: Accessing image 1 of alien:///alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.260/AliESDs.root in SE <ALICE::CCIN2P3::SE>
+I-TAlienFile::Open: Accessing image 1 of alien:///alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.270/AliESDs.root in SE <ALICE::CERN::ALICEDISK>
+I-TAlienFile::Open: Accessing image 1 of alien:///alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.280/AliESDs.root in SE <ALICE::CERN::ALICEDISK>
+I-TAlienFile::Open: Accessing image 1 of alien:///alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.30/AliESDs.root in SE <ALICE::CERN::ALICEDISK>
+I-TAlienFile::Open: Accessing image 1 of alien:///alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.100/AliESDs.root in SE <ALICE::CERN::ALICEDISK>
+I-TAlienFile::Open: Accessing image 1 of alien:///alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.310/AliESDs.root in SE <ALICE::CCIN2P3::SE>
+I-TAlienFile::Open: Accessing image 1 of alien:///alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.120/AliESDs.root in SE <ALICE::CERN::ALICEDISK>
+I-TAlienFile::Open: Accessing image 1 of alien:///alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.130/AliESDs.root in SE <ALICE::CERN::ALICEDISK>
+I-TAlienFile::Open: Accessing image 1 of alien:///alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.140/AliESDs.root in SE <ALICE::CNAF::SE>
+I-TAlienFile::Open: Accessing image 1 of alien:///alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.150/AliESDs.root in SE <ALICE::CERN::ALICEDISK>
+I-TAlienFile::Open: Accessing image 1 of alien:///alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.160/AliESDs.root in SE <ALICE::CERN::ALICEDISK>
+I-TAlienFile::Open: Accessing image 1 of alien:///alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.170/AliESDs.root in SE <ALICE::CERN::ALICEDISK>
+I-TAlienFile::Open: Accessing image 1 of alien:///alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.180/AliESDs.root in SE <ALICE::CNAF::SE>
+E-TTree::SetBranchStatus: unknown branch -> ESDfriend.
+<-AliAnalysisManager::Init(esdTree)
+<-AliAnalysisSelector->Init()
+->AliAnalysisManager::Notify() file: alien:///alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.180/AliESDs.root
+I-AliESDInputHandlerRP::Notify: Directory change alien:///alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.180/AliESDs.root 
+
+I-TAlienFile::Open: Accessing image 1 of alien:///alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.180/root_archive.zip in SE <ALICE::CNAF::SE>
+AliESDInputHandlerRP::Notify() Path: alien:///alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.180/
+E-AliESDInputHandlerRP::Init: AliESDInputHandlerRP: No file with RecPoints found in alien:///alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.180/ ! 
+
+I-AliESDInputHandlerRP::Notify: Directory change alien:///alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.180/AliESDs.root 
+
+I-TAlienFile::Open: Accessing image 1 of alien:///alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.180/AliESDfriends.root in SE <ALICE::CNAF::SE>
+I-AliESDInputHandlerRP::SwitchOnBranches: Branch ESDfriend switched on 
+
+<-AliAnalysisManager::Notify()
+I-TAlienFile::Open: Accessing image 1 of alien:///alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.10/AliESDs.root in SE <ALICE::CERN::ALICEDISK>
+E-TTree::SetBranchStatus: unknown branch -> ESDfriend.
+E-TTree::SetBranchStatus: unknown branch -> *ESDfriend*
+->AliAnalysisManager::Notify() file: alien:///alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.10/AliESDs.root
+I-AliESDInputHandlerRP::Notify: Directory change alien:///alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.10/AliESDs.root 
+
+I-TAlienFile::Open: Accessing image 1 of alien:///alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.10/root_archive.zip in SE <ALICE::CERN::ALICEDISK>
+AliESDInputHandlerRP::Notify() Path: alien:///alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.10/
+E-AliESDInputHandlerRP::Init: AliESDInputHandlerRP: No file with RecPoints found in alien:///alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.10/ ! 
+
+I-AliESDInputHandlerRP::Notify: Directory change alien:///alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.10/AliESDs.root 
+
+I-TAlienFile::Open: Accessing image 1 of alien:///alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.10/AliESDfriends.root in SE <ALICE::CERN::ALICEDISK>
+I-AliESDInputHandlerRP::SwitchOnBranches: Branch ESDfriend switched on 
+
+<-AliAnalysisManager::Notify()
+->AliAnalysisSelector::Process()
+MGR: Processing event #0
+E-AliPhysicsSelection::GetFillingScheme: Unknown filling scheme (run 119846)
+I-AliPhysicsSelection::Initialize: Initializing for run 119846
+E-AliPhysicsSelection::GetBXIDs: Unknown run 119846, using all BXs!
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #1
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #2
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #3
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #4
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #5
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #6
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #7
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #8
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #9
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #10
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #11
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #12
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #13
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #14
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #15
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #16
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #17
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #18
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #19
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #20
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #21
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #22
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #23
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #24
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #25
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #26
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #27
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #28
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #29
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #30
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #31
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #32
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #33
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #34
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #35
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #36
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #37
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #38
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #39
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #40
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #41
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #42
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #43
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #44
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #45
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #46
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #47
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #48
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #49
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #50
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #51
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #52
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #53
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #54
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #55
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #56
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #57
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #58
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #59
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #60
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #61
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #62
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #63
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #64
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #65
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #66
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #67
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #68
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #69
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #70
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #71
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #72
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #73
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #74
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #75
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #76
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #77
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #78
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #79
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #80
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #81
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #82
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #83
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #84
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #85
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #86
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #87
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #88
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #89
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #90
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #91
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #92
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #93
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #94
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #95
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #96
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #97
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #98
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #99
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #100
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #101
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #102
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #103
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #104
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #105
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #106
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #107
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #108
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #109
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #110
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #111
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #112
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #113
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #114
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #115
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #116
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #117
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #118
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #119
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #120
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #121
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #122
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #123
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #124
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #125
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #126
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #127
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #128
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #129
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #130
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #131
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #132
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #133
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #134
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #135
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #136
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #137
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #138
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #139
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #140
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #141
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #142
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #143
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #144
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #145
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #146
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #147
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #148
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #149
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #150
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #151
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #152
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #153
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #154
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #155
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #156
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #157
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #158
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #159
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #160
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #161
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #162
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #163
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #164
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #165
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #166
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #167
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #168
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #169
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #170
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #171
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #172
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #173
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #174
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #175
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #176
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #177
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #178
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #179
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #180
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #181
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #182
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #183
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #184
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #185
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #186
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #187
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #188
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #189
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #190
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #191
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #192
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #193
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #194
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #195
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #196
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #197
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #198
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #199
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #200
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #201
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #202
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #203
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #204
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #205
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #206
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #207
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #208
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #209
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #210
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #211
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #212
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #213
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #214
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #215
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #216
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #217
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #218
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #219
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #220
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #221
+ <message repeated 3 times>
+I-AliBackgroundSelection::BookClusterVsTrackletsHisto: Creating histos: hCvsTCuts_CINT1B-ABCE-NOPF-ALL, all and accepted
+I-AliBackgroundSelection::BookDeltaPhiHisto: Creating histos: hDeltaPhiCuts_CINT1B-ABCE-NOPF-ALL, all and accepted
+W-AliTRDcheckDET::PlotTrackStatus: No Track defined.
+W-AliTRDcheckDET::PlotTrackletStatus: No Track defined.
+W-AliTRDcheckDET::PlotNClustersTracklet: No Track defined.
+W-AliTRDcheckDET::PlotNClustersTrack: No Track defined.
+W-AliTRDcheckDET::PlotNTrackletsTrack: No Track defined.
+W-AliTRDcheckDET::PlotNTrackletsRowCross: No Track defined.
+W-AliTRDcheckDET::PlotFindableTracklets: No Track defined.
+W-AliTRDcheckDET::PlotNTracksSector: No Track defined.
+W-AliTRDcheckDET::PlotPHt: No Track defined.
+W-AliTRDcheckDET::PlotPHx: No Track defined.
+W-AliTRDcheckDET::PlotChi2: No Track defined.
+W-AliTRDcheckDET::PlotChargeCluster: No Track defined.
+W-AliTRDcheckDET::PlotChargeTracklet: No Track defined.
+W-AliTRDcheckDET::PlotTrackStatus: No Track defined.
+W-AliTRDcheckDET::PlotTrackletStatus: No Track defined.
+W-AliTRDcheckDET::PlotNClustersTracklet: No Track defined.
+W-AliTRDcheckDET::PlotNClustersTrack: No Track defined.
+W-AliTRDcheckDET::PlotNTrackletsTrack: No Track defined.
+W-AliTRDcheckDET::PlotNTrackletsRowCross: No Track defined.
+W-AliTRDcheckDET::PlotFindableTracklets: No Track defined.
+W-AliTRDcheckDET::PlotNTracksSector: No Track defined.
+W-AliTRDcheckDET::PlotPHt: No Track defined.
+W-AliTRDcheckDET::PlotPHx: No Track defined.
+W-AliTRDcheckDET::PlotChi2: No Track defined.
+W-AliTRDcheckDET::PlotChargeCluster: No Track defined.
+W-AliTRDcheckDET::PlotChargeTracklet: No Track defined.
+W-AliTRDcheckDET::PlotTrackStatus: No Track defined.
+W-AliTRDcheckDET::PlotTrackletStatus: No Track defined.
+W-AliTRDcheckDET::PlotNClustersTracklet: No Track defined.
+W-AliTRDcheckDET::PlotNClustersTrack: No Track defined.
+W-AliTRDcheckDET::PlotNTrackletsTrack: No Track defined.
+W-AliTRDcheckDET::PlotNTrackletsRowCross: No Track defined.
+W-AliTRDcheckDET::PlotFindableTracklets: No Track defined.
+W-AliTRDcheckDET::PlotNTracksSector: No Track defined.
+W-AliTRDcheckDET::PlotPHt: No Track defined.
+W-AliTRDcheckDET::PlotPHx: No Track defined.
+W-AliTRDcheckDET::PlotChi2: No Track defined.
+W-AliTRDcheckDET::PlotChargeCluster: No Track defined.
+W-AliTRDcheckDET::PlotChargeTracklet: No Track defined.
+W-AliTRDcheckDET::PlotTrackStatus: No Track defined.
+W-AliTRDcheckDET::PlotTrackletStatus: No Track defined.
+W-AliTRDcheckDET::PlotNClustersTracklet: No Track defined.
+W-AliTRDcheckDET::PlotNClustersTrack: No Track defined.
+W-AliTRDcheckDET::PlotNTrackletsTrack: No Track defined.
+W-AliTRDcheckDET::PlotNTrackletsRowCross: No Track defined.
+W-AliTRDcheckDET::PlotFindableTracklets: No Track defined.
+W-AliTRDcheckDET::PlotNTracksSector: No Track defined.
+W-AliTRDcheckDET::PlotPHt: No Track defined.
+W-AliTRDcheckDET::PlotPHx: No Track defined.
+W-AliTRDcheckDET::PlotChi2: No Track defined.
+W-AliTRDcheckDET::PlotChargeCluster: No Track defined.
+W-AliTRDcheckDET::PlotChargeTracklet: No Track defined.
+W-AliTRDcheckDET::PlotTrackStatus: No Track defined.
+W-AliTRDcheckDET::PlotTrackletStatus: No Track defined.
+W-AliTRDcheckDET::PlotNClustersTracklet: No Track defined.
+W-AliTRDcheckDET::PlotNClustersTrack: No Track defined.
+W-AliTRDcheckDET::PlotNTrackletsTrack: No Track defined.
+W-AliTRDcheckDET::PlotNTrackletsRowCross: No Track defined.
+W-AliTRDcheckDET::PlotFindableTracklets: No Track defined.
+W-AliTRDcheckDET::PlotNTracksSector: No Track defined.
+W-AliTRDcheckDET::PlotPHt: No Track defined.
+W-AliTRDcheckDET::PlotPHx: No Track defined.
+W-AliTRDcheckDET::PlotChi2: No Track defined.
+W-AliTRDcheckDET::PlotChargeCluster: No Track defined.
+W-AliTRDcheckDET::PlotChargeTracklet: No Track defined.
+W-AliTRDresolution::PlotMC: No MC defined. Results will not be available.
+<-AliAnalysisSelector::Process()
+->AliAnalysisSelector::Process()
+MGR: Processing event #222
+ <message repeated 4 times>
+E-AliTrackerBase::MeanMaterialBudget: No TGeo
+
+ <message repeated 2 times>
+W-AliTRDcheckDET::PlotPHt: No Track defined.
+======== TaskBuzzer.C finished with exit code: 0 ========
+############## memory after: ##############
+             total       used       free     shared    buffers     cached
+Mem:         24098      19217       4881          0        909      14031
+-/+ buffers/cache:       4276      19822
+Swap:        15264          0      15264
+Output files were not validated by the analysis manager

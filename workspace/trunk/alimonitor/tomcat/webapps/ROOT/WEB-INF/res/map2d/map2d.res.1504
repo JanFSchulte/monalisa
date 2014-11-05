@@ -1,0 +1,510 @@
+	<html>
+	<head>
+	<script type="text/javascript" src="/overlib/overlib.js"></script>
+	<title>MonALISA WEB Repository</title>
+	<style>
+	    a:link 		{font-family: verdana, arial, sans-serif; font-size: 11px; text-decoration: none; font-weight: normal; color: #0000cc;}
+	    a:hover 		{font-family: verdana, arial, sans-serif; font-size: 11px; text-decoration: none; font-weight: normal; color: #ff6600;}
+	    a:visited 		{font-family: verdana, arial, sans-serif; font-size: 11px; text-decoration: none; font-weight: normal; color: #0000cc;}
+	    a:visited:hover 	{font-family: verdana, arial, sans-serif; font-size: 11px; text-decoration: none; font-weight: normal; color: #ff6600;}
+	    a:visited:active	{font-family: verdana, arial, sans-serif; font-size: 11px; text-decoration: none; font-weight: normal; color: #0000cc;}
+	    a:active 		{font-family: verdana, arial, sans-serif; font-size: 11px; text-decoration: none; font-weight: normal; color: #0000cc;}
+	</style>
+	
+	<SCRIPT language="JavaScript1.2" type="text/JavaScript">
+	var IMG_WIDTH=800;
+	var IMG_HEIGHT=IMG_WIDTH/2;
+	var d3d=0;
+	var a3d=90;
+	var dx3d=.1;
+	
+	var posX, posY, lastX, lastY, theimage;
+	//theimage = "lupa.gif" //the 2nd image to be displayed
+	//Browser checking and syntax variables
+	var docLayers = (document.layers) ? true:false;
+	var docId = (document.getElementById) ? true:false;
+	var docAll = (document.all) ? true:false;
+	var docbitK = (docLayers) ? "document.layers['":(docId) ? "document.getElementById('":(docAll) ? "document.all['":"document."
+	var docbitendK = (docLayers) ? "']":(docId) ? "')":(docAll) ? "']":""
+	var stylebitK = (docLayers) ? "":".style"
+	var showbitK = (docLayers) ? "show":"visible"
+	var hidebitK = (docLayers) ? "hide":"hidden"
+	var ns6=document.getElementById&&!document.all;
+	var sit_home="http://monalisa4.cern.ch:8080/";
+	//Variables used in script
+	lastX = 0
+	lastY = 0
+	
+	var MAX_Y=8;
+	var MAX_X=16;
+	var width=MAX_X*2;
+	var height=width/2;
+	var x=-16;
+	var y=8;
+	var image2;
+	
+	var click_action=1;//action for mouse left click on image
+	
+	
+	function findPosX(obj)
+	{
+	var curleft = 0;
+	if (obj.offsetParent)
+	{
+		while (obj.offsetParent)
+		{
+		curleft += obj.offsetLeft
+		obj = obj.offsetParent;
+		}
+	}
+	else if (obj.x)
+		curleft += obj.x;
+	return curleft;
+	}
+	function findPosY(obj)
+	{
+	var curtop = 0;
+	if (obj.offsetParent)
+	{
+		while (obj.offsetParent)
+		{
+		curtop += obj.offsetTop
+		obj = obj.offsetParent;
+		}
+	}
+	else if (obj.y)
+		curtop += obj.y;
+	return curtop;
+	}
+	
+	//Collection of functions to get mouse position and place the images
+	function doCapture(e) 
+	{
+		posX = getMouseXPos(e)
+		posY = getMouseYPos(e)
+		image = document.getElementById("Map2D");
+		image_x = findPosX(image);
+		image_y = findPosY(image);
+		if ( posX>image_x && posX<image_x+IMG_WIDTH && posY>image_y && posY <image_y+IMG_HEIGHT ) {
+			positionID(posX, posY, "lupa");
+			showID("lupa");
+		} else
+			hideID("lupa");
+		lastX = posX;
+		lastY = posY;
+	}
+	// Get the horizontal position of the mouse
+	function getMouseXPos(e) {
+		if (document.layers||ns6)
+			return parseInt(e.pageX+10);
+		return (parseInt(event.clientX+10) + parseInt(document.body.scrollLeft));
+	}
+	// Get the vartical position of the mouse
+	function getMouseYPos(e) {
+		if (document.layers||ns6)
+			return parseInt(e.pageY)
+		return (parseInt(event.clientY) + parseInt(document.body.scrollTop))
+	}
+	
+	function positionID(x,y,id) {
+		eval(docbitK + id + docbitendK + stylebitK + ".left = " + x);
+		eval(docbitK + id + docbitendK + stylebitK + ".top = " + y);
+	}
+	function showID(id) {
+		eval(docbitK + id + docbitendK + stylebitK + ".visibility = '" + showbitK + "'");
+	}
+	function hideID(id) {
+		eval(docbitK + id + docbitendK + stylebitK + ".visibility = '" + hidebitK + "'");
+	}
+	
+	function capturebegin(){
+		//Let the browser know when the mouse moves
+		if (docLayers) {
+			document.captureEvents(Event.MOUSEMOVE)
+			document.onMouseMove = doCapture
+		} else {
+			document.onmousemove = doCapture
+		}
+	}
+	
+	function dimensiune_changed()
+	{
+		dimensiune_obj = document.getElementById("dimensiune");
+		valoare=dimensiune_obj.options[dimensiune_obj.selectedIndex].value;
+		new_w=0;
+		i=0;
+		for ( ; i< valoare.length; i++) {
+			car = valoare.charAt(i);
+			if  ( car>='0' && car <= '9' ) {
+				new_w=new_w*10+(car-'0');
+			} else if ( car=='x' ) {
+				i++;//pass over 'x'
+				break;
+			}
+			//else ignore
+		};
+		new_h=0;
+		for ( ; i< valoare.length; i++) {
+			car = valoare.charAt(i);
+			if  ( car>='0' && car <= '9' )
+				new_h=new_h*10+(car-'0');
+			//else ignore
+		};
+		if ( new_w>0 && new_h>0 ) {
+			IMG_WIDTH=new_w;
+			IMG_HEIGHT=IMG_WIDTH*.5;
+			zoom(0);
+		}
+	}
+	
+	//var	text = "";
+	function position_zoom()
+	{
+		alert(x);    
+		alert(y);
+		alert(lastX);
+		alert(lastY);
+	
+		image = document.getElementById("Map2D");
+//		text="<br>x ant="+x+" and y ant="+y;
+		if ( click_action==1 || click_action==-1 ) {
+		    imageX = findPosX(image);
+		    imageY = findPosY(image);
+			if ( d3d>0 ) {
+				//clicked on 3d map, so change coordinates
+				//gresit!!!...
+				ctg=1/Math.tan(a3d*Math.PI/180);
+				extraX = (lastY-0.66*IMG_HEIGHT)*ctg;
+				lastX = (lastX+extraX)/(IMG_WIDTH+2*extraX)*IMG_WIDTH;
+				while ( lastX < imageX )
+    				    lastX+=IMG_WIDTH;
+				while ( lastX > imageX+IMG_WIDTH )
+    				    lastX-=IMG_WIDTH;
+			}
+			x += (lastX - findPosX(image))*width/IMG_WIDTH - width*.5;
+			y += -(lastY - findPosY(image))*height/IMG_HEIGHT + height*.5;
+    		};
+		zoom(click_action);
+	}
+	function zoom1(dir)
+	{
+		dir=(dir?(dir<0?-1:1):0);
+		//limit zoom out
+		if ( width>MAX_X && dir<0 )
+			return;
+		//limit zoom in
+		if (width<MAX_X/128 && dir >0)
+			return;
+		//text+="<br>width="+width+" and height="+height;
+		//text+="<br>x="+x+" and y="+y;
+		//compute new widhts
+		ww = width*(dir?(dir<0?2:.5):1);
+		hh = height*(dir?(dir<0?2:.5):1);
+		//text+="<br>new width="+ww+" and new height="+hh;
+		//recompute new position
+		x+=(width-ww)*.5;
+		y+=(hh-height)*.5;
+		//text+="<br>new x="+x+" and new y="+y;
+		//set new widths
+		width=ww;
+		height=hh;
+		//height checking to limit map
+		if ( y > MAX_Y )
+			y = MAX_Y;
+		if ( y < -MAX_Y+height )
+			y = -MAX_Y+height;
+		//text+="<br>new y after correction="+y;
+		//document.getElementById("mesaje").innerHTML=text;
+		setImageForLoad();
+		//document.getElementById("Map2D").src="http://wn1.rogrid.pub.ro:8080/Map2D?page=wmap&w="+width+"&h="+height+"&x="+x+"&y="+y+"&d3d="+(d3d+0)+"&a3d="+a3d+"&dx3d="+dx3d;
+	}
+	
+	
+	function zoom(dir)
+	{
+		dir=(dir?(dir<0?-1:1):0);
+		//limit zoom out
+		if ( width>MAX_X && dir<0 )
+			return;
+		//limit zoom in
+		if (width<MAX_X/128 && dir >0)
+			return;
+		//text+="<br>width="+width+" and height="+height;
+		//text+="<br>x="+x+" and y="+y;
+		//compute new widhts
+		ww = width*(dir?(dir<0?2:.5):1);
+		hh = height*(dir?(dir<0?2:.5):1);
+		//text+="<br>new width="+ww+" and new height="+hh;
+		//recompute new position
+		x+=(width-ww)*.5;
+		y+=(hh-height)*.5;
+		//text+="<br>new x="+x+" and new y="+y;
+		//set new widths
+		width=ww;
+		height=hh;
+		//height checking to limit map
+		if ( y > MAX_Y )
+			y = MAX_Y;
+		if ( y < -MAX_Y+height )
+			y = -MAX_Y+height;
+		//text+="<br>new y after correction="+y;
+		//document.getElementById("mesaje").innerHTML=text;
+		//setImageForLoad();
+		//document.getElementById("Map2D").src="http://wn1.rogrid.pub.ro:8080/Map2D?page=wmap&w="+width+"&h="+height+"&x="+x+"&y="+y+"&d3d="+(d3d+0)+"&a3d="+a3d+"&dx3d="+dx3d;
+	}
+	
+	
+	function setImageForLoad()
+	{	image2=new Image();
+		//text="http://wn1.rogrid.pub.ro:8080/Map2D?w="+width+"&h="+height+"&x="+x+"&y="+y+"&d3d="+(d3d+0)+"&a3d="+a3d+"&dx3d="+dx3d;
+		//document.getElementById("mesaje").innerHTML=text;
+		//document.location="http://monalisa4.cern.ch:8080/FarmMap?page=wmap&w="+width+"&h="+height+"&x="+x+"&y="+y+"&d3d="+(d3d+0)+"&a3d="+a3d+"&dx3d="+dx3d;
+		document.getElementById("Map2D").src="http://monalisa4.cern.ch:8080/display?image=<<:image:>>";
+		//loadFarmsImage();
+		checkLoad();
+	
+	
+	}
+	
+	
+	
+	function setImageForLoad1()
+	{
+		//get image
+		//hideID("div_tools");
+		//showID("div_load");
+		//load new farms image
+		//loadFarmsImage();
+		image2=new Image();
+		//text="http://wn1.rogrid.pub.ro:8080/Map2D?w="+width+"&h="+height+"&x="+x+"&y="+y+"&d3d="+(d3d+0)+"&a3d="+a3d+"&dx3d="+dx3d;
+		//document.getElementById("mesaje").innerHTML=text;
+		document.getElementById("Map2D").src="http://monalisa4.cern.ch:8080/display?image=<<:image:>>";
+		//loadFarmsImage();
+		checkLoad();
+	}
+	function loadFarmsImage()
+	{
+		image3=new Image();
+		image3.src=sit_home+"FarmMap?page=wmap&_W="+IMG_WIDTH+"&w="+width+"&h="+height+"&x="+x+"&y="+y+"&d3d="+(d3d+0)+"&a3d="+a3d;
+		checkLoad2();
+	}
+	function checkLoad2()
+	{
+		image = document.getElementById("img_farms");
+		if ( image3.width==IMG_WIDTH ) {
+			image.src=image3.src;
+			return;
+		};
+		setTimeout("checkLoad2();",200);
+	}
+	function move(dirx, diry)
+	{
+		//miscarea se face cu un sfert din poza pe directia de miscare
+		dirx=(dirx!=0?(dirx<0?-1:1):0);
+		diry=(diry!=0?(diry<0?-1:1):0);
+		//text="";
+		//text+="<br>move before x="+x+" and y="+y;
+		x+=dirx*width*.25;
+		y+=diry*height*.25;
+		//text+="<br>move after x="+x+" and y="+y;
+		//height checking to limit map
+		if ( y > MAX_Y )
+			y = MAX_Y;
+		if ( y < -MAX_Y+height )
+			y = -MAX_Y+height;
+		//text+="<br>move after2 x="+x+" and y="+y;
+		//document.getElementById("mesaje").innerHTML=text;
+		setImageForLoad();
+	}
+	function rotate(dir)
+	{
+		step=10;
+		if ( dir>0 ) {
+			if ( 90-a3d>=step )
+				a3d+=step;
+			else {
+				a3d=90;
+				d3d=0;
+			}
+		} else if ( dir<0 ) {
+			if ( 90-a3d<6*step ) {
+				d3d=1;
+				a3d-=step;
+			};
+		};
+		document.getElementById("angle3d").value=a3d;
+		zoom(0);
+	}
+	
+	function checkLoad()
+	{
+		image = document.getElementById("Map2D");
+		if ( image2.width==IMG_WIDTH ) {
+			image.src=image2.src;
+			//hideID("div_load");
+			//showID("div_tools");
+			return;
+		};
+		setTimeout("checkLoad();",200);
+	}
+	function startUp()
+	{
+		
+		//hideID('div_load');
+		
+		
+		zoom(0);
+		capturebegin();
+	}
+	function repositionTimer()
+	{
+		image = document.getElementById("Map2D");
+		image_x = findPosX(image);
+		image_y = findPosY(image);
+		positionID(image_x, image_y,"div_farms");
+		setTimeout("repositionTimer();",1000);
+	}
+	</script>
+	<style><!--
+	.ch{cursor:pointer;cursor:hand}
+	.lupa {
+	position:absolute;
+	top:0;
+	left:0;
+	visibility:hidden;
+	}
+	.small {
+		font-family: "verdana",sans-serif; 
+		font-size: 12pt; 
+	}
+	body{font-family: "verdana",sans-serif; font-size: 12pt; }
+	//-->
+	</style>
+	</head>
+	<body onLoad="javascript:startUp();">
+	<script language=JavaScript>
+
+function switchToAlternate(page){
+    document.form1.page.value=page;
+    document.form1.submit();
+}
+	    
+	    
+function reverse(id){
+    var ch = document.getElementById(id);
+    
+    if (ch.checked) ch.checked=false;
+    else ch.checked=true;
+}
+
+function checkall(){
+    var fields = document.form1.plot_series;
+    for (i=0; i<fields.length; i++)
+        fields[i].checked=true;
+}
+	    
+function uncheckall(){
+    var fields = document.form1.plot_series;
+    for (i=0; i<fields.length; i++)
+	fields[i].checked=false;
+}
+function modify(){
+    document.form1.submit();
+}
+
+	</script>
+	<map name=imgmap><<:map:>></map>
+	<img src="http://monalisa4.cern.ch:8080/display?image=<<:image:>>" id="Map2D" name="Map2D" usemap=#imgmap border=1 class=ch onClick="javascript:parent.position_zoom(x,y,lastX, lastY, findPosX(document.getElementById('Map2D')),findPosY(document.getElementById('Map2D')) );x=top.x;y=top.y;lastX=top.lastX;lastY=top.lastY;">
+	<!--
+	
+	<table align=center class="small">
+	<tr>
+		<td align=center>Choose Left Mouse Click action:
+	<input type="radio" name="mouse_action" value="select farm" onClick="click_action=0;document.getElementById('theimage').src='map2Dpictures/wizard.gif';"> Select farm
+	<input type="radio" name="mouse_action" value="zoom in" checked onClick="click_action=1;document.getElementById('theimage').src='map2Dpictures/zoomin.gif';"> Zoom in
+	<input type="radio" name="mouse_action" value="zoom out" onClick="click_action=-1;document.getElementById('theimage').src='map2Dpictures/zoomout.gif';"> Zoom out
+		</td>
+	</tr>
+	<tr>
+		<td>
+		<table align="center" class="small">
+			<tr>
+				<td><img src="map2Dpictures/1luarrow.png" onClick="javascript:move(-1,1);" class=ch></td>
+				<td align="center"><img src="map2Dpictures/1uparrow.png" onClick="javascript:move(0,1);" class=ch></td>
+				<td><img src="map2Dpictures/1ruarrow.png" onClick="javascript:move(1,1);" class=ch></td>
+			</tr>
+			<tr>
+				<td><img src="map2Dpictures/1leftarrow.png" onClick="javascript:move(-1,0);" class=ch></td>
+				<td><img src="no_image.jpeg" id="Map2D" name="Map2D" usemap=#imgmap border=1 class="ch" onclick="javascript:position_zoom();"></td>
+				<td><img src="map2Dpictures/1rightarrow.png" onClick="javascript:move(1,0);" class=ch></td>
+			</tr>
+			<tr>
+				<td><img src="map2Dpictures/1ldarrow.png" onClick="javascript:move(-1,-1);" class=ch></td>
+				<td align="center"><img src="map2Dpictures/1downarrow.png" onClick="javascript:move(0,-1);" class=ch></td>
+				<td><img src="map2Dpictures/1rdarrow.png" onClick="javascript:move(1,-1);" class=ch></td>
+			</tr>
+		</table>
+		</td>
+	</tr>
+	<tr>
+		<td align=center>
+		<div id="div_load">Loading...</div>
+		<div id="div_tools"><table align=center class="small">
+			<tr>
+			<td align=center><table class="small">
+				<tr>
+				<td><img src="map2Dpictures/ul.gif" onClick="javascript:move(-1,1);" class=ch></td>
+				<td><img src="map2Dpictures/up.gif" onClick="javascript:move(0,1);" class=ch></td>
+				<td><img src="map2Dpictures/ur.gif" onClick="javascript:move(1,1);" class=ch></td>
+				</tr>
+				<tr>
+				<td><img src="map2Dpictures/l.gif" onClick="javascript:move(-1,0);" class=ch></td>
+				<td></td>
+				<td><img src="map2Dpictures/r.gif" onClick="javascript:move(1,0);" class=ch></td>
+				</tr>
+				<tr>
+				<td><img src="map2Dpictures/dl.gif" onClick="javascript:move(-1,-1);" class=ch></td>
+				<td><img src="map2Dpictures/down.gif" onClick="javascript:move(0,-1);" class=ch></td>
+				<td><img src="map2Dpictures/dr.gif" onClick="javascript:move(1,-1);" class=ch></td>
+				</tr>
+			</table></td>
+			<td align=center><table class="small">
+				<tr>
+					<td><img src="map2Dpictures/zoom_in.gif" border='0' onClick="zoom(1);" class=ch></a></td>
+					<td><img src="map2Dpictures/zoom_out.gif" border='0' onClick="zoom(-1);" class=ch></a</td>
+					<td><input type=button value="3D/2D" onClick="d3d=(d3d?0:1);zoom(0);"></td>
+					<td>Dimensiune poza: 
+						<select onchange="dimensiune_changed();" id="dimensiune">
+						<option value ="600x300">600x300</option>
+						<option value ="800x400" selected>800x400</option>
+						<option value ="1024x512">1024x512</option>
+						</select>
+					</td>
+					<td><img src="map2Dpictures/arrow3Ddown.gif" border='0' onClick="rotate(1);" class=ch></a></td>
+					<td><img src="map2Dpictures/arrow3Dup.gif" border='0' onClick="rotate(-1);" class=ch></a</td>
+					<td>unghi de inclinare: <input type=text readonly disabled value="90" id="angle3d" size=3></td>
+				</tr>
+			</table></td>
+			</tr>
+		</table></div>
+		</td>
+	</tr>
+	</table>
+	-->
+	<SCRIPT language="JavaScript" type="text/JavaScript">
+	<!--
+	
+	//cloak
+	if (document.all||document.getElementById||document.layers){
+	document.write('<div id="lupa" class="lupa"><img src="map2Dpictures/zoomin.gif" alt="" border="0" id="theimage"></div>\n');
+	//eval(docbitK + "lupa" + docbitendK + stylebitK + ".visibility = '" + showbitK + "'");
+	document.write('<div id="div_farms" class="lupa"><img src="map2Dpictures/no_image.jpg" alt="" border="1" id="img_farms" onclick="javascript:position_zoom();"></div>\n');
+		showID("div_farms");
+		repositionTimer();
+	}
+	//decloak
+	</SCRIPT>
+	<div id="mesaje"></div>
+
+	</body>
+	</html>

@@ -1,0 +1,25 @@
+Executable = "aliroot_new";
+Jobtag={"comment:First physics pp, Pythia6, No field, 900GeV"};
+
+Packages={"VO_ALICE@AliRoot::v4-12-Rev-02","VO_ALICE@GEANT3::v1-9-3","VO_ALICE@ROOT::v5-19-02a","VO_ALICE@APISCONFIG::V2.4"};
+
+TTL = "72000";
+
+Requirements =  member(other.GridPartitions,"rawreco");
+
+Validationcommand ="/alice/cern.ch/user/a/aliprod/prod2007/configs_pbpb_hijing/validation.sh";
+
+InputFile= {[:INPUTFILES:]};
+
+OutputArchive={"log_archive:*.log,stdout,stderr,*.log@Alice::NIHAM::File","root_archive.zip:galice.root,Kinematics.root,TrackRefs.root,AliESDs.root,AliESDfriends.root,AliAOD.root@Alice::CERN::CASTOR2"};
+OutputFile={"Run*.root@Alice::CERN::SE","raw.root@Alice::CERN::Castor2"};
+
+OutputDir="[:OUTPUTDIR:]/$1/#alien_counter_03i#";
+
+JDLVariables={"Packages", "OutputDir"};
+GUIDFILE="guid.txt";
+
+splitarguments="simrun.C --run $1 --event #alien_counter# --process kPythia6 --field kNoField --energy 900" ;
+split="production:1-1100";
+
+Workdirectorysize={"4000MB"};

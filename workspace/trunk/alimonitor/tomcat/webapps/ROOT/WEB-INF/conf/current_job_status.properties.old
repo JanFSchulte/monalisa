@@ -1,0 +1,86 @@
+page=stats
+
+pages=1
+
+pagetitle=Current job status
+
+stats.mintime=60
+stats.maxtime=0
+
+pivot0_1=Job status
+
+title0=Service
+
+#pivot0_2=$Qselect 'CERN' union select distinct ml_name from pledged where ml_name is not null;
+pivot0_2=$Qselect distinct split_part(mi_key, '/', 3) from monitor_ids where mi_key like 'CERN/ALICE_Sites_Jobs_Summary/%' and split_part(mi_key,'/',3)!='_TOTALS_' order by 1;
+
+option0.numbers=true
+
+#$QSELECT vobox FROM pledged WHERE site_names[1]=get_real_name('$2',1::smallint) OR site_names[1]=get_real_name('$2',2::smallint) ORDER BY tier ASC LIMIT 1;,\
+#$QSELECT CASE WHEN length(get_real_name('$2',1::smallint))>0 THEN get_pledged_tier(1::smallint,get_real_name('$2',1::smallint),'cpus') ELSE get_pledged_tier(2::smallint,get_real_name('$2',2::smallint),'cpus') END;,\
+
+pivot0_3=$QSELECT ip FROM abping_aliases WHERE name='$2';,\
+	 $QSELECT get_pledged('$2', 2);,\
+	 CERN/ALICE_Sites_Jobs_Summary/$2/-1/-1/RUNNING_jobs,\
+	 CERN/ALICE_Sites_Jobs_Summary/$2/-1/-1/STARTED_jobs,\
+	 CERN/ALICE_Sites_Jobs_Summary/$2/-1/-1/SAVING_jobs,\
+	 CERN/ALICE_Sites_Jobs_Summary/$2/-1/-1/ZOMBIE_jobs,\
+	 1,\
+	 \
+	 1,\
+	 \
+	 $2/%_JobAgent_Summary/ce/jobAgents_queued,\
+	 $2/%_JobAgent_Summary/ce/jobAgents_running,\
+	 $2/%_JobAgent_Summary/ce/jobAgents_slots
+	 
+         
+descr0=Address,\
+       KSI2k,\
+       \
+       Running,\
+       Started,\
+       Saving,\
+       Zombie,\
+       Total<br>(R+S+S+Z),\
+       \
+       Occupation<br>(Total/CPUs),\
+       \
+       Queued,\
+       Running,\
+       Free slots
+       
+
+func0=string resolveip,\
+      string double;rnd;ns,\
+      \
+      last(15m) ns;rnd,\
+      last(15m) ns;rnd,\
+      last(15m) ns;rnd,\
+      last(15m) ns;rnd,\
+      totalcol(2;3;4;5) ns;rnd,\
+      \
+      divcol(6;1) factor=100;ns;%,\
+      last(15m) ns;multi_sum;rnd,\
+      last(15m) ns;multi_sum;rnd,\
+      last(15m) ns;multi_sum;rnd
+
+minmax0=1 FFFFFF AACCFF,\
+        2 FFFFFF 77FFAA,\
+        3 FFFFFF FFFF77,\
+        4 FFFFFF FFAADD,\
+        5 FFFFFF FF5555,\
+        6 FFFFFF AACCFF,\
+        7 FFFF99 99FF99,\
+        8 FFFFFF FFFF99,\
+        9 FFFFFF 99FF99,\
+        10 FFFFFF 99FFCC
+        
+total0=1,2,3,4,5,6,8,9,10
+
+avg0=7
+
+groups0=0 1 VOBox,\
+        1 1 Pledged,\
+        2 5 Jobs,\
+        7 1 Site,\
+        8 3 JobAgents

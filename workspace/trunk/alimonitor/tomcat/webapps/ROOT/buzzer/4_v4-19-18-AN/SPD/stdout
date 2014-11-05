@@ -1,0 +1,87 @@
+Test: ClusterMonitor is at vobox.reef.man.poznan.pl:8084
+Execution machine:  r196
+*****************************************************************
+* APISCONFIG V1.1x                                               *
+* Setting up close SE ....                                      *
+* Setting up API endpoints .....                                *
+* Setting up API PATH and LD_LIBRARY_PATH for shipped library.. *
+* PATH                       => /opt/exp_soft/alice/alien.v2-18.28_new/bin:/opt/exp_soft/alice/alien.v2-18.28_new/x86_64-unknown-linux-gnu/4.1.2/bin:/opt/exp_soft/alice/alien.v2-18.28_new/api/bin:/opt/exp_soft/alice/alien.v2-18.28_new/globus/bin:/opt/intel/ict/3.0/itac/7.0/bin:/opt/intel/fce/10.1.012/bin:/opt/intel/cce/10.1.012/bin:/home/egee/alice/sgmalice009/bin:/home/egee/alice/sgmalice009/scripts:/usr/sue/bin:/usr/local/bin:/usr/local/bin/X11:/usr/bin:/bin:/usr/bin/X11:/cern/pro/bin:/opt/intel/ict/3.0/itac/7.0/bin:/opt/intel/cce/10.1.012/bin:/opt/intel/fce/10.1.012/bin:/usr/lib64/qt-3.3/bin:/usr/kerberos/bin:/opt/d-cache/srm/bin:/opt/d-cache/dcap/bin:/opt/edg/bin:/opt/glite/bin:/opt/globus/bin:/opt/lcg/bin:/opt/maui/bin:/usr/local/cli:/opt/abaqus/Commands:/opt/maui/bin:/usr/local/cli:/opt/abaqus/Commands:/usr/local/bin
+* LD_LIBRARY_PATH            => /lib:/usr/lib:/opt/exp_soft/alice/alien.v2-18.28_new/lib:/opt/exp_soft/alice/alien.v2-18.28_new/api/lib:/opt/exp_soft/alice/alien.v2-18.28_new/globus/lib:/opt/exp_soft/alice/alien.v2-18.28_new/lib:/opt/exp_soft/alice/alien.v2-18.28_new/lib64:/opt/exp_soft/alice/alien.v2-18.28_new/lib/mysql:/opt/exp_soft/alice/alien.v2-18.28_new/x86_64-unknown-linux-gnu/4.1.2/lib:/opt/intel/ict/3.0/cmkl/9.0/lib/em64t:/opt/intel/ict/3.0/itac/7.0/itac/slib_impi2:/opt/intel/fce/10.1.012/lib:/opt/intel/cce/10.1.012/lib:/opt/exp_soft/users/intel/mkl/10.0.1.014/lib/em64t:/opt/intel/ict/3.0/cmkl/9.0/lib/em64t:/opt/intel/ict/3.0/itac/7.0/itac/slib_impi2:/opt/intel/cce/10.1.012/lib:/opt/intel/ict/3.0/cmkl/9.0/lib/em64t:/opt/intel/ict/3.0/itac/7.0/itac/slib_impi2:/opt/intel/fce/10.1.012/lib:/opt/intel/cce/10.1.012/lib:/opt/exp_soft/users/intel/mkl/10.0.1.014/lib/em64t:/opt/intel/ict/3.0/cmkl/9.0/lib/em64t:/opt/intel/ict/3.0/itac/7.0/itac/slib_impi2:/opt/intel/cce/10.1.012/lib:/opt/d-cache/dcap/lib:/opt/glite/lib:/opt/glite/lib64:/opt/globus/lib:/opt/lcg/lib:/opt/lcg/lib64:/opt/classads/lib64/:/opt/c-ares/lib/ /opt/exp_soft/alice/alien.v2-18.28_new/lib:/opt/exp_soft/alice/alien.v2-18.28_new/api/lib:/opt/exp_soft/alice/alien.v2-18.28_new/globus/lib:/opt/exp_soft/alice/alien.v2-18.28_new/lib:/opt/exp_soft/alice/alien.v2-18.28_new/lib64:/opt/exp_soft/alice/alien.v2-18.28_new/lib/mysql:/opt/intel/fce/10.1.012/lib:/opt/intel/cce/10.1.012/lib:/opt/intel/cce/10.1.012/lib:/opt/intel/fce/10.1.012/lib:/opt/intel/cce/10.1.012/lib:/opt/intel/cce/10.1.012/lib
+* GCLIENT_NOGSI              => 1
+* GCLIENT_NOPROMPT           => 1
+* GCLIENT_COMMAND_MAXWAIT    => 1800
+* GCLIENT_COMMAND_RETRY      => 50
+* GCLIENT_SERVER_RESELECT    => 4
+* GCLIENT_SERVER_RECONNECT   => 2
+* GCLIENT_RETRY_DAMPING      => 4.0
+* GCLIENT_RETRY_SLEEPTIME    => 2
+*****************************************************************
+  GCLIENT_SERVER_LIST        => 137.138.99.175:10000|137.138.99.167:10000|137.138.99.170:10000|
+*****************************************************************
+  alien_CLOSE_SE             => ALICE::Poznan::SE
+*****************************************************************
+Setting the environment for ROOT
+Setting ROOTSYS to /opt/exp_soft/alice/packages/VO_ALICE/ROOT/v5-26-00b-6/v5-26-00b-6
+Setting the environment for ROOT
+Setting ROOTSYS to /opt/exp_soft/alice/packages/VO_ALICE/ROOT/v5-26-00b-6/v5-26-00b-6
+Setting GEANT3
+Setting AliROOT to /opt/exp_soft/alice/packages/VO_ALICE/AliRoot/v4-19-18-AN
+=========================================
+############## PATH : ##############
+/opt/exp_soft/alice/packages/VO_ALICE/AliRoot/v4-19-18-AN/v4-19-18-AN/bin/tgt_linuxx8664gcc:/opt/exp_soft/alice/packages/VO_ALICE/ROOT/v5-26-00b-6/v5-26-00b-6/bin:/opt/exp_soft/alice/packages/VO_ALICE/ROOT/v5-26-00b-6/v5-26-00b-6/bin:/opt/exp_soft/alice/alien.v2-18.28_new/bin:/opt/exp_soft/alice/alien.v2-18.28_new/x86_64-unknown-linux-gnu/4.1.2/bin:/opt/exp_soft/alice/alien.v2-18.28_new/api/bin:/opt/exp_soft/alice/alien.v2-18.28_new/globus/bin:/opt/intel/ict/3.0/itac/7.0/bin:/opt/intel/fce/10.1.012/bin:/opt/intel/cce/10.1.012/bin:/home/egee/alice/sgmalice009/bin:/home/egee/alice/sgmalice009/scripts:/usr/sue/bin:/usr/local/bin:/usr/local/bin/X11:/usr/bin:/bin:/usr/bin/X11:/cern/pro/bin:/opt/intel/ict/3.0/itac/7.0/bin:/opt/intel/cce/10.1.012/bin:/opt/intel/fce/10.1.012/bin:/usr/lib64/qt-3.3/bin:/usr/kerberos/bin:/opt/d-cache/srm/bin:/opt/d-cache/dcap/bin:/opt/edg/bin:/opt/glite/bin:/opt/globus/bin:/opt/lcg/bin:/opt/maui/bin:/usr/local/cli:/opt/abaqus/Commands:/opt/maui/bin:/usr/local/cli:/opt/abaqus/Commands:/usr/local/bin
+############## LD_LIBRARY_PATH : ##############
+/opt/exp_soft/alice/packages/VO_ALICE/AliRoot/v4-19-18-AN/v4-19-18-AN/lib/tgt_linuxx8664gcc/:/opt/exp_soft/alice/packages/VO_ALICE/GEANT3/v1-11-12/v1-11-12/lib/tgt_linuxx8664gcc/:/opt/exp_soft/alice/packages/VO_ALICE/ROOT/v5-26-00b-6/v5-26-00b-6/lib:/opt/exp_soft/alice/packages/VO_ALICE/ROOT/v5-26-00b-6/v5-26-00b-6/lib:/lib:/usr/lib:/opt/exp_soft/alice/alien.v2-18.28_new/lib:/opt/exp_soft/alice/alien.v2-18.28_new/api/lib:/opt/exp_soft/alice/alien.v2-18.28_new/globus/lib:/opt/exp_soft/alice/alien.v2-18.28_new/lib:/opt/exp_soft/alice/alien.v2-18.28_new/lib64:/opt/exp_soft/alice/alien.v2-18.28_new/lib/mysql:/opt/exp_soft/alice/alien.v2-18.28_new/x86_64-unknown-linux-gnu/4.1.2/lib:/opt/intel/ict/3.0/cmkl/9.0/lib/em64t:/opt/intel/ict/3.0/itac/7.0/itac/slib_impi2:/opt/intel/fce/10.1.012/lib:/opt/intel/cce/10.1.012/lib:/opt/exp_soft/users/intel/mkl/10.0.1.014/lib/em64t:/opt/intel/ict/3.0/cmkl/9.0/lib/em64t:/opt/intel/ict/3.0/itac/7.0/itac/slib_impi2:/opt/intel/cce/10.1.012/lib:/opt/intel/ict/3.0/cmkl/9.0/lib/em64t:/opt/intel/ict/3.0/itac/7.0/itac/slib_impi2:/opt/intel/fce/10.1.012/lib:/opt/intel/cce/10.1.012/lib:/opt/exp_soft/users/intel/mkl/10.0.1.014/lib/em64t:/opt/intel/ict/3.0/cmkl/9.0/lib/em64t:/opt/intel/ict/3.0/itac/7.0/itac/slib_impi2:/opt/intel/cce/10.1.012/lib:/opt/d-cache/dcap/lib:/opt/glite/lib:/opt/glite/lib64:/opt/globus/lib:/opt/lcg/lib:/opt/lcg/lib64:/opt/classads/lib64/:/opt/c-ares/lib/
+############## ROOTSYS : ##############
+/opt/exp_soft/alice/packages/VO_ALICE/ROOT/v5-26-00b-6/v5-26-00b-6
+############## which root : ##############
+/opt/exp_soft/alice/packages/VO_ALICE/ROOT/v5-26-00b-6/v5-26-00b-6/bin/root
+############## ALICE_ROOT : ##############
+/opt/exp_soft/alice/packages/VO_ALICE/AliRoot/v4-19-18-AN/v4-19-18-AN
+############## which aliroot : ##############
+/opt/exp_soft/alice/packages/VO_ALICE/AliRoot/v4-19-18-AN/v4-19-18-AN/bin/tgt_linuxx8664gcc/aliroot
+############## system limits : ##############
+core file size          (blocks, -c) 0
+data seg size           (kbytes, -d) 1945600
+scheduling priority             (-e) 0
+file size               (blocks, -f) unlimited
+pending signals                 (-i) 135167
+max locked memory       (kbytes, -l) unlimited
+max memory size         (kbytes, -m) 1945600
+open files                      (-n) 32768
+pipe size            (512 bytes, -p) 8
+POSIX message queues     (bytes, -q) 819200
+real-time priority              (-r) 0
+stack size              (kbytes, -s) 10240
+cpu time               (seconds, -t) unlimited
+max user processes              (-u) 135167
+virtual memory          (kbytes, -v) unlimited
+file locks                      (-x) unlimited
+############## memory : ##############
+             total       used       free     shared    buffers     cached
+Mem:         16056      11258       4798          0       1850       6976
+-/+ buffers/cache:       2432      13624
+Swap:         2047         19       2028
+=========================================
+  *******************************************
+  *                                         *
+  *        W E L C O M E  to  R O O T       *
+  *                                         *
+  *   Version  5.26/00b   9 February 2010   *
+  *                                         *
+  *  You are welcome to visit our Web site  *
+  *          http://root.cern.ch            *
+  *                                         *
+  *******************************************
+
+ROOT 5.26/00b (tags/v5-26-00b@32327, May 25 2010, 14:00:02 on linuxx8664gcc)
+
+CINT/ROOT C/C++ Interpreter version 5.17.00, Dec 21, 2008
+Type ? for help. Commands must be C++ statements.
+Enclose multiple statements between { }.
+
+======== TaskBuzzer.C finished with exit code: 0 ========
+############## memory after: ##############
+             total       used       free     shared    buffers     cached
+Mem:         16056      11456       4600          0       1850       7172
+-/+ buffers/cache:       2434      13622
+Swap:         2047         19       2028

@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<alien>
+  <collection name="pp">
+    <event name="1">
+      <file name="AliESDs.root" aclId="" broken="0" ctime="2010-05-15 23:45:39" dir="1332808" entryId="1332820" expiretime="" gowner="alidaq" guid="1289578A-6028-11DF-9717-66AB8E80BEEF" guidtime="11DF6028" lfn="/alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.10/AliESDs.root" md5="" owner="alidaq" perm="755" replicated="0" selist="" size="268058468" turl="alien:///alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.10/AliESDs.root" type="f" />
+    </event>
+    <event name="10">
+      <file name="AliESDs.root" aclId="" broken="0" ctime="2010-05-15 10:30:22" dir="1281115" entryId="1281127" expiretime="" gowner="alidaq" guid="5BEAFB6A-5FBD-11DF-9717-90AB8E80BEEF" guidtime="11DF5FBD" lfn="/alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.190/AliESDs.root" md5="" owner="alidaq" perm="755" replicated="0" selist="" size="254167071" turl="alien:///alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.190/AliESDs.root" type="f" />
+    </event>
+    <event name="11">
+      <file name="AliESDs.root" aclId="" broken="0" ctime="2010-05-16 17:57:11" dir="1515312" entryId="1515324" expiretime="" gowner="alidaq" guid="4AEF5288-60AE-11DF-9717-E6AB8E80BEEF" guidtime="11DF60AE" lfn="/alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.200/AliESDs.root" md5="" owner="alidaq" perm="755" replicated="0" selist="" size="252510122" turl="alien:///alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.200/AliESDs.root" type="f" />
+    </event>
+    <event name="12">
+      <file name="AliESDs.root" aclId="" broken="0" ctime="2010-05-16 15:15:13" dir="1481724" entryId="1481735" expiretime="" gowner="alidaq" guid="5D1DC22E-6085-11DF-9717-91AB8E80BEEF" guidtime="11DF6085" lfn="/alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.210/AliESDs.root" md5="" owner="alidaq" perm="755" replicated="0" selist="" size="254405899" turl="alien:///alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.210/AliESDs.root" type="f" />
+    </event>
+    <event name="13">
+      <file name="AliESDs.root" aclId="" broken="0" ctime="2010-05-16 17:56:05" dir="1515004" entryId="1515016" expiretime="" gowner="alidaq" guid="8E5EE574-60AE-11DF-9717-2EA48E80BEEF" guidtime="11DF60AE" lfn="/alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.220/AliESDs.root" md5="" owner="alidaq" perm="755" replicated="0" selist="" size="253185933" turl="alien:///alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.220/AliESDs.root" type="f" />
+    </event>
+    <event name="14">
+      <file name="AliESDs.root" aclId="" broken="0" ctime="2010-05-16 13:51:06" dir="1474403" entryId="1474408" expiretime="" gowner="alidaq" guid="0859DBA2-6070-11DF-9717-0AA28E80BEEF" guidtime="11DF6070" lfn="/alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.240/AliESDs.root" md5="" owner="alidaq" perm="755" replicated="0" selist="" size="253881354" turl="alien:///alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.240/AliESDs.root" type="f" />
+    </event>
+    <event name="15">
+      <file name="AliESDs.root" aclId="" broken="0" ctime="2010-05-16 15:34:52" dir="1485639" entryId="1485646" expiretime="" gowner="alidaq" guid="7FC1D680-6085-11DF-9717-26AB8E80BEEF" guidtime="11DF6085" lfn="/alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.250/AliESDs.root" md5="" owner="alidaq" perm="755" replicated="0" selist="" size="252817500" turl="alien:///alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.250/AliESDs.root" type="f" />
+    </event>
+    <event name="16">
+      <file name="AliESDs.root" aclId="" broken="0" ctime="2010-05-16 15:12:11" dir="1480442" entryId="1480449" expiretime="" gowner="alidaq" guid="E181DA32-607B-11DF-9717-0DBC8E80BEEF" guidtime="11DF607B" lfn="/alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.260/AliESDs.root" md5="" owner="alidaq" perm="755" replicated="0" selist="" size="253439924" turl="alien:///alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.260/AliESDs.root" type="f" />
+    </event>
+    <event name="17">
+      <file name="AliESDs.root" aclId="" broken="0" ctime="2010-05-16 16:17:12" dir="1492722" entryId="1492734" expiretime="" gowner="alidaq" guid="81C72002-6085-11DF-9717-E0AB8E80BEEF" guidtime="11DF6085" lfn="/alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.270/AliESDs.root" md5="" owner="alidaq" perm="755" replicated="0" selist="" size="254420756" turl="alien:///alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.270/AliESDs.root" type="f" />
+    </event>
+    <event name="18">
+      <file name="AliESDs.root" aclId="" broken="0" ctime="2010-05-15 20:06:03" dir="1302943" entryId="1302955" expiretime="" gowner="alidaq" guid="609E5F94-5FF4-11DF-9717-5FA18E80BEEF" guidtime="11DF5FF4" lfn="/alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.280/AliESDs.root" md5="" owner="alidaq" perm="755" replicated="0" selist="" size="254284617" turl="alien:///alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.280/AliESDs.root" type="f" />
+    </event>
+    <event name="19">
+      <file name="AliESDs.root" aclId="" broken="0" ctime="2010-05-15 20:07:16" dir="1303090" entryId="1303101" expiretime="" gowner="alidaq" guid="5D1C74D2-5FF4-11DF-9717-9EA18E80BEEF" guidtime="11DF5FF4" lfn="/alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.30/AliESDs.root" md5="" owner="alidaq" perm="755" replicated="0" selist="" size="252488767" turl="alien:///alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.30/AliESDs.root" type="f" />
+    </event>
+    <event name="2">
+      <file name="AliESDs.root" aclId="" broken="0" ctime="2010-05-15 10:25:37" dir="1281045" entryId="1281057" expiretime="" gowner="alidaq" guid="5E2E436E-5FBD-11DF-9717-1AA48E80BEEF" guidtime="11DF5FBD" lfn="/alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.100/AliESDs.root" md5="" owner="alidaq" perm="755" replicated="0" selist="" size="252440818" turl="alien:///alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.100/AliESDs.root" type="f" />
+    </event>
+    <event name="20">
+      <file name="AliESDs.root" aclId="" broken="0" ctime="2010-05-16 15:25:50" dir="1483972" entryId="1483984" expiretime="" gowner="alidaq" guid="85625308-6085-11DF-9717-70AC8E80BEEF" guidtime="11DF6085" lfn="/alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.310/AliESDs.root" md5="" owner="alidaq" perm="755" replicated="0" selist="" size="254139433" turl="alien:///alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.310/AliESDs.root" type="f" />
+    </event>
+    <event name="3">
+      <file name="AliESDs.root" aclId="" broken="0" ctime="2010-05-15 09:55:03" dir="1280779" entryId="1280791" expiretime="" gowner="alidaq" guid="D68217A6-5FBC-11DF-9717-DBAB8E80BEEF" guidtime="11DF5FBC" lfn="/alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.120/AliESDs.root" md5="" owner="alidaq" perm="755" replicated="0" selist="" size="253747245" turl="alien:///alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.120/AliESDs.root" type="f" />
+    </event>
+    <event name="4">
+      <file name="AliESDs.root" aclId="" broken="0" ctime="2010-05-15 18:44:36" dir="1298800" entryId="1298812" expiretime="" gowner="alidaq" guid="5C5C2DE4-5FF4-11DF-9717-14A28E80BEEF" guidtime="11DF5FF4" lfn="/alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.130/AliESDs.root" md5="" owner="alidaq" perm="755" replicated="0" selist="" size="254650673" turl="alien:///alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.130/AliESDs.root" type="f" />
+    </event>
+    <event name="5">
+      <file name="AliESDs.root" aclId="" broken="0" ctime="2010-05-15 22:03:19" dir="1309756" entryId="1309757" expiretime="" gowner="alidaq" guid="A61D25A0-6008-11DF-9717-A0B68E80BEEF" guidtime="11DF6008" lfn="/alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.140/AliESDs.root" md5="" owner="alidaq" perm="755" replicated="0" selist="" size="252811145" turl="alien:///alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.140/AliESDs.root" type="f" />
+    </event>
+    <event name="6">
+      <file name="AliESDs.root" aclId="" broken="0" ctime="2010-05-15 18:45:25" dir="1298957" entryId="1298969" expiretime="" gowner="alidaq" guid="5D59F046-5FF4-11DF-9717-6DAB8E80BEEF" guidtime="11DF5FF4" lfn="/alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.150/AliESDs.root" md5="" owner="alidaq" perm="755" replicated="0" selist="" size="252316382" turl="alien:///alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.150/AliESDs.root" type="f" />
+    </event>
+    <event name="7">
+      <file name="AliESDs.root" aclId="" broken="0" ctime="2010-05-15 10:38:25" dir="1281227" entryId="1281239" expiretime="" gowner="alidaq" guid="D472BCB8-5FBC-11DF-9717-68A18E80BEEF" guidtime="11DF5FBC" lfn="/alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.160/AliESDs.root" md5="" owner="alidaq" perm="755" replicated="0" selist="" size="254152164" turl="alien:///alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.160/AliESDs.root" type="f" />
+    </event>
+    <event name="8">
+      <file name="AliESDs.root" aclId="" broken="0" ctime="2010-05-15 19:47:41" dir="1301771" entryId="1301777" expiretime="" gowner="alidaq" guid="58BAF8DC-5FF4-11DF-9717-9EA18E80BEEF" guidtime="11DF5FF4" lfn="/alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.170/AliESDs.root" md5="" owner="alidaq" perm="755" replicated="0" selist="" size="255476361" turl="alien:///alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.170/AliESDs.root" type="f" />
+    </event>
+    <event name="9">
+      <file name="AliESDs.root" aclId="" broken="0" ctime="2010-05-17 04:27:56" dir="1630144" entryId="1630147" expiretime="" gowner="alidaq" guid="C02BA87E-611E-11DF-9717-17A48E80BEEF" guidtime="11DF611E" lfn="/alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.180/AliESDs.root" md5="" owner="alidaq" perm="755" replicated="0" selist="" size="254145130" turl="alien:///alice/data/2010/LHC10c/000119846/ESDs/pass1/10000119846023.180/AliESDs.root" type="f" />
+    </event>
+    <info command="[/alice/cern.ch/user/a/agheata/buzzer/]: find -z -x pp -l 20 /alice/data/2010/LHC10c/000119846/ESDs/pass1 *AliESDs.root" creator="admin" date="Mon Jun 21 11:34:16 CEST 2010" timestamp="1277112856" />
+  </collection>
+</alien>

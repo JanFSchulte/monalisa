@@ -1,0 +1,116 @@
+nodes=LIGO-CIT-OSG,\
+      UC_Teraport_OSG_ITB,\
+      ITB-Zero,\
+      citgrid3.cacr.caltech.edu,\
+      IU_iuatlas,\
+      UC,\
+      PROD_SLAC_STANFORD_EDU,\
+      UFlorida-IGT,\
+      IU_WALLABY
+aliases=LIGO-CIT-OSG,\
+	UC Teraport,\
+	ITB-Zero,\
+	Citgrid3,\
+	IU_iuatlas,\
+	UC,\
+	SLAC_Stanford,\
+	UFlorida-IGT,\
+	IU_WALLABY 
+long=-119,\
+     -86,\
+     -88,\
+     -117,\
+     -86.1,\
+     -87,\
+     -122.10,\
+     -81,\
+     -85.4     
+lat=35,\
+    41,\
+    39,\
+    32,\
+    39.17,\
+    41,\
+    37.27,\
+    28.6,\
+    38.4
+
+
+//coordinates of the 2 points delimitating the map - long, lat    
+cornerLeftUp=-125,49
+cornerRightDown=-60,17
+
+//auto positioning of the farms or not
+auto=1
+
+width=800
+height=400
+resolution=1500x750
+xcenter=0
+//-21
+ycenter=0
+//-5
+zoom=0.5	
+
+#speciallink=BNL_ATLAS UBuffalo-CCR,UBuffalo-CCR UM_ATLAS,UM_ATLAS IU_ATLAS_Tier2,UM_ATLAS UWMadison,UWMadison pdsf,pdsf Caltech-PG,FNAL_CMS pdsf,FNAL_CMS Caltech-Grid3,Caltech-PG Caltech-Grid3,Caltech-Grid3 UCSanDiegoPG,UCSanDiegoPG FNAL_CMS,Caltech-PG UNM_HPC,UNM_HPC UTA-DPCC,UNM_HPC Rice-Grid3,UTA-DPCC Vanderbilt,Vanderbilt KNU,Caltech-Grid3 KNU
+
+
+title=OSG-ITB Status MAP
+description=Status Map
+ignorezero=true
+
+routers=false
+
+image.format=jpeg
+image.jpeg.compression=0.9
+
+default.fontsize=10
+default.xlabeloffset=10
+default.ylabeloffset=5
+
+
+ITB-Zero.xlabeloffset=-60
+ITB-Zero.ylabeloffset=5
+
+fnpcg.fnal.gov.xlabeloffset=-45
+fnpcg.fnal.gov.ylabeloffset=4
+
+
+anlhep.xlabeloffset=-46
+anlhep.ylabeloffset=5
+
+
+default.href=display?page=i&farm=$NAME&pTime=1+day
+
+default.preds1=$NAME/PN%/*/-1/-1/Load_51&$NAME/PN%/*/-1/-1/Load_05
+default.preds2=$NAME/VO_JOBS/*/-1/-1/Idle Jobs&$NAME/VO_JOBS/*/-1/-1/Running Jobs
+default.preds3=$NAME/VO_JOBS/ATLAS/-1/-1/Running Jobs&$NAME/VO_JOBS/CMS/-1/-1/Running Jobs&$NAME/VO_JOBS/BTeV/-1/-1/Running Jobs&$NAME/VO_JOBS/GADU/-1/-1/Running Jobs&$NAME/VO_JOBS/GRASE/-1/-1/Running Jobs&$NAME/VO_JOBS/GRIDEX/-1/-1/Running Jobs&$NAME/VO_JOBS/iVDgL/-1/-1/Running Jobs&$NAME/VO_JOBS/LIGO/-1/-1/Running Jobs&$NAME/VO_JOBS/SDSS/-1/-1/Running Jobs
+default.alternate_data=$NAME/*/*/-1/-1
+default.colors1=0 100 255,0 255 0
+default.colors2=0 100 255,0 255 0
+default.colors3=0 255 0,153 204 0,255 204 255,255 128 128,255 255 0,128 255 255,128 128 255,255 0 255,0 0 255
+
+default.radius=10
+
+default.tooltip1.0=$ALIAS is DOWN
+default.tooltip1.0_alternate_data=$ALIAS has no PN data
+default.tooltip1.1=$ALIAS
+default.tooltip1.2=$ALIAS: Busy Nodes:$0 Free Nodes:$1
+//default.tooltip.9=$ALIAS: ATLAS:$0 CMS:$1 BTeV:$2 GADU:$3 GRASE:$4 GRIDEX:$5 iVDgL:$6 LIGO:$7 SDSS:$8 
+
+default.tooltip2.0=$ALIAS is DOWN
+default.tooltip2.0_alternate_data=$ALIAS has no VO_JOBS data
+default.tooltip2.1=$ALIAS
+default.tooltip2.2=$ALIAS: Idle Jobs:$0 Running Jobs:$1
+//default.tooltip.9=$ALIAS: ATLAS:$0 CMS:$1 BTeV:$2 GADU:$3 GRASE:$4 GRIDEX:$5 iVDgL:$6 LIGO:$7 SDSS:$8 
+
+
+default.tooltip3.0=$ALIAS is DOWN
+default.tooltip3.0_alternate_data=$ALIAS has no VO_JOBS data
+default.tooltip3.1=$ALIAS
+//default.tooltip3.2=$ALIAS: Idle Jobs:$0 Running Jobs:$1
+default.tooltip3.9=$ALIAS: ATLAS:$0 CMS:$1 BTeV:$2 GADU:$3 GRASE:$4 GRIDEX:$5 iVDgL:$6 LIGO:$7 SDSS:$8 
+
+scallednodes.enabled=true
+scallednodes.min=8
+scallednodes.max=11

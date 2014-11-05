@@ -1,0 +1,2 @@
+value This fortune is encrypted. Call 1-800-CIALISTENS for the plain text version.
+style font-size:10px;color:#444444

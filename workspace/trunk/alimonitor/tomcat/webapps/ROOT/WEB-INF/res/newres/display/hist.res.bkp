@@ -1,0 +1,164 @@
+<script language=JavaScript>
+
+function quickjump(){
+    index = document.form1.quickint.selectedIndex;
+    
+    value = document.form1.quickint[index].value;
+	
+    intmin = document.getElementById('intmin');
+	    
+    intmin.selectedIndex = intmin.length - value - 1;
+		
+    intmax = document.getElementById('intmax');
+		    
+    intmax.selectedIndex = intmax.length - 1;
+			
+    modify();
+}
+		    
+</script>
+			    
+
+<form action="display" method="post" name="form1">
+    <input type=hidden name="page" value="<<:page:>>">
+    <table border=0 cellspacing=0 cellpadding=2 width=70% bgcolor="#778899">
+	<tr>
+	    <td>
+		<table border=0 cellspacing=0 cellpadding=3 width=100% bgcolor="#eeeeee" style="font-face:Helvetica; font-size:9px;">
+		    <tr>
+			<td><b>Sites :</b></td>
+		    </tr>
+		    <tr>
+		        <td width=100% class="checkboxmenu">
+			    <<:continut:>>
+			    <<:com_separate_start:>><hr size=1 noshade><<:separate:>><<:com_separate_end:>>
+		        </td>
+		        <td align=right>
+		            <input type=submit name="submit_plot" value="Plot">
+		        </td>
+		    </tr>
+		    <tr>
+		    <td align=center nowrap class="checkboxmenu">
+		            (<a href="JavaScript:checkall();">check all</a> | <a href="JavaScript:uncheckall();">uncheck all </a>)
+		    </td>
+		    </tr>
+		    <tr>							
+			<td width=100% colspan=2><table align=center width=100% border=0 cellspacing=0 cellpadding=0  class="checkboxmenu"><tr>
+			<<:com_interval_start:>>
+			    <td colspan=4 align=center class="checkboxmenu">
+				Quick interval:
+			        <select name=quickint onChange="JavaScript:quickjump();" id="quickint">
+			            <option value=0>- select one -</option>
+			            <option value=1>last hour</option>
+			            <option value=24>last day</option>
+			            <option value=168>last week</option>
+			            <option value=720>last month</option>
+			            <option value=2208>3 months</option>
+				    <option value=4416>6 months</optoin>
+				    <option value=8760>1 year</optoin>
+				</select>
+				&nbsp;&nbsp;
+				Interval selection : 
+				<select name=interval.min id="intmin" onChange="JavaScript:updateQuickInt();"><<:opt_intervalmin:>></select>
+				&nbsp;&nbsp;-&nbsp;&nbsp;
+				<select name=interval.max id="intmax" onChange="JavaScript:updateQuickInt();"><<:opt_intervalmax:>></select>
+			    </td>
+			</tr>
+			<tr>
+			    <td>&nbsp;</td>
+			<<:com_interval_end:>>
+
+			<<:com_log_start:>>
+			<td align=center nowrap valign=absmiddle style="font-face:Helvetica;font-size:10px">Logarithmic scale is 
+				<select name="log" onChange="JavaScript:modify();">
+				    <option value="0" <<:log_0:>>>disabled</option>
+				    <option value="1" <<:log_1:>>>enabled</option>
+				</select>
+			</td>
+			<<:com_log_end:>>
+			<<:com_err_start:>>
+			<td align=left nowrap valign=absmiddle style="font-face:Helvetica;font-size:10px">Fluctuations are
+				<select name="err" onChange="JavaScript:modify();">
+				    <option value="0" <<:err_0:>>>disabled</option>
+				    <option value="1" <<:err_1:>>>enabled</option>
+				</select>
+			</td>
+			<<:com_err_end:>>
+			<<:com_sum_start:>>
+			<td align=left nowrap valign=absmiddle style="font-face:Helvetica;font-size:10px">Sum series
+			    <select name="sum" onChange="JavaScript:modify();">
+				<option value="0" <<:sum_0:>>>disabled</option>
+				<option value="1" <<:sum_1:>>>enabled</option>
+			    </select>
+			</td>
+			<<:com_sum_end:>>
+			<<:com_int_start:>>
+			<td align=left nowrap valign=absmiddle style="font-face:Helvetica;font-size:10px">Integral series
+			    <select name="int" onChange="JavaScript:modify();">
+				<option value="0" <<:int_0:>>>disabled</option>
+				<option value="1" <<:int_1:>>>enabled</option>
+			    </select>
+			</td>
+			<<:com_int_end:>>
+			</tr>
+			<tr>	
+			    <td>&nbsp;</td>
+			    <td colspan=4 align=left nowrap style="font-face:Helvetica;font-size:10px">
+				<table border=0 cellspacing=0 cellpadding=0 width=100%  style="font-face:Helvetica;font-size:10px">
+				    <tr>
+					<<:options:>>
+				    </tr>
+				</table>
+			    </td>
+			</tr>
+			</table></td>
+		    </tr>
+		</table>
+	    </td>
+	</tr>
+    </table>
+    
+    <<:extra:>>
+</form>
+<script language=JavaScript>
+    function updateQuickInt(){
+        intmin = document.getElementById('intmin');
+	intmax = document.getElementById('intmax');
+		    
+	qint   = document.getElementById('quickint');
+			    
+	if (intmax.selectedIndex == intmax.length - 1){
+	    value = intmin.length - 1 - intmin.selectedIndex;
+	
+	    switch (value){
+	        case 1:         qint.selectedIndex=1; break;
+	        case 24:        qint.selectedIndex=2; break;
+	        case 168:       qint.selectedIndex=3; break;
+	        case 720:       qint.selectedIndex=4; break;
+	        case 2208:      qint.selectedIndex=5; break;
+	        case 4416:      qint.selectedIndex=6; break;
+	    }
+	}
+    }
+
+    updateQuickInt();
+</script>
+																							
+<table border=0 cellspacing=0 cellpadding=0 align=center width=70%>
+    <tr>
+        <td valign=top align=center>
+            <<:map:>><img src="display?image=<<:image:>>" usemap="#<<:image:>>" border=0>
+        </td>
+        <td valign=top><<:description:>></td>
+    </tr>
+</table>				    
+
+<br clear=all>
+<br clear=all>
+<table width=70% border=0 cellspacing=0 cellpadding=0>
+    <tr>
+	<td align=center>
+<<:statistics:>>		
+	</td>
+    </tr>
+</table>

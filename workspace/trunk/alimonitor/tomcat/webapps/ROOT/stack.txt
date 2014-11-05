@@ -1,0 +1,819 @@
+2006-11-23 08:12:48
+Full thread dump Java HotSpot(TM) Server VM (1.6.0-rc-b104 mixed mode):
+
+"Attach Listener" daemon prio=10 tid=0x0826a000 nid=0x56ac runnable [0x00000000..0x00000000]
+   java.lang.Thread.State: RUNNABLE
+
+"(ML) WEB Page : /FarmMap" daemon prio=10 tid=0x8b62b800 nid=0x56a2 runnable [0x8c136000..0x8c1370b0]
+   java.lang.Thread.State: RUNNABLE
+	at java.util.zip.Deflater.deflateBytes(Native Method)
+	at java.util.zip.Deflater.deflate(Deflater.java:290)
+	- locked <0xb458bb30> (a java.util.zip.Deflater)
+	at com.sun.imageio.plugins.png.IDATOutputStream.deflate(PNGImageWriter.java:202)
+	at com.sun.imageio.plugins.png.IDATOutputStream.write(PNGImageWriter.java:196)
+	at com.sun.imageio.plugins.png.PNGImageWriter.encodePass(PNGImageWriter.java:876)
+	at com.sun.imageio.plugins.png.PNGImageWriter.write_IDAT(PNGImageWriter.java:910)
+	at com.sun.imageio.plugins.png.PNGImageWriter.write(PNGImageWriter.java:1125)
+	at javax.imageio.ImageWriter.write(ImageWriter.java:598)
+	at javax.imageio.ImageIO.write(ImageIO.java:1479)
+	at javax.imageio.ImageIO.write(ImageIO.java:1565)
+	at org.jfree.chart.encoders.SunPNGEncoderAdapter.encode(SunPNGEncoderAdapter.java:128)
+	at org.jfree.chart.encoders.EncoderUtil.writeBufferedImage(EncoderUtil.java:137)
+	at org.jfree.chart.ChartUtilities.writeBufferedImageAsPNG(ChartUtilities.java:634)
+	at lia.web.servlets.map2d.FarmMap.actualexecGet(FarmMap.java:807)
+	at lia.web.servlets.map2d.FarmMap.execGet(FarmMap.java:121)
+	- locked <0x98020878> (a java.lang.String)
+	at lia.web.utils.ThreadedPage.run(ThreadedPage.java:349)
+	at java.lang.Thread.run(Thread.java:619)
+
+"(ML) WEB Page : /FarmMap" daemon prio=10 tid=0x08269800 nid=0x56a1 waiting for monitor entry [0x8c188000..0x8c188130]
+   java.lang.Thread.State: BLOCKED (on object monitor)
+	at lia.web.servlets.map2d.FarmMap.execGet(FarmMap.java:121)
+	- waiting to lock <0x98020878> (a java.lang.String)
+	at lia.web.utils.ThreadedPage.run(ThreadedPage.java:349)
+	at java.lang.Thread.run(Thread.java:619)
+
+" ( ML ) MLProcessWatchdog Thread :- 0" daemon prio=10 tid=0x090cfc00 nid=0x5686 in Object.wait() [0x8beae000..0x8beae1b0]
+   java.lang.Thread.State: WAITING (on object monitor)
+	at java.lang.Object.wait(Native Method)
+	- waiting on <0x994e7420> (a java.lang.Object)
+	at java.lang.Object.wait(Object.java:485)
+	at edu.emory.mathcs.backport.java.util.concurrent.DelayQueue.take(DelayQueue.java:152)
+	- locked <0x994e7420> (a java.lang.Object)
+	at lia.util.MLProcessWatchdog.run(MLProcessWatchdog.java:104)
+
+"(ML) BatchProcessor" daemon prio=10 tid=0x089a2800 nid=0x567f runnable [0x8c0e5000..0x8c0e6030]
+   java.lang.Thread.State: RUNNABLE
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.read(SocketInputStream.java:129)
+	at java.io.BufferedInputStream.fill(BufferedInputStream.java:218)
+	at java.io.BufferedInputStream.read(BufferedInputStream.java:237)
+	- locked <0x974d5b80> (a java.io.BufferedInputStream)
+	at org.postgresql.core.PGStream.ReceiveChar(PGStream.java:256)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:1163)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:188)
+	- locked <0x974d5db8> (a org.postgresql.core.v3.QueryExecutorImpl)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.execute(AbstractJdbc2Statement.java:437)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeWithFlags(AbstractJdbc2Statement.java:339)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.execute(AbstractJdbc2Statement.java:331)
+	at org.postgresql.jdbc3.AbstractJdbc3Statement.execute(AbstractJdbc3Statement.java:231)
+	at lia.Monitor.Store.Fast.DB.doQuerySync(DB.java:533)
+	at lia.Monitor.Store.Fast.DB.doQuery(DB.java:487)
+	at lia.Monitor.Store.Fast.DB.update(DB.java:475)
+	at lia.Monitor.Store.Fast.BatchProcessor.saveIDObjects(BatchProcessor.java:487)
+	at lia.Monitor.Store.Fast.BatchProcessor.run(BatchProcessor.java:884)
+
+"(JSK) Idle" daemon prio=10 tid=0x08d4d000 nid=0x5676 in Object.wait() [0x8d018000..0x8d019030]
+   java.lang.Thread.State: TIMED_WAITING (on object monitor)
+	at java.lang.Object.wait(Native Method)
+	- waiting on <0x959b50c8> (a java.lang.Object)
+	at com.sun.jini.thread.ThreadPool$Worker.run(ThreadPool.java:165)
+	- locked <0x959b50c8> (a java.lang.Object)
+	at java.lang.Thread.run(Thread.java:619)
+
+"http-8889-Processor8" daemon prio=10 tid=0x086c6c00 nid=0x5674 waiting on condition [0x8dfac000..0x8dfae130]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.web.utils.ThreadedPage.execute(ThreadedPage.java:278)
+	at lia.web.utils.ThreadedPage.doGet(ThreadedPage.java:57)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:689)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:802)
+	at sun.reflect.GeneratedMethodAccessor38.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.catalina.security.SecurityUtil$1.run(SecurityUtil.java:239)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at javax.security.auth.Subject.doAsPrivileged(Subject.java:517)
+	at org.apache.catalina.security.SecurityUtil.execute(SecurityUtil.java:268)
+	at org.apache.catalina.security.SecurityUtil.doAsPrivilege(SecurityUtil.java:157)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.access$000(ApplicationFilterChain.java:50)
+	at org.apache.catalina.core.ApplicationFilterChain$1.run(ApplicationFilterChain.java:140)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:136)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:214)
+	at org.apache.catalina.core.StandardValveContext.invokeNext(StandardValveContext.java:104)
+	at org.apache.catalina.core.StandardPipeline.invoke(StandardPipeline.java:520)
+	at org.apache.catalina.core.StandardContextValve.invokeInternal(StandardContextValve.java:198)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:152)
+	at org.apache.catalina.core.StandardValveContext.invokeNext(StandardValveContext.java:104)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:462)
+	at org.apache.catalina.core.StandardValveContext.invokeNext(StandardValveContext.java:102)
+	at org.apache.catalina.core.StandardPipeline.invoke(StandardPipeline.java:520)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:137)
+	at org.apache.catalina.core.StandardValveContext.invokeNext(StandardValveContext.java:104)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:118)
+	at org.apache.catalina.core.StandardValveContext.invokeNext(StandardValveContext.java:102)
+	at org.apache.catalina.core.StandardPipeline.invoke(StandardPipeline.java:520)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109)
+	at org.apache.catalina.core.StandardValveContext.invokeNext(StandardValveContext.java:104)
+	at org.apache.catalina.core.StandardPipeline.invoke(StandardPipeline.java:520)
+	at org.apache.catalina.core.ContainerBase.invoke(ContainerBase.java:929)
+	at org.apache.coyote.tomcat5.CoyoteAdapter.service(CoyoteAdapter.java:160)
+	at org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:799)
+	at org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.processConnection(Http11Protocol.java:705)
+	at org.apache.tomcat.util.net.TcpWorkerThread.runIt(PoolTcpEndpoint.java:577)
+	at org.apache.tomcat.util.threads.ThreadPool$ControlRunnable.run(ThreadPool.java:683)
+	at java.lang.Thread.run(Thread.java:619)
+
+"http-8889-Processor7" daemon prio=10 tid=0x09357000 nid=0x5673 waiting on condition [0x8cbfd000..0x8cbff1b0]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.web.utils.ThreadedPage.execute(ThreadedPage.java:278)
+	at lia.web.utils.ThreadedPage.doGet(ThreadedPage.java:57)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:689)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:802)
+	at sun.reflect.GeneratedMethodAccessor38.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.catalina.security.SecurityUtil$1.run(SecurityUtil.java:239)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at javax.security.auth.Subject.doAsPrivileged(Subject.java:517)
+	at org.apache.catalina.security.SecurityUtil.execute(SecurityUtil.java:268)
+	at org.apache.catalina.security.SecurityUtil.doAsPrivilege(SecurityUtil.java:157)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.access$000(ApplicationFilterChain.java:50)
+	at org.apache.catalina.core.ApplicationFilterChain$1.run(ApplicationFilterChain.java:140)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:136)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:214)
+	at org.apache.catalina.core.StandardValveContext.invokeNext(StandardValveContext.java:104)
+	at org.apache.catalina.core.StandardPipeline.invoke(StandardPipeline.java:520)
+	at org.apache.catalina.core.StandardContextValve.invokeInternal(StandardContextValve.java:198)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:152)
+	at org.apache.catalina.core.StandardValveContext.invokeNext(StandardValveContext.java:104)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:462)
+	at org.apache.catalina.core.StandardValveContext.invokeNext(StandardValveContext.java:102)
+	at org.apache.catalina.core.StandardPipeline.invoke(StandardPipeline.java:520)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:137)
+	at org.apache.catalina.core.StandardValveContext.invokeNext(StandardValveContext.java:104)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:118)
+	at org.apache.catalina.core.StandardValveContext.invokeNext(StandardValveContext.java:102)
+	at org.apache.catalina.core.StandardPipeline.invoke(StandardPipeline.java:520)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109)
+	at org.apache.catalina.core.StandardValveContext.invokeNext(StandardValveContext.java:104)
+	at org.apache.catalina.core.StandardPipeline.invoke(StandardPipeline.java:520)
+	at org.apache.catalina.core.ContainerBase.invoke(ContainerBase.java:929)
+	at org.apache.coyote.tomcat5.CoyoteAdapter.service(CoyoteAdapter.java:160)
+	at org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:799)
+	at org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.processConnection(Http11Protocol.java:705)
+	at org.apache.tomcat.util.net.TcpWorkerThread.runIt(PoolTcpEndpoint.java:577)
+	at org.apache.tomcat.util.threads.ThreadPool$ControlRunnable.run(ThreadPool.java:683)
+	at java.lang.Thread.run(Thread.java:619)
+
+"http-8889-Processor6" daemon prio=10 tid=0x0907a800 nid=0x5672 in Object.wait() [0x8fa2c000..0x8fa2ce30]
+   java.lang.Thread.State: WAITING (on object monitor)
+	at java.lang.Object.wait(Native Method)
+	- waiting on <0x9803bd38> (a org.apache.tomcat.util.threads.ThreadPool$ControlRunnable)
+	at java.lang.Object.wait(Object.java:485)
+	at org.apache.tomcat.util.threads.ThreadPool$ControlRunnable.run(ThreadPool.java:655)
+	- locked <0x9803bd38> (a org.apache.tomcat.util.threads.ThreadPool$ControlRunnable)
+	at java.lang.Thread.run(Thread.java:619)
+
+"http-8889-Processor5" daemon prio=10 tid=0x08cf0400 nid=0x5671 runnable [0x8d364000..0x8d364eb0]
+   java.lang.Thread.State: RUNNABLE
+	at java.net.PlainSocketImpl.socketAccept(Native Method)
+	at java.net.PlainSocketImpl.accept(PlainSocketImpl.java:384)
+	- locked <0x975499a8> (a java.net.SocksSocketImpl)
+	at java.net.ServerSocket.implAccept(ServerSocket.java:450)
+	at java.net.ServerSocket.accept(ServerSocket.java:421)
+	at org.apache.tomcat.util.net.DefaultServerSocketFactory.acceptSocket(DefaultServerSocketFactory.java:60)
+	at org.apache.tomcat.util.net.PoolTcpEndpoint.acceptSocket(PoolTcpEndpoint.java:368)
+	at org.apache.tomcat.util.net.TcpWorkerThread.runIt(PoolTcpEndpoint.java:549)
+	at org.apache.tomcat.util.threads.ThreadPool$ControlRunnable.run(ThreadPool.java:683)
+	at java.lang.Thread.run(Thread.java:619)
+
+"(ML) JTClient for KNU" daemon prio=10 tid=0x09235c00 nid=0x566e waiting on condition [0x8cfc7000..0x8cfc8030]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.JiniClient.Store.JtClient.run(JtClient.java:153)
+
+"(ML) JTClient for Catania" daemon prio=10 tid=0x08345800 nid=0x566d waiting on condition [0x8de18000..0x8de190b0]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.JiniClient.Store.JtClient.run(JtClient.java:153)
+
+"(ML) JTClient for LBL" daemon prio=10 tid=0x08345000 nid=0x566c waiting on condition [0x8de6a000..0x8de6a130]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.JiniClient.Store.JtClient.run(JtClient.java:153)
+
+"(ML) JTClient for Bologna" daemon prio=10 tid=0x08213000 nid=0x566b sleeping[0x8d0bb000..0x8d0bb1b0]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.JiniClient.Store.JtClient.run(JtClient.java:153)
+
+"(ML) JTClient for NIHAM" daemon prio=10 tid=0x086c7c00 nid=0x566a waiting on condition [0x8cf76000..0x8cf76e30]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.JiniClient.Store.JtClient.run(JtClient.java:153)
+
+"(ML) JTClient for RRC-KI" daemon prio=10 tid=0x08222000 nid=0x5669 waiting on condition [0x8cb0b000..0x8cb0beb0]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.JiniClient.Store.JtClient.run(JtClient.java:153)
+
+"(ML) JTClient for PNPI" daemon prio=10 tid=0x0897b000 nid=0x5668 waiting on condition [0x8cbad000..0x8cbadf30]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.JiniClient.Store.JtClient.run(JtClient.java:153)
+
+"(ML) JTClient for NGO" daemon prio=10 tid=0x08324800 nid=0x5667 waiting on condition [0x8caba000..0x8cabafb0]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.JiniClient.Store.JtClient.run(JtClient.java:153)
+
+"(ML) JTClient for CNAF" daemon prio=10 tid=0x08b76c00 nid=0x5665 sleeping[0x8c466000..0x8c4670b0]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.JiniClient.Store.JtClient.run(JtClient.java:153)
+
+"(ML) JTClient for aliendb5.cern.ch" daemon prio=10 tid=0x08477800 nid=0x5664 waiting on condition [0x8ca6a000..0x8ca6a130]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.JiniClient.Store.JtClient.run(JtClient.java:153)
+
+"(ML) JTClient for Athens" daemon prio=10 tid=0x08473000 nid=0x5663 waiting on condition [0x8ca19000..0x8ca191b0]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.JiniClient.Store.JtClient.run(JtClient.java:153)
+
+"(ML) JTClient for Cagliari" daemon prio=10 tid=0x08474000 nid=0x5662 waiting on condition [0x8c9c7000..0x8c9c7e30]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.JiniClient.Store.JtClient.run(JtClient.java:153)
+
+"(ML) JTClient for TriGrid_Catania" daemon prio=10 tid=0x08155400 nid=0x5661 waiting on condition [0x8d93b000..0x8d93beb0]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.JiniClient.Store.JtClient.run(JtClient.java:153)
+
+"(ML) JTClient for CERNMAC" daemon prio=10 tid=0x08475400 nid=0x5660 waiting on condition [0x8c976000..0x8c976f30]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.JiniClient.Store.JtClient.run(JtClient.java:153)
+
+"(ML) JTClient for GSI" daemon prio=10 tid=0x08ba1000 nid=0x565f waiting on condition [0x8c8d4000..0x8c8d4fb0]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.JiniClient.Store.JtClient.run(JtClient.java:153)
+
+"(ML) JTClient for OSC" daemon prio=10 tid=0x0930cc00 nid=0x5659 waiting on condition [0x8c1d8000..0x8c1d9030]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.JiniClient.Store.JtClient.run(JtClient.java:153)
+
+"( ML ) GMLEPublisher" daemon prio=10 tid=0x08348c00 nid=0x5657 in Object.wait() [0x8c884000..0x8c884130]
+   java.lang.Thread.State: TIMED_WAITING (on object monitor)
+	at java.lang.Object.wait(Native Method)
+	- waiting on <0x97d9ee38> (a java.lang.Object)
+	at lia.Monitor.JiniSerFarmMon.GMLEPublisher.run(GMLEPublisher.java:138)
+	- locked <0x97d9ee38> (a java.lang.Object)
+
+"(ML) JTClient for Bari" daemon prio=10 tid=0x0918f800 nid=0x5656 waiting on condition [0x8c833000..0x8c8331b0]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.JiniClient.Store.JtClient.run(JtClient.java:153)
+
+"(ML) JTClient for pcapiserv02.cern.ch" daemon prio=10 tid=0x0834b000 nid=0x5655 sleeping[0x8c7e1000..0x8c7e1e30]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.JiniClient.Store.JtClient.run(JtClient.java:153)
+
+"(ML) JTClient for RAL" daemon prio=10 tid=0x0834c400 nid=0x5654 waiting on condition [0x8c790000..0x8c790eb0]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.JiniClient.Store.JtClient.run(JtClient.java:153)
+
+"(ML) JTClient for Madrid" daemon prio=10 tid=0x086c3c00 nid=0x5653 waiting on condition [0x8c73f000..0x8c73ff30]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.JiniClient.Store.JtClient.run(JtClient.java:153)
+
+"(ML) JTClient for CERN_gLite" daemon prio=10 tid=0x091ce000 nid=0x5652 waiting on condition [0x8c6ee000..0x8c6eefb0]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.JiniClient.Store.JtClient.run(JtClient.java:153)
+
+"(ML) JTClient for SARA" daemon prio=10 tid=0x0907d800 nid=0x5651 waiting on condition [0x8c69d000..0x8c69e030]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.JiniClient.Store.JtClient.run(JtClient.java:153)
+
+"(ML) JTClient for SINP" daemon prio=10 tid=0x09038000 nid=0x5650 waiting on condition [0x8c64c000..0x8c64d0b0]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.JiniClient.Store.JtClient.run(JtClient.java:153)
+
+"(ML) JTClient for UiB" daemon prio=10 tid=0x08740c00 nid=0x564f waiting on condition [0x8c5fc000..0x8c5fc130]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.JiniClient.Store.JtClient.run(JtClient.java:153)
+
+"(ML) JTClient for CCIN2P3" daemon prio=10 tid=0x08b74c00 nid=0x564e waiting on condition [0x8c5ab000..0x8c5ab1b0]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.JiniClient.Store.JtClient.run(JtClient.java:153)
+
+"(ML) JTClient for Legnaro" daemon prio=10 tid=0x080e0000 nid=0x564d waiting on condition [0x8c559000..0x8c559e30]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.JiniClient.Store.JtClient.run(JtClient.java:153)
+
+"(ML) JTClient for KISTI" daemon prio=10 tid=0x080e1000 nid=0x564c waiting on condition [0x8c508000..0x8c508eb0]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.JiniClient.Store.JtClient.run(JtClient.java:153)
+
+"(ML) JTClient for Torino" daemon prio=10 tid=0x08198800 nid=0x564b waiting on condition [0x8c4b7000..0x8c4b7f30]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.JiniClient.Store.JtClient.run(JtClient.java:153)
+
+"(ML) JTClient for ALICE-CAF" daemon prio=10 tid=0x0831ec00 nid=0x564a waiting on condition [0x8c2e6000..0x8c2e6fb0]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.JiniClient.Store.JtClient.run(JtClient.java:153)
+
+"(ML) JTClient for Muenster" daemon prio=10 tid=0x08476400 nid=0x5648 waiting on condition [0x8c925000..0x8c9260b0]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.JiniClient.Store.JtClient.run(JtClient.java:153)
+
+"(ML) JTClient for Kolkatta" daemon prio=10 tid=0x08603400 nid=0x5646 waiting on condition [0x8d728000..0x8d7281b0]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.JiniClient.Store.JtClient.run(JtClient.java:153)
+
+"(ML) JTClient for UNAM" daemon prio=10 tid=0x089f7800 nid=0x5645 waiting on condition [0x8d685000..0x8d685e30]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.JiniClient.Store.JtClient.run(JtClient.java:153)
+
+"(ML) JTClient for GRIF_DAPNIA" daemon prio=10 tid=0x089f6800 nid=0x5644 waiting on condition [0x8d6d6000..0x8d6d6eb0]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.JiniClient.Store.JtClient.run(JtClient.java:153)
+
+"(ML) JTClient for pcapiserv03.cern.ch" daemon prio=10 tid=0x08198400 nid=0x5643 waiting on condition [0x8d1ad000..0x8d1adf30]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.JiniClient.Store.JtClient.run(JtClient.java:153)
+
+"Java2D Disposer" daemon prio=10 tid=0x0890b400 nid=0x5642 in Object.wait() [0x8d5e3000..0x8d5e3fb0]
+   java.lang.Thread.State: WAITING (on object monitor)
+	at java.lang.Object.wait(Native Method)
+	- waiting on <0x973dfbd8> (a java.lang.ref.ReferenceQueue$Lock)
+	at java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:116)
+	- locked <0x973dfbd8> (a java.lang.ref.ReferenceQueue$Lock)
+	at java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:132)
+	at sun.java2d.Disposer.run(Disposer.java:125)
+	at java.lang.Thread.run(Thread.java:619)
+
+"(ML) JTClient for Prague" daemon prio=10 tid=0x08978400 nid=0x5641 waiting on condition [0x8d634000..0x8d635030]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.JiniClient.Store.JtClient.run(JtClient.java:153)
+
+"(ML) JTClient for Clermont" daemon prio=10 tid=0x08822800 nid=0x5640 waiting on condition [0x8deba000..0x8debb0b0]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.JiniClient.Store.JtClient.run(JtClient.java:153)
+
+"(ML) JTClient for ISS" daemon prio=10 tid=0x08146800 nid=0x563f waiting on condition [0x8df0c000..0x8df0c130]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.JiniClient.Store.JtClient.run(JtClient.java:153)
+
+"(ML) JTClient for ITEP" daemon prio=10 tid=0x0866f000 nid=0x563e waiting on condition [0x8f2ff000..0x8f2ff1b0]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.JiniClient.Store.JtClient.run(JtClient.java:153)
+
+"(ML) JTClient for aliendb1.cern.ch" daemon prio=10 tid=0x086d8800 nid=0x563d waiting on condition [0x8d4f0000..0x8d4f0e30]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.JiniClient.Store.JtClient.run(JtClient.java:153)
+
+"(ML) JTClient for SPbSU" daemon prio=10 tid=0x08360000 nid=0x563c waiting on condition [0x8d541000..0x8d541eb0]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.JiniClient.Store.JtClient.run(JtClient.java:153)
+
+"(ML) JTClient for JINR" daemon prio=10 tid=0x08323c00 nid=0x563b sleeping[0x8d44e000..0x8d44ef30]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.JiniClient.Store.JtClient.run(JtClient.java:153)
+
+"(ML) JTClient for IHEP" daemon prio=10 tid=0x085c7800 nid=0x563a waiting on condition [0x8d1fe000..0x8d1fefb0]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.JiniClient.Store.JtClient.run(JtClient.java:153)
+
+"(ML) JTClient for NIKHEF" daemon prio=10 tid=0x086d9c00 nid=0x5639 waiting on condition [0x8d49f000..0x8d4a0030]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.JiniClient.Store.JtClient.run(JtClient.java:153)
+
+"(ML) JTClient for Kosice" daemon prio=10 tid=0x08199400 nid=0x5638 waiting on condition [0x8d899000..0x8d89a0b0]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.JiniClient.Store.JtClient.run(JtClient.java:153)
+
+"(ML) JTClient for Trujillo" daemon prio=10 tid=0x08081000 nid=0x5637 waiting on condition [0x8c3c5000..0x8c3c5130]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.JiniClient.Store.JtClient.run(JtClient.java:153)
+
+"(ML) JTClient for CERN-L" daemon prio=10 tid=0x0807d400 nid=0x5636 waiting on condition [0x8c416000..0x8c4161b0]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.JiniClient.Store.JtClient.run(JtClient.java:153)
+
+"(ML) JTClient for BITP" daemon prio=10 tid=0x09234800 nid=0x561e waiting on condition [0x8d8eb000..0x8d8eb1b0]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.JiniClient.Store.JtClient.run(JtClient.java:153)
+
+"(ML) JTClient for pcapiserv01.cern.ch" daemon prio=10 tid=0x0897c400 nid=0x561d waiting on condition [0x8cb5c000..0x8cb5ce30]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.JiniClient.Store.JtClient.run(JtClient.java:153)
+
+"(ML) JTClient for Sejong" daemon prio=10 tid=0x08732000 nid=0x5615 waiting on condition [0x8d069000..0x8d069e30]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.JiniClient.Store.JtClient.run(JtClient.java:153)
+
+"(ML) JTClient for Birmingham" daemon prio=10 tid=0x0847a400 nid=0x5613 waiting on condition [0x8d10b000..0x8d10bf30]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.JiniClient.Store.JtClient.run(JtClient.java:153)
+
+"(ML) JTClient for CERN" daemon prio=10 tid=0x08211400 nid=0x5610 waiting on condition [0x8d15c000..0x8d15d0b0]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.JiniClient.Store.JtClient.run(JtClient.java:153)
+
+"(ML) JTClient for Cyfronet" daemon prio=10 tid=0x08d51400 nid=0x5604 waiting on condition [0x8d592000..0x8d592eb0]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.JiniClient.Store.JtClient.run(JtClient.java:153)
+
+"(ML) JTClient for Subatech" daemon prio=10 tid=0x0849e000 nid=0x55fd waiting on condition [0x8d7f8000..0x8d7f81b0]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.JiniClient.Store.JtClient.run(JtClient.java:153)
+
+"(ML) JTClient for IPNO" daemon prio=10 tid=0x0819a800 nid=0x55fc waiting on condition [0x8d848000..0x8d848e30]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.JiniClient.Store.JtClient.run(JtClient.java:153)
+
+"(ML) Store.Cache Cleanup Thread" daemon prio=10 tid=0x8fb2c000 nid=0x55f3 waiting on condition [0x8df5c000..0x8df5ce30]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.Store.Cache$CacheCleanupThread.run(Cache.java:488)
+
+"Thread-18" daemon prio=10 tid=0x0935dc00 nid=0x55f1 waiting on condition [0x8f1fc000..0x8f1fcf30]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.web.utils.ThreadedPage$CleanupThread.run(ThreadedPage.java:79)
+
+"( ML ) tcpConn for /192.91.245.5:6001:-47742" daemon prio=10 tid=0x0935cc00 nid=0x55ef runnable [0x8e282000..0x8e282fb0]
+   java.lang.Thread.State: RUNNABLE
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.read(SocketInputStream.java:129)
+	at java.net.SocketInputStream.read(SocketInputStream.java:182)
+	at java.io.ObjectInputStream$PeekInputStream.peek(ObjectInputStream.java:2247)
+	at java.io.ObjectInputStream$BlockDataInputStream.peek(ObjectInputStream.java:2540)
+	at java.io.ObjectInputStream$BlockDataInputStream.peekByte(ObjectInputStream.java:2550)
+	at java.io.ObjectInputStream.readObject0(ObjectInputStream.java:1297)
+	at java.io.ObjectInputStream.readObject(ObjectInputStream.java:351)
+	at lia.Monitor.monitor.tcpConn.ReadObject(tcpConn.java:304)
+	at lia.Monitor.monitor.tcpConn.run(tcpConn.java:541)
+
+" ( ML ) - tcpConnS Watchdog " daemon prio=10 tid=0x08890c00 nid=0x55ee waiting on condition [0x8e406000..0x8e407030]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.monitor.tcpConnWatchdog.run(tcpConnWatchdog.java:104)
+
+"( ML ) tcpConnWatchdogWorkerTask 0" prio=10 tid=0x0935f000 nid=0x55ed in Object.wait() [0x8e457000..0x8e4580b0]
+   java.lang.Thread.State: TIMED_WAITING (on object monitor)
+	at java.lang.Object.wait(Native Method)
+	- waiting on <0x97685f80> (a edu.emory.mathcs.backport.java.util.concurrent.locks.CondVar)
+	at java.lang.Object.wait(Object.java:443)
+	at edu.emory.mathcs.backport.java.util.concurrent.TimeUnit.timedWait(TimeUnit.java:364)
+	at edu.emory.mathcs.backport.java.util.concurrent.locks.CondVar.await(CondVar.java:99)
+	- locked <0x97685f80> (a edu.emory.mathcs.backport.java.util.concurrent.locks.CondVar)
+	at edu.emory.mathcs.backport.java.util.concurrent.ArrayBlockingQueue.poll(ArrayBlockingQueue.java:345)
+	at edu.emory.mathcs.backport.java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:921)
+	at edu.emory.mathcs.backport.java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:980)
+	at edu.emory.mathcs.backport.java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:528)
+	at java.lang.Thread.run(Thread.java:619)
+
+"(ML) IPResolver" prio=10 tid=0x08890400 nid=0x55ec waiting on condition [0x8f24e000..0x8f24e130]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.JiniClient.CommonGUI.IpAddrCache$IPResolver.run(IpAddrCache.java:291)
+
+"(JSK) Idle" daemon prio=10 tid=0x8efc7c00 nid=0x55eb in Object.wait() [0x8dfff000..0x8dfff1b0]
+   java.lang.Thread.State: TIMED_WAITING (on object monitor)
+	at java.lang.Object.wait(Native Method)
+	- waiting on <0x959b50c8> (a java.lang.Object)
+	at com.sun.jini.thread.ThreadPool$Worker.run(ThreadPool.java:165)
+	- locked <0x959b50c8> (a java.lang.Object)
+	at java.lang.Thread.run(Thread.java:619)
+
+"(JSK) Idle" daemon prio=10 tid=0x8efc7000 nid=0x55ea in Object.wait() [0x8e168000..0x8e168e30]
+   java.lang.Thread.State: TIMED_WAITING (on object monitor)
+	at java.lang.Object.wait(Native Method)
+	- waiting on <0x959b50c8> (a java.lang.Object)
+	at com.sun.jini.thread.ThreadPool$Worker.run(ThreadPool.java:165)
+	- locked <0x959b50c8> (a java.lang.Object)
+	at java.lang.Thread.run(Thread.java:619)
+
+"(JSK) Idle" daemon prio=10 tid=0x8efd1c00 nid=0x55e9 in Object.wait() [0x8e1e7000..0x8e1e7eb0]
+   java.lang.Thread.State: TIMED_WAITING (on object monitor)
+	at java.lang.Object.wait(Native Method)
+	- waiting on <0x959b50c8> (a java.lang.Object)
+	at com.sun.jini.thread.ThreadPool$Worker.run(ThreadPool.java:165)
+	- locked <0x959b50c8> (a java.lang.Object)
+	at java.lang.Thread.run(Thread.java:619)
+
+"(JSK) RenewClean-TcpEndpoint[131.215.207.35:6003]" daemon prio=10 tid=0x8ea9ac00 nid=0x55e8 in Object.wait() [0x8e395000..0x8e395f30]
+   java.lang.Thread.State: TIMED_WAITING (on object monitor)
+	at java.lang.Object.wait(Native Method)
+	- waiting on <0x9762ee68> (a java.lang.ref.ReferenceQueue$Lock)
+	at java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:116)
+	- locked <0x9762ee68> (a java.lang.ref.ReferenceQueue$Lock)
+	at com.sun.jini.jeri.internal.runtime.AbstractDgcClient$EndpointEntry$RenewCleanThread.run(AbstractDgcClient.java:576)
+	at java.lang.Thread.run(Thread.java:619)
+
+"DestroyJavaVM" prio=10 tid=0x0805a800 nid=0x55a9 waiting on condition [0x00000000..0xb7fe4100]
+   java.lang.Thread.State: RUNNABLE
+
+"(JSK) Idle" daemon prio=10 tid=0x8eff1400 nid=0x55e7 in Object.wait() [0x8d98c000..0x8d98cfb0]
+   java.lang.Thread.State: TIMED_WAITING (on object monitor)
+	at java.lang.Object.wait(Native Method)
+	- waiting on <0x959b50c8> (a java.lang.Object)
+	at com.sun.jini.thread.ThreadPool$Worker.run(ThreadPool.java:165)
+	- locked <0x959b50c8> (a java.lang.Object)
+	at java.lang.Thread.run(Thread.java:619)
+
+"(JSK) Idle" daemon prio=10 tid=0x8eff1000 nid=0x55e6 in Object.wait() [0x8d9dd000..0x8d9de030]
+   java.lang.Thread.State: TIMED_WAITING (on object monitor)
+	at java.lang.Object.wait(Native Method)
+	- waiting on <0x959b50c8> (a java.lang.Object)
+	at com.sun.jini.thread.ThreadPool$Worker.run(ThreadPool.java:165)
+	- locked <0x959b50c8> (a java.lang.Object)
+	at java.lang.Thread.run(Thread.java:619)
+
+"(JSK) Idle" daemon prio=10 tid=0x8eff0800 nid=0x55e5 in Object.wait() [0x8dd73000..0x8dd740b0]
+   java.lang.Thread.State: TIMED_WAITING (on object monitor)
+	at java.lang.Object.wait(Native Method)
+	- waiting on <0x959b50c8> (a java.lang.Object)
+	at com.sun.jini.thread.ThreadPool$Worker.run(ThreadPool.java:165)
+	- locked <0x959b50c8> (a java.lang.Object)
+	at java.lang.Thread.run(Thread.java:619)
+
+"(JSK) Idle" daemon prio=10 tid=0x8eaadc00 nid=0x55e4 in Object.wait() [0x8e2d3000..0x8e2d4130]
+   java.lang.Thread.State: TIMED_WAITING (on object monitor)
+	at java.lang.Object.wait(Native Method)
+	- waiting on <0x959b50c8> (a java.lang.Object)
+	at com.sun.jini.thread.ThreadPool$Worker.run(ThreadPool.java:165)
+	- locked <0x959b50c8> (a java.lang.Object)
+	at java.lang.Thread.run(Thread.java:619)
+
+"(ML) ActionsManager" prio=10 tid=0x8e8dc800 nid=0x55e0 waiting on condition [0x8d778000..0x8d778f30]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.util.actions.ActionsManager.run(ActionsManager.java:169)
+	at java.lang.Thread.run(Thread.java:619)
+
+"http-8889-Monitor" prio=10 tid=0x8e7a6000 nid=0x55df in Object.wait() [0x8e4a8000..0x8e4a8fb0]
+   java.lang.Thread.State: TIMED_WAITING (on object monitor)
+	at java.lang.Object.wait(Native Method)
+	- waiting on <0x9762b470> (a org.apache.tomcat.util.threads.ThreadPool$MonitorRunnable)
+	at org.apache.tomcat.util.threads.ThreadPool$MonitorRunnable.run(ThreadPool.java:559)
+	- locked <0x9762b470> (a org.apache.tomcat.util.threads.ThreadPool$MonitorRunnable)
+	at java.lang.Thread.run(Thread.java:619)
+
+"http-8889-Processor4" daemon prio=10 tid=0x8e78c400 nid=0x55de runnable [0x8e4f9000..0x8e4fa030]
+   java.lang.Thread.State: RUNNABLE
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.read(SocketInputStream.java:129)
+	at org.apache.coyote.http11.InternalInputBuffer.fill(InternalInputBuffer.java:737)
+	at org.apache.coyote.http11.InternalInputBuffer.parseRequestLine(InternalInputBuffer.java:398)
+	at org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:761)
+	at org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.processConnection(Http11Protocol.java:705)
+	at org.apache.tomcat.util.net.TcpWorkerThread.runIt(PoolTcpEndpoint.java:577)
+	at org.apache.tomcat.util.threads.ThreadPool$ControlRunnable.run(ThreadPool.java:683)
+	at java.lang.Thread.run(Thread.java:619)
+
+"http-8889-Processor3" daemon prio=10 tid=0x8ef7dc00 nid=0x55dd in Object.wait() [0x8eb5c000..0x8eb5d0b0]
+   java.lang.Thread.State: WAITING (on object monitor)
+	at java.lang.Object.wait(Native Method)
+	- waiting on <0x9762b080> (a org.apache.tomcat.util.threads.ThreadPool$ControlRunnable)
+	at java.lang.Object.wait(Object.java:485)
+	at org.apache.tomcat.util.threads.ThreadPool$ControlRunnable.run(ThreadPool.java:655)
+	- locked <0x9762b080> (a org.apache.tomcat.util.threads.ThreadPool$ControlRunnable)
+	at java.lang.Thread.run(Thread.java:619)
+
+"http-8889-Processor2" daemon prio=10 tid=0x8fb40000 nid=0x55dc in Object.wait() [0x8ebad000..0x8ebae130]
+   java.lang.Thread.State: WAITING (on object monitor)
+	at java.lang.Object.wait(Native Method)
+	- waiting on <0x9762af80> (a org.apache.tomcat.util.threads.ThreadPool$ControlRunnable)
+	at java.lang.Object.wait(Object.java:485)
+	at org.apache.tomcat.util.threads.ThreadPool$ControlRunnable.run(ThreadPool.java:655)
+	- locked <0x9762af80> (a org.apache.tomcat.util.threads.ThreadPool$ControlRunnable)
+	at java.lang.Thread.run(Thread.java:619)
+
+"http-8889-Processor1" daemon prio=10 tid=0x8e782400 nid=0x55db in Object.wait() [0x8ebff000..0x8ebff1b0]
+   java.lang.Thread.State: WAITING (on object monitor)
+	at java.lang.Object.wait(Native Method)
+	- waiting on <0x9762ae10> (a org.apache.tomcat.util.threads.ThreadPool$ControlRunnable)
+	at java.lang.Object.wait(Object.java:485)
+	at org.apache.tomcat.util.threads.ThreadPool$ControlRunnable.run(ThreadPool.java:655)
+	- locked <0x9762ae10> (a org.apache.tomcat.util.threads.ThreadPool$ControlRunnable)
+	at java.lang.Thread.run(Thread.java:619)
+
+"ContainerBackgroundProcessor[StandardEngine[Catalina]]" daemon prio=10 tid=0x8e781800 nid=0x55da waiting on condition [0x8f15a000..0x8f15ae30]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.run(ContainerBase.java:1597)
+	at java.lang.Thread.run(Thread.java:619)
+
+"Thread-9" prio=10 tid=0x8ef81400 nid=0x55d9 waiting on condition [0x8f1ab000..0x8f1abeb0]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.web.servlets.web.display$CleanupThread.run(display.java:491)
+
+"(ML) MLProperties.QueryCacheCleaner" daemon prio=10 tid=0x8e742400 nid=0x55d8 waiting on condition [0x8f7f5000..0x8f7f5f30]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.util.MLProperties$QueryCacheCleaner.run(MLProperties.java:246)
+
+"(ML) JiniClient " prio=10 tid=0x8e6a8800 nid=0x55d7 waiting on condition [0x8f846000..0x8f846fb0]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.JiniClient.CommonJini.JiniClient.run(JiniClient.java:521)
+
+" (ML) MLLUSHelper " daemon prio=10 tid=0x8e741000 nid=0x55d6 sleeping[0x90577000..0x90578030]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.JiniSerFarmMon.MLLUSHelper.run(MLLUSHelper.java:489)
+
+"(ML) Web Page Cache Supervisor" prio=10 tid=0x8e788c00 nid=0x55d5 waiting on condition [0x8f521000..0x8f5220b0]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.web.utils.CacheServlet$CacheSupervisor.run(CacheServlet.java:137)
+
+"Thread-8" daemon prio=10 tid=0x085aac00 nid=0x55d2 waiting on condition [0x8f2ad000..0x8f2ade30]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.util.ApMon.ConfReloader.run(ConfReloader.java:36)
+
+"Thread-7" daemon prio=10 tid=0x8fb23400 nid=0x55ce in Object.wait() [0x8f4d0000..0x8f4d1030]
+   java.lang.Thread.State: TIMED_WAITING (on object monitor)
+	at java.lang.Object.wait(Native Method)
+	- waiting on <0x96b82db8> (a com.sun.jini.thread.WakeupManager$Kicker)
+	at com.sun.jini.thread.WakeupManager$Kicker.run(WakeupManager.java:397)
+	- locked <0x96b82db8> (a com.sun.jini.thread.WakeupManager$Kicker)
+	at java.lang.Thread.run(Thread.java:619)
+
+"(ML) JiniHelper Attr Publish" daemon prio=10 tid=0x08221000 nid=0x55cc in Object.wait() [0x8f47f000..0x8f480130]
+   java.lang.Thread.State: TIMED_WAITING (on object monitor)
+	at java.lang.Object.wait(Native Method)
+	- waiting on <0x96b850a0> (a java.util.TaskQueue)
+	at java.util.TimerThread.mainLoop(Timer.java:509)
+	- locked <0x96b850a0> (a java.util.TaskQueue)
+	at java.util.TimerThread.run(Timer.java:462)
+
+"Timer-2" prio=10 tid=0x8fb25400 nid=0x55c9 in Object.wait() [0x8f7a4000..0x8f7a4eb0]
+   java.lang.Thread.State: TIMED_WAITING (on object monitor)
+	at java.lang.Object.wait(Native Method)
+	- waiting on <0x96b901d0> (a java.util.TaskQueue)
+	at java.util.TimerThread.mainLoop(Timer.java:509)
+	- locked <0x96b901d0> (a java.util.TaskQueue)
+	at java.util.TimerThread.run(Timer.java:462)
+
+"(ML) TransparentStoreFast" daemon prio=10 tid=0x8fb44800 nid=0x55c8 waiting on condition [0x8f897000..0x8f897f30]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.Store.TransparentStoreFast.run(TransparentStoreFast.java:1159)
+	at java.lang.Thread.run(Thread.java:619)
+
+"(ML) CacheFlusherThread for w4_100m (11, 1800000)" daemon prio=10 tid=0x8fb42c00 nid=0x55c7 waiting on condition [0x8f8e8000..0x8f8e8fb0]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.Store.Fast.Writer$CacheFlusherThread.run(Writer.java:392)
+
+"(ML) CacheFlusherThread for w4_30m (11, 360000)" daemon prio=10 tid=0x8fb18000 nid=0x55c6 waiting on condition [0x8f939000..0x8f93a030]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.Store.Fast.Writer$CacheFlusherThread.run(Writer.java:392)
+
+"(ML) CacheFlusherThread for w4_1m (11, 30000)" daemon prio=10 tid=0x8fb17c00 nid=0x55c4 waiting on condition [0x8f98a000..0x8f98b0b0]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.Store.Fast.Writer$CacheFlusherThread.run(Writer.java:392)
+
+"Timer-1" daemon prio=10 tid=0x8fb17400 nid=0x55c3 in Object.wait() [0x8f9db000..0x8f9dc130]
+   java.lang.Thread.State: TIMED_WAITING (on object monitor)
+	at java.lang.Object.wait(Native Method)
+	- waiting on <0x96b90cd8> (a java.util.TaskQueue)
+	at java.util.TimerThread.mainLoop(Timer.java:509)
+	- locked <0x96b90cd8> (a java.util.TaskQueue)
+	at java.util.TimerThread.run(Timer.java:462)
+
+"Thread-2" daemon prio=10 tid=0x8fb16c00 nid=0x55c0 waiting on condition [0x8fa7d000..0x8fa7de30]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.web.utils.ServletExtension$QueryCacheCleaner.run(ServletExtension.java:355)
+
+"(ML) DB CleanupThread" daemon prio=10 tid=0x08443400 nid=0x55be waiting on condition [0x8fad4000..0x8fad4eb0]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.Monitor.Store.Fast.DB$CleanupThread.run(DB.java:388)
+
+" (ML) NTPThread" daemon prio=10 tid=0x0843e800 nid=0x55b7 waiting on condition [0x8fc5c000..0x8fc5cf30]
+   java.lang.Thread.State: TIMED_WAITING (sleeping)
+	at java.lang.Thread.sleep(Native Method)
+	at lia.util.ntp.NTPDate$NTPThread.run(NTPDate.java:141)
+
+"(ML) Tomcat Starter Main Thread" prio=10 tid=0x083d0800 nid=0x55b6 runnable [0x8fcad000..0x8fcadfb0]
+   java.lang.Thread.State: RUNNABLE
+	at java.net.PlainSocketImpl.socketAccept(Native Method)
+	at java.net.PlainSocketImpl.accept(PlainSocketImpl.java:384)
+	- locked <0x966da318> (a java.net.SocksSocketImpl)
+	at java.net.ServerSocket.implAccept(ServerSocket.java:450)
+	at java.net.ServerSocket.accept(ServerSocket.java:421)
+	at org.apache.catalina.core.StandardServer.await(StandardServer.java:513)
+	at org.apache.catalina.startup.Catalina.await(Catalina.java:619)
+	at org.apache.catalina.startup.Catalina.start(Catalina.java:579)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.catalina.startup.Bootstrap.start(Bootstrap.java:287)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:425)
+	at lia.Monitor.JiniClient.Store.TomcatStarter.run(TomcatStarter.java:24)
+
+"Timer-0" daemon prio=10 tid=0x083cfc00 nid=0x55b5 in Object.wait() [0x8fcfe000..0x8fcff030]
+   java.lang.Thread.State: TIMED_WAITING (on object monitor)
+	at java.lang.Object.wait(Native Method)
+	- waiting on <0x96b937a8> (a java.util.TaskQueue)
+	at java.util.TimerThread.mainLoop(Timer.java:509)
+	- locked <0x96b937a8> (a java.util.TaskQueue)
+	at java.util.TimerThread.run(Timer.java:462)
+
+"( ML ) DateFileWatchdogManager [ 23 ]" daemon prio=10 tid=0x083d1400 nid=0x55b4 in Object.wait() [0x8fe87000..0x8fe880b0]
+   java.lang.Thread.State: TIMED_WAITING (on object monitor)
+	at java.lang.Object.wait(Native Method)
+	- waiting on <0x96b93c28> (a java.lang.Object)
+	at java.lang.Object.wait(Object.java:443)
+	at edu.emory.mathcs.backport.java.util.concurrent.TimeUnit.timedWait(TimeUnit.java:364)
+	at edu.emory.mathcs.backport.java.util.concurrent.DelayQueue.take(DelayQueue.java:156)
+	- locked <0x96b93c28> (a java.lang.Object)
+	at lia.util.DateFileWatchdog$DFWManager.run(DateFileWatchdog.java:135)
+
+"Low Memory Detector" daemon prio=10 tid=0x90402400 nid=0x55b2 runnable [0x00000000..0x00000000]
+   java.lang.Thread.State: RUNNABLE
+
+"CompilerThread1" daemon prio=10 tid=0x90400800 nid=0x55b1 waiting on condition [0x00000000..0x903fe488]
+   java.lang.Thread.State: RUNNABLE
+
+"CompilerThread0" daemon prio=10 tid=0x08139000 nid=0x55b0 waiting on condition [0x00000000..0x905f8508]
+   java.lang.Thread.State: RUNNABLE
+
+"Signal Dispatcher" daemon prio=10 tid=0x08137c00 nid=0x55af runnable [0x00000000..0x90649c10]
+   java.lang.Thread.State: RUNNABLE
+
+"Finalizer" daemon prio=10 tid=0x08127c00 nid=0x55ae in Object.wait() [0x9089b000..0x9089bfb0]
+   java.lang.Thread.State: WAITING (on object monitor)
+	at java.lang.Object.wait(Native Method)
+	- waiting on <0x970adca0> (a java.lang.ref.ReferenceQueue$Lock)
+	at java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:116)
+	- locked <0x970adca0> (a java.lang.ref.ReferenceQueue$Lock)
+	at java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:132)
+	at java.lang.ref.Finalizer$FinalizerThread.run(Finalizer.java:159)
+
+"Reference Handler" daemon prio=10 tid=0x08124000 nid=0x55ad in Object.wait() [0x908ec000..0x908ed030]
+   java.lang.Thread.State: WAITING (on object monitor)
+	at java.lang.Object.wait(Native Method)
+	- waiting on <0x95a76648> (a java.lang.ref.Reference$Lock)
+	at java.lang.Object.wait(Object.java:485)
+	at java.lang.ref.Reference$ReferenceHandler.run(Reference.java:116)
+	- locked <0x95a76648> (a java.lang.ref.Reference$Lock)
+
+"VM Thread" prio=10 tid=0x08121800 nid=0x55ac runnable 
+
+"GC task thread#0 (ParallelGC)" prio=10 tid=0x08061800 nid=0x55aa runnable 
+
+"GC task thread#1 (ParallelGC)" prio=10 tid=0x08062800 nid=0x55ab runnable 
+
+"VM Periodic Task Thread" prio=10 tid=0x90404000 nid=0x55b3 waiting on condition 
+
+JNI global references: 2508
+

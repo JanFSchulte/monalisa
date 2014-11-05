@@ -1,0 +1,199 @@
+nodes=LIGO-CIT-OSG,\
+      UC_Teraport_OSG_ITB,\
+      ITB-Zero,\
+      citgrid3.cacr.caltech.edu,\
+      UC,\
+      PROD_SLAC_STANFORD_EDU,\
+      UFlorida-IGT,\
+      IU_WALLABY,\
+      FNAL_GPFARM,\
+      FNAL_CMSOSG_TEST2,\
+      FNAL_CMST1_TEST,\
+      atlas10.hep.anl.gov,\
+      IU_iuatlas,\
+      UC_grid03_OSG_ITB,\
+      UC_grid05_OSG_ITB,\
+      fnpcg.fnal.gov,\
+      UF-HPC,\
+      tier2d.cacr.caltech.edu,\
+      FNAL_AHEAVEY_TEST,\
+      UM_ATLAS,\
+      FNAL-Burt,\
+      fermigrid
+aliases=LIGO-CIT-OSG,\
+	UC_Teraport,\
+	ITB-Zero,\
+	Citgrid3,\
+	UC,\
+	SLAC_Stanford,\
+	UFlorida-IGT,\
+	IU_WALLABY,\
+	FNAL_GPFARM,\
+	FNAL_CMSOSG,\
+	FNAL_CMST1,\
+	atlas10,\
+	IU_iuatlas,\
+	UC_grid03,\
+	UC_grid05,\
+	fnpcg,\
+	UF-HPC,\
+	tier2d,\
+	FNAL_AHEAVEY,\
+	UM_ATLAS,\
+	FNAL-Burt,\
+	fermigrid 
+long=-119,\
+     -85.5,\
+     -88,\
+     -117,\
+     -87,\
+     -122.10,\
+     -81,\
+     -85.4,\
+     -88,\
+     -89,\
+     -88.9,\
+     -87.9,\
+     -86.10,\
+     -86,\
+     -86,\
+     -89,\
+     -82,\
+     -117.5,\
+     -88.5,\
+     -83.4,\
+     -87.4,\
+     -88.9     
+lat=35,\
+    41.9,\
+    39,\
+    32,\
+    41,\
+    36.97,\
+    28.6,\
+    38.4,\
+    42.7,\
+    42.8,\
+    41.3,\
+    40.8,\
+    39.17,\
+    41.5,\
+    41.1,\
+    42.2,\
+    29,\
+    33.6,\
+    43,\
+    42.3,\
+    41.7,\
+    41.5
+
+
+//coordinates of the 2 points delimitating the map - long, lat    
+cornerLeftUp=-125,49
+cornerRightDown=-60,17
+
+//auto positioning of the farms or not
+auto=1
+
+width=800
+height=400
+resolution=1500x750
+xcenter=0
+//-21
+ycenter=0
+//-5
+zoom=0.5	
+
+#speciallink=BNL_ATLAS UBuffalo-CCR,UBuffalo-CCR UM_ATLAS,UM_ATLAS IU_ATLAS_Tier2,UM_ATLAS UWMadison,UWMadison pdsf,pdsf Caltech-PG,FNAL_CMS pdsf,FNAL_CMS Caltech-Grid3,Caltech-PG Caltech-Grid3,Caltech-Grid3 UCSanDiegoPG,UCSanDiegoPG FNAL_CMS,Caltech-PG UNM_HPC,UNM_HPC UTA-DPCC,UNM_HPC Rice-Grid3,UTA-DPCC Vanderbilt,Vanderbilt KNU,Caltech-Grid3 KNU
+
+
+title=OSG-ITB Status MAP
+description=Status Map
+ignorezero=true
+
+routers=false
+
+image.format=jpeg
+image.jpeg.compression=0.9
+
+default.fontsize=7
+default.xlabeloffset=10
+default.ylabeloffset=5
+
+
+UIOWA-ITB.xlabeloffset=-69
+
+FNAL_CMSOSG_TEST2.xlabeloffset=-70
+FNAL_CMSOSG_TEST2.ylabeloffset=-6
+
+FNAL-DDS.ylabeloffset=-4
+
+FNAL-Burt.ylabeloffset=-3
+FNAL-Burt.xlabeloffset=5
+
+FNAL_GPFARM.xlabeloffset=-2
+FNAL_GPFARM.ylabeloffset=-7
+
+FNAL_AHEAVEY_TEST.xlabeloffset=-70
+FNAL_AHEAVEY_TEST.ylabeloffset=-10
+
+UC_grid03_OSG_ITB.ylabeloffset=8
+
+fermigrid.xlabeloffset=-40
+fermigrid.ylabeloffset=13
+
+
+UM_ATLAS.ylabeloffset=2
+fnpcg.fnal.gov.xlabeloffset=-41
+fnpcg.fnal.gov.ylabeloffset=-2
+
+
+FNAL_CMST1_TEST.xlabeloffset=-74
+FNAL_CMST1_TEST.ylabeloffset=12
+
+atlas10.hep.anl.gov.xlabeloffset=-20
+atlas10.hep.anl.gov.ylabeloffset=15
+
+UC.ylabeloffset=10
+UC.xlabeloffset=3
+
+UF-HPC.ylabeloffset=-3
+
+default.href=display?page=i&farm=$NAME&pTime=1+day
+
+vo_nr=13
+
+//default.preds1=$NAME/PN%/*/-1/-1/Load_51&$NAME/PN%/*/-1/-1/Load_05
+default.preds1=$NAME/%_Jobs_Summary/*/-1/-1/RUNNING_jobs&$NAME/%_Jobs_Summary/*/-1/-1/DONE_jobs
+default.preds2=$NAME/VO_JOBS/*/-1/-1/Idle Jobs&$NAME/VO_JOBS/*/-1/-1/Running Jobs
+default.preds3=$NAME/VO_JOBS/ATLAS/-1/-1/Running Jobs&$NAME/VO_JOBS/CMS/-1/-1/Running Jobs&$NAME/VO_JOBS/BTeV/-1/-1/Running Jobs&$NAME/VO_JOBS/GADU/-1/-1/Running Jobs&$NAME/VO_JOBS/GRASE/-1/-1/Running Jobs&$NAME/VO_JOBS/GRIDEX/-1/-1/Running Jobs&$NAME/VO_JOBS/iVDgL/-1/-1/Running Jobs&$NAME/VO_JOBS/LIGO/-1/-1/Running Jobs&$NAME/VO_JOBS/SDSS/-1/-1/Running Jobs&$NAME/VO_JOBS/CDF/-1/-1/Running Jobs&$NAME/VO_JOBS/fMRI/-1/-1/Running Jobs&$NAME/VO_JOBS/OSG/-1/-1/Running Jobs&$NAME/VO_JOBS/GridEx/-1/-1/Running Jobs
+default.alternate_data=$NAME/*/*/-1/-1
+default.colors1=0 100 255,0 255 0
+default.colors2=0 100 255,0 255 0
+default.colors3=0 255 0,153 204 0,255 204 255,153 0 51,255 255 0,128 255 255,128 128 255,255 0 255,0 0 255, 0 153 153, 204 102 255, 204 255 204,102 204 204
+
+default.radius=7
+
+default.tooltip1.0=$ALIAS: is <font color=red>DOWN</font>
+default.tooltip1.0_alternate_data=$ALIAS: has no <font color=orange>JOB</font> data
+default.tooltip1.1=$ALIAS
+//default.tooltip1.2=$ALIAS: <b>Utilisation</b> <br><font color=navy>Busy</font> Nodes: $0  <br><font color=darkgreen>Free</font> Nodes: $1
+//default.tooltip.9=$ALIAS: ATLAS:$0 CMS:$1 BTeV:$2 GADU:$3 GRASE:$4 GRIDEX:$5 iVDgL:$6 LIGO:$7 SDSS:$8 
+
+default.tooltip2.0=$ALIAS: is <font color=red>DOWN</font>
+default.tooltip2.0_alternate_data=$ALIAS: has no <font color=orange>VO_JOBS</font> data
+default.tooltip2.1=$ALIAS
+default.tooltip2.2=$ALIAS: <b>Total</b> <br><font color=navy>Idle</font> Jobs: $0  <br> <font color=darkgreen>Running</font> Jobs: $1
+//default.tooltip.9=$ALIAS: ATLAS:$0 CMS:$1 BTeV:$2 GADU:$3 GRASE:$4 GRIDEX:$5 iVDgL:$6 LIGO:$7 SDSS:$8 
+
+
+default.tooltip3.0=$ALIAS: is <font color=red>DOWN</font>
+default.tooltip3.0_alternate_data=$ALIAS: has no <font color=orange>VO_JOBS</font> data
+default.tooltip3.1=$ALIAS
+//default.tooltip3.2=$ALIAS: Idle Jobs:$0 Running Jobs:$1
+default.tooltip3.13=$ALIAS: <b>Running Jobs</b><br> *ATLAS:$0  *CMS:$1  *BTeV:$2  *GADU:$3  *GRASE:$4  *GRIDEX:$5  *iVDgL:$6  *LIGO:$7  *SDSS:$8  *CDF:$9  *fMRI:$10 *OSG:$11 *GridEx:$12    
+
+
+scallednodes.enabled=true
+scallednodes.min=7
+scallednodes.max=10

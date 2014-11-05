@@ -1,0 +1,117 @@
+<html>
+<head>
+</head>
+<body leftmargin=0 topmargin=0 bgcolor=white>
+Information sources:<br><ul>
+<li><A HREF="http://www.spec.org/cpu2000/results/cpu2000.html" TARGET="_blank">http://www.spec.org/cpu2000/results/cpu2000.html</a></li>
+<li><A HREF="http://www.spec.org/cgi-bin/osgresults?conf=cpu2006" TARGET="_blank">http://www.spec.org/cgi-bin/osgresults?conf=cpu2006</a> * 82.167</li>
+<li><A HREF="http://www.aceshardware.com/SPECmine/est_cpus.jsp" TARGET="_blank">http://www.aceshardware.com/SPECmine/est_cpus.jsp</a></li>
+<li><A HREF="http://hepix.caspur.it/processors/#Results" TARGET="_blank">http://hepix.caspur.it/processors/#Results</a></li>
+<li><A HREF="http://www.videoi.com/~pietro/cpu_speeds/specint2000.htm" TARGET="_blank">http://www.videoi.com/~pietro/cpu_speeds/specint2000.htm</a></li>
+</ul>
+<br>
+<a target=_blank href="/show?page=si2k_report.html">SI2k report</a> (gathered from IS@aliendb1.cern.ch)
+<br>
+<pre style="font-face:courier;font-size:12px">
+<!-- select * from cpu_si2k order by cpu_model_name, cpu_cache, cpu_MHz; -->
++----------------------------------+------+-----------+---------+-------------------------------------------------------------------------------------+
+| cpu_model_name                   | si2k | cpu_cache | cpu_MHz | source                                                                              |
++----------------------------------+------+-----------+---------+-------------------------------------------------------------------------------------+
+| %AMD%Athlon%                     |  706 |       256 |    1667 |                                                                                     | 
+| %AMD%Athlon%                     |  782 |       256 |    2000 |                                                                                     | 
+| %AMD%Opteron%                    | 1289 |      1024 |    2000 |                                                                                     | 
+| %AMD%Opteron%                    | 1392 |      1024 |    2200 |                                                                                     | 
+| %AMD%Opteron%                    | 1668 |      1024 |    2600 |                                                                                     | 
+| %AMD%Opteron%2218%               | 1800 |      1024 |    1000 |                                                                                     | 
+| %AMD%Opteron%2218%               | 1800 |      1024 |    2190 |                                                                                     | 
+| %AMD%Opteron%2218%               | 1800 |      1024 |    2390 |                                                                                     | 
+| %AMD%Opteron%2218%               | 1800 |      1024 |    2600 |                                                                                     | 
+| %AMD%Opteron%2354                | 1000 |       512 |    1100 | SI2k6 from spec.org * 82.167                                                        | 
+| %AMD%Opteron%2354                | 1000 |       512 |    2000 | SI2k6 from spec.org * 82.167                                                        | 
+| %AMD%Opteron%270%                | 1452 |      1024 |    1990 |                                                                                     | 
+| %AMD%Opteron%275%                | 1539 |      1024 |    2190 |                                                                                     | 
+| %AMD%Opteron%275%                | 1539 |      1024 |    2210 |                                                                                     | 
+| %AMD%Opteron%280%                | 1683 |      1024 |    2400 |                                                                                     | 
+| %Intel% Pentium% D %             | 1576 |      1024 |    2800 |                                                                                     | 
+| %Intel% Pentium% D %             | 1658 |      1024 |    3000 |                                                                                     | 
+| %Intel% Pentium% D %             | 1665 |      2048 |    2800 |                                                                                     | 
+| %Intel% Pentium% D %             | 1749 |      2048 |    3000 |                                                                                     | 
+| %Intel% Pentium% D %             | 1836 |      2048 |    3200 |                                                                                     | 
+| %Intel% Pentium(R) 4%            | 1301 |      1024 |    3000 |                                                                                     | 
+| %Intel% Pentium(R) 4%            | 1363 |      1024 |    3200 |                                                                                     | 
+| %Intel% Pentium(R) 4%            | 1432 |      1024 |    3400 |                                                                                     | 
+| %Intel% Pentium(R) 4%            | 1666 |      1024 |    3800 |                                                                                     | 
+| %Intel% Pentium(R) 4%            | 1585 |      2048 |    3200 |                                                                                     | 
+| %Intel% Pentium(R) 4%            | 1674 |      2048 |    3400 |                                                                                     | 
+| %Intel% Pentium(R) 4%            | 1764 |      2048 |    3600 |                                                                                     | 
+| %Intel%Core%2%6600%              | 1520 |      4096 |    1600 |                                                                                     | 
+| %Intel%Core%2%6600%              | 1520 |      4096 |    2400 |                                                                                     | 
+| %Intel%Core%2%Quad%2.40%         | 1520 |      4096 |    1600 |                                                                                     | 
+| %Intel%Core%2%Quad%2.40%         | 1520 |      4096 |    2400 |                                                                                     | 
+| %Intel%Pentium(R) 4%             |  817 |       512 |    2400 |                                                                                     | 
+| %Intel%Pentium(R) 4%             |  861 |       512 |    2600 |                                                                                     | 
+| %Intel%Pentium(R) 4%             |  903 |       512 |    2800 |                                                                                     | 
+| %Intel%Xeon%                     |  825 |       512 |    2400 |                                                                                     | 
+| %Intel%Xeon%                     |  876 |       512 |    2600 |                                                                                     | 
+| %Intel%Xeon%                     | 1022 |       512 |    2800 |                                                                                     | 
+| %Intel%Xeon%                     | 1317 |       512 |    3066 |                                                                                     | 
+| %Intel%Xeon%                     | 1220 |      1024 |    2800 |                                                                                     | 
+| %Intel%Xeon%                     | 1374 |      1024 |    3392 |                                                                                     | 
+| %Intel%Xeon%                     | 1371 |      2048 |    2800 |                                                                                     | 
+| %Intel%Xeon%                     | 1516 |      2048 |    3192 |                                                                                     | 
+| %Intel%Xeon%51%                  | 1260 |      4096 |    2660 |                                                                                     | 
+| %Intel%Xeon%51%                  | 1388 |      4096 |    3000 |                                                                                     | 
+| %Intel%Xeon%51%                  | 1641 |      4096 |    3650 |                                                                                     | 
+| %Intel%Xeon%5148%2.33%           | 1454 |      4096 |    2330 | High opt. value from HEPIX                                                          | 
+| %Intel%Xeon%5150%2.66%           | 1606 |      4096 |    2660 |                                                                                     | 
+| %Intel%Xeon%5150%2.66%           | 1606 |      4096 |    2990 |                                                                                     | 
+| %Intel%Xeon%5160%3.00GHz%        | 1758 |      4096 |    2000 | High opt. value from HEPIX                                                          | 
+| %Intel%Xeon%5160%3.00GHz%        | 1758 |      4096 |    2660 | High opt. value from HEPIX                                                          | 
+| %Intel%Xeon%5160%3.00GHz%        | 1758 |      4096 |    3000 | High opt. value from HEPIX                                                          | 
+| %Intel%Xeon%E5320%               |  986 |      4096 |    1866 |                                                                                     | 
+| %Intel%Xeon%E5335%               | 1232 |      4096 |    2000 |                                                                                     | 
+| %Intel%Xeon%E5345%               | 1403 |      4096 |    2000 | High opt. value from HEPIX                                                          | 
+| %Intel%Xeon%E5345%               | 1403 |      4096 |    2327 | High opt. value from HEPIX                                                          | 
+| %Intel%Xeon%E5405%2.00%          | 1075 |      6144 |    1660 | https://twiki.cern.ch/twiki/bin/view/FIOgroup/PtCe4083                              | 
+| %Intel%Xeon%E5405%2.00%          | 1075 |      6144 |    2000 | https://twiki.cern.ch/twiki/bin/view/FIOgroup/PtCe4083                              | 
+| %Intel%Xeon%E5410%2.33%          | 1774 |      6144 |    1995 |                                                                                     | 
+| %Intel%Xeon%E5410%2.33%          | 1774 |      6144 |    2333 |                                                                                     | 
+| %Intel%Xeon%E5420%               | 1710 |      6144 |    1995 | High opt. value from HEPIX                                                          | 
+| %Intel%Xeon%E5420%               | 1710 |      6144 |    2494 | High opt. value from HEPIX                                                          | 
+| %Intel%Xeon%E5430%               | 1972 |      6144 |    2000 | SI2k6 from spec.org * 82.167 = 1972, HEPIX=1762                                     | 
+| %Intel%Xeon%E5430%               | 1972 |      6144 |    2666 | SI2k6 from spec.org * 82.167 = 1972, HEPIX=1762                                     | 
+| %Intel%Xeon%E5440%               | 2344 |      6144 |    2000 | High opt. value from HEPIX                                                          | 
+| %Intel%Xeon%E5440%               | 2344 |      6144 |    2833 | High opt. value from HEPIX                                                          | 
+| %Intel%Xeon%E5450%               | 2177 |      6144 |    2000 |                                                                                     | 
+| %Intel%Xeon%E5450%               | 2177 |      6144 |    3000 |                                                                                     | 
+| %Intel%Xeon%L5420%               | 1881 |      6144 |    2000 | http://www.spec.org/cpu2006/results/res2008q4/cpu2006-20080922-05393.pdf            | 
+| %Intel%Xeon%L5420%               | 1881 |      6144 |    2500 | http://www.spec.org/cpu2006/results/res2008q4/cpu2006-20080922-05393.pdf            | 
+| %Intel%Xeon%L5430%               | 2002 |      6144 |    2000 | http://www.spec.org/cpu2006/results/res2008q4/cpu2006-20080922-05393.pdf * 2.66/2.5 | 
+| %Intel%Xeon%L5430%               | 2002 |      6144 |    2666 | http://www.spec.org/cpu2006/results/res2008q4/cpu2006-20080922-05393.pdf * 2.66/2.5 | 
+| %Intel%Xeon%X5355%               | 1479 |      4096 |    1998 |                                                                                     | 
+| %Intel%Xeon%X5355%               | 1479 |      4096 |    2666 |                                                                                     | 
+| %Intel%Xeon%X5365%               | 1996 |      4096 |    2992 |                                                                                     | 
+| %Intel%Xeon%X5450%3.00%          | 2153 |      6144 |    2660 | SI2k6 from spec.org * 82.167                                                        | 
+| %Intel%Xeon%X5450%3.00%          | 2153 |      6144 |    3000 | SI2k6 from spec.org * 82.167                                                        | 
+| %Pentium% III%                   |  331 |       256 |     733 |                                                                                     | 
+| %Pentium% III%                   |  407 |       256 |    1000 |                                                                                     | 
+| %Pentium% III%                   |  437 |       512 |    1000 |                                                                                     | 
+| %Pentium% III%                   |  648 |       512 |    1400 |                                                                                     | 
+| 02/21                            | 1282 |      1024 |    2000 |                                                                                     | 
+| 02/21                            | 1389 |      1024 |    2200 |                                                                                     | 
+| 02/21                            | 1492 |      1024 |    2400 |                                                                                     | 
+| AMD%Athlon%XP%+                  |  670 |       512 |    1466 |                                                                                     | 
+| Intel%Xeon%E5520%                | 2950 |      8192 |    1600 | Jean-Michel, 2010-06-05                                                             | 
+| Intel%Xeon%E5520%                | 2950 |      8192 |    2261 | Jean-Michel, 2010-06-05                                                             | 
+| Itanium 2                        | 1178 |      3072 |    1300 |                                                                                     | 
+| Itanium 2                        | 1430 |      3072 |    1600 |                                                                                     | 
+| Itanium 2                        | 1372 |      4096 |    1500 |                                                                                     | 
+| Itanium 2                        | 1400 |      6144 |    1500 |                                                                                     | 
+| Itanium 2                        | 1535 |      6144 |    1600 |                                                                                     | 
+| Itanium 2                        | 1590 |      9216 |    1600 |                                                                                     | 
+| Quad%AMD%Opteron%Processor%2352% | 1027 |      2048 |    1500 | www.spec.org / Antonio Franco@Bari                                                  | 
+| Quad%AMD%Opteron%Processor%2352% | 1027 |      2048 |    2100 | www.spec.org / Antonio Franco@Bari                                                  | 
++----------------------------------+------+-----------+---------+-------------------------------------------------------------------------------------+
+</pre>
+</body>
+</html>

@@ -1,0 +1,9 @@
+This page displays the statistics gathered from the iptables-based firewall that protects the proxy service running on <code>aliendb4.cern.ch:8088</code>.<br>
+<br>
+The firewall accepts connections with a maximum rate / host. Currently the thresholds are 90 new connections per minute, with a burst rate of up to 120 new connections per minute. Connection requests arriving with a greater rate will be rejected by the firewall.<br>
+<br>
+The chart displays both the number of accepted connections and the number of rejected connections for each ALICE VoBox.<br>
+<br>
+There are other hosts connecting to the proxy service of course, but we only display the VoBoxes here.<br>
+<br>
+The scripts that do this monitoring are in <code>aliendb4.cern.ch:/root/scripts/</code>

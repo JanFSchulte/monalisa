@@ -1,0 +1,201 @@
+<<:begin=windowChanged();changeWidth();startUp();:>>
+<<:onresize=windowChanged();:>>
+<<:title=World map:>>
+<script type="text/javascript" src="/js/map.js"></script>
+<table align="center" class="small">
+    <tr>
+	<!--
+	<td align=center class="dtree" class="text_content">
+	    <form>	
+		<input type="radio" name="pie_type" value="total_jobs" checked onClick="hideID('load_legend');showID('total_jobs_legend');pred=1;setImageForLoad();"> <b>Job Status</b>
+		<input type="radio" name="pie_type" value="load" onClick="hideID('total_jobs_legend');showID('load_legend');pred=2;setImageForLoad();"> <b>Utilisation: Busy / Free Nodes</b>
+		<input type="radio" name="pie_type" value="jobs_vo"  onClick="hideID('load_legend');hideID('total_jobs_legend');showID('jobs_vo_legend');pred=3;setImageForLoad();"> Running Jobs per VO
+		</form>	
+	    </td>
+	</tr>
+	-->
+	<tr>
+	    <td>
+		<table align="center" class="small" cellspacing=1 cellpadding=0>
+		    <tr>
+			<td><a href="javascript:move(-1,1);" title="up-left"><img src="map2Dpictures/ul1_v2.gif" width="15" height="15" class=ch border=0></a></td>
+			<td align="center"><a href="javascript:move(0,1);" title="up"><img src="map2Dpictures/up1_v2.gif" width="21" height="15" class=ch border=0></a></td>
+			<td align="right"><a href="javascript:move(1,1);" title="up-right"><img src="map2Dpictures/ur1_v2.gif" width="15" height="15" class=ch border=0></a></td>
+		    </tr>
+    		    <tr>
+			<td><a href="javascript:move(-1,0);" title="left"><img src="map2Dpictures/l1_v2.gif" width="15" height="21" class=ch border=0></a></td>
+			<td><iframe src="no_frame.html" frameborder=0 scrolling="no" id="Map2D" name="Map2D" class="ch" width=780 height=390></iframe></td>
+			<td align="right"><a href="javascript:move(1,0);" title="right"><img src="map2Dpictures/r1_v2.gif" width="15" height="21" class=ch border=0></a></td>
+    		    </tr>
+		    <tr>
+			<td valign="bottom"><a href="javascript:move(-1,-1);" title="down-left"><img src="map2Dpictures/dl1_v2.gif" width="15" height="15" class=ch border=0></a></td>
+			<td align="center" valign="bottom"><a href="javascript:move(0,-1);" title="down"><img src="map2Dpictures/down1_v2.gif" width="21" height="15" class=ch" border=0></a></td>
+			<td align="right" valign="bottom"><a href="javascript:move(1,-1);" title="down-right"><img src="map2Dpictures/dr1_v2.gif" width="15" height="15" class=ch border=0></a></td>
+		    </tr>
+		</table>
+	    </td>
+	</tr>
+</table>
+<div ID="load_legend" style="position:relative; visibility: hidden;">
+    <table align=center cellspacing="5" class="small">
+	<tr class="dtree" style="color:#000">
+	    <td width="12" align="center" valign="middle" class="dtree"><img src="14.gif" width="8" height="8"> </td>
+	    <td>Free Nodes &nbsp;</td>
+	    <td width="12" align="center" valign="middle" class="dtree"><img src="15.gif" width="8" height="8"> </td>
+	    <td>Busy Nodes &nbsp;</td>
+	    <td width="12" align="center" valign="middle"><img src="17.png" width="8" height="8"> </td>
+	    <td>No Data </td>
+	    <td width="12" align="center" valign="middle"><img src="13.gif" width="8" height="8"> </td>
+	    <td>Farm Down </td>
+        </tr>
+    </table>
+</div>	
+<div ID="total_jobs_legend" style="position:relative; visibility: hidden;">
+    <table align=center cellspacing="5" class="small">
+	<tr class="dtree" style="color:#000">
+	    <td width="12" align="center" valign="middle" class="dtree"><img src="14.gif" width="8" height="8"></td>
+	    <td>Running Jobs &nbsp;</td>
+	    <td width="12" align="center" valign="middle" class="dtree"><img src="15.gif" width="8" height="8"></td>
+	    <td>Zombie Jobs &nbsp;</td>
+	    <td width="12" align="center" valign="middle"><img src="17.png" width="8" height="8"> </td>
+	    <td>No Active Jobs </td>
+	    <td width="12" align="center" valign="middle"><img src="13.gif" width="8" height="8"> </td>
+	    <td>ML Service Down </td>
+	</tr>
+    </table>
+</div>
+<script language=JavaScript>
+    var sSpecialLinksDescr = '<b><div align=center>Tier-level view of the Alice Grid</div></b><br><br>'+
+	    '<table border=0 cellspacing=0 cellpadding=2>'+
+		    '<tr>'+
+			'<td align=left>'+
+			    '<table border=0 cellspacing=0 cellpadding=0 width=10 height=10><tr><td bgcolor=#FFFFFF width=10><img src="/img/empty.gif" wisth=10 height=10></td></tr></table>'+
+			'</td>'+
+			'<td align=left>T0 - T1 relations</td>'+
+		    '</tr>'+
+		    '<tr>'+
+			'<td>'+
+			    '<table border=0 cellspacing=0 cellpadding=0 width=10 height=10><tr><td bgcolor=#E133FF width=10><img src="/img/empty.gif" wisth=10 height=10></td></tr></table>'+
+			'</td>'+
+			'<td align=left>T2s connected to CERN</td>'+
+		    '</tr>'+
+		    '<tr>'+
+			'<td>'+
+			    '<table border=0 cellspacing=0 cellpadding=0 width=10 height=10><tr><td bgcolor=#61D644 width=10><img src="/img/empty.gif" wisth=10 height=10></td></tr></table>'+
+			'</td>'+
+			'<td align=left>T2s connected to FZK</td>'+
+		    '</tr>'+
+		    '<tr>'+
+			'<td>'+
+			    '<table border=0 cellspacing=0 cellpadding=0 width=10 height=10><tr><td bgcolor=#FFB854 width=10><img src="/img/empty.gif" wisth=10 height=10></td></tr></table>'+
+			'</td>'+
+			'<td align=left>T2s connected to CCIN2P3</td>'+
+		    '</tr>'+
+		    '<tr>'+
+			'<td>'+
+			    '<table border=0 cellspacing=0 cellpadding=0 width=10 height=10><tr><td bgcolor=#50A7FF width=10><img src="/img/empty.gif" wisth=10 height=10></td></tr></table>'+
+			'</td>'+
+			'<td align=left>T2s connected to CNAF</td>'+
+		    '</tr>'+
+		'</table>';
+</script>	
+<table align=center class="small">
+    <tr>
+	<td align=center>
+    	    <span class="text">
+    		<label for="links_checkbox" style="cursor: pointer; cursor: hand" onMouseOver="return overlib('Active xrootd transfers in the last hour, the shown value is the latest measurement. Click on a link to see the history data.');" onMouseOut="return nd();"><INPUT TYPE=CHECKBOX NAME="links" checked onclick="showLinks()" id="links_checkbox" class="input_checkbox">Show xrootd transfers</label>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <label for="speciallinks_checkbox" style="cursor: pointer; cursor: hand" onMouseOver="return overlib(sSpecialLinksDescr);" onMouseOut="return nd();"><INPUT TYPE=CHECKBOX NAME="speciallinks" onclick="showSpecialLinks()" id="speciallinks_checkbox" class="input_checkbox">Show site relations</label>
+            </span>
+    	</td>
+    </tr>
+    <tr>
+	<td align=center>
+	    <span class="textmenublue"><b>Actions:</b></span> &nbsp; 
+	    <span class="text">Left Click - Zoom In</span> &nbsp; 
+	    <span class="text">Right Click - Zoom Out</span> &nbsp; 
+	    <span class="text">(Center on the mouse position)</span>
+	</td>
+    </tr>
+    <tr>
+	<td align=center>
+    	    <div class="text" id="div_load">Loading...</div>
+	    <div id="div_tools">
+		<table align=center class="small">
+    		    <tr>
+			<td align=center>
+			    <table class="small">
+				<tr>
+				    <td><img src="map2Dpictures/ul1.gif" width="8" height="8" class=hand onClick="javascript:move(-1,1);"></td>
+				    <td><img src="map2Dpictures/up1.gif" width="11" height="11" class=hand onClick="javascript:move(0,1);"></td>
+				    <td><img src="map2Dpictures/ur1.gif" width="8" height="8" class=hand onClick="javascript:move(1,1);"></td>
+				</tr>
+				<tr>
+				    <td><img src="map2Dpictures/l1.gif" width="11" height="11" class=ch onClick="javascript:move(-1,0);"></td>
+				    <td></td>
+				    <td><img src="map2Dpictures/r1.gif" width="11" height="11" class=ch onClick="javascript:move(1,0);"></td>
+				</tr>
+				<tr>
+				    <td><img src="map2Dpictures/dl1.gif" width="8" height="8" class=ch onClick="javascript:move(-1,-1);"></td>
+				    <td><img src="map2Dpictures/down1.gif" width="11" height="11" class=ch onClick="javascript:move(0,-1);"></td>
+				    <td><img src="map2Dpictures/dr1.gif" width="8" height="8" class=ch onClick="javascript:move(1,-1);"></td>
+				</tr>
+			    </table>
+			</td>
+			<td align=center>
+			    <table class="text">
+				<tr>
+				    <td><img src="map2Dpictures/zoom_in.gif" border='0' onClick="zoom(1);" class=ch></a></td>
+				    <td><img src="map2Dpictures/zoom_out.gif" border='0' onClick="zoom(-1);" class=ch></a></td>
+				    <!--	<td><input type=button value="3D/2D" onClick="d3d=(d3d?0:1);zoom(0);"></td> -->
+				    <td class="text">&nbsp; Zoom / Translation Factor:&nbsp 1.01 </span></td>
+				    <td>
+					<div class="slider" id="slider-1" tabIndex="1">
+   					    <input class="slider-input" id="slider-input-1" name="slider-input-1" size="20"/>
+					</div>
+				    </td>	
+				    <td class="text">&nbsp;2</span></td>
+				</tr>
+			    </table>
+			</td>
+		    </tr>
+		    <tr>
+			<td colspan="2">
+			    <table class="small">
+				<tr>
+				    <td class="text">
+					Image size:	<select onchange="dimensiune_changed();" id="dimensiune" class="input_select">
+						<option value ="0" class="dtree" style="color:#000" id="adaptive" selected>Adaptive</option>
+						<option value ="600x300" class="dtree" style="color:#000">600x300</option>
+						<option value ="780x390" class="dtree" style="color:#000">780x390</option>
+						<option value ="1024x512" class="dtree" style="color:#000">1024x512</option>
+						</select>
+				    </td>
+				    <td class="text">Select Predefined Map:		<select onchange="map_changed();" id="map" class="input_select">
+						<option value ="1" class="dtree" style="color:#000" >North America</option>
+						<option value ="3" class="dtree" style="color:#000" selected>Europe</option>
+						<option value ="4" class="dtree" style="color:#000">South America</option>
+						<option value ="5" class="dtree" style="color:#000">Asia</option>
+						<option value ="2" class="dtree" style="color:#000">World</option>
+						</select>
+				    </td>
+				</tr>
+			    </table>
+			</td>
+		    </tr>
+		</table>
+	    </div>
+	</td>
+    </tr>
+</table>
+<script type="text/javascript">
+    var s = new Slider(document.getElementById("slider-1"),
+     			document.getElementById("slider-input-1"));
+			s.setMinimum(1);
+			s.setMaximum(100);
+			s.setValue(100);
+			s.onchange = function () {
+				zoom_factor=s.getValue()/100;
+		
+		}
+</script>

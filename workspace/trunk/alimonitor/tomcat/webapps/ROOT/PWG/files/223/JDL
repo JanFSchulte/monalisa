@@ -1,0 +1,55 @@
+Packages = 
+   {
+      "VO_ALICE@AliRoot::v4-19-Rev-08",
+      "VO_ALICE@GEANT3::v1-11-13",
+      "VO_ALICE@ROOT::v5-27-05",
+      "VO_ALICE@APISCONFIG::V1.1x"
+   }; 
+Jobtag = 
+   {
+      "comment: pp 7 TeV signals for PWG3 barrel analyses with anchor runs from LHC10b,c,d, ID #221"
+   }; 
+split = "production:1-3488"; 
+OutputDir = "/alice/sim/LHC10f3/117048/#alien_counter_03i#"; 
+Price = 1; 
+Executable = "/alice/bin/aliroot_new"; 
+InputFile = 
+   {
+      "LF:/alice/cern.ch/user/a/aliprod/LHC10f3/CheckESD.C",
+      "LF:/alice/cern.ch/user/a/aliprod/LHC10f3/Config.C",
+      "LF:/alice/cern.ch/user/a/aliprod/LHC10f3/rec.C",
+      "LF:/alice/cern.ch/user/a/aliprod/LHC10f3/sim.C",
+      "LF:/alice/cern.ch/user/a/aliprod/LHC10f3/simrun.C",
+      "LF:/alice/cern.ch/user/a/aliprod/LHC10f3/tag.C"
+   }; 
+User = "aliprod"; 
+OutputArchive = 
+   {
+      "log_archive:stderr,stdout,sim.log,rec.log,tag.log@disk=1",
+      "root_archive.zip:galice.root,Kinematics.root,TrackRefs.root,AliESDs.root,AliESDfriends.root,Run*.root@disk=3"
+   }; 
+splitarguments = "simrun.C --run 117048 --event #alien_counter# --process kPythiaPerugia0HFbarrel --energy 7000"; 
+Requirements = ( other.Type == "machine" ) && ( member(other.Packages,"VO_ALICE@APISCONFIG::V1.1x") ) && ( member(other.Packages,"VO_ALICE@ROOT::v5-27-05") ) && ( member(other.Packages,"VO_ALICE@GEANT3::v1-11-13") ) && ( member(other.Packages,"VO_ALICE@AliRoot::v4-19-Rev-08") ) && member(other.GridPartitions,"PDC08_2") && ( other.TTL > 72000 ) && ( other.Price <= 1 ); 
+OrigRequirements = member(other.GridPartitions,"PDC08_2"); 
+TTL = 72000; 
+InputBox = 
+   {
+      "/alice/cern.ch/user/a/aliprod/LHC10f3/CheckESD.C",
+      "/alice/cern.ch/user/a/aliprod/LHC10f3/Config.C",
+      "/alice/cern.ch/user/a/aliprod/LHC10f3/rec.C",
+      "/alice/cern.ch/user/a/aliprod/LHC10f3/sim.C",
+      "/alice/cern.ch/user/a/aliprod/LHC10f3/simrun.C",
+      "/alice/cern.ch/user/a/aliprod/LHC10f3/tag.C"
+   }; 
+Workdirectorysize = 
+   {
+      "10000MB"
+   }; 
+Type = "Job"; 
+GUIDFILE = "guid.txt"; 
+JDLVariables = 
+   {
+      "Packages",
+      "OutputDir"
+   }; 
+Validationcommand = "/alice/cern.ch/user/a/aliprod/prod2007/configs_pbpb_hijing/validation.sh"

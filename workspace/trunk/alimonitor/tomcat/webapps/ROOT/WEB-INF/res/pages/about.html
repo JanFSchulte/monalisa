@@ -1,0 +1,56 @@
+<div align="left">
+<a name="PageTop"></a><h1><a name="ALICE_Grid_Monitoring_with_MonAL"></a> ALICE Grid Monitoring with MonALISA </h1>
+<p />
+<h2><a name="Grid_monitoring_requirements"></a> Grid monitoring requirements </h2>
+<p />
+When talking about a worldwide distributed system, like the ALICEs Grid, you have to take into consideration various platforms, software and consequently, error conditions. In order to quickly understand what is happening in a system of this scale, monitoring should provide a global view of the entire system. 
+<p />
+It is important to be able to correlate the evolution of various monitored parameters, on different grid sites or in relation with the central services parameters. Aside that, the monitoring system must be non intrusive, accurate and it should provide both historical and near real-time image of the Grids status and performance.
+<p />
+Based on these requirements, <a href="http://monalisa.caltech.edu/" target="_top">MonALISA</a> framework was chosen to monitor the entire <a href="/twiki/bin/view/AliEn/AliEn" class="twikiLink">AliEn</a> Grid system.
+<p />
+<h2><a name="Monitored_parameters"></a> Monitored parameters </h2>
+<p />
+Currently almost all <a href="/twiki/bin/view/AliEn/AliEn" class="twikiLink">AliEn</a> components are monitored: <ul>
+<li> Central Services <ul>
+<li> Task Queue, Information Service, Optimizers, API Service etc.
+</li></ul> 
+</li> <li> Site Services <ul>
+<li> Job Agents, Cluster Monitor, Computing and Storage Elements
+</li> <li> LCG Services (on VO Boxes)
+</li></ul> 
+</li> <li> Job status and resource usage
+</li> <li> Jobs network traffic  inter and intra site
+</li></ul> 
+Also, various host parameters both for head nodes (where central and site services run) and for worker nodes (where jobs run) are monitored.
+<p />
+<h2><a name="Monitoring_architecture_in_AliEn"></a> Monitoring architecture in <a href="/twiki/bin/view/AliEn/AliEn" class="twikiLink">AliEn</a> </h2>
+<p />
+AliEn monitoring follows closely the MonALISA architecture: each AliEn service, including the Job Agent, is instrumented with <a href="http://monalisa.caltech.edu/monalisa__Documentation__ApMon_User_Guide.htm" target="_top">ApMon</a>, the Perl and C++ versions. It regularly sends monitoring data to the local <a href="http://monalisa.caltech.edu/monalisa__System_Design__monitoring_info_gathering.html" target="_top">MonALISA service</a> running on the site. Here, data from all the services, jobs and nodes is aggregated, the site profile being generated with a resolution of 2 minutes. Local on site MonALISA services keep a short (in memory only) history about each received or aggregated parameter. All these can be queried with a <a href="http://monalisa.caltech.edu/monalisa__System_Design__interactive_clients.html" target="_top">MonALISA GUI Client</a>. Only the aggregated data is collected by the <a href="http://monalisa.caltech.edu/monalisa__System_Design__repositories.html" target="_top">MonALISA Repository</a> for long term histories.
+<p />
+<center>
+<img alt="monitoring-architecture-in-alien.png" src="http://alien.cern.ch/twiki/pub/AliEn/MonaLisa/monitoring-architecture-in-alien.png" />
+</center>
+<p />
+<h2><a name="Deployment_and_configuration"></a> Deployment and configuration </h2>
+<p />
+For AliEn monitoring, MonALISA is packaged and prepared for installation by the AliEn Build and Test System. When you install AliEn, you can also install MonALISA simply by checking the monitor metapackage in the AliEn-Installer.
+<center>
+<img alt="alien-installer_monalisa.png" src="http://alien.cern.ch/twiki/pub/AliEn/MonaLisa/alien-installer_monalisa.png" />
+</center>
+<p />
+Configuration files for MonALISA are generated automatically from AliEn LDAP at startup. If a MonALISA entry for the site is not present in LDAP, MonALISA wont start. Then, MonALISA behaves like any other AliEn service: <ul>
+<li> Start it with <code>alien StartMonaLisa</code>
+</li> <li> Stop it with <code>alien StopMonaLisa</code>
+</li> <li> Check status with <code>alien StatusMonaLisa</code>
+</li></ul> 
+<p />
+<h2><a name="Sample_plots"></a> Sample plots </h2>
+<p />
+Here are some of the key monitoring points accessible via the <a href="http://pcalimonitor.cern.ch:8889/" target="_top">MonALISA ALICE Repository</a>: <ul>
+<li> <a href="http://pcalimonitor.cern.ch:8889/display?page=jobStatusSites_RUNNING" target="_top">Jobs status</a> - summaries per sites and users, errors, running and cumulative parameters
+</li> <li> <a href="http://pcalimonitor.cern.ch:8889/display?page=jobResUsageSum_time_cpu" target="_top">Jobs resource usage</a> - consumed cpu, network traffic, disk usage etc.
+</li> <li> <a href="http://pcalimonitor.cern.ch:8889/stats?page=services_status" target="_top">AliEn and LCG services</a> - current status for all <a href="/twiki/bin/view/AliEn/AliEn" class="twikiLink">AliEn</a> and LCG services running on each site
+</li> <li> <a href="http://pcalimonitor.cern.ch:8889/stats?page=vobox_status" target="_top">VO Boxes</a> - machine parameters for all head (master) nodes, on sites, pledged resources etc.
+</li></ul> 
+</div>

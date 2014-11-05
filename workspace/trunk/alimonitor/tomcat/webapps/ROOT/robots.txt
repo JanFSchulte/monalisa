@@ -1,0 +1,24 @@
+User-Agent: Wget
+Allow: /
+
+User-Agent: *
+Allow: /
+Allow: /show
+Allow: /stats
+Disallow: /display
+Disallow: /shuttle_log.jsp
+Disallow: /shuttle*
+Disallow: /production/*
+Disallow: /subscribe/*
+Disallow: /admin/*
+Disallow: /admin.jsp
+Disallow: /lpm/*
+Disallow: /PWG/*
+Disallow: /raw/*
+Disallow: /job_stats.jsp
+Disallow: /job_events.jsp
+Disallow: /catalogue/*
+Disallow: /bits/*
+Disallow: /job_details.jsp
+Disallow: /trend.jsp
+Disallow: /simple?page=dials/jobs

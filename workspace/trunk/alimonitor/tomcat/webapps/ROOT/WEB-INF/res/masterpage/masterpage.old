@@ -1,0 +1,243 @@
+<<:imports:>>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link href="/cooltree.css" rel="stylesheet" type="text/css">
+<link href="/dtree.css" rel="stylesheet" type="text/css" />
+<link href="/dtree1.css" rel="stylesheet" type="text/css" />
+<link href="/dtree3.css" rel="stylesheet" type="text/css" />
+
+<link href="/map2D.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/overlib/overlib.js"></script>
+<script type="text/javascript" src="/overlib/overlib_crossframe.js"></script>
+<script type="text/javascript" src="/dtree.js"></script>
+<script type="text/javascript" src="/js/range.js"></script>
+<script type="text/javascript" src="/js/timer.js"></script>
+<script type="text/javascript" src="/js/slider.js"></script>
+<script type="text/javascript" src="/js/menu.js"></script>
+<script type="text/javascript" src="/js/common.js"></script>
+<script language="JavaScript" src="/calendar1.js"></script>
+<link type="text/css" rel="StyleSheet" href="/css/bluecurve/bluecurve.css" />
+<link type="text/css" rel="StyleSheet" href="/style.css" />
+
+<script type="text/javascript" src="/js/window/prototype.js"> </script>
+<script type="text/javascript" src="/js/window/window.js"> </script> 
+<script type="text/javascript" src="/js/window/windowutils.js"> </script> 
+<!-- Add this to have a specific theme--> 
+<link href="/js/window/default.css" rel="stylesheet" type="text/css"></link>
+<link href="/js/window/mac_os_x.css" rel="stylesheet" type="text/css"></link> 
+
+<title>ALICE Grid Monitoring with MonALISA</title>
+</head>
+
+<body onload="windowChanged();<<:begin:>>" topmargin="0" leftmargin="0" onresize="windowChanged();">
+<BASE href="http://pcalimonitor.cern.ch:8889/">
+<script language=JavaScript>
+<<:comment_refresh:>>window.setTimeout("modify()", <<:refresh_time:>>*1000);
+</script>
+<table width="100%" border="0" cellpadding="0" cellspacing="0" id="test">
+  <tbody><tr>
+    <td><img src="spacer.gif" width="4" height="4"></td>
+  </tr>
+  <tr>
+    <td><table style="border: 2px solid rgb(196, 196, 196);" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="5" height="78" width="100%">
+      <tbody><tr>
+        <td style="border: 2px solid rgb(196, 196, 196);" align="center" height="55" width="146"><table align="center" bgcolor="#053887" border="0" cellpadding="0" cellspacing="0" height="55" width="93%">
+          <tbody><tr>
+            <td class="whitetextsmall" align="center" height="55" valign="top" width="135"><br>
+               <a class="whitetextsmall" style="text-decoration:none" target=_blank href="http://monalisa.caltech.edu/" title="Monitoring">MonALISA Repository</a><br>
+               <a class="whitetextlarge" style="text-decoration:none" target=_blank href="http://monalisa.caltech.edu/monalisa__Repositories.htm" title="ALICE Grid Monitoring with MonALISA">ALICE</a></td>
+          </tr>
+        </tbody></table></td>
+        <td height="64" align="center" background="background2.gif"><a title="Grid monitoring with MonALISA" href="http://monalisa.caltech.edu/" target="_blank"><img src="mona.gif" width="207" height="60" border=0></a></td>
+      </tr>
+    </tbody></table></td>
+  </tr>
+  <tr>
+    <td class="whitetextsmall"><em><img src="spacer.gif" width="4" height="4"></em></td>
+  </tr>
+  <tr>
+    <td width="100%"><table width="100%" height="90" border="0" cellpadding="0" cellspacing="0" bgcolor="#ffffff" style="border: 2px solid rgb(196, 196, 196);">
+      <tbody><tr>
+        <td style="border-right: 2px solid rgb(196, 196, 196);" align="left" height="90" valign="top" width="153"><table border="0" cellpadding="0" cellspacing="0" width="153">
+          <tbody>
+            <tr>
+              <td width="5" rowspan="4" style="border-bottom: 2px solid rgb(196, 196, 196);">&nbsp;</td>
+              <td width="185"><span class="textmenublue">                <img src="spacer.gif" width="4" height="4"><br>
+                MonALISA Client <br>
+                </span><span class="dtree style1">Click on the button below to<br>
+                start the Monalisa Client.
+                </span></td>
+            </tr>
+            <tr>
+              <td><img src="spacer.gif" width="4" height="4"></td>
+            </tr>
+            <tr>
+              <td><div align="center">
+                <input name="Submit" type="submit" class="clientbutton" value="Client"
+		onClick="JavaScript:window.location='http://monalisa.cacr.caltech.edu/newc/MonaLisa.jnlp'">
+                <br>
+              </div></td>
+            </tr>
+            <tr>
+              <td style="border-bottom: 2px solid rgb(196, 196, 196);"><img src="spacer.gif" width="4" height="4"></td>
+            </tr>
+	    <!--
+            <tr>
+              <td width="5" style="border-bottom: 2px solid rgb(196, 196, 196);">&nbsp;</td>
+              <td class="textmenublue" style="border-bottom: 2px solid rgb(196, 196, 196);"><a href="admin.jsp" class="linkmenublue">
+                ABPing Configuration
+              </a></td>
+            </tr>
+	    -->
+            <tr>
+		<td>&nbsp;<td>	
+	    </tr>	
+
+	    <tr>
+              <td width="5">&nbsp;</td>
+              <td width="185" rowspan="7" align="left" class="dtree">
+                <script type="text/javascript">
+	
+			showMenu();		
+
+	      	</script>
+                <p><a href="javascript: d.closeAll();">close all</a></p></td>
+            </tr>
+            <tr>
+              <td width="5">&nbsp;</td>
+              </tr>
+            <tr>
+              <td width="5">&nbsp;</td>
+              </tr>
+            <tr>
+              <td width="5">&nbsp;</td>
+              </tr>
+            <tr>
+              <td width="5">&nbsp;</td>
+              </tr>
+            <tr>
+              <td width="5">&nbsp;</td>
+              </tr>
+            <tr>
+              <td width="5">&nbsp;</td>
+              </tr>
+          </tbody>
+	  <tbody>
+
+
+	  <tr>
+	  	<td width="5" style="border-bottom: 2px solid rgb(196, 196, 196);">&nbsp;</td>
+              <td style="border-bottom: 2px solid rgb(196, 196, 196);"><img src="spacer.gif" width="4" height="4"></td>
+            </tr>
+
+            <tr>
+              <td width="5" style="border-bottom: 2px solid rgb(196, 196, 196);">&nbsp;</td>
+              <td class="textmenublue" style="border-bottom: 2px solid rgb(196, 196, 196);"><a href="/reports/" class="linkmenublue">
+                ALICE Reports
+              </a></td>
+            </tr>
+            
+            <!--
+            <tr>
+              <td width="5" style="border-bottom: 2px solid rgb(196, 196, 196);">&nbsp;</td>
+              <td class="textmenublue" style="border-bottom: 2px solid rgb(196, 196, 196);"><a href="apmon" class="linkmenublue">
+                ApMon Configuration
+              </a></td>
+            </tr>
+
+            <tr>
+              <td width="5" style="border-bottom: 2px solid rgb(196, 196, 196);">&nbsp;</td>
+              <td class="textmenublue" style="border-bottom: 2px solid rgb(196, 196, 196);"><a href="abping" class="linkmenublue">
+                ABPing Configuration
+              </a></td>
+            </tr>
+            -->
+            
+	    <tr>
+	      <td width="5" style="border-bottom: 2px solid rgb(196, 196, 196);">&nbsp;</td>
+	      <td class="textmenublue" style="border-bottom: 2px solid rgb(196, 196, 196);"><a href="admin.jsp" class="linkmenublue">
+                Site Administration
+              </a></td>
+            </tr>
+                        
+	    <tr>
+	      <td width="5" style="border-bottom: 2px solid rgb(196, 196, 196);">&nbsp;</td>
+	      <td class="textmenublue" style="border-bottom: 2px solid rgb(196, 196, 196);"><a href="abping?function=ColorSitesList" class="linkmenublue">
+                Farm Colour Configuration
+              </a></td>
+            </tr>
+
+            <script language=javascript>
+        	var buri='<<:bookmark js:>>';
+        	var bookmark='http://pcalimonitor.cern.ch:8889'+buri;
+        	
+        	function showLink(title, url){
+        	    if (document.all || window.sidebar) {
+        	        document.write('<a title="'+title+'" rel="sidebar" href="#" class="linkmenublue" onclick="return bookmarksite(\''+title+'\', \''+url+'\');"">Bookmark this page</a> (<a class="linkmenublue" href="'+bookmark+'" title="Direct URL to this view">url</a>)');
+        	    }
+        	    else{
+        	        document.write('<a title="'+title+'" class="linkmenublue" href="'+url+'">Current page</a>');
+        	    }
+        	}
+        	                                
+        	function bookmarksite(title, url){
+        	    if (document.all && !window.opera){
+        	        window.external.AddFavorite(url, title);
+        	    }
+        	    else
+        	    if (window.sidebar && sidebar.addPanel){
+        	        sidebar.addPanel(title, url, "");
+        	    }
+        	    else{
+        		this.title = title;
+        	    }
+        	
+        	    return false;
+        	}
+        	                                
+		if (buri.length>0){
+		    document.write('<tr><td width=\"5\" style=\"border-bottom: 2px solid rgb(196, 196, 196);\">&nbsp;</td>');
+		    document.write('<td class=\"textmenublue\" style=\"border-bottom: 2px solid rgb(196, 196, 196);\">');
+		    showLink('ALICE Repository view', bookmark);
+		    document.write('</td></tr>');
+		}
+	    </script>
+	  </tbody>
+        </table></td>
+        <td width="100%" align="center" valign="top" ><p></p><p>
+	      <div align="center">
+	       <<:com_alternates_start:>>
+                <table border=0 cellspacing=0 cellpadding=0>
+                <tr><td height=7></td></tr>
+                <tr><td align=center><table border=0 cellspacing=0 class=alternate cellpadding=2 width=790 bgcolor="#F8FFB8">
+                        <tr>
+                            <td nowrap align=center style="border-bottom: 1px solid #E0E6A6; border-top: 1px solid #E0E6A6" height=30><<:alternates:>></td>
+                        </tr>
+                    </table></td></tr>
+                <tr><td height=7></td></tr>
+                </table>
+               <<:com_alternates_end:>>
+	 	<<:continut:>>
+	      </div>
+	    
+	</td>
+      </tr>
+    </tbody></table></td>
+  </tr>
+  <tr>
+    <td><img src="spacer.gif" width="4" height="4"></td>
+  </tr>
+  <tr>
+    <td><table style="border: 2px solid rgb(196, 196, 196);" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" height="10" width="100%">
+      <tbody><tr>
+        <td class="textupdate" align="center" height="15">&nbsp; </td>
+      </tr>
+    </tbody></table></td>
+  </tr>
+  <tr>
+    <td><img src="spacer.gif" width="4" height="4"></td>
+  </tr>
+  
+</tbody></table>
+</body></html>

@@ -1,0 +1,132 @@
+include=vobox_alt
+
+pages=1
+
+pagetitle=VO Box machine status
+
+# tier 1 sites
+
+title0=Site name
+
+pivot0_1=Machine status
+
+option0.numbers=true
+
+#pivot0_2=$Qselect x from (select distinct get_nice_name(site_names) as x from pledged) as x order by (select tier from pledged p2 where p2.site_names[1]=x order by tier asc limit 1), x asc;
+pivot0_2=$Qselect name from abping_aliases where exists (select 1 from monitor_ids where split_part(mi_key,'/',1)=name and split_part(mi_key,'/',2)='AliEnServicesStatus' limit 1) and name not like '%.cern.ch' order by lower(name);
+
+pivot0_3=$QSELECT get_lastseen(pledged_to_ml('$2'));,\
+	 $QSELECT pledged_to_ml('$2');,\
+	 $QSELECT pledged_to_ml('$2')||'/Master/%/-1/-1/load5';,\
+	 $QSELECT pledged_to_ml('$2')||'/Master/%/-1/-1/cpu_usage';,\
+	 $QSELECT pledged_to_ml('$2')||'/Master/%/-1/-1/cpu_usr';,\
+	 $QSELECT pledged_to_ml('$2')||'/Master/%/-1/-1/cpu_sys';,\
+	 $QSELECT pledged_to_ml('$2')||'/Master/%/-1/-1/no_CPUs';,\
+	 $QSELECT pledged_to_ml('$2')||'/Master/%/-1/-1/cpu_MHz';,\
+	 $QSELECT pledged_to_ml('$2')||'/Master/%/-1/-1/mem_usage';,\
+	 $QSELECT pledged_to_ml('$2')||'/Master/%/-1/-1/total_mem';,\
+	 $QSELECT pledged_to_ml('$2')||'/Master/%/-1/-1/swap_usage';,\
+	 $QSELECT pledged_to_ml('$2')||'/Master/%/-1/-1/total_swap';,\
+	 $QSELECT pledged_to_ml('$2')||'/Master/%/-1/-1/eth0_in';,\
+	 $QSELECT pledged_to_ml('$2')||'/Master/%/-1/-1/eth0_out';,\
+	 $QSELECT pledged_to_ml('$2')||'/Master/%/-1/-1/eth1_in';,\
+	 $QSELECT pledged_to_ml('$2')||'/Master/%/-1/-1/eth1_out';,\
+	 $QSELECT pledged_to_ml('$2')||'/Master/%/-1/-1/eth2_in';,\
+	 $QSELECT pledged_to_ml('$2')||'/Master/%/-1/-1/eth2_out';,\
+	 $QSELECT pledged_to_ml('$2')||'/Master/%/-1/-1/processes';,\
+	 $QSELECT pledged_to_ml('$2')||'/Master/%/-1/-1/sockets_tcp';
+
+descr0=Last see online,\
+       ML name,\
+       Load5,\
+       Usage,\
+       User,\
+       System,\
+       Cnt,\
+       MHz,\
+       Usage,\
+       Total,\
+       Usage,\
+       Total,\
+       In,\
+       Out,\
+       In,\
+       Out,\
+       In,\
+       Out,\
+       Procs,\
+       Socks
+                                                                             
+
+func0=string version=-;version_count=3;ns,\
+      string,\
+      avg(1h) ns,\
+      avg(1h) ns,\
+      avg(1h) ns,\
+      avg(1h) ns,\
+      avg(1h) ns,\
+      avg(1h) ns;rnd,\
+      avg(1h) ns;rnd,\
+      avg(1h) ns,\
+      avg(1h) ns,\
+      avg(1h) ns,\
+      avg(1h) ns,\
+      avg(1h) ns,\
+      avg(1h) ns,\
+      avg(1h) ns,\
+      avg(1h) ns,\
+      avg(1h) ns,\
+      avg(1h) ns;rnd,\
+      avg(1h) ns;rnd
+
+
+minmax0=0 FF7777 FFFFFF,\
+	2 FFFFFF FF0000,\
+        3 FFFFFF FF0000,\
+	4 FFFFFF 00AAFF,\
+	5 FFFFFF FFAA00,\
+	6 FFFFFF 77FF77,\
+	7 FFFFE0 A4FF9E,\
+	8 FFFFFF FFD9FF,\
+	9 FFFFFF 33FF33,\
+	10 FFFFFF FF3333,\
+	11 FFFFFF 33FF33,\
+	12 FFFFFF 0077FF,\
+	13 FFFFFF FFFF77,\
+	14 FFFFFF 0077FF,\
+	15 FFFFFF FFFF77,\
+	16 FFFFFF 0077FF,\
+	17 FFFFFF FFFF77,\
+	18 FFFFFF CCAAFF,\
+	19 FFFFFF FFAACC
+
+# Load5
+absmin0_2=0.5
+absmax0_2=1.5
+
+# Usage
+absmax0_3=100
+
+# User
+absmin0_4=20
+absmax0_4=100
+
+# System
+absmin0_5=1
+absmax0_5=15
+
+# CPUs
+absmin0_6=1
+absmax0_6=3
+
+# MHz
+absmin0_7=1000
+absmax0_7=2000
+
+groups0=2 6 CPU,\
+	8 2 Mem [% MB],\
+	10 2 Swap [% MB],\
+	12 2 Eth0 [KB/s],\
+	14 2 Eth1 [KB/s],\
+	16 2 Eth2 [KB/s],\
+	18 2 System

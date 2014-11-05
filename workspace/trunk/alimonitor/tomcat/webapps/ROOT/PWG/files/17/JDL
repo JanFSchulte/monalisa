@@ -1,0 +1,25 @@
+Executable = "aliroot";
+Jobtag={"comment: MUON Cocktail pp, MB"};
+
+Packages={"VO_ALICE@AliRoot::v4-10-Rev-02","VO_ALICE@GEANT3::v1-9-1","VO_ALICE@ROOT::v5-18-00a","VO_ALICE@APISCONFIG::V2.4"};
+
+TTL = "72000";
+
+Requirements =  member(other.GridPartitions,"CERN");
+
+Validationcommand ="/alice/cern.ch/user/a/aliprod/prod2007/configs_pbpb_hijing/validation.sh";
+
+InputFile= {[:INPUTFILES:]};
+
+OutputArchive={"log_archive:stdout,stderr,*.log@Alice::Torino::DPM","root_archive.zip:galice_sim.root,geometry.root,Kinematics.root,TrackRefs.root,AliESDs.root,AliAOD.root,check.root@Alice::Catania::DPM"};
+OutputFile={"Run*.root@Alice::Catania::DPM"};
+
+OutputDir="[:OUTPUTDIR:]/$1/#alien_counter_03i#";
+
+JDLVariables={"Packages", "OutputDir"};
+GUIDFILE="guid.txt";
+
+splitarguments="simrun.C --run $1 --event #alien_counter#";
+split="production:1-1000";
+
+Workdirectorysize={"4000MB"};

@@ -1,0 +1,50 @@
+<html>
+    <head>
+	<script type="text/javascript" src="/overlib/overlib.js"></script>
+	<title>MonALISA WEB Repository</title>
+	<style>
+	    a:link 		{font-family: verdana, arial, sans-serif; font-size: 11px; text-decoration: none; font-weight: normal; color: #0000cc;}
+	    a:hover 		{font-family: verdana, arial, sans-serif; font-size: 11px; text-decoration: none; font-weight: normal; color: #ff6600;}
+	    a:visited 		{font-family: verdana, arial, sans-serif; font-size: 11px; text-decoration: none; font-weight: normal; color: #0000cc;}
+	    a:visited:hover 	{font-family: verdana, arial, sans-serif; font-size: 11px; text-decoration: none; font-weight: normal; color: #ff6600;}
+	    a:visited:active	{font-family: verdana, arial, sans-serif; font-size: 11px; text-decoration: none; font-weight: normal; color: #0000cc;}
+	    a:active 		{font-family: verdana, arial, sans-serif; font-size: 11px; text-decoration: none; font-weight: normal; color: #0000cc;}
+	</style>
+    </head>
+    <body bgcolor=white>
+
+<script language=JavaScript>
+
+function switchToAlternate(page){
+    document.form1.page.value=page;
+    document.form1.submit();
+}
+	    
+	    
+function reverse(id){
+    var ch = document.getElementById(id);
+    
+    if (ch.checked) ch.checked=false;
+    else ch.checked=true;
+}
+
+function checkall(){
+    var fields = document.form1.plot_series;
+    for (i=0; i<fields.length; i++)
+        fields[i].checked=true;
+}
+	    
+function uncheckall(){
+    var fields = document.form1.plot_series;
+    for (i=0; i<fields.length; i++)
+	fields[i].checked=false;
+}
+function modify(){
+    document.form1.submit();
+}
+
+	</script>
+	<map name=imgmap><<:map:>></map>    
+	<img src=http://monalisa4.cern.ch:8080/display?image=<<:image:>> usemap=#imgmap border=0>
+    </body>
+</html>

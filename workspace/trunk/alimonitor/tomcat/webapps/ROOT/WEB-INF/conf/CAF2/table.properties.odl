@@ -1,0 +1,180 @@
+page=stats
+
+include=CAF2/base
+
+pages=1
+
+pagetitle=CAF machines
+option0.numbers=true
+
+pivot0_1=Machines status
+
+title0=Machine
+pivot0_2=$QSELECT distinct split_part(mi_key,'/',3) FROM monitor_ids WHERE mi_key like '${Farms}/${Clusters}/%' and split_part(mi_key,'/',3)!='lxplus069.cern.ch' and split_part(mi_key,'/',3) not like 'lxb60%' order by 1;
+
+pivot0_3=${Farms}/${Clusters}/$2/%,\
+	 ${Farms}/${Clusters}/$2/xrootd_up,\
+	 ${Farms}/${Clusters}/$2/xproofd_up,\
+	 ${Farms}/${Clusters}/$2/olbd_up,\
+         ${Farms}/${Clusters}/$2/load1,\
+         ${Farms}/${Clusters}/$2/proofserv_count,\
+         \
+	 ${Farms}/${Clusters}/$2/pool_free,\
+	 ${Farms}/${Clusters}/$2/staging_queue_size,\
+	 ${Farms}/${Clusters}/$2/var_free,\
+	 ${Farms}/${Clusters}/$2/root_free,\
+         \
+         ${Farms}/${Clusters}/$2/cpu_usr,\
+         ${Farms}/${Clusters}/$2/cpu_sys,\
+         ${Farms}/${Clusters}/$2/cpu_nice,\
+         ${Farms}/${Clusters}/$2/cpu_idle,\
+         \
+         ${Farms}/${Clusters}/$2/total_mem,\
+         ${Farms}/${Clusters}/$2/mem_used,\
+         ${Farms}/${Clusters}/$2/mem_cached,\
+         ${Farms}/${Clusters}/$2/mem_buffers,\
+         ${Farms}/${Clusters}/$2/mem_actualfree,\
+         \
+         ${Farms}/${Clusters}/$2/total_swap,\
+         ${Farms}/${Clusters}/$2/swap_used,\
+         ${Farms}/${Clusters}/$2/swap_free,\
+         \
+         ${Farms}/${Clusters}/$2/eth0_in,\
+         ${Farms}/${Clusters}/$2/eth0_out,\
+         ${Farms}/${Clusters}/$2/sockets_tcp,\
+         \
+         ${Farms}/${Clusters}/$2/processes,\
+         \
+         ${Farms}/ROOT_DISKQUOTA_CAF%/__PROCESSINGINFO__/$2_files,\
+         ${Farms}/ROOT_DISKQUOTA_CAF%/__PROCESSINGINFO__/$2_size 
+         
+
+
+descr0=Online,\
+       xrootd,\
+       xproofd,\
+       cmsd,\
+       Load,\
+       Proof users,\
+       Staging disk (%),\
+       Staging queue,\
+       /var usage (%),\
+       / usage (%),\
+       \
+       usr,\
+       sys,\
+       nice,\
+       idle,\
+       \
+       Total,\
+       Used,\
+       Cached,\
+       Buffers,\
+       Free,\
+       \
+       Total,\
+       Used,\
+       Free,\
+       \
+       IN,\
+       OUT,\
+       TCP socks,\
+       \
+       Processes,\
+       \
+       Files,\
+       Size
+       
+
+func0=last(5m) ns;bool,\
+      last(5m) ns;onoff,\
+      last(5m) ns;onoff,\
+      last(5m) ns;onoff,\
+      last(5m) ns,\
+      last(5m) ns,\
+      \
+      last(5m) ns,\
+      last(5m) ns,\
+      last(5m) ns,\
+      last(5m) ns,\
+      \
+      last(5m) ns,\
+      last(5m) ns,\
+      last(5m) ns,\
+      last(5m) ns,\
+      \
+      last(5m) M,\
+      last(5m) M,\
+      last(5m) M,\
+      last(5m) M,\
+      last(5m) M,\
+      \
+      last(5m) M,\
+      last(5m) M,\
+      last(5m) M,\
+      \
+      last(5m) K;bps,\
+      last(5m) K;bps,\
+      last(5m) ns,\
+      \
+      last(5m) ns,\
+      \
+      last(60m) ns,\
+      last(60m) B
+
+groups0=0 6 Machine status,\
+	6 4 Storage,\
+        10 4 CPU,\
+        13 5 Memory,\
+        19 3 Swap,\
+        22 3 Networking,\
+        25 1,\
+        26 2 Hosted files
+
+minmax0=1 33FF77 FFFF33,\
+	\
+        3 FFFFFF FF8888,\
+        4 FFFFFF 8888FF,\
+        \
+        5 FFFFFF FF8888,\
+        6 FFFFFF AADDEE,\
+        7 FFFFFF FF8888,\
+        8 FFFFFF FF8888,\
+        \
+        9 FFFFFF 8888FF,\
+       10 FFFFFF FF8888,\
+       11 FFFFFF FFFF88,\
+       12 CCCCCC FFFFFF,\
+        \
+       14 FFFFFF 8888FF,\
+       15 FFFFFF FFFF88,\
+       16 FFFFFF FFAAFF,\
+       17 FFFF88 AAFF88,\
+       \
+       18 FFFFFF 8888FF,\
+       19 FFFF88 AAFF88,\
+       \
+       21 FFFFFF AAAAFF,\
+       22 FFFFFF AAAAFF,\
+       23 FFFFFF FFAAFF,\
+       \
+       24 FFFFFF FFFFAA,\
+       \
+       25 FFFFFF AADDEE,\
+       26 FFFFFF 8888FF
+
+absmin0_3=1
+absmax0_3=5
+
+absmin0_5=80
+absmax0_5=90
+
+absmin0_7=80
+absmax0_7=90
+
+absmin0_8=80
+absmax0_8=90
+
+total0=0,6,12,17,20,21,25,26
+
+avg0=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26

@@ -1,0 +1,234 @@
+var map, manager;
+//Europe, America N, America S, Asie
+var centers = [{'lat': 48.643, 'long': 4.853, 'zoom': 5}, { 'lat':42.098, 'long':-101.777, 'zoom': 4}, {'lat':-10.660, 'long':-55.898, 'zoom' : 4}, { 'lat':28.381, 'long':86.308, 'zoom':4},  { 'lat':45.583, 'long':-18.281, 'zoom':2}];
+
+var centerLatitude = 48.643, centerLongitude = 4.853, startZoom = 6;
+
+function createMarkerClickHandler(marker, text) {
+    return function() {
+	marker.openInfoWindowHtml(
+	    text
+	);
+
+	return false;
+    };
+}
+
+function createMarker(pointData) {
+	var latlng = new GLatLng(pointData.latitude, pointData.longitude);
+	var icon = new GIcon(false, pointData.image);
+
+	icon.iconSize = new GSize(12, 20);
+	//pozitia la icoana(6, 20)
+	icon.iconAnchor = new GPoint(6-parseInt(pointData.iconx), 20-parseInt(pointData.icony));
+	icon.infoWindowAnchor = new GPoint(25, 7);
+
+	var marker = new GMarker(latlng, icon);
+
+	GEvent.addListener(marker, "click", function() {
+		marker.openInfoWindowHtml(pointData.label);
+	});
+    
+	GEvent.addListener(marker, "dblclick", function(){
+		window.open(pointData.link, "link");
+	    });	
+    
+	return marker;
+}
+
+function createLabeledMarker(pointData) {
+	var latlng = new GLatLng(pointData.latitude, pointData.longitude);
+	var icon = new GIcon(false, pointData.image);
+
+	//icon.image = 'http://labs.google.com/ridefinder/images/mm_20_green.png';
+	
+	icon.iconSize = new GSize(12, 20);
+	//poztia la icoana
+	icon.iconAnchor = new GPoint(6-parseInt(pointData.iconx), 20-parseInt(pointData.icony));
+	icon.infoWindowAnchor = new GPoint(25, 7);
+	
+	opts = {
+		"icon": icon,
+		"clickable": true,
+		"draggable": false,
+		"labelText": pointData.abbr,
+		"labelOffset": new GSize(parseInt(pointData.labelx)+parseInt(pointData.iconx), parseInt(pointData.labely)+parseInt(pointData.icony)) // 5, -25
+	};
+	                                  
+	var marker = new LabeledMarker(latlng, opts);
+
+	var handler = createMarkerClickHandler(marker, pointData.label);
+	GEvent.addListener(marker, "click", handler);
+
+	GEvent.addListener(marker, "dblclick", function(){
+		window.open(pointData.link, "link");
+	    });	
+	
+	return marker;
+}
+
+function windowHeight() {
+	// Standard browsers (Mozilla, Safari, etc.)
+	if (self.innerHeight)
+		return self.innerHeight;
+	// IE 6
+	if (document.documentElement && document.documentElement.clientHeight)
+		return document.documentElement.clientHeight;
+	// IE 5
+	if (document.body)
+		return document.body.clientHeight;
+	// Just in case. 
+	return 0;
+}
+
+function windowWidth() {
+	// Standard browsers (Mozilla, Safari, etc.)
+	if (self.innerWidth)
+		return self.innerWidth;
+	// IE 6
+	if (document.documentElement && document.documentElement.clientHeight)
+		return document.documentElement.clientWidth;
+	// IE 5
+	if (document.body)
+		return document.body.clientWidth;
+	// Just in case. 
+	return 0;
+}
+
+function handleResize() {
+	var height = windowHeight() - 270;
+	document.getElementById('map').style.height = height + 'px';
+	document.getElementById('harta_centru').style.height = (height+10) + 'px';
+	document.getElementById('harta_centru').style.width = (windowWidth()-230) + 'px';
+	document.getElementById('map').style.width = (windowWidth()-240) + 'px';
+}
+
+function init() {
+	handleResize();
+	
+	map = new GMap(document.getElementById("map"));
+	map.addControl(new GLargeMapControl());
+//	map.setCenter(new GLatLng(centerLatitude, centerLongitude), startZoom);
+	map.setCenter(new GLatLng(centers[continent].lat, centers[continent].long), centers[continent].zoom);
+	map.addControl(new GMapTypeControl());
+	map.addControl(new GScaleControl());
+	map.setMapType(G_SATELLITE_MAP);
+	map.enableScrollWheelZoom();
+	map.enableDoubleClickZoom();
+	
+	
+        var side_bar_html = "";
+        var gmarkers = [];
+        var htmls = [];
+        var i = 0;
+	var batch = [];
+	var batch1 = [];
+
+	manager = new GMarkerManager(map);
+	// Read the data from example4.xml
+        var request = GXmlHttp.create();
+      
+     // 'abbr': 'HAR',
+    //	'name': 'Harlem',
+    //		'latitude':40.8027651305852,
+    //			'longitude':-73.94588470458984,
+    //				'wp':'http://en.wikipedia.org/wiki/Harlem'
+        request.open("GET", "map_data.jsp?relations="+bRelations+"&lines="+bLines, true);
+	request.onreadystatechange = function() {
+	    if (request.readyState == 4) {
+    		var xmlDoc = request.responseXML;
+    		// obtain the array of markers and loop through it
+    		var markers = xmlDoc.documentElement.getElementsByTagName("marker");
+        	
+        	
+    		
+    		for (var i = 0; i < markers.length; i++) {
+    		    // obtain the attribues of each marker
+    		    
+    		    var lat = markers[i].getAttribute("lat");
+    		    var long = markers[i].getAttribute("lng");
+        	    var html = markers[i].getAttribute("html");
+        	    var abbr  = markers[i].getAttribute("abbr");
+        	    var name = markers[i].getAttribute("name");
+		    var image = markers[i].getAttribute("image");
+		    var link = markers[i].getAttribute("link")
+		    var labelx = markers[i].getAttribute("labelx")
+		    var labely = markers[i].getAttribute("labely")
+		    var iconx = markers[i].getAttribute("iconx")
+		    var icony = markers[i].getAttribute("icony")
+        	    
+        	    var vMarker = {'abbr' : abbr, 'name': name, 'label' : html, 'latitude' : lat, 'longitude': long, 
+        			'image': image, 'link': link, 'labelx': labelx, 'labely': labely, 'iconx' : iconx, 'icony': icony};
+        	    
+        	    if(long  != "N/A" && lat != "N/A"){
+        		long = parseFloat(long);
+        		lat = parseFloat(lat);
+        		
+        		//map.addOverlay(createMarker(vMarker));
+        		batch.push(createLabeledMarker(vMarker));
+        		batch1.push(createMarker(vMarker));
+        	    }
+    	        }
+
+		manager.addMarkers(batch, 4);
+		manager.addMarkers(batch1, 1);
+
+		manager.refresh();
+            
+    		if(bLines){
+		
+    		    // ========= Now process the polylines ===========
+    		    var lines = xmlDoc.documentElement.getElementsByTagName("line_xrootd");
+    		    // read each line
+            
+    		    for (var a = 0; a < lines.length; a++) {
+        		//get any line attributes
+        		var colour = lines[a].getAttribute("colour");
+        		var width  = parseFloat(lines[a].getAttribute("width"));
+        	    
+        		// read each point on that line
+        		var points = lines[a].getElementsByTagName("point");
+        		var pts = [];
+        	
+        		for (var i = 0; i < points.length; i++) {
+            		    pts[i] = new GLatLng(parseFloat(points[i].getAttribute("lat")), parseFloat(points[i].getAttribute("lng")));
+        		}
+        	
+        		map.addOverlay(new GPolyline(pts,colour,width));
+    		    }
+	        }
+
+    		if(bRelations){
+		
+    		    // ========= Now process the polylines ===========
+    		    var lines = xmlDoc.documentElement.getElementsByTagName("line_relations");
+    		    // read each line
+            
+    		    for (var a = 0; a < lines.length; a++) {
+        		//get any line attributes
+        		var colour = lines[a].getAttribute("colour");
+        		var width  = parseFloat(lines[a].getAttribute("width"));
+        	    
+        		// read each point on that line
+        		var points = lines[a].getElementsByTagName("point");
+        		var pts = [];
+        	
+        		for (var i = 0; i < points.length; i++) {
+            		    pts[i] = new GLatLng(parseFloat(points[i].getAttribute("lat")), parseFloat(points[i].getAttribute("lng")));
+        		}
+        	
+        		map.addOverlay(new GPolyline(pts,colour,width));
+    		    }
+	        }
+	    }
+	}
+        
+	
+	request.send(null);
+
+
+}
+
+window.onresize = handleResize;
+window.onload = init;
+window.onunload = GUnload;

@@ -1,0 +1,31 @@
+Executable = "aliroot_new";
+Jobtag={"comment:pp, Perugia-11, 0.5T, 7TeV, Lambda(1520) enhancement, ID #XXX"};
+
+Packages={"VO_ALICE@AliRoot::v5-01-Rev-20","VO_ALICE@ROOT::v5-30-06","VO_ALICE@GEANT3::v1-12-4","VO_ALICE@APISCONFIG::V1.1x"};
+
+TTL = "72000";
+
+Requirements = member(other.GridPartitions,"PDC08_2");
+
+Validationcommand ="/alice/cern.ch/user/a/aliprod/prod2007/configs_pbpb_hijing/validation.sh";
+
+InputFile= {"LF:/alice/cern.ch/user/b/bdoenigu/mc_production/CheckESD.C",
+            "LF:/alice/cern.ch/user/b/bdoenigu/mc_production/Config.C",
+            "LF:/alice/cern.ch/user/b/bdoenigu/mc_production/rec.C",
+            "LF:/alice/cern.ch/user/b/bdoenigu/mc_production/sim.C",
+            "LF:/alice/cern.ch/user/b/bdoenigu/mc_production/simrun.C",
+            "LF:/alice/cern.ch/user/b/bdoenigu/mc_production/tag.C"
+};
+
+OutputArchive={"log_archive:stderr,stdout,sim.log,rec.log,tag.log@disk=1","root_archive.zip:galice.root,Kinematics.root,TrackRefs.root,AliESDs.root,AliESDfriends.root,Run*.root@disk=3"};
+
+OutputDir="/alice/cern.ch/user/b/bdoenigu/mc_production/$1/#alien_counter_03i#";
+
+JDLVariables={"Packages", "OutputDir"};
+GUIDFILE="guid.txt";
+
+#
+splitarguments="simrun.C --run $1 --event #alien_counter# --process kPythiaTunePerugia11AndLambda1520Enhancement --energy 7000";
+split="production:$2-$3";
+
+Workdirectorysize={"10000MB"};

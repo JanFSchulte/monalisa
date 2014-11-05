@@ -1,0 +1,122 @@
+#   This is a sample configuration file for drawing a chart.
+#
+#   Each FILENAME.properties will be referenced from any web page using a link like :
+# display?conf=FILENAME
+#
+
+
+page={hist|combined_hist|combined_bar|rt|image|farminfo}
+kind={history|pie} : ?
+Farms={list|query}
+Clusters={list}
+Nodes={list}
+Functions={list}
+FuncSuff=string,list : You will use this parameter if you want to add strings to all the functions you specified above.
+Wildcards=[F|C|N|f]
+xlabel=String
+ylabel=String
+title=String
+showtotal={true|false}
+size={true|false}
+descr={list} : description for the functions?
+
+include={list} : conf. files to include
+intervalselection={true|false}
+intervalselection.method={1(def)|2} : 1 - show table names; 2 - autoselect table
+intervalselection.method2.stringformat=MMM d, HH:00 (example)
+interval.min=3600000 : default values for interval in past time offset
+interval.max=0
+timezone=GMT
+timeaxis=${timezone} time
+etc.descr=ETC : sets an alias for farm or series
+reftesh.time=30 : 0 for no refresh
+
+alternate.pages=sample_combined_realtime,...?
+alternate.descr=Combined real-time view
+charts={list} : list of charts to be included in combined_hist
+charts.descr={list}
+percents=50,50
+colapsedlegend={true|false} : if the same series is in all the charts display only once
+height={pixels}
+width={pixels}
+orientation={horizontal|vertical}
+sort={true|false} : sort the series names
+sort.bysuffix={true|false}
+sort.bysuffix.delimeter=. -_
+sort.bysuffix.separator=<hr size=1 noshade> : separate the groups of suffixes
+log={0|1} : logaritmic scale
+err={0|1} : variations
+int={0|1} : integral
+sum={0|1} : sum series
+disableerr={true|false}
+disablelog={true|false}
+displaysum={true|false}
+displayint={true|false}
+foreground.alpha=0.65 : ?
+background.alpha=1.00 : ?
+displayall={true|false} : display only the active series or not.
+separate={list} : separate some series from others.
+
+samerange={true|false} : combine charts in the same domain or same range?
+
+areachart={true|false} : area chatr
+areachart.shapes={true|false} : ?
+colors=0 255 0,0 0 255 : folors of farms?
+timeaxis= : ?
+auto_adjust_range={true|false} : auto-adjust Y axis
+
+series={list} : for a pie chart
+aliases={list}
+seriesx.alias=string : the same
+
+default.pred=${farms}/MonaLisa/*/-1/-1/$NAME : $NAME is replaced by the series name, $ALIAS is replaced by the series alias
+
+3d={true|false}
+3d.depthfactor=0.03
+circular={true|false}
+interiorgap=0.13
+labelgap=0
+shadow.offset.x=3
+shadow.offset.y=3
+startangle=90
+seriesx.explode={true|false}
+seriesx.explode.ratio=0.3
+labels={true|false}
+enablehistory={true|false} : time-based stats. or else only realtime
+sum.enabled={true|false} : sum of the values
+avg.enabled={true|false}
+int.enabled={true|false} : avg * interval length
+min.enabled={true|false} : min > 0
+min0.enabled={true|false} : min. 0 ok.
+max.enabled={true|false}
+percent.format=##.##%
+pielabel.format={0}={1}
+
+options=1 : allow the user to select the farm
+option_0.name=FARM
+option_0.descr=Farm:
+option_0.values=${Farms}
+option_0.aliases=
+
+FARM=string : default value
+
+
+totalperminute={true|false} : if data represents /min instead of /sec
+sizein={K,M,G, }
+datainbits={true|false} defaults to ylabel.endswith("bps")
+showtotal={true|false} : total value for interval
+compact.displaypoints=90 : when there are too many points in the selected interval
+ignorezero={true|false} : so not display 0s in the table below the chart
+tooltip.suffix=String : sorce a suffix for the tooltips
+skipnull={<0,0,>0} : when data is missing - unite eth, automatic, unite points at most N intervals apart
+labels.vertical={true|false} : time labels
+labels.date.format=MMM d, HH:mm
+
+totalrow={true|false} : grand total of all series
+
+stack={true|false}
+
+
+
+
+

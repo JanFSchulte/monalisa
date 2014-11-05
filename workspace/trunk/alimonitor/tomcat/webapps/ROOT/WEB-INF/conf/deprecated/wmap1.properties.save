@@ -1,0 +1,200 @@
+nodes=NIKHEF,IHEP
+aliases=NIKHEF,IHEP
+long=4.91,37.2178
+lat=53.35,52.45
+
+#put here the farms you don't want to appear on the map
+notvisible=aliendb5.cern.ch,aliendb4.cern.ch,aliendb1.cern.ch
+
+
+
+#coordinates of the 2 points delimitating the map - long, lat    
+cornerLeftUp=-125,49
+cornerRightDown=-60,17
+
+#auto positioning of the farms or not; this must be on!
+auto=1
+
+width=800
+height=400
+resolution=1500x750
+xcenter=0
+#-21
+ycenter=0
+#-5
+zoom=0.5	
+
+#speciallink=BNL_ATLAS UBuffalo-CCR,UBuffalo-CCR UM_ATLAS,UM_ATLAS IU_ATLAS_Tier2,UM_ATLAS UWMadison,UWMadison pdsf,pdsf Caltech-PG,FNAL_CMS pdsf,FNAL_CMS Caltech-Grid3,Caltech-PG Caltech-Grid3,Caltech-Grid3 UCSanDiegoPG,UCSanDiegoPG FNAL_CMS,Caltech-PG UNM_HPC,UNM_HPC UTA-DPCC,UNM_HPC Rice-Grid3,UTA-DPCC Vanderbilt,Vanderbilt KNU,Caltech-Grid3 KNU
+
+speciallink=CERN NIKHEF,\
+            CERN FZK,\
+            CERN CNAF,\
+            CERN CCIN2P3,\
+            CERN RAL,\
+            CERN SARA,\
+            CERN CERN-L,\
+            CERN CERNMAC,\
+            \
+            FZK Prague _ #52FF22,\
+            FZK GSI _ #52FF22,\
+            FZK Muenster _ #52FF22,\
+            FZK SPbSU _ #52FF22,\
+            FZK PNPI _ #52FF22,\
+            FZK ITEP _ #52FF22,\
+            FZK Troitsk _ #52FF22,\
+            FZK RRC-KI _ #52FF22,\
+            FZK JINR _ #52FF22,\
+            FZK IHEP _ #52FF22,\
+            FZK SINP _ #52FF22,\
+            \
+            CERN RMKI _ #FFC403,\
+            CERN NIHAM _ #FFC403,\
+            CERN ISS _ #FFC403,\
+            CERN Kolkata _ #FFC403,\
+            CERN Houston _ #FFC403,\
+            CERN OSC _ #FFC403,\
+            \
+            CCIN2P3 Sejong _ #BBFF32,\
+            CCIN2P3 Subatech _ #BBFF32,\
+            CCIN2P3 Clermont _ #BBFF32,\
+            \
+            CNAF Torino _ #FFF532,\
+            CNAF Bari _ #FFF532,\
+            CNAF Catania _ #FFF532,\
+            CNAF Cagliari _ #FFF532,\
+            CNAF Legnaro _ #FFF532
+            
+            
+
+#title=OSG-ITB Status MAP
+#description=Status Map
+
+#links=CNAF:CERN:Bandwidth:_TOTALS_/Site_Traffic_Summary/CNAF-CERN/-1/-1/transf_mbytes_R,\
+#	CERN:CNAF:Bandwidth:_TOTALS_/Site_Traffic_Summary/CERN-CNAF/-1/-1/transf_mbytes_R,\
+#	CCIN2P3C:CERN:Bandwidth:_TOTALS_/Site_Traffic_Summary/CCIN2P3C-CERN/-1/-1/transf_mbytes_R,\
+#        CERN:CCIN2P3C:Bandwidth:_TOTALS_/Site_Traffic_Summary/CERN-CCIN2P3C/-1/-1/transf_mbytes_R,\
+#	FZK:CERN:Bandwidth:_TOTALS_/Site_Traffic_Summary/FZK-CERN/-1/-1/transf_mbytes_R,\
+#        CERN:FZK:Bandwidth:_TOTALS_/Site_Traffic_Summary/CERN-FZK/-1/-1/transf_mbytes_R,\
+#	GSI:CERN:Bandwidth:_TOTALS_/Site_Traffic_Summary/GSI-CERN/-1/-1/transf_mbytes_R,\
+#        CERN:GSI:Bandwidth:_TOTALS_/Site_Traffic_Summary/CERN-GSI/-1/-1/transf_mbytes_R,\
+#	Houston:CERN:Bandwidth:_TOTALS_/Site_Traffic_Summary/Houston-CERN/-1/-1/transf_mbytes_R,\
+#        CERN:Houston:Bandwidth:_TOTALS_/Site_Traffic_Summary/CERN-Houston/-1/-1/transf_mbytes_R,\
+#	Kiev:CERN:Bandwidth:_TOTALS_/Site_Traffic_Summary/Kiev-CERN/-1/-1/transf_mbytes_R,\
+#        CERN:Kiev:Bandwidth:_TOTALS_/Site_Traffic_Summary/CERN-Kiev/-1/-1/transf_mbytes_R,\
+#	Muenster:CERN:Bandwidth:_TOTALS_/Site_Traffic_Summary/Muenster-CERN/-1/-1/transf_mbytes_R,\
+#        CERN:Muenster:Bandwidth:_TOTALS_/Site_Traffic_Summary/CERN-Muenster/-1/-1/transf_mbytes_R,\
+#	PNPI:CERN:Bandwidth:_TOTALS_/Site_Traffic_Summary/PNPI-CERN/-1/-1/transf_mbytes_R,\
+#        CERN:PNPI:Bandwidth:_TOTALS_/Site_Traffic_Summary/CERN-PNPI/-1/-1/transf_mbytes_R,\
+#	RMKI:CERN:Bandwidth:_TOTALS_/Site_Traffic_Summary/RMKI-CERN/-1/-1/transf_mbytes_R,\
+#        CERN:RMKI:Bandwidth:_TOTALS_/Site_Traffic_Summary/CERN-RMKI/-1/-1/transf_mbytes_R,\
+#	Sejong:CERN:Bandwidth:_TOTALS_/Site_Traffic_Summary/Sejong-CERN/-1/-1/transf_mbytes_R,\
+#        CERN:Sejong:Bandwidth:_TOTALS_/Site_Traffic_Summary/CERN-Sejong/-1/-1/transf_mbytes_R,\
+#	Torino:CERN:Bandwidth:_TOTALS_/Site_Traffic_Summary/Torino-CERN/-1/-1/transf_mbytes_R,\
+#        CERN:Torino:Bandwidth:_TOTALS_/Site_Traffic_Summary/CERN-Torino/-1/-1/transf_mbytes_R
+
+
+#links=$Qselect source||':'||destination||':Bandwidth:_TOTALS_/Site_Traffic_Summary/'||source||'-'||destination||'/-3600000/-1/transf_mbytes_R' from symetric_active_xrootd_transfers;
+links=$Qselect source||':'||destination||':Bandwidth:_TOTALS_/Site_Traffic_Summary/'||source||'-'||destination||'/-3600000/-1/transf_mbytes_R' from active_xrootd_transfers;
+
+
+
+
+default.link.tooltip=$A1-$A2: last hour xrootd average transfer rate: <b> $SMBB/s </b>
+default.link.href=display?page=site_intsite_traffic_hist&plot_series=$A1-$A2
+
+Bandwidth.color.min=0 255 255
+Bandwidth.color.max=0 0 255
+Delay.parameter=Bandwidth
+
+
+ignorezero=true
+
+routers=false
+
+image.format=jpeg
+image.jpeg.compression=0.9
+
+default.fontsize=7
+default.xlabeloffset=10
+default.ylabeloffset=5
+
+aliendb5.cern.ch.xlabeloffset=-80
+aliendb5.cern.ch.ylabeloffset=-10
+
+Troitsk.xlabeloffset=-41
+
+CCIN2P3.xlabeloffset=-45
+
+Yerevan.xlabeloffset=-45
+
+SARA.xlabeloffset=-11
+SARA.ylabeloffset=18
+
+NIKHEF.xlabeloffset=-16
+NIKHEF.ylabeloffset=-10
+
+default.href=display?page=jobs_per_site&Nodes=$NAME
+
+vo_nr=1
+
+#default.preds1=$NAME/%_Jobs_Summary/*/-1/-1/RUNNING_jobs&$NAME/%_Jobs_Summary/*/-1/-1/ZOMBIE_jobs
+#default.preds1=$NAME/Site_Jobs_Summary/*/-1/-1/RUNNING_jobs
+default.preds1=CERN/ALICE_Sites_Jobs_Summary/$NAME/-1/-1/RUNNING_jobs
+#default.preds1=CERN/ALICE_Sites_Jobs_Summary/CERN/-1/-1/RUNNING_jobs
+default.preds2=$NAME/%_Nodes_Summary/med/-1/-1/load5
+
+# this is to detect that the farm is still up
+#default.alternate_data=$NAME/*/*/-1/-1
+default.alternate_data=$NAME/MonaLisa/%/-1/-1/memstore_hours
+
+#if only one predicate is given, then the used color is
+default.color.min=150 255 150 
+#default.color.min=0 255 0
+default.color.max=0 255 0 
+
+#farm color when return value of the predicate is 0; if not present, the farm will be coloured using the gradient   
+color.zerovalue=255 195 0
+
+#farm color when there is no data for the indicated predicate.default color: orange (255 195 0)
+color.nodata=255 195 0
+
+# these colors are used only when you have more than one sub-predicate in a predicate definition 
+default.colors1=0 255 0,0 0 255
+#default.colors1=0 0 255,0 255 0, 255 0 0
+
+default.radius=5
+
+# what is the tooltip if there is no data for that node (0), only one series is available (1) or both series are available (2)
+# this refers to the number after the point, in the tooltip definition
+
+default.tooltip1.0=$ALIAS: MonaLisa Service is <font color=red>DOWN</font>
+default.tooltip1.0_alternate_data=$ALIAS: No current running jobs info<br>&nbsp;<br><img src="/tooltips/$ALIAS.png" border=0 width=300 height=200>
+default.tooltip1.1=$ALIAS: &nbsp;&nbsp;<b> $0  </b>current running jobs<br>&nbsp;<br><img src="/tooltips/$ALIAS.png" border=0 width=300 height=200>
+# default.tooltip1.2=$ALIAS: $0  running and $1  zombie jobs
+
+default.tooltip2.0=$ALIAS: is <font color=red>DOWN</font>
+default.tooltip2.0_alternate_data=$ALIAS: has no active nodes
+# the $0 refers to the first predicate
+default.tooltip2.1=$ALIAS: Avg Load: $0
+
+
+#default.tooltip1.2=$ALIAS: <b>Utilisation</b> <br><font color=navy>Busy</font> Nodes: $0  <br><font color=darkgreen>Free</font> Nodes: $1
+#default.tooltip.9=$ALIAS: ATLAS:$0 CMS:$1 BTeV:$2 GADU:$3 GRASE:$4 GRIDEX:$5 iVDgL:$6 LIGO:$7 SDSS:$8 
+
+#default.tooltip2.0=$ALIAS: is <font color=red>DOWN</font>
+#default.tooltip2.0_alternate_data=$ALIAS: has no <font color=orange>VO_JOBS</font> data
+#default.tooltip2.1=$ALIAS
+#default.tooltip2.2=$ALIAS: <b>Total</b> <br><font color=navy>Idle</font> Jobs: $0  <br> <font color=darkgreen>Running</font> Jobs: $1
+#default.tooltip.9=$ALIAS: ATLAS:$0 CMS:$1 BTeV:$2 GADU:$3 GRASE:$4 GRIDEX:$5 iVDgL:$6 LIGO:$7 SDSS:$8 
+
+
+#default.tooltip3.0=$ALIAS: is <font color=red>DOWN</font>
+#default.tooltip3.0_alternate_data=$ALIAS: has no <font color=orange>VO_JOBS</font> data
+#default.tooltip3.1=$ALIAS
+#default.tooltip3.2=$ALIAS: Idle Jobs:$0 Running Jobs:$1
+#default.tooltip3.13=$ALIAS: <b>Running Jobs</b><br> *ATLAS:$0  *CMS:$1  *BTeV:$2  *GADU:$3  *GRASE:$4  *GRIDEX:$5  *iVDgL:$6  *LIGO:$7  *SDSS:$8  *CDF:$9  *fMRI:$10 *OSG:$11 *GridEx:$12    
+
+scallednodes.enabled=true
+scallednodes.min=5
+scallednodes.max=6
+scallednodes.substract_if_down=0.3

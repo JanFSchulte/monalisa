@@ -1,0 +1,165 @@
+<%@ page import="lazyj.*,alien.catalogue.*,alien.transfers.*,alimonitor.*,java.util.*,java.io.*,lia.Monitor.Store.Fast.*,java.security.cert.*,auth.*" %><%!
+    
+%><%
+    response.setHeader("Connection", "keep-alive");
+
+    lia.web.servlets.web.Utils.logRequest("START /trains/admin/train_edit_handler.jsp", 0, request);
+
+    final RequestWrapper rw = new RequestWrapper(request);
+    
+    RequestWrapper.setNotCache(response);
+
+    final ServletContext sc = getServletContext();
+    final ByteArrayOutputStream baos = new ByteArrayOutputStream(50000);
+            
+    final Page p = new Page(baos, "trains/admin/train_edit_handler.res", false);
+    
+    final DB db = new DB();
+    
+    final int train_id = rw.geti("train_id");
+    final String handler_name = rw.gets("handler_name");
+    
+    final String previous_name = rw.gets("old_name");
+    
+    final AlicePrincipal principal = new AlicePrincipal(""); //Users.get(request);
+
+    boolean admin = true; //principal.hasRole("admin");
+    
+    boolean unprivileged = false;
+    
+    int op = rw.geti("op");
+    
+    if (!admin){
+	db.query("SELECT 1 FROM train_operator_permission WHERE username='"+Format.escSQL(principal.getName())+"' and train_id="+train_id);
+	
+	admin = db.moveNext();
+    }
+
+    if (!admin){
+	if (rw.geti("op")==0){
+	    unprivileged = true;
+	    admin = true;
+	}
+    }
+
+    if (!admin){
+	out.println("You are not allowed here");
+	return;
+    }
+
+    boolean copyAnotherHandler = false;
+
+    if (rw.gets("submit").startsWith("Copy")){
+	String ref = rw.gets("copyhandler");
+	
+	if (ref.indexOf("/")>0){
+	    db.query("SELECT * FROM train_handler WHERE train_id="+Format.escSQL(ref.substring(0, ref.indexOf("/")))+" AND handler_name='"+Format.escSQL(ref.substring(ref.indexOf("/")+1))+"';");
+	
+	    if (db.moveNext()){
+		p.modify("train_id", train_id);
+		p.fillFromDB(db);
+		
+		p.modify("old_name", handler_name);
+	    
+		copyAnotherHandler = true;
+	    }
+	}
+    }
+    else{
+	if (op != 0 && handler_name.length()>0){
+	    if (op == 4){
+		// activate
+		db.syncUpdateQuery("UPDATE train_handler SET enabled=1 WHERE train_id="+train_id+" and handler_name='"+handler_name+"';");
+	    
+		response.sendRedirect("/trains/train.jsp?train_id="+train_id+"#handlers");
+		return;
+	    }
+	    else
+	    if (op == 3){
+		// deactivate
+		db.syncUpdateQuery("UPDATE train_handler SET enabled=0 WHERE train_id="+train_id+" and handler_name='"+handler_name+"';");
+	    
+		response.sendRedirect("/trains/train.jsp?train_id="+train_id+"#handlers");
+		return;
+	    }
+	    else
+	    if (op == 2){
+		// delete
+		db.syncUpdateQuery("DELETE FROM train_handler WHERE train_id="+train_id+" AND handler_name='"+Format.escSQL(handler_name)+"';");
+	    
+		response.sendRedirect("/trains/train.jsp?train_id="+train_id+"#handlers");
+		return;
+	    }
+	    else
+	    if (op == 1){
+	        // insert/update
+	    
+		if (previous_name.length()==0){
+		    // insert
+		
+		    db.query("SELECT 1 FROM train_handler WHERE train_id="+train_id+" AND handler_name='"+Format.escSQL(handler_name)+"';");
+		    if (db.moveNext()){
+			out.println("Handler name conflicts with an existing entry, please go back and choose another name.");
+			return;
+		    }
+		
+		    db.syncUpdateQuery("INSERT INTO train_handler (train_id, handler_name, macro_path, parameters, macro_body) VALUES ("+train_id+", '"+Format.escSQL(handler_name)+"', '"+Format.escSQL(rw.gets("macro_path"))+"', '"+Format.escSQL(rw.gets("parameters"))+"', '"+Format.escSQL(rw.gets("macro_body"))+"');");
+		}
+		else{
+		    // update
+		
+		    if (!handler_name.equals(previous_name)){
+			db.query("SELECT 1 FROM train_handler WHERE train_id="+train_id+" AND handler_name='"+Format.escSQL(handler_name)+"';");
+			if (db.moveNext()){
+			    out.println("Handler name conflicts with an existing entry, please go back and choose another name.");
+			    return;
+	    		}
+		    }
+		
+		    db.syncUpdateQuery("UPDATE train_handler SET handler_name='"+Format.escSQL(handler_name)+"', macro_path='"+Format.escSQL(rw.gets("macro_path"))+"', parameters='"+Format.escSQL(rw.gets("parameters"))+"', macro_body='"+Format.escSQL(rw.gets("macro_body"))+"' WHERE train_id="+train_id+" AND handler_name='"+Format.escSQL(previous_name)+"';");
+		}
+
+		out.println("<script type=text/javascript>parent.setBookmark('handlers');</script>");
+		out.println("<script type=text/javascript>parent.modify()</script>");
+		return;
+	    }
+	}
+    }
+
+    p.comment("com_edit", !unprivileged);
+    
+    // ------------------------ content
+    
+    
+    if (!copyAnotherHandler){
+	if (handler_name.length()>0){
+	    db.query("SELECT * FROM train_handler WHERE train_id="+train_id+" AND handler_name='"+Format.escSQL(handler_name)+"';");
+    
+	    p.fillFromDB(db);
+	    
+	    p.modify("old_name", db.gets("handler_name"));
+	}
+	else{
+	    p.modify("train_id", train_id);
+        }
+    }
+    
+    db.query("select wg_no,train_name,handler_name,train_id from train_handler inner join train_def using (train_id) WHERE train_id!="+train_id+" OR handler_name!='"+Format.escSQL(handler_name)+"' order by 1,2,3;");
+    
+    while (db.moveNext()){
+	String k = db.gets(4)+"/"+db.gets(3);
+    
+	String s = db.gets(1)+"/"+db.gets(2)+"/"+db.gets(3);
+	
+	p.append("copy_list", "<option value='"+Format.escHtml(k)+"'>"+Format.escHtml(s)+"</option>");
+    }
+    
+    // ------------------------ final bits and pieces
+
+    p.write();
+    
+    String s = new String(baos.toByteArray());
+    out.println(s);
+
+    lia.web.servlets.web.Utils.logRequest("/trains/admin/train_edit_handler.jsp?train_id="+train_id+"&username="+principal.getName()+"&handler_name="+handler_name, baos.size(), request);
+%>

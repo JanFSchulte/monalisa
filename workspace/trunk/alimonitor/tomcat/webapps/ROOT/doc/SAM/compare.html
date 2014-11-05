@@ -1,0 +1,19 @@
+The values from the 4 Patricia's scripts are now sent to the local ML on 
+each of the 3 voboxes as<br>
+<br>
+{CERN-L|CNAF|FZK}/SAM_SiteJobs/{batch|is|lb|gris}/{running|waiting}.<br>
+<br>
+If you want to send also other values, you can use the small script I 
+have written for this, that allows you to send directly from shell 
+various parameters to a ML service. By default, it will send to 
+localhost. If you define MONALISA_HOST with a hostname, it will send 
+them there. Just call<br>
+<br>
+sendToML.sh &lt;cluster&gt; &lt;node&gt; &lt;param1&gt; &lt;val1&gt; [ &lt;param2&gt; &lt;val2&gt; .. ]<br>
+<br>
+I've copied this together with a perl ApMon installation on the 3 
+VoBoxes in ~/SAM/sendToML, or you can get it from:<br>
+<br>
+<a target="_blank" href="http://monalisa2.cern.ch/~catac/apmon/sendToML.tgz">
+http://monalisa2.cern.ch/~catac/apmon/sendToML.tgz
+</a>

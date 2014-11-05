@@ -1,0 +1,375 @@
+<!--
+<%@ page import="lia.web.servlets.web.display" %>
+<%@ page import="lia.web.utils.Formatare" %>
+<%@ page import="java.util.Date" %>
+<%
+    String server = 
+	request.getScheme()+"://"+
+	request.getServerName()+":"+
+	request.getServerPort()+"/";
+	
+    lia.Monitor.Store.Fast.TempMemWriterInterface tmw = null;
+    
+    String sError = "";
+
+    try{
+        lia.Monitor.Store.TransparentStoreFast store = (lia.Monitor.Store.TransparentStoreFast) lia.Monitor.Store.TransparentStoreFactory.getStore();
+	tmw = store.getTempMemWriter();
+    }
+    catch (Throwable t){
+	sError = t.getMessage();
+    }
+%>
+
+-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>OSG-ITB Repository Page</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link href="cooltree.css" rel="stylesheet" type="text/css">
+<link href="dtree.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/overlib/overlib.js"></script>
+<script type="text/javascript" src="dtree.js"></script>
+<script type="text/javascript">
+	function changeWidth()
+	{
+		document.getElementById('test').width=0.96*screen.width;
+	}
+	
+	function switchToAlternate(page){
+    document.form1.page.value=page;
+    document.form1.submit();
+}
+	    
+<<:comment_refresh:>>window.setTimeout("modify()", <<:refresh_time:>>*1000);
+	    
+function reverse(id){
+    var ch = document.getElementById(id);
+    
+    if (ch.checked) ch.checked=false;
+    else ch.checked=true;
+}
+
+function checkall(){
+    var fields = document.form1.plot_series;
+    for (i=0; i<fields.length; i++)
+        fields[i].checked=true;
+}
+	    
+function uncheckall(){
+    var fields = document.form1.plot_series;
+    for (i=0; i<fields.length; i++)
+	fields[i].checked=false;
+}
+function modify(){
+    document.form1.submit();
+}
+
+
+</script>
+
+<style type="text/css">
+<!--
+.style1 {font-size: 14px}
+
+-->
+</style>
+</head>
+
+<body onload="changeWidth()" topmargin="0">
+<div id="overDiv" style="position:absolute; visibility:hidden; z-index:1000;"></div>
+<div align="center">
+<table height="600" border="0" align="center" cellpadding="0" cellspacing="0" id="test">
+  <tr>
+    <td width="1" rowspan="2" bgcolor="#006699">&nbsp;</td>
+    <td width="1" rowspan="2" bgcolor="#FFFFFF">&nbsp;</td>
+    <td width="153" rowspan="2" align="left" valign="top" bgcolor="#EDEBEC"><table width="153" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="153" align="left" valign="top"><table width="153" height="49" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+              <td width="1" rowspan="3" bgcolor="#EDEBEC">&nbsp;</td>
+              <td rowspan="3" bgcolor="#EDEBEC">&nbsp;</td>
+              <td width="7" rowspan="3" bgcolor="#5890C3" class="header1">&nbsp;</td>
+              <td width="53" bgcolor="#5890C3" class="header1">&nbsp;</td>
+            </tr>
+            <tr>
+              <td height="20" class="selectedmenutab2" bgcolor="#CCCCCC">&nbsp;</td>
+            </tr>
+            <tr>
+              <td height="16" bgcolor="#CCCCCC">&nbsp;</td>
+            </tr>
+        </table></td>
+      </tr>
+      <tr>
+        <td width="153" align="left" valign="top" bgcolor="#EDEBEC"><table width="153" height="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#EDEBEC">
+            <tr>
+              <td width="185" height="32" class="banner3"><img src="bullet.gif" width="6" height="6"> MonALISA</td>
+            </tr>
+            <tr>
+              <td height="72" align="left" valign="top" bgcolor="#006699" class="banner2"><div align="center"> Click on the butoon below to start the MonALISA Client </div>
+                  <div align="center"><br>
+                      <input type="submit" name="Submit" value="Client" class="clientbutton">
+                </div></td>
+            </tr>
+            <tr>
+              <td height="15" align="left" valign="top" bgcolor="#006699" class="banner2">
+                <div align="center">last update : 2005.03.14 </div></td>
+            </tr>
+            <tr>
+              <td height="30" align="left" valign="middle" bgcolor="#006699" class="banner2"><div align="center"><u>ABPing configuration </u></div></td>
+            </tr>
+            <tr>
+              <td height="29" align="left" class="banner3"><img src="bullet.gif" width="6" height="6"> <a href="index.html" class="banner3">OSG-ITB</a></td>
+            </tr>
+            <tr>
+              <td width="185" height="0" align="left" class="dtree" bgcolor="#EDEBEC">
+                <script type="text/javascript">
+		<!--
+
+		d = new dTree('d');
+
+		d.add(0,-1,'Statistics','stats?page=stats2');
+		d.add(1,-1,'Global view','display?page=osg');
+		d.add(2,-1,'OSG-ITB Map','index.html');
+		d.add(3,-1,'Jobs status','display?page=globalview');
+		d.add(4,-1,'Farms status','stats?page=summary');
+		d.add(5,-1,'Masters','');
+		d.add(6,5,'Load','');
+		d.add(7,6,'Real-Time','display?page=rt_link2');
+		d.add(8,6,'History','display?page=hist_link2');
+		d.add(9,5,'Traffic','display?page=eth');
+		d.add(10,9,'eth0','');
+		d.add(11,10,'Real-Time','display?page=rt_link5');
+		d.add(12,10,'History','display?page=hist_link5_com');
+		d.add(14,9,'eth1','');
+		d.add(15,14,'Real-Time','display?page=rt_link6');
+		d.add(16,14,'History','display?page=hist_link6_com');
+		d.add(17,-1,'Farms','');
+		d.add(18,17,'CPUs','');
+		d.add(19,18,'Real-Time','display?page=cpu_rt');
+		d.add(20,18,'History','display?page=cpu_hist');
+		d.add(21,17,'Usage','');
+		d.add(22,21,'Real-Time','display?page=rt_link1');
+		d.add(23,21,'History','display?page=hist_usage');
+		d.add(24,17,'IO traffic','');
+		d.add(25,24,'Real-Time','display?page=rt_link3');
+		d.add(26,24,'History','display?page=hist_io');
+		d.add(27,-1,'VO JOBS','display?page=jobs_totals');
+		d.add(28,27,'ATLAS','');
+		d.add(29,28,'Real-Time','display?page=ATLAS_rt');
+		d.add(30,28,'History','display?page=hist_JOBS_ATLAS');
+		d.add(31,27,'CMS','');
+		d.add(32,31,'Real-Time','display?page=CMS_rt');
+		d.add(33,31,'History','display?page=hist_JOBS_CMS');
+		d.add(34,27,'BTeV','');
+		d.add(35,34,'Real-Time','display?page=BTeV_rt');
+		d.add(36,34,'History','display?page=hist_JOBS_BTeV');
+		d.add(37,27,'GADU','');
+		d.add(38,37,'Real-Time','display?page=GADU_rt');
+		d.add(39,37,'History','display?page=hist_JOBS_GADU');
+		d.add(40,27,'GRASE','');
+		d.add(41,40,'Real-Time','display?page=GRASE_rt');
+		d.add(42,40,'History','display?page=hist_JOBS_GRASE');
+		d.add(43,27,'GRIDEX','');
+		d.add(44,43,'Real-Time','display?page=GRIDEX_rt');
+		d.add(45,43,'History','display?page=hist_JOBS_GRIDEX');
+		d.add(46,27,'iVDgL','');
+		d.add(47,46,'Real-Time','display?page=iVDgL_rt');
+		d.add(48,46,'History','display?page=hist_JOBS_iVDgL');
+		d.add(49,27,'LIGO','');
+		d.add(50,49,'Real-Time','display?page=LIGO_rt');
+		d.add(51,49,'History','display?page=hist_JOBS_LIGO');
+		d.add(52,27,'SDSS','');
+		d.add(53,52,'Real-Time','display?page=SDSS_rt');
+		d.add(54,52,'History','display?page=hist_JOBS_SDSS');
+		d.add(55,-1,'VO IO','');
+		d.add(56,55,'ATLAS','');
+		d.add(57,56,'Real-Time','display?page=ATLAS_io_rt');
+		d.add(58,56,'History','display?page=hist_IO_ATLAS');
+		d.add(59,55,'CMS','');
+		d.add(60,59,'Real-Time','display?page=CMS_io_rt');
+		d.add(61,59,'History','display?page=hist_IO_CMS');
+		d.add(62,55,'BTeV','');
+		d.add(63,62,'Real-Time','display?page=BTeV_io_rt');
+		d.add(64,62,'History','display?page=hist_IO_BTeV');
+		d.add(65,55,'GADU','');
+		d.add(66,65,'Real-Time','display?page=GADU_io_rt');
+		d.add(67,65,'History','display?page=hist_IO_GADU');
+		d.add(68,55,'GRASE','');
+		d.add(69,68,'Real-Time','display?page=GRASE_io_rt');
+		d.add(70,68,'History','display?page=hist_IO_GRASE');
+		d.add(71,55,'GRIDEX','');
+		d.add(72,71,'Real-Time','display?page=GRIDEX_io_rt');
+		d.add(73,71,'History','display?page=hist_IO_GRIDEX');
+		d.add(74,55,'iVDgL','');
+		d.add(75,74,'Real-Time','display?page=iVDgL_io_rt');
+		d.add(76,74,'History','display?page=hist_IO_iVDgL');
+		d.add(77,55,'LIGO','');
+		d.add(78,77,'Real-Time','display?page=LIGO_io_rt');
+		d.add(79,77,'History','display?page=hist_IO_LIGO');
+		d.add(80,55,'SDSS','');
+		d.add(81,80,'Real-Time','display?page=SDSS_io_rt');
+		d.add(82,80,'History','display?page=hist_IO_SDSS');
+		d.add(83,-1,'Site info','info.jsp');
+
+		document.write(d);
+
+		//-->
+	      </script>
+              </td>
+            </tr>
+            <tr>
+              <td align="left" bgcolor="#EDEBEC">&nbsp;</td>
+            </tr>
+        </table></td>
+      </tr>
+    </table></td>
+    <td width="100%" align="left" valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="100%" height="12" bgcolor="#5890C3" class="header1">&nbsp;</td>
+        <td width="26" height="12" align="right" valign="top" bgcolor="#5890C3" class="header1"><table width="26" height="12" border="0" align="right" cellpadding="0" cellspacing="0" bgcolor="#FF9900">
+          <tr>
+            <td width="26">&nbsp;</td>
+          </tr>
+        </table></td>
+      </tr>
+      <tr>
+        <td colspan="2" align="left" valign="top"><table width="100%"  border="0" cellpadding="0" cellspacing="0" background="background2.gif">
+            <tr>
+              <td width="250" align="left" valign="top"><table width="250" border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td width="250" height="20" bgcolor="#FF6600" class="selectedmenutab1">MONALISA REPOSITORY FOR OSG-ITB</td>
+                  </tr>
+                  <tr>
+                    <td>&nbsp;</td>
+                  </tr>
+              </table></td>
+              <td width="100%"><div align="center"><img src="ml_main_logo.gif" width="300" height="87"></div></td>
+              <td width="46" align="right" valign="top"><table width="26" height="37" border="0" cellpadding="0" cellspacing="0" bgcolor="#FF9900">
+                  <tr>
+                    <td width="26">&nbsp;</td>
+                  </tr>
+              </table></td>
+            </tr>
+        </table></td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td width="827" align="left" valign="top" ><br><span class="email style1">MonALISA Repository Information </span><br>
+    <p></p><p><table width="96%" border="0" align="center" cellpadding="0" cellspacing="0">
+              <tr>
+                <td valign="top"><span class="email"><font style="font-face:Verdana,Helvetica"><br>
+                Repository version:</font> </span><span class="dtree"><font style="font-face:Verdana,Helvetica;font-size:14px"><b class="content"><%=display.sRepositoryVersion%></b></font></span><font style="font-face:Verdana,Helvetica;font-size:14px"><span class="email"><span class="style9"><br>
+                    Release date</span>: </span><b class="dtree"><%=display.sRepositoryDate%></b><span class="email"><br>
+                Links:</span><span class="repositorieslist"><br>
+                </span></font><span class="dtree"><font style="font-face:Verdana,Helvetica"><a target=_blank href="http://monalisa.cacr.caltech.edu/">MonALISA home page</a></font></span><font style="font-face:Verdana,Helvetica"><a target=_blank href="http://monalisa.cacr.caltech.edu/"><br>
+                </a></font><font class="dtree" style="font-face:Verdana,Helvetica"><a target=_blank href="mailto:developers@monalisa.cern.ch?Subject=Repository">Email the developers</a></font></td>
+              </tr>
+              <tr>
+                <td><span class="email"><br>
+                Repository status:</span><br><span class="dtree" style="font-weight: bold"><font style="font-face:Verdana,Helvetica">Now :</font></span><span class="dtree"><font style="font-face:Verdana,Helvetica"> <%=(new Date()).toString()%><span style="font-weight: bold"><br>
+                Repository start date:</span> <%= (new Date(display.lRepositoryStarted)).toString()%><strong><br>
+                Repository uptime :</strong> <%= display.getUptime()%><strong><br>
+                Java VM memory info :</strong> <%= Formatare.intFormat(Runtime.getRuntime().freeMemory())%> free / <%= Formatare.intFormat(Runtime.getRuntime().totalMemory())%> total <strong><br>
+                Served pages :</strong> <%= lia.web.utils.ThreadedPage.getRequestCount()%>
+                      <%
+		    double servedPerHour = lia.web.utils.ThreadedPage.getRequestCount();
+		    servedPerHour /= (double) (System.currentTimeMillis() - display.lRepositoryStarted) / (double) 3600000;
+
+		    double base = 1;
+		
+		    if (servedPerHour<100) base *= 10;
+		    if (servedPerHour<10)  base *= 10;
+		    if (servedPerHour<1)   base *= 10;
+		    
+		    servedPerHour = (double) ((long)(servedPerHour*base)) / (double)base;
+		    
+		    String str = ""+servedPerHour;
+				
+		    if (str.indexOf(".") > 0){
+		        while (str.endsWith("0"))
+		            str = str.substring(0, str.length()-1);
+		
+		        if (str.endsWith("."))
+			    str = str.substring(0, str.length()-1);
+		    }
+		    
+		    out.println(" ("+str+" per hour)");
+		%>
+                <strong><br>
+                Data cache:</strong>
+
+                  <%
+                    if (tmw!=null){
+                        out.println("values: "+tmw.getSize()+"/"+tmw.getLimit()+" (max "+tmw.getHardLimit()+"), time frame: ");
+                        long l = tmw.getTotalTime() / 1000;
+
+                        long s = l%60;
+                        long m = (l/60)%60;
+                        long h = l/(60*60);
+
+                        out.println(h+":"+(m<10 ? "0" : "")+m+":"+(s<10 ? "0" : "")+s+", served requests: "+tmw.getServedRequests());
+                    }
+                    else{
+                        out.println("cannot access data cache: "+sError);
+                    }
+                %>
+                </font></span><span class="email"><font style="font-face:Verdana,Helvetica"><br>
+                  WS Queries:</font></span><span class="email"><font style="font-face:Verdana,Helvetica;font-size:14px"></font></span><font style="font-face:Verdana,Helvetica;font-size:14px"><span class="dtree">
+                    <%
+		    try{
+			String sOut= "<br><table border=0 cellspacing=1 cellpadding=0 style=\"font-face:Verdana,Helvetica;font-size:12px\">"+
+				     "<tr><td rowspan=100% width=100>&nbsp;</td><td align=left><b>WS Function</b></td><td align=right><b>Calls</b></td></tr>";
+
+			long total = 0;
+		    
+		        for (int i=0; i<lia.ws.MLWebServiceSoapBindingImpl.vsCounterNames.length; i++){
+			    sOut += "<tr><td align=left>"+lia.ws.MLWebServiceSoapBindingImpl.vsCounterNames[i]+"</td><td align=right>"+lia.ws.MLWebServiceSoapBindingImpl.vsCounterValues[i]+"</td></tr>\n";
+			    
+			    total += lia.ws.MLWebServiceSoapBindingImpl.vsCounterValues[i];
+			}
+			
+			sOut += "<tr><td colspan=2><hr size=1></td></tr>";
+			sOut += "<tr><td align=left><b>Total</b></td><td align=right><b>"+total+"</b></td></tr>";
+			sOut += "</table>";
+
+	    	        if (total==0){
+			    out.println(" No WS query yet on this repository");
+		        }
+			else{
+			    out.println(sOut);
+			}
+		    }
+		    catch (Throwable t){
+			out.println(" error retrieving this info: "+t);
+		    }
+		%>
+                  </span></font><font style="font-face:Verdana,Helvetica;font-size:14px"><span class="email"><br>
+                  
+                  This repository can be accessed via:</span></font><span class="content style13"><strong><font style="font-face:Verdana,Helvetica"><br>
+                  </font></strong></span><span class="dtree"><strong><font style="font-face:Verdana,Helvetica">WEB:</font></strong></span> <span class="dtree"><a target=_blank href="<%=server%>"><%=server%></a></span><span class="content style13"><strong><font style="font-face:Verdana,Helvetica"><br>
+                  </font></strong></span><span class="dtree"><strong><font style="font-face:Verdana,Helvetica">WAP:</font></strong><font style="font-face:Verdana,Helvetica"> <a href="<%=server%>wap/" target=_blank class="content"><%=server%>wap/</a></font></span><font style="font-face:Verdana,Helvetica"><span class="content style13"><strong><br>
+                  </strong></span><span class="dtree"><strong>WebServices:</strong> <a href="<%=server%>axis/" target=_blank class="content"><%=server%>axis/</a></span></font></td>
+              </tr>
+              <tr>
+                <td><p><span class="content"><font style="font-face:Verdana,Helvetica;font-size:14px">                  </font></span></p></td>
+          </tr>
+            </table>
+    </p>      
+      </td>
+  </tr>
+  <tr>
+    <td bgcolor="#006699">&nbsp;</td>
+    <td bgcolor="#FFFFFF">&nbsp;</td>
+    <td colspan="2" bgcolor="#FFFFFF" class="footerderived2"><div align="center">Copyright &copy; Caltech University 2005, All Rights Reserved </div></td>
+    </tr>
+</table>
+</div>
+</body>
+</html>
+
+
+

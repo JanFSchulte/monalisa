@@ -1,0 +1,3 @@
+<%
+    producers.SEDistanceOptimizer.wakeup();
+%>

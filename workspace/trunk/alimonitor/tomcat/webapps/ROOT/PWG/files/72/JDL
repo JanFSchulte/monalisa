@@ -1,0 +1,34 @@
+Executable = "aliroot_new";
+Jobtag={"comment:PbPb, electron (Beauty) jets (17 pt bins, 100 K each) ID #72"};
+
+Packages={"VO_ALICE@AliRoot::v4-16-Rev-01","VO_ALICE@GEANT3::v1-9-6","VO_ALICE@ROOT::v5-21-01-alice","VO_ALICE@APISCONFIG::V2.4"};
+
+TTL = "72000";
+Price = 1;
+
+Validationcommand ="/alice/cern.ch/user/a/aliprod/prod2007/configs_pbpb_hijing/validation.sh";
+
+InputFile= {"LF:/alice/cern.ch/user/a/aliprod/LHC08d15/CheckESD.C",
+"LF:/alice/cern.ch/user/a/aliprod/LHC08d15/Config.C",
+"LF:/alice/cern.ch/user/a/aliprod/LHC08d15/rec.C",
+"LF:/alice/cern.ch/user/a/aliprod/LHC08d15/sim.C",
+"LF:/alice/cern.ch/user/a/aliprod/LHC08d15/simrun.C",
+"LF:/alice/cern.ch/user/a/aliprod/LHC08d15/tag.C"};
+
+OutputArchive={"log_archive:*.log,stdout,stderr@Alice::NIHAM::File","root_archive.zip:*.tag.root,galice.root,geometry.root,Kinematics.root,TrackRefs.root,AliESDs.root,AliESDfriends.root,pyxsec.root@Alice::Subatech::DPM,ALICE::NIHAM::File,ALICE::CERN::CASTOR2"};
+
+InputDataCollection="LF:/alice/cern.ch/user/c/conesa/production/collection/collection$1.xml";
+InputDataListFormat = "xml-single";
+InputDataList = "collection.xml";
+
+OutputDir="/alice/sim/PDC_08b/LHC08d15/$1/#alien_counter_03i#";
+
+JDLVariables={"Packages", "OutputDir"};
+GUIDFILE="guid.txt";
+
+splitarguments="simrun.C --run $1 --event #alien_counter# --process kBeautyppwmiJet --quench 0  --ecms 5500 --trigger 1" ;
+
+Split="se"; 
+SplitMaxInputFileNumber="1"; 
+
+Workdirectorysize={"6000MB"};

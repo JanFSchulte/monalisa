@@ -1,0 +1,81 @@
+#!/bin/bash
+
+PACKAGES="<<:packages:>>"
+
+cd `dirname $0`
+
+mkdir download
+cd download
+
+if wget -q alien.cern.ch/alien-installer -O alien-installer; then
+    chmod a+x alien-installer
+
+    echo "Checking alien version and updating if necessary"
+
+    ./alien-installer -type user -batch &> alien-installer.log
+
+    echo "  done, logs are in download/alien-installer.log"
+else
+    echo "Could not download the alien-installer script, exiting quickly"
+    exit 1
+fi
+
+if ! wget -q "http://alienbuild.cern.ch:8889/tarballs/Packages" -O Packages; then
+    echo "Could not download the Packages file from the build servers, can't work without it, sorry"
+    exit 1
+fi
+
+MYARCH=$HOSTTYPE
+
+if [ -z "$MYARCH" ]; then
+    MYARCH=`uname -m`
+fi
+
+DOWNLOADSCRIPT="$ALIEN_ROOT/torrent_client_$MYARCH/download"
+
+if [ ! -f "$DOWNLOADSCRIPT" ]; then
+    DOWNLOADSCRIPT="$HOME/alien/torrent_client_$MYARCH/download"
+fi
+
+if [ ! -f "$DOWNLOADSCRIPT" ]; then
+    if ! wget -q "http://alitorrent.cern.ch/torrent_client/torrent_client_$MYARCH.tar.bz2" -O torrent_client.tar.bz2; then
+	echo "Could not download the torrent client, exiting"
+	exit 1
+    fi
+    
+    tar -xjf torrent_client.tar.bz2
+
+    DOWNLOADSCRIPT="torrent_client_$MYARCH/download"    
+fi
+
+echo "Using '$DOWNLOADSCRIPT' to download the files"
+
+                
+for PACKAGE in $PACKAGES; do
+    echo "Installing $PACKAGE"
+    
+    FILENAME=`cat Packages | awk '{print $1 " " $5}' | grep "$PACKAGE$" | awk '{print $1}'`
+    
+    FILENAME=`echo "$FILENAME" | sed "s/-i686-/-$MYARCH-/g" | sed "s/-x86_64-/-$MYARCH-/g"`
+
+    $DOWNLOADSCRIPT "http://alitorrent.cern.ch/torrents/$FILENAME.torrent"
+    
+    FILE=${FILENAME%.tar.bz2}
+    FILE=${FILE%.tar.gz}
+    
+    FILE="$FILE/$FILENAME"
+    
+    TARGET="../packages/`echo "$PACKAGE" | sed 's#@#/#g' | sed 's#::#/#g'`"
+    
+    mkdir -p "$TARGET"
+    
+    EXT=${FILENAME##*.}
+    
+    OPTION="z"
+    
+    if [ "$EXT" == "bz2" ]; then
+	OPTION="j"
+    fi
+    
+    tar -C "$TARGET" -x${OPTION}f "$FILE"
+done

@@ -1,0 +1,28 @@
+Executable = "aliroot";
+Jobtag={"MC pp, di-muon cocktail"};
+
+Packages={"VO_ALICE@AliRoot::v4-07-Rev-01",
+          "VO_ALICE@GEANT3::v1-8-1",
+          "VO_ALICE@ROOT::v5-16-00",
+          "VO_ALICE@APISCONFIG::V2.4"};
+
+TTL = "72000";
+
+Requirements =  member(other.GridPartitions,"PDC07_2");
+
+Validationcommand ="/alice/cern.ch/user/a/aliprod/PDC_07/LHC07g/validation.sh";
+
+InputFile= {[:INPUTFILES:]};
+            
+OutputArchive={"log_archive:*.tag.root,stdout,stderr,*.log@Alice::NIHAM::File","root_archive.zip:galice.root,geometry.root,Kinematics.root,TrackRefs.root,AliESDs.root,AliAOD.root@Alice::CERN::CASTOR2"};
+
+
+OutputDir="[:OUTPUTDIR:]/$1/#alien_counter_03i#";
+
+JDLVariables={"Packages", "OutputDir"};
+GUIDFILE="guid.txt";
+
+splitarguments="simrun.C --run $1 --event #alien_counter#";
+split="production:1-100";
+
+Workdirectorysize={"4000MB"};

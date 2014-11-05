@@ -1,0 +1,45 @@
+Executable = "/alice/bin/aliroot_new";
+Jobtag =
+   {
+     "Hijing:PbPb, Test (anti)hypernuclei flat pt distribution #139328"
+   };
+
+Packages=
+   {
+      "VO_ALICE@AliRoot::v5-02-Rev-05",
+      "VO_ALICE@GEANT3::v1-14-1",
+      "VO_ALICE@ROOT::v5-33-02a",
+      "VO_ALICE@APISCONFIG::V1.1x"
+   };
+
+TTL = "72000";
+
+Requirements = member(other.GridPartitions,"PDC08_2");
+Validationcommand = "/alice/cern.ch/user/a/aliprod/prod2007/configs_pbpb_hijing/validation.sh"; 
+
+InputFile =
+   {
+      "LF:/alice/cern.ch/user/l/lramona/g3test/CheckESD.C",
+      "LF:/alice/cern.ch/user/l/lramona/g3test/Config.C",
+      "LF:/alice/cern.ch/user/l/lramona/g3test/rec.C",
+      "LF:/alice/cern.ch/user/l/lramona/g3test/sim.C",
+      "LF:/alice/cern.ch/user/l/lramona/g3test/simrun.C",
+      "LF:/alice/cern.ch/user/l/lramona/g3test/tag.C"
+   };
+
+OutputArchive =
+   {
+      "log_archive:stderr,stdout,sim.log,rec.log,tag.log@disk=1",
+      "root_archive.zip:galice.root,Kinematics.root,TrackRefs.root,AliESDs.root,AliESDfriends.root,Run*.root@disk=3"
+   };
+
+OutputDir="/alice/cern.ch/user/l/lramona/g3test/139328/#alien_counter_03i#";
+
+JDLVariables={"Packages", "OutputDir"};
+GUIDFILE="guid.txt";
+
+#
+
+splitarguments="simrun.C --run 139328 --event #alien_counter# --process kHijing2000 --energy 2760 --bmin 0. --bmax 30.";
+split = "production:1-30"; 
+Workdirectorysize = { "10000MB" }; 

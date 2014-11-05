@@ -1,0 +1,86 @@
+<%@ page import="lazyj.*,alien.catalogue.*,alien.transfers.*,alimonitor.*,java.util.*,java.io.*,lia.Monitor.Store.Fast.*,java.security.cert.*,auth.*" %><%!
+    
+%><%
+    response.setHeader("Connection", "keep-alive");
+
+    lia.web.servlets.web.Utils.logRequest("START /trains/", 0, request);
+
+    final RequestWrapper rw = new RequestWrapper(request);
+    
+    RequestWrapper.setNotCache(response);
+
+    final ServletContext sc = getServletContext();
+    final ByteArrayOutputStream baos = new ByteArrayOutputStream(50000);
+            
+    final Page pMaster = new Page(baos, "WEB-INF/res/masterpage/masterpage.res");
+    pMaster.comment("com_alternates", false);
+    pMaster.modify("comment_refresh", "//");
+
+    final Page p = new Page("trains/index.res", false);
+    final Page pEl = new Page("trains/index_el.res", false);
+
+    final AlicePrincipal principal = Users.get(request);
+    
+    pMaster.modify("title", "Analysis trains");
+
+    p.modify("account", principal.getName());
+
+    // ------------------------ content
+    
+/*
+    String q = "SELECT "+
+	"train_def.train_id, train_def.train_name, train_def.wg_no, train_def.description, max(id) as max_id, "+
+	"exists (select 1 from train_wagon where train_id=train_def.train_id and username='"+Format.escSQL(principal.getName())+"') as member "+
+	"FROM train_def NATURAL LEFT OUTER JOIN train_run ";
+	
+    q += " GROUP BY 1,2,3,4 ORDER BY wg_no asc, train_name asc;";
+*/    
+
+    String q = "SELECT "+
+	"train_def.train_id, train_def.train_name, train_def.wg_no, train_def.description, "+
+	"exists (select 1 from train_wagon where train_id=train_def.train_id and username='"+Format.escSQL(principal.getName())+"') as member "+
+	"FROM train_def ";
+	
+    q += " GROUP BY 1,2,3,4 ORDER BY wg_no asc, train_name asc;";
+
+    DB db = new DB(q);
+
+    DB db2 = new DB();
+    
+    while (db.moveNext()){
+	pEl.fillFromDB(db);
+	
+	if (db.getb("member")){
+	    pEl.modify("member_img", "<img src=/img/trend_ok.png>");
+	}
+	
+	db2.query("select username from train_operator_permission where train_id="+db.geti("train_id")+" order by 1;");
+	
+	boolean first = true;
+	
+	while (db2.moveNext()){
+	    if (!first)
+		pEl.append("operators", ", ");
+	    else
+		first = false;
+		
+	    pEl.append("operators", db2.gets(1));
+	}
+
+	db2.query("select to_char(to_timestamp(max(run_start)), 'DD Mon YY') as last_run from train_run where train_id='"+db.geti("train_id")+"'");
+	pEl.append("last_run", db2.gets(1));
+	
+	p.append(pEl);
+    }
+
+    // ------------------------ final bits and pieces
+
+    pMaster.append(p);
+    
+    pMaster.write();
+    
+    String s = new String(baos.toByteArray());
+    out.println(s);
+
+    lia.web.servlets.web.Utils.logRequest("/trains/", baos.size(), request);
+%>

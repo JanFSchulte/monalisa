@@ -1,0 +1,34 @@
+Executable = "aliroot";
+Jobtag={"comment:gamma triggered pp, PYTHIA"
+        };
+
+Packages={"VO_ALICE@AliRoot::v4-06-Rev-04",
+          "VO_ALICE@GEANT3::v1-8-1","VO_ALICE@ROOT::v5-16-00","VO_ALICE@APISCONFIG::V2.4"};
+
+TTL = "72000";
+
+Requirements =  member(other.GridPartitions,"PDC07_2");
+
+Validationcommand ="/alice/cern.ch/user/s/schutz/prod/configs_pp_ys/validation.sh";
+
+InputFile= {"LF:/alice/cern.ch/user/s/schutz/prod/configs_pp_ys/Config.C",
+            "LF:/alice/cern.ch/user/s/schutz/prod/configs_pp_ys/simrun.C",
+            "LF:/alice/cern.ch/user/s/schutz/prod/configs_pp_ys/sim.C",
+            "LF:/alice/cern.ch/user/s/schutz/prod/configs_pp_ys/rec.C",
+            "LF:/alice/cern.ch/user/s/schutz/prod/configs_pp_ys/tag.C", 
+            "LF:/alice/cern.ch/user/s/schutz/prod/configs_pp_ys/CheckESD.C", 
+			"LF:/alice/cern.ch/user/s/schutz/prod/configs_pp_ys/cali.tgz"};
+
+OutputArchive={"log_archive:stdout,stderr,*.log@Alice::NIHAM::File","root_archive.zip:galice.root,geometry.root,Kinematics.root,TrackRefs.root,AliESDs.root@Alice::CERN::castor2"};
+OutputFile={"Run*.root@Alice::NIHAM::File"};
+OutputFile={"raw.root@Alice::CERN::Castor2"};
+
+OutputDir="/alice/cern.ch/user/s/schutz/prod/output/pp/$1/#alien_counter_03i#";
+
+JDLVariables={"Packages", "OutputDir"};
+GUIDFILE="guid.txt";
+
+splitarguments="simrun.C --run $1 --event #alien_counter# --process kGammaJetEMCAL --minhard 5 --maxhard 10 --minpt 0.0" ;
+split="production:1-100";
+
+Workdirectorysize={"4000MB"};

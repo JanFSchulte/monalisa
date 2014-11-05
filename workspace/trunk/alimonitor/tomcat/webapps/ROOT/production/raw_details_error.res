@@ -1,0 +1,1 @@
+<a href="raw_errors.jsp?runfilter=<<:run db enc:>>&onlyerr=1&return=<<:returnurl enc:>>" onMouseOver="overlib('<<:errorv_count db:>> error logs', CAPTION, 'Click for details');" onMouseOut="nd()" onClick="nd(); return true;"><img src="/img/trend_alert.png" border="0"></a>

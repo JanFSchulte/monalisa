@@ -1,0 +1,30 @@
+Executable = "aliroot_new";
+Jobtag={"comment:PHOS,  neutral mesons with AliGenBox"};
+
+Packages={"VO_ALICE@AliRoot::v4-17-Rev-23","VO_ALICE@GEANT3::v1-11-7","VO_ALICE@ROOT::v5-25-04-1","VO_ALICE@APISCONFIG::V1.1x"};
+
+TTL = "72000";
+
+Requirements = member(other.GridPartitions,"fastmc");
+
+Validationcommand ="/alice/cern.ch/user/a/aliprod/prod2007/configs_pbpb_hijing/validation.sh";
+
+InputFile = {"LF:/alice/cern.ch/user/k/kharlov/production/pi0_2gamma/PHOS/Config.C",
+     	     "LF:/alice/cern.ch/user/k/kharlov/production/pi0_2gamma/PHOS/simrun.C",
+     	     "LF:/alice/cern.ch/user/k/kharlov/production/pi0_2gamma/PHOS/sim.C",
+    	     "LF:/alice/cern.ch/user/k/kharlov/production/pi0_2gamma/PHOS/rec.C",
+     	     "LF:/alice/cern.ch/user/k/kharlov/production/pi0_2gamma/PHOS/tag.C",
+     	     "LF:/alice/cern.ch/user/k/kharlov/production/pi0_2gamma/PHOS/CheckESD.C"};
+
+OutputArchive = {"log_archive.zip:stdout,stderr,*.log@ALICE::IHEP::SE","root_archive.zip:galice.root,geometry.root,Kinematics.root,TrackRefs.root,AliESDs.root,check.root,PHOS.QA.*.root,Run*.root@ALICE::IHEP::SE,ALICE::JINR::SE"};
+
+OutputDir="/alice/cern.ch/user/k/kharlov/production/pi0_2gamma/PHOS/$1/#alien_counter_03i#";
+
+JDLVariables={"Packages", "OutputDir"};
+GUIDFILE="guid.txt";
+
+splitarguments = "simrun.C --run $1 --event #alien_counter#";
+split="production:1-10";
+
+Workdirectorysize={"5000MB"};
+Email="Yuri.Kharlov@cern.ch";

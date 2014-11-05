@@ -1,0 +1,106 @@
+<script type="text/javascript">
+<!--
+
+function addEvent(){
+    var ni = document.getElementById('myDiv');
+    var numi = document.getElementById('theValue');
+    var num = (document.getElementById("theValue").value -1)+ 2;
+    numi.value = num;
+    var divIdName = "my"+num+"Div";
+
+    var newdiv = document.createElement('div');
+    newdiv.setAttribute("id",divIdName);
+    newdiv.innerHTML = "Predicate "+num+": <a href=\"javascript:void(0);\" onclick=\"removeEvent('"+divIdName+"', "+num+")\" class=\"link\">Remove</a>";
+        
+    var newinput = document.createElement('input');
+    
+    newinput.setAttribute("id", "predicate"+num);
+    newinput.setAttribute("type", "text");
+    newinput.setAttribute("name", "predicate"+num);
+    newinput.setAttribute("class", "input_submit");
+    newinput.setAttribute("size", "80");
+    newinput.setAttribute("value", "");
+    
+    var finalDiv = document.getElementById("finalDiv");
+
+    
+    ni.insertBefore(newdiv, finalDiv);
+    ni.insertBefore(newinput, finalDiv);
+
+//       ni.appendChild(newinput, finalDiv);
+
+    document.step3.elements["predicate"+num] = newinput;
+}
+
+function removeEvent(divNum, num){
+    var d = document.getElementById('myDiv');
+    var olddiv = document.getElementById(divNum);
+    
+    var oldinput = document.getElementById("predicate"+num);
+
+    oldinput.parentNode.removeChild(oldinput);
+
+    d.removeChild(olddiv);
+}
+
+function showVariables(){
+    var elementCiudat = document.forms["step3"].elements["predicate1"];
+    alert(elementCiudat.value);
+    alert(elementCiudat.name);
+//    alert(document.getElementById('myDiv').innerHTML)
+//    alert(document.getElementById("predicate1").value);
+    return false;
+}
+
+//-->
+</script>
+<table cellspacing="0" cellpadding="0" border="0" align="left">
+<tr><td><<:info:>></td></tr>
+<tr><td><<:charts:>></td></tr>
+<tr><td><<:series:>></td></tr>
+<tr><td>
+<table cellpadding="7" cellspacing="1" border="0" align="left" class="text">
+    <form name="step3" action="/correlations/correlations_action.jsp" method="POST">
+    <input type="hidden" name="step" value="3">
+    <input type="hidden" name="prop" value="<<:prop:>>">
+    <input type="hidden" name="chart" value="<<:chart:>>">
+    <input type="hidden" name="serie" value="<<:title:>>">
+    <tr>
+	<td colspan="2" align="left"><h2><<:action:>> serie for "<<:title_chart:>>"</h2></td>
+    </tr>
+    <tr>
+	<td colspan="2" align="left"><font class="grey">Fields marked with an asterisk <font class="error">*</font> are required</font></td>
+    </tr>
+    <tr>
+	<td class="correlations" align="right">Title:</td>
+	<td class="correlations" nowrap><input type="text" name="alias" value="<<:alias:>>" class="input_text" size="80"><font class="error">*</font></td>
+    </tr>
+    <tr>
+	<td class="correlations" align="right" valign="top">Predicates</td>
+	<td valign="top" class="correlations" nowrap>
+	    <table cellpadding="2" cellspacing="0" border="0" align="left" class="text">
+		<tr>
+		    <td align="right" nowrap><a href="javascript: void(0);" class="link" onclick="addEvent();" title="Add another predicate">Add another predicate</a><td>
+		</tr>
+		<tr>
+		    <td>
+    			<input type="hidden" value="0" id="theValue" />
+			<div id="myDiv"> 
+			    <div id="finalDiv"></div>
+			</div>
+		    </td>
+		</tr>
+	    </table>
+	</td>
+    </tr>
+    <tr>
+	<td class="correlations" align="right"></td>
+	<td class="correlations">
+	    <input type="submit" value="Submit" class="input_submit">
+
+	</td>
+    </tr>
+    </form>
+</table>
+	    <a href="javascript: void(0)" onclick="showVariables(); return false;">test</a>
+</td></tr></table>

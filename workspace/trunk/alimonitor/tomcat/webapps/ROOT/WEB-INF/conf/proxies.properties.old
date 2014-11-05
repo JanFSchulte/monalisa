@@ -1,0 +1,74 @@
+page=stats
+
+pages=1
+
+#pagetitle=Status of the proxies
+option0.numbers=true
+
+pivot0_1=Proxies
+
+option0.all_data=false
+
+title0=Service
+pivot0_2=$Qselect name from alien_sites order by lower(name) asc;
+
+pivot0_3=$2/AliEnTestsStatus/alien proxy/Status,\
+         $2/AliEnTestsStatus/alien proxy/timeleft,\
+         $2/LCGServicesStatus/Delegated proxy/Status,\
+         $2/LCGServicesStatus/Delegated proxy/timeleft,\
+         $2/LCGServicesStatus/Proxy Server/Status,\
+         $2/LCGServicesStatus/Proxy Server/timeleft,\
+         $2/LCGServicesStatus/Proxy of the machine/Status,\
+         $2/LCGServicesStatus/Proxy of the machine/timeleft
+         
+descr0=Status,\
+       Time left,\
+       Status,\
+       Time left,\
+       Status,\
+       Time left,\
+       Status,\
+       Time left
+       
+func0=last status;ns;warning;redifnodata,\
+      last time;ns,\
+      last status;ns;warning,\
+      last time;ns,\
+      last status;ns;warning,\
+      last time;ns,\
+      last status;ns;warning,\
+      last time;ns
+
+groups0_2=0 2 AliEn proxy,\
+        2 2 Delegated proxy,\
+        4 2 Proxy Server,\
+        6 2 Proxy of the machine
+        
+groups0=0 2 AliEn Tests,\
+          2 6 LCG Tests
+
+minmax0=1 FFAA55 FFFFFF,\
+        3 FFAA55 FFFFFF,\
+        5 FFAA55 FFFFFF,\
+        7 FFAA55 FFFFFF,\
+        9 FFAA55 FFFFFF
+
+absmin0_1=18000
+absmax0_1=36000
+
+absmin0_3=18000
+absmax0_3=36000
+
+absmin0_5=18000
+absmax0_5=36000
+
+absmin0_7=18000
+absmax0_7=36000
+
+absmin0_9=18000
+absmax0_9=36000
+
+
+total0=
+
+avg0=

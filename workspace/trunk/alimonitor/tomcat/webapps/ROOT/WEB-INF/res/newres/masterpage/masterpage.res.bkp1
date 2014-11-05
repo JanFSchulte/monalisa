@@ -1,0 +1,982 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>OSG-ITB Repository Page</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link href="cooltree.css" rel="stylesheet" type="text/css">
+<link href="dtree.css" rel="stylesheet" type="text/css" />
+<link href="dtree1.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="/overlib/overlib.js"></script>
+<script type="text/javascript" src="dtree.js"></script>
+<script type="text/javascript" src="js/range.js"></script>
+<script type="text/javascript" src="js/timer.js"></script>
+<script type="text/javascript" src="js/slider.js"></script>
+<link type="text/css" rel="StyleSheet" href="css/bluecurve/bluecurve.css" />
+	
+	<SCRIPT language="text/javascript" type="text/JavaScript">
+	var IMG_WIDTH=800;
+	var IMG_HEIGHT=IMG_WIDTH/2;
+	var d3d=0;
+	var a3d=90;
+	var dx3d=.1;
+	
+	var posX=-1, posY=-1, lastX, lastY, theimage;
+	//theimage = "lupa.gif" //the 2nd image to be displayed
+	//Browser checking and syntax variables
+	var docLayers = (document.layers) ? true:false;
+	var docId = (document.getElementById) ? true:false;
+	var docAll = (document.all) ? true:false;
+	var docbitK = (docLayers) ? "document.layers['":(docId) ? "document.getElementById('":(docAll) ? "document.all['":"document."
+	var docbitendK = (docLayers) ? "']":(docId) ? "')":(docAll) ? "']":""
+	var stylebitK = (docLayers) ? "":".style"
+	var showbitK = (docLayers) ? "show":"visible"
+	var hidebitK = (docLayers) ? "hide":"hidden"
+	var ns6=document.getElementById&&!document.all;
+	var sit_home="http://gocmon.uits.iupui.edu:8888/";
+	//Variables used in script
+	
+	var MAX_Y=8;
+	var MAX_X=16;
+	var width=MAX_X*2;
+	var zoom_factor=1;//poate varia intre 0.01 si 1
+	var height=width/2;
+	var x=-16;
+	var y=8;
+	var image2;
+	var pred=3;
+	
+	var click_action=1;//action for mouse left click on image
+	
+	function positionID(x,y,id) {
+		eval(docbitK + id + docbitendK + stylebitK + ".left = " + x);
+		eval(docbitK + id + docbitendK + stylebitK + ".top = " + y);
+	}
+	function showID(id) {
+		eval(docbitK + id + docbitendK + stylebitK + ".visibility = '" + showbitK + "'");
+	}
+	function hideID(id) {
+		eval(docbitK + id + docbitendK + stylebitK + ".visibility = '" + hidebitK + "'");
+	}	
+
+
+
+	function dimensiune_changed()
+	{
+		dimensiune_obj = document.getElementById("dimensiune");
+		valoare=dimensiune_obj.options[dimensiune_obj.selectedIndex].value;
+		new_w=0;
+		i=0;
+		for ( ; i< valoare.length; i++) {
+			car = valoare.charAt(i);
+			if  ( car>='0' && car <= '9' ) {
+				new_w=new_w*10+(car-'0');
+			} else if ( car=='x' ) {
+				i++;//pass over 'x'
+				break;
+			}
+			//else ignore
+		};
+		new_h=0;
+		for ( ; i< valoare.length; i++) {
+			car = valoare.charAt(i);
+			if  ( car>='0' && car <= '9' )
+				new_h=new_h*10+(car-'0');
+			//else ignore
+		};
+		if ( new_w>0 && new_h>0 ) {
+			IMG_WIDTH=new_w;
+			IMG_HEIGHT=IMG_WIDTH*.5;
+			document.getElementById("Map2D").width=new_w;
+			document.getElementById("Map2D").height=new_w*.5;
+			zoom(0);
+		}
+	}
+	
+	function findPosX(obj)
+	{
+	var curleft = 0;
+	if (obj.offsetParent)
+	{
+		while (obj.offsetParent)
+		{
+		curleft += obj.offsetLeft
+		obj = obj.offsetParent;
+		}
+	}
+	else if (obj.x)
+		curleft += obj.x;
+	return curleft;
+	}
+	function findPosY(obj)
+	{
+	var curtop = 0;
+	if (obj.offsetParent)
+	{
+		while (obj.offsetParent)
+		{
+		curtop += obj.offsetTop
+		obj = obj.offsetParent;
+		}
+	}
+	else if (obj.y)
+		curtop += obj.y;
+	return curtop;
+	}
+
+
+	function position_zoom(zoomdir,lastx, lasty, imagex, imagey)
+	{
+		//lastX=lastx;
+		//lastY=lasty;
+		posX=lastx;
+		posY=lasty;
+		click_action=zoomdir;
+		image = document.getElementById("Map2D");
+//		text="<br>x ant="+x+" and y ant="+y;
+		if ( click_action==1 || click_action==-1 ) {
+		    imageX = imagex;//findPosX(image);
+		    imageY = imagey;//findPosY(image);
+			if ( d3d>0 ) {
+				//clicked on 3d map, so change coordinates
+				//gresit!!!...
+				ctg=1/Math.tan(a3d*Math.PI/180);
+				extraX = (lasty-0.66*IMG_HEIGHT)*ctg;
+				lastx = (lastx+extraX)/(IMG_WIDTH+2*extraX)*IMG_WIDTH;
+				while ( lastx < imageX )
+    				    lastx+=IMG_WIDTH;
+				while ( lastx > imageX+IMG_WIDTH )
+    				    lastx-=IMG_WIDTH;
+			}
+			//document.getElementById("debug").innerHTML="x="+x+" y="+y+" w="+width+" h="+height+" lastX="+lastx+" lastY="+lasty+" imageX="+imageX+"imageY="+imageY;
+			x += (lastx - imageX)*width/IMG_WIDTH - width*.5;
+			y += -(lasty - imageY)*height/IMG_HEIGHT + height*.5;
+    		};
+		zoom(click_action);
+	}
+	function zoom(dir)
+	{
+		dir=(dir?(dir<0?-1:1):0);
+		//limit zoom out
+		if ( width*(dir?(dir<0?(1+zoom_factor):1/(1+zoom_factor)):1)>2*MAX_X && dir<0 )
+			return;
+		//limit zoom in
+		if (width<MAX_X/16 && dir >0)
+			return;
+		//text+="<br>width="+width+" and height="+height;
+		//text+="<br>x="+x+" and y="+y;
+		//compute new widhts
+		ww = width*(dir?(dir<0?(1+zoom_factor):1/(1+zoom_factor)):1);
+		hh = height*(dir?(dir<0?(1+zoom_factor):1/(1+zoom_factor)):1);
+		//text+="<br>new width="+ww+" and new height="+hh;
+		//recompute new position
+		x+=(width-ww)*.5;
+		y+=(hh-height)*.5;
+		//text+="<br>new x="+x+" and new y="+y;
+		//set new widths
+		width=ww;
+		height=hh;
+		
+		//height checking to limit map
+		if ( y > MAX_Y )
+			y = MAX_Y;
+		if ( y < -MAX_Y+height )
+			y = -MAX_Y+height;
+		//text+="<br>new y after correction="+y;
+		//document.getElementById("mesaje").innerHTML=text;
+		setImageForLoad();
+		//document.getElementById("Map2D").src="http://wn1.rogrid.pub.ro:8080/Map2D?page=wmap&w="+width+"&h="+height+"&x="+x+"&y="+y+"&d3d="+(d3d+0)+"&a3d="+a3d+"&dx3d="+dx3d;
+	}
+	function setImageForLoad()
+	{
+		hideID("div_tools");
+		showID("div_load");
+		
+		document.getElementById("Map2D").src="http://gocmon.uits.iupui.edu:8888/FarmMap?page=wmap1&w="+width+"&h="+height+"&x="+x+"&y="+y+"&d3d="+(d3d+0)+"&a3d="+a3d+"&dx3d="+dx3d+"&_W="+IMG_WIDTH+"&p="+pred;
+		hideID("div_load");
+		showID("div_tools");
+		//checkLoad();
+	}
+	
+	function move(dirx, diry)
+	{
+		//miscarea se face cu un sfert din poza pe directia de miscare
+		dirx=(dirx!=0?(dirx<0?-1:1):0);
+		diry=(diry!=0?(diry<0?-1:1):0);
+		//text="";
+		//text+="<br>move before x="+x+" and y="+y;
+		x+=dirx*width*zoom_factor/4;
+		y+=diry*height*zoom_factor/4;
+		//text+="<br>move after x="+x+" and y="+y;
+		//height checking to limit map
+		if ( y > MAX_Y )
+			y = MAX_Y;
+		if ( y < -MAX_Y+height )
+			y = -MAX_Y+height;
+		//text+="<br>move after2 x="+x+" and y="+y;
+		//document.getElementById("mesaje").innerHTML=text;
+		setImageForLoad();
+		
+	}
+	function rotate(dir)
+	{
+		step=10;
+		if ( dir>0 ) {
+			if ( 90-a3d>=step )
+				a3d+=step;
+			else {
+				a3d=90;
+				d3d=0;
+			}
+		} else if ( dir<0 ) {
+			if ( 90-a3d<6*step ) {
+				d3d=1;
+				a3d-=step;
+			};
+		};
+		document.getElementById("angle3d").value=a3d;
+		zoom(0);
+	}
+	
+	function checkLoad()
+	{
+		image = document.getElementById("Map2D");
+		if ( image.width==IMG_WIDTH ) {
+			//image.src=image2.src;
+			hideID("div_load");
+			showID("div_tools");
+			return;
+		};
+		setTimeout("checkLoad();",200);
+	}
+	function startUp()
+	{
+		zoom(0);
+		hideID("load_legend");
+		hideID("total_jobs_legend");
+		//capturebegin();
+	}
+
+	function toggleBox(szDivID, iState) // 1 visible, 0 hidden
+	{
+    		if(document.layers)	   //NN4+
+    		{
+       		document.layers[szDivID].visibility = iState ? "show" : "hide";
+    		}
+    		else if(document.getElementById)	  //gecko(NN6) + IE 5+
+    		{
+        	var obj = document.getElementById(szDivID);
+        	obj.style.visibility = iState ? "visible" : "hidden";
+    		}
+    		else if(document.all)	// IE 4
+    		{
+        	document.all[szDivID].style.visibility = iState ? "visible" : "hidden";
+    		}
+	}
+
+
+	function changeWidth()
+	{
+		document.getElementById('test').width=0.96*screen.width;
+	}
+	
+	function switchToAlternate(page){
+    document.form1.page.value=page;
+    document.form1.submit();
+}
+	    
+
+
+
+function switchToAlternate(page){
+    document.form1.page.value=page;
+    document.form1.submit();
+}
+	    
+<<:comment_refresh:>>window.setTimeout("modify()", <<:refresh_time:>>*1000);
+	    
+ 
+function reverse(id){
+    var ch = document.getElementById(id);
+    
+    if (ch.checked) ch.checked=false;
+    else ch.checked=true;
+}
+
+function checkall(){
+    var fields = document.form1.plot_series;
+    for (i=0; i<fields.length; i++)
+        fields[i].checked=true;
+}
+	    
+function uncheckall(){
+    var fields = document.form1.plot_series;
+    for (i=0; i<fields.length; i++)
+	fields[i].checked=false;
+}
+function modify(){
+    document.form1.submit();
+}
+
+
+</script>
+
+</head>
+
+<body onload="changeWidth(); startUp();" topmargin="0">
+<div id="overDiv" style="position:absolute; visibility:hidden; z-index:1000;"></div>
+<div align="center">
+<table border="0" id="test" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td width="1" rowspan="2" bgcolor="#006699">&nbsp;</td>
+    <td width="1" rowspan="2" bgcolor="#FFFFFF">&nbsp;</td>
+    <td width="153" rowspan="2" align="left" valign="top" bgcolor="#EDEBEC"><table width="153" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="153" align="left" valign="top"><table width="153" height="49" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+              <td width="1" rowspan="3" bgcolor="#EDEBEC">&nbsp;</td>
+              <td rowspan="3" bgcolor="#EDEBEC">&nbsp;</td>
+              <td width="7" rowspan="3" bgcolor="#5890C3" class="header1">&nbsp;</td>
+              <td width="53" bgcolor="#5890C3" class="header1">&nbsp;</td>
+            </tr>
+            <tr>
+              <td height="20" class="selectedmenutab2" bgcolor="#CCCCCC">&nbsp;</td>
+            </tr>
+            <tr>
+              <td height="16" bgcolor="#CCCCCC">&nbsp;</td>
+            </tr>
+        </table></td>
+      </tr>
+      <tr>
+        <td width="153" align="left" valign="top" bgcolor="#EDEBEC"><table width="153" height="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#EDEBEC">
+            <tr>
+              <td width="185" height="29" class="banner3"><img src="bullet.gif" width="6" height="6"> MonALISA</td>
+            </tr>
+            <tr>
+              <td height="72" align="left" valign="center" bgcolor="#EDEBEC" class="dtree1"><div align="center"> Click on the button below to start the MonALISA Client </div>
+                  <div align="center"><br>
+                      <input type="submit" name="Submit" value="Client" class="clientbutton"
+		      onClick="JavaScript:window.location='http://monalisa.cacr.caltech.edu/newc/MonaLisa.jnlp'">
+                </div></td>
+            </tr>
+            <tr><!--
+              <td height="15" align="left" valign="top" bgcolor="#006699" class="banner2">
+                <div align="center">last update : 2005.03.14 </div></td>
+                --> 
+	   </tr>
+            <tr>
+              <td height="30" align="left" valign="center" bgcolor="#EDEBEC" class="dtree"><a href="admin.jsp"><div align="center" class="style1"><u>ABPing configuration </u></div></a></td>
+            </tr>
+            <tr>
+              <td height="29" align="left" class="banner3"><img src="bullet.gif" width="6" height="6"> OSG-ITB </td>
+            </tr>
+            <tr>
+              <td width="185" height="0" align="left" class="dtree" bgcolor="#EDEBEC">
+                
+		<!--
+		d.add(0,-1,'Statistics','stats?page=stats2');
+		d.add(1,-1,'Global view','display?page=osg');
+		d.add(2,-1,'OSG-ITB Map','index.html');
+		d.add(3,-1,'Jobs status','display?page=globalview');
+		d.add(4,-1,'Farms status','stats?page=summary');
+		d.add(5,-1,'Masters','');
+		d.add(6,5,'Load','');
+		d.add(7,6,'Real-Time','display?page=rt_link2');
+		d.add(8,6,'History','display?page=hist_link2');
+		d.add(9,5,'Traffic','display?page=eth');
+		d.add(10,9,'eth0','');
+		d.add(11,10,'Real-Time','display?page=rt_link5');
+		d.add(12,10,'History','display?page=hist_link5_com');
+		d.add(14,9,'eth1','');
+		d.add(15,14,'Real-Time','display?page=rt_link6');
+		d.add(16,14,'History','display?page=hist_link6_com');
+		d.add(17,-1,'Farms','');
+		d.add(18,17,'CPUs','');
+		d.add(19,18,'Real-Time','display?page=cpu_rt');
+		d.add(20,18,'History','display?page=cpu_hist');
+		d.add(21,17,'Usage','');
+		d.add(22,21,'Real-Time','display?page=rt_link1');
+		d.add(23,21,'History','display?page=hist_usage');
+		d.add(24,17,'IO traffic','');
+		d.add(25,24,'Real-Time','display?page=rt_link3');
+		d.add(26,24,'History','display?page=hist_io');
+		d.add(27,-1,'VO JOBS','display?page=jobs_totals');
+		d.add(28,27,'ATLAS','');
+		d.add(29,28,'Real-Time','display?page=ATLAS_rt');
+		d.add(30,28,'History','display?page=hist_JOBS_ATLAS');
+		d.add(31,27,'CMS','');
+		d.add(32,31,'Real-Time','display?page=CMS_rt');
+		d.add(33,31,'History','display?page=hist_JOBS_CMS');
+		d.add(34,27,'BTeV','');
+		d.add(35,34,'Real-Time','display?page=BTeV_rt');
+		d.add(36,34,'History','display?page=hist_JOBS_BTeV');
+		d.add(37,27,'GADU','');
+		d.add(38,37,'Real-Time','display?page=GADU_rt');
+		d.add(39,37,'History','display?page=hist_JOBS_GADU');
+		d.add(40,27,'GRASE','');
+		d.add(41,40,'Real-Time','display?page=GRASE_rt');
+		d.add(42,40,'History','display?page=hist_JOBS_GRASE');
+		d.add(43,27,'GRIDEX','');
+		d.add(44,43,'Real-Time','display?page=GRIDEX_rt');
+		d.add(45,43,'History','display?page=hist_JOBS_GRIDEX');
+		d.add(46,27,'iVDgL','');
+		d.add(47,46,'Real-Time','display?page=iVDgL_rt');
+		d.add(48,46,'History','display?page=hist_JOBS_iVDgL');
+		d.add(49,27,'LIGO','');
+		d.add(50,49,'Real-Time','display?page=LIGO_rt');
+		d.add(51,49,'History','display?page=hist_JOBS_LIGO');
+		d.add(52,27,'SDSS','');
+		d.add(53,52,'Real-Time','display?page=SDSS_rt');
+		d.add(54,52,'History','display?page=hist_JOBS_SDSS');
+		d.add(55,-1,'VO IO','');
+		d.add(56,55,'ATLAS','');
+		d.add(57,56,'Real-Time','display?page=ATLAS_io_rt');
+		d.add(58,56,'History','display?page=hist_IO_ATLAS');
+		d.add(59,55,'CMS','');
+		d.add(60,59,'Real-Time','display?page=CMS_io_rt');
+		d.add(61,59,'History','display?page=hist_IO_CMS');
+		d.add(62,55,'BTeV','');
+		d.add(63,62,'Real-Time','display?page=BTeV_io_rt');
+		d.add(64,62,'History','display?page=hist_IO_BTeV');
+		d.add(65,55,'GADU','');
+		d.add(66,65,'Real-Time','display?page=GADU_io_rt');
+		d.add(67,65,'History','display?page=hist_IO_GADU');
+		d.add(68,55,'GRASE','');
+		d.add(69,68,'Real-Time','display?page=GRASE_io_rt');
+		d.add(70,68,'History','display?page=hist_IO_GRASE');
+		d.add(71,55,'GRIDEX','');
+		d.add(72,71,'Real-Time','display?page=GRIDEX_io_rt');
+		d.add(73,71,'History','display?page=hist_IO_GRIDEX');
+		d.add(74,55,'iVDgL','');
+		d.add(75,74,'Real-Time','display?page=iVDgL_io_rt');
+		d.add(76,74,'History','display?page=hist_IO_iVDgL');
+		d.add(77,55,'LIGO','');
+		d.add(78,77,'Real-Time','display?page=LIGO_io_rt');
+		d.add(79,77,'History','display?page=hist_IO_LIGO');
+		d.add(80,55,'SDSS','');
+		d.add(81,80,'Real-Time','display?page=SDSS_io_rt');
+		d.add(82,80,'History','display?page=hist_IO_SDSS');
+		d.add(83,-1,'Site info','info.jsp');
+		
+		d.add(84,27,'CDF','');
+		d.add(85,84,'Real-Time','display?page=CDF_rt');
+		d.add(86,84,'History','display?page=hist_JOBS_CDF');
+		d.add(87,55,'CDF','');
+		d.add(88,87,'Real-Time','display?page=CDF_io_rt');
+		d.add(89,87,'History','display?page=hist_IO_CDF');
+		
+		d.add(90,27,'OSG','');
+		d.add(91,90,'Real-Time','display?page=OSG_rt');
+		d.add(92,90,'History','display?page=hist_JOBS_OSG');
+		d.add(93,55,'OSG','');
+		d.add(94,93,'Real-Time','display?page=OSG_io_rt');
+		d.add(95,93,'History','display?page=hist_IO_OSG');
+				
+		d.add(96,27,'fMRI','');
+		d.add(97,96,'Real-Time','display?page=fMRI_rt');
+		d.add(98,96,'History','display?page=hist_JOBS_fMRI');
+		d.add(99,55,'fMRI','');
+		d.add(100,99,'Real-Time','display?page=fMRI_io_rt');
+		d.add(101,99,'History','display?page=hist_IO_fMRI');
+		-->							
+		
+
+		<script type="text/javascript">
+
+		d = new dTree('d');	
+		d.add(0,-1,'MonALISA Repository','index.html');
+		d.add(1,0,'Interactive Map','');
+		d.add(2,0,'Global Statistics','');
+		d.add(11,0,'Masters','');
+		d.add(22,0,'Farms','');
+		d.add(3,0,'VO Jobs','');
+		d.add(4,0,'VO Traffic','');
+		d.add(5,0,'Site Info','');
+		
+		d.add(6,1,'USA Map','index.html');
+
+		d.add(7,2,'Statistics','stats?page=stats2');
+		d.add(8,2,'Global view','display?page=osg');
+		d.add(9,2,'Jobs status','display?page=globalview');
+		d.add(10,2,'Farms status','stats?page=summary');
+		
+		
+		d.add(12,11,'Load','');
+		d.add(13,12,'Real-Time','display?page=rt_link2&width=600');
+		d.add(14,12,'History','display?page=hist_link2');
+		d.add(15,11,'Traffic','display?page=eth');
+		d.add(16,15,'eth0','');
+		d.add(17,16,'Real-Time','display?page=rt_link5');
+		d.add(18,16,'History','display?page=hist_link5_com');
+		d.add(19,15,'eth1','');
+		d.add(20,19,'Real-Time','display?page=rt_link6');
+		d.add(21,19,'History','display?page=hist_link6_com');
+
+
+		d.add(23,22,'CPUs','');
+		d.add(24,23,'Real-Time','display?page=cpu_rt');
+		d.add(25,23,'History','display?page=cpu_hist');
+		d.add(26,22,'Usage','');
+		d.add(27,26,'Real-Time','display?page=rt_link1');
+		d.add(28,26,'History','display?page=hist_usage');
+		d.add(29,22,'IO traffic','');
+		d.add(30,29,'Real-Time','display?page=rt_link3');
+		d.add(31,29,'History','display?page=hist_io');
+		
+		d.add(32,3,'ATLAS','');
+		d.add(33,32,'Real-Time','display?page=ATLAS_rt');
+		d.add(34,32,'History','display?page=hist_JOBS_ATLAS');
+		d.add(35,3,'CMS','');
+		d.add(36,35,'Real-Time','display?page=CMS_rt');
+		d.add(37,35,'History','display?page=hist_JOBS_CMS');
+		d.add(38,3,'BTeV','');
+		d.add(39,38,'Real-Time','display?page=BTeV_rt');
+		d.add(40,38,'History','display?page=hist_JOBS_BTeV');
+		d.add(41,3,'GADU','');
+		d.add(42,41,'Real-Time','display?page=GADU_rt');
+		d.add(43,41,'History','display?page=hist_JOBS_GADU');
+		d.add(44,3,'GRASE','');
+		d.add(45,44,'Real-Time','display?page=GRASE_rt');
+		d.add(46,44,'History','display?page=hist_JOBS_GRASE');
+		d.add(47,3,'GRIDEX','');
+		d.add(48,47,'Real-Time','display?page=GRIDEX_rt');
+		d.add(49,47,'History','display?page=hist_JOBS_GRIDEX');
+		d.add(50,3,'iVDgL','');
+		d.add(51,50,'Real-Time','display?page=iVDgL_rt');
+		d.add(52,50,'History','display?page=hist_JOBS_iVDgL');
+		d.add(53,3,'LIGO','');
+		d.add(54,53,'Real-Time','display?page=LIGO_rt');
+		d.add(55,53,'History','display?page=hist_JOBS_LIGO');
+		d.add(56,3,'SDSS','');
+		d.add(57,56,'Real-Time','display?page=SDSS_rt');
+		d.add(58,56,'History','display?page=hist_JOBS_SDSS');
+		
+		
+		d.add(59,4,'ATLAS','');
+		d.add(60,59,'Real-Time','display?page=ATLAS_io_rt');
+		d.add(61,59,'History','display?page=hist_IO_ATLAS');
+		d.add(62,4,'CMS','');
+		d.add(63,62,'Real-Time','display?page=CMS_io_rt');
+		d.add(64,62,'History','display?page=hist_IO_CMS');
+		d.add(65,4,'BTeV','');
+		d.add(66,65,'Real-Time','display?page=BTeV_io_rt');
+		d.add(67,65,'History','display?page=hist_IO_BTeV');
+		d.add(68,4,'GADU','');
+		d.add(69,68,'Real-Time','display?page=GADU_io_rt');
+		d.add(70,68,'History','display?page=hist_IO_GADU');
+		d.add(71,4,'GRASE','');
+		d.add(72,71,'Real-Time','display?page=GRASE_io_rt');
+		d.add(73,71,'History','display?page=hist_IO_GRASE');
+		d.add(74,4,'GRIDEX','');
+		d.add(75,74,'Real-Time','display?page=GRIDEX_io_rt');
+		d.add(76,74,'History','display?page=hist_IO_GRIDEX');
+		d.add(77,4,'iVDgL','');
+		d.add(78,77,'Real-Time','display?page=iVDgL_io_rt');
+		d.add(79,77,'History','display?page=hist_IO_iVDgL');
+		d.add(80,4,'LIGO','');
+		d.add(81,80,'Real-Time','display?page=LIGO_io_rt');
+		d.add(82,80,'History','display?page=hist_IO_LIGO');
+		d.add(83,4,'SDSS','');
+		d.add(84,83,'Real-Time','display?page=SDSS_io_rt');
+		d.add(85,83,'History','display?page=hist_IO_SDSS');
+
+
+		d.add(86,3,'CDF','');
+		d.add(87,86,'Real-Time','display?page=CDF_rt');
+		d.add(88,86,'History','display?page=hist_JOBS_CDF');
+		d.add(89,4,'CDF','');
+		d.add(90,89,'Real-Time','display?page=CDF_io_rt');
+		d.add(91,89,'History','display?page=hist_IO_CDF');
+		
+		d.add(92,3,'OSG','');
+		d.add(93,92,'Real-Time','display?page=OSG_rt');
+		d.add(94,92,'History','display?page=hist_JOBS_OSG');
+		d.add(95,4,'OSG','');
+		d.add(96,95,'Real-Time','display?page=OSG_io_rt');
+		d.add(97,95,'History','display?page=hist_IO_OSG');
+		
+		d.add(98,3,'fMRI','');
+		d.add(99,98,'Real-Time','display?page=fMRI_rt');
+		d.add(100,98,'History','display?page=hist_JOBS_fMRI');
+		d.add(101,4,'fMRI','');
+		d.add(102,101,'Real-Time','display?page=fMRI_io_rt');
+		d.add(103,101,'History','display?page=hist_IO_fMRI');
+		
+	
+		d.add(104,5,'About','info.jsp');
+
+		d.add(105,1,'World Map','index_world.html')
+
+		document.write(d);
+
+	
+	      </script>
+		<p><a href="javascript: d.closeAll();">close all</a></p>
+              </td>
+            </tr>
+            <tr>
+              <td align="left" bgcolor="#EDEBEC">&nbsp;</td>
+            </tr>
+        </table></td>
+      </tr>
+    </table></td>
+    <td width="100%" align="left" valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="100%" height="12" bgcolor="#5890C3" class="header1">&nbsp;</td>
+        <td width="26" height="12" align="right" valign="top" bgcolor="#5890C3" class="header1"><table width="26" height="12" border="0" align="right" cellpadding="0" cellspacing="0" bgcolor="#FF9900">
+          <tr>
+            <td width="26">&nbsp;</td>
+          </tr>
+        </table></td>
+      </tr>
+      <tr>
+        <td colspan="2" align="left" valign="top"><table width="100%"  border="0" cellpadding="0" cellspacing="0" background="background2.gif">
+            <tr>
+              <td width="250" align="left" valign="top"><table width="250" border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td width="250" height="20" bgcolor="#FF6600" class="selectedmenutab1">REPOSITORY FOR OSG-ITB </td>
+                  </tr>
+                  <tr>
+                    <td>&nbsp;</td>
+                  </tr>
+              </table></td>
+              <td width="100%"><div align="center"><img src="ml_main_logo.gif" width="300" height="87"></div></td>
+              <td width="46" align="right" valign="top"><table width="26" height="37" border="0" cellpadding="0" cellspacing="0" bgcolor="#FF9900">
+                  <tr>
+                    <td width="26">&nbsp;</td>
+                  </tr>
+              </table></td>
+            </tr>
+        </table></td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td width="827" align="left" valign="top" ><p>
+	
+	
+		<script type="text/javascript" src="js/range.js"></script>
+	<script type="text/javascript" src="js/timer.js"></script>
+	<script type="text/javascript" src="js/slider.js"></script>
+	<link type="text/css" rel="StyleSheet" href="css/bluecurve/bluecurve.css" />
+
+	
+	<SCRIPT language="JavaScript1.2" type="text/JavaScript">
+	var IMG_WIDTH=800;
+	var IMG_HEIGHT=IMG_WIDTH/2;
+	var d3d=0;
+	var a3d=90;
+	var dx3d=.1;
+	
+	var posX=-1, posY=-1, lastX, lastY, theimage;
+	//theimage = "lupa.gif" //the 2nd image to be displayed
+	//Browser checking and syntax variables
+	var docLayers = (document.layers) ? true:false;
+	var docId = (document.getElementById) ? true:false;
+	var docAll = (document.all) ? true:false;
+	var docbitK = (docLayers) ? "document.layers['":(docId) ? "document.getElementById('":(docAll) ? "document.all['":"document."
+	var docbitendK = (docLayers) ? "']":(docId) ? "')":(docAll) ? "']":""
+	var stylebitK = (docLayers) ? "":".style"
+	var showbitK = (docLayers) ? "show":"visible"
+	var hidebitK = (docLayers) ? "hide":"hidden"
+	var ns6=document.getElementById&&!document.all;
+	var sit_home="http://gocmon.uits.iupui.edu:8888/";
+	//Variables used in script
+	
+	var MAX_Y=8;
+	var MAX_X=16;
+	var width=MAX_X*2;
+	var zoom_factor=1;//poate varia intre 0.01 si 1
+	var height=width/2;
+	var x=-16;
+	var y=8;
+	var image2;
+	var pred=3;
+	
+	var click_action=1;//action for mouse left click on image
+	
+	function positionID(x,y,id) {
+		eval(docbitK + id + docbitendK + stylebitK + ".left = " + x);
+		eval(docbitK + id + docbitendK + stylebitK + ".top = " + y);
+	}
+	function showID(id) {
+		eval(docbitK + id + docbitendK + stylebitK + ".visibility = '" + showbitK + "'");
+	}
+	function hideID(id) {
+		eval(docbitK + id + docbitendK + stylebitK + ".visibility = '" + hidebitK + "'");
+	}	
+
+
+
+	function dimensiune_changed()
+	{
+		dimensiune_obj = document.getElementById("dimensiune");
+		valoare=dimensiune_obj.options[dimensiune_obj.selectedIndex].value;
+		new_w=0;
+		i=0;
+		for ( ; i< valoare.length; i++) {
+			car = valoare.charAt(i);
+			if  ( car>='0' && car <= '9' ) {
+				new_w=new_w*10+(car-'0');
+			} else if ( car=='x' ) {
+				i++;//pass over 'x'
+				break;
+			}
+			//else ignore
+		};
+		new_h=0;
+		for ( ; i< valoare.length; i++) {
+			car = valoare.charAt(i);
+			if  ( car>='0' && car <= '9' )
+				new_h=new_h*10+(car-'0');
+			//else ignore
+		};
+		if ( new_w>0 && new_h>0 ) {
+			IMG_WIDTH=new_w;
+			IMG_HEIGHT=IMG_WIDTH*.5;
+			document.getElementById("Map2D").width=new_w;
+			document.getElementById("Map2D").height=new_w*.5;
+			zoom(0);
+		}
+	}
+	
+	function findPosX(obj)
+	{
+	var curleft = 0;
+	if (obj.offsetParent)
+	{
+		while (obj.offsetParent)
+		{
+		curleft += obj.offsetLeft
+		obj = obj.offsetParent;
+		}
+	}
+	else if (obj.x)
+		curleft += obj.x;
+	return curleft;
+	}
+	function findPosY(obj)
+	{
+	var curtop = 0;
+	if (obj.offsetParent)
+	{
+		while (obj.offsetParent)
+		{
+		curtop += obj.offsetTop
+		obj = obj.offsetParent;
+		}
+	}
+	else if (obj.y)
+		curtop += obj.y;
+	return curtop;
+	}
+
+
+	function position_zoom(zoomdir,lastx, lasty, imagex, imagey)
+	{
+		//lastX=lastx;
+		//lastY=lasty;
+		posX=lastx;
+		posY=lasty;
+		click_action=zoomdir;
+		image = document.getElementById("Map2D");
+//		text="<br>x ant="+x+" and y ant="+y;
+		if ( click_action==1 || click_action==-1 ) {
+		    imageX = imagex;//findPosX(image);
+		    imageY = imagey;//findPosY(image);
+			if ( d3d>0 ) {
+				//clicked on 3d map, so change coordinates
+				//gresit!!!...
+				ctg=1/Math.tan(a3d*Math.PI/180);
+				extraX = (lasty-0.66*IMG_HEIGHT)*ctg;
+				lastx = (lastx+extraX)/(IMG_WIDTH+2*extraX)*IMG_WIDTH;
+				while ( lastx < imageX )
+    				    lastx+=IMG_WIDTH;
+				while ( lastx > imageX+IMG_WIDTH )
+    				    lastx-=IMG_WIDTH;
+			}
+			//document.getElementById("debug").innerHTML="x="+x+" y="+y+" w="+width+" h="+height+" lastX="+lastx+" lastY="+lasty+" imageX="+imageX+"imageY="+imageY;
+			x += (lastx - imageX)*width/IMG_WIDTH - width*.5;
+			y += -(lasty - imageY)*height/IMG_HEIGHT + height*.5;
+    		};
+		zoom(click_action);
+	}
+	function zoom(dir)
+	{
+		dir=(dir?(dir<0?-1:1):0);
+		//limit zoom out
+		if ( width*(dir?(dir<0?(1+zoom_factor):1/(1+zoom_factor)):1)>2*MAX_X && dir<0 )
+			return;
+		//limit zoom in
+		if (width<MAX_X/16 && dir >0)
+			return;
+		//text+="<br>width="+width+" and height="+height;
+		//text+="<br>x="+x+" and y="+y;
+		//compute new widhts
+		ww = width*(dir?(dir<0?(1+zoom_factor):1/(1+zoom_factor)):1);
+		hh = height*(dir?(dir<0?(1+zoom_factor):1/(1+zoom_factor)):1);
+		//text+="<br>new width="+ww+" and new height="+hh;
+		//recompute new position
+		x+=(width-ww)*.5;
+		y+=(hh-height)*.5;
+		//text+="<br>new x="+x+" and new y="+y;
+		//set new widths
+		width=ww;
+		height=hh;
+		
+		//height checking to limit map
+		if ( y > MAX_Y )
+			y = MAX_Y;
+		if ( y < -MAX_Y+height )
+			y = -MAX_Y+height;
+		//text+="<br>new y after correction="+y;
+		//document.getElementById("mesaje").innerHTML=text;
+		setImageForLoad();
+		//document.getElementById("Map2D").src="http://wn1.rogrid.pub.ro:8080/Map2D?page=wmap&w="+width+"&h="+height+"&x="+x+"&y="+y+"&d3d="+(d3d+0)+"&a3d="+a3d+"&dx3d="+dx3d;
+	}
+	function setImageForLoad()
+	{
+		hideID("div_tools");
+		showID("div_load");
+		
+		document.getElementById("Map2D").src="http://gocmon.uits.iupui.edu:8888/FarmMap?page=wmap1&w="+width+"&h="+height+"&x="+x+"&y="+y+"&d3d="+(d3d+0)+"&a3d="+a3d+"&dx3d="+dx3d+"&_W="+IMG_WIDTH+"&p="+pred;
+		hideID("div_load");
+		showID("div_tools");
+		//checkLoad();
+	}
+	
+	function move(dirx, diry)
+	{
+		//miscarea se face cu un sfert din poza pe directia de miscare
+		dirx=(dirx!=0?(dirx<0?-1:1):0);
+		diry=(diry!=0?(diry<0?-1:1):0);
+		//text="";
+		//text+="<br>move before x="+x+" and y="+y;
+		x+=dirx*width*zoom_factor/4;
+		y+=diry*height*zoom_factor/4;
+		//text+="<br>move after x="+x+" and y="+y;
+		//height checking to limit map
+		if ( y > MAX_Y )
+			y = MAX_Y;
+		if ( y < -MAX_Y+height )
+			y = -MAX_Y+height;
+		//text+="<br>move after2 x="+x+" and y="+y;
+		//document.getElementById("mesaje").innerHTML=text;
+		setImageForLoad();
+		
+	}
+	function rotate(dir)
+	{
+		step=10;
+		if ( dir>0 ) {
+			if ( 90-a3d>=step )
+				a3d+=step;
+			else {
+				a3d=90;
+				d3d=0;
+			}
+		} else if ( dir<0 ) {
+			if ( 90-a3d<6*step ) {
+				d3d=1;
+				a3d-=step;
+			};
+		};
+		document.getElementById("angle3d").value=a3d;
+		zoom(0);
+	}
+	
+	function checkLoad()
+	{
+		image = document.getElementById("Map2D");
+		if ( image.width==IMG_WIDTH ) {
+			//image.src=image2.src;
+			hideID("div_load");
+			showID("div_tools");
+			return;
+		};
+		setTimeout("checkLoad();",200);
+	}
+	function startUp()
+	{
+		zoom(0);
+		hideID("load_legend");
+		hideID("total_jobs_legend");
+		//capturebegin();
+	}
+
+	function toggleBox(szDivID, iState) // 1 visible, 0 hidden
+	{
+    		if(document.layers)	   //NN4+
+    		{
+       		document.layers[szDivID].visibility = iState ? "show" : "hide";
+    		}
+    		else if(document.getElementById)	  //gecko(NN6) + IE 5+
+    		{
+        	var obj = document.getElementById(szDivID);
+        	obj.style.visibility = iState ? "visible" : "hidden";
+    		}
+    		else if(document.all)	// IE 4
+    		{
+        	document.all[szDivID].style.visibility = iState ? "visible" : "hidden";
+    		}
+	}
+</script>
+
+	  <script type="text/javascript">
+
+	var s = new Slider(document.getElementById("slider-1"),
+                   document.getElementById("slider-input-1"));
+	s.setMinimum(1);
+	s.setMaximum(100);
+	s.setValue(100);
+	s.onchange = function () {
+		zoom_factor=s.getValue()/100;
+		
+	}
+	</script>
+	
+	<!--
+	<SCRIPT language="JavaScript" type="text/JavaScript">
+	//cloak
+	// Add lupa div
+	if (document.all||document.getElementById||document.layers){
+	document.write('<div id="lupa" class="lupa"><img src="map2Dpictures/zoomin.gif" alt="" border="0" id="theimage"></div>\n');
+	// eval(docbitK + "lupa" + docbitendK + stylebitK + ".visibility = '" + showbitK + "'");
+	document.write('<div id="div_farms" class="lupa"><img src="map2Dpictures/no_image.jpg" alt="" border="1" id="img_farms" onclick="javascript:position_zoom();"></div>\n');
+		//showID("div_farms");
+		//repositionTimer();
+	}
+	// decloak 
+	</SCRIPT>
+	-->
+	<div ID="load_legend" visibility="hidden">		</div>	
+
+	<div ID="total_jobs_legend" visibility="hidden">		</div>
+
+	<div ID="jobs_vo_legend" visibility="visible">		</div>
+	
+	
+	
+
+	<div id="debug"></div>
+	
+	
+	</p> 
+	<p><table border=0 cellspacing=0 cellpadding=2><tr><<:alternates:>></tr></table>
+    
+	<<:continut:>>
+</p>     
+      </td>
+  </tr>
+  <tr>
+    <td bgcolor="#006699">&nbsp;</td>
+    <td bgcolor="#FFFFFF">&nbsp;</td>
+    <td colspan="2" bgcolor="#FFFFFF" class="footerderived2"><div align="center">last update : 2005.05.04</div></td>
+    </tr>
+</table>
+</div>
+</body>
+</html>
+
+

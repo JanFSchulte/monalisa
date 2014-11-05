@@ -1,0 +1,31 @@
+Executable = "aliroot_new";
+
+Jobtag={"comment:PbPb, Hijing, 0.5T, 2760GeV, Min.bias+(Anti)Nuclei, LHC10h anchors, ID #247"};
+
+Packages={"VO_ALICE@AliRoot::v4-20-Rev-15","VO_ALICE@GEANT3::v1-11-21","VO_ALICE@ROOT::v5-27-06d","VO_ALICE@APISCONFIG::V1.1x"};
+
+TTL = "72000";
+
+Requirements = member(other.GridPartitions,"PDC08_2");
+
+Validationcommand ="/alice/cern.ch/user/n/nsharma/Test_SimG3/validation.sh";
+
+InputFile= {"LF:/alice/cern.ch/user/n/nsharma/Test_SimG3/CheckESD.C",
+            "LF:/alice/cern.ch/user/n/nsharma/Test_SimG3/Config.C",
+            "LF:/alice/cern.ch/user/n/nsharma/Test_SimG3/rec.C",
+            "LF:/alice/cern.ch/user/n/nsharma/Test_SimG3/sim.C",
+            "LF:/alice/cern.ch/user/n/nsharma/Test_SimG3/simrun.C",
+            "LF:/alice/cern.ch/user/n/nsharma/Test_SimG3/tag.C"};
+
+OutputArchive={"log_archive:stderr,stdout,sim.log,rec.log,tag.log@disk=1","root_archive.zip:galice.root,Kinematics.root,TrackRefs.root,AliESDs.root,AliESDfriends.root@disk=3"};
+
+OutputDir="/alice/cern.ch/user/n/nsharma/Test_SimG3/output/$1/#alien_counter_03i#";
+
+JDLVariables={"Packages", "OutputDir"};
+GUIDFILE="guid.txt";
+
+#
+splitarguments="simrun.C --run $1 --event #alien_counter# --process kHijing2000 --energy 2760 --bmin 0. --bmax 30." ;
+split="production:$2-$3";
+
+Workdirectorysize={"10000MB"};

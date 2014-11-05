@@ -1,0 +1,273 @@
+<html>
+<head>
+<title></title>
+<meta content="">
+<script type="text/javascript" src="http://pcalice295.cern.ch:8180/js/window/prototype.js"> </script>
+<script type="text/javascript" src="http://pcalice295.cern.ch:8180/js/scriptaculous/scriptaculous.js"></script>
+<style>
+
+.text{
+    font-family: Verdana, Arial, Tahome;
+    font-size: 11px;
+    font-weight: normal;
+    text-decoration: none;
+    color: #5D6261;
+}
+
+a.link:link,
+a.link:active,
+a.link:visited{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: normal;
+	color: #475D71;
+	text-decoration: none
+}
+
+a.link:hover{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: normal;
+	color: #475D71;
+	text-decoration: underline
+}  
+
+a.linkb:link,
+a.linkb:active,
+a.linkb:visited{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: #475D71;
+	text-decoration: underline;
+}
+
+a.linkb:hover{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: #475D71;
+	text-decoration: none
+} 
+
+a.menu_link:link,
+a.menu_link:active,
+a.menu_link:visited{
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: #818887;
+	text-decoration: none
+}
+
+a.menu_link:hover{
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: #818887;
+	text-decoration: underline
+} 
+
+input.input_text{
+	    font-family: Verdana, Arial, Tahome;
+	    font-size: 11px;
+	    font-weight: normal;
+	    text-decoration: none;
+	    text-align: left;
+	    border: solid 1px #CCCC99;
+	    background: #FFFFFF;
+}
+
+input.input_submit{
+	    font-family: Verdana, Arial, Tahome;
+	    font-size: 11px;
+	    color: #4F4F3B;
+	    font-weight: normal;
+	    text-decoration: none;
+	    border: solid 1px #CCCC99;
+	    background: #F6F6F6;
+}
+
+input.input_checkbox{
+	    border: solid 1px #CCCC99;
+	    background: #F6F6F6;
+	    width: 13px;
+	    height: 13px;
+}
+
+select.input_select{
+	    font-family: Verdana, Arial, Tahome;
+	    font-size: 11px;
+	    color: #4F4F3B;
+	    font-weight: normal;
+	    text-decoration: none;
+	    border: solid 1px #CCCC99;
+	    background: #F6F6F6;
+}
+
+td.menu{
+	padding: 3px; 
+	border-bottom: 3px solid #FFFFFF;
+	border-right: solid 2px #FFFFFF;
+	background-color: #F0F0F0;
+	text-align: center;
+}
+
+td.bottom{
+	border-bottom: solid 2px #FFFFFF;
+}
+</style>
+</head>
+<body style="padding: 30px;">
+<table width="100%" cellspacing="0" cellpadding="0" border="0" class="text">
+	<tr>
+		<td height="13" background="header.jpg"></td>
+	</tr>
+	<tr>
+		<td>
+			<table width="100%" cellspacing="0" cellpadding="0" border="0">
+				<tr>
+					<td width="90" class="menu"><span onclick="new Effect.toggle($('div_series'),'blind')"><a href="#" onlick="void(0);" class="menu_link"><b>Series</b> <img src="plus.jpg" width="9" height="9" border="0"></a></span></td>
+					<td width="90" class="menu"><span onclick="new Effect.toggle($('div_options'),'blind')"><a href="#" onlick="void(0);" class="menu_link"><b>Options</b> <img src="minus.jpg" width="9" height="9" border="0"></a></span></td>
+					<td width="130" class="menu"><span onclick="new Effect.toggle($('div_alternatives'),'blind')"><a href="#" onlick="void(0);" class="menu_link"><b>Alternative Views</b> <img src="minus.jpg" width="9" height="9" border="0"></a></span></td>
+					<td class="menu" style="border-right: 0px;">&nbsp;</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td style="border-bottom: solid 1px #697C8B; padding-bottom: 5px; font-family: Verdana, Arial" bgcolor="#F0F0F0">
+			<table border=0 cellspacing=0 cellpadding=0 width=100% bgcolor="#eeeeee" style="font-family:Helvetica;font-size:10px">
+				<tr>
+					<td class="bottom" colspan="2">
+						<div id="div_alternatives" style="display: none"><div>
+            				<table border=0 cellspacing=0 class=alternate cellpadding=2 width=790>
+                    	    	<tr>
+                        			<td nowrap height=30 class="text"><b>Job status</b>: 
+                        				<a class="link" href="#" onClick="JavaScript:switchToAlternate('jobStatusSites_ASSIGNED'); return false;" onMouseOver="return ''.length>0 ? overlib('') : false;" onMouseOut="return nd();">Assigned</a> | 
+                        				<a class="link" href="#" onClick="JavaScript:switchToAlternate('jobStatusSites_STARTED');" onMouseOver="return ''.length>0 ? overlib('') : false;" onMouseOut="return nd();">Started</a> | 
+                        				<a class="linkb" href="#" onClick="JavaScript:switchToAlternate('jobStatusSites_SAVING');" onMouseOver="return ''.length>0 ? overlib('') : false;" onMouseOut="return nd();">Saving</a> | 
+                        				<a class="link" href="#"  onClick="JavaScript:switchToAlternate('jobStatusSites_SAVED');"  onMouseOver="return ''.length>0 ? overlib('') : false;" onMouseOut="return nd();">Saved</a> | 
+                        				<a class="link" href="#" onClick="JavaScript:switchToAlternate('jobStatusSites_DONE');" onMouseOver="return ''.length>0 ? overlib('') : false;" onMouseOut="return nd();">Done</a> |        
+                        				<a class="link" href="#" onClick="JavaScript:switchToAlternate('jobStatusSites_KILLED');"  onMouseOver="return ''.length>0 ? overlib('') : false;" onMouseOut="return nd();">Killed</a> |
+                        				<a class="link" href="#" onClick="JavaScript:switchToAlternate('jobStatusSites_FAILED');"  onMouseOver="return ''.length>0 ? overlib('') : false;" onMouseOut="return nd();">Faild</a> |
+                        				<a class="link" href="#" onClick="JavaScript:switchToAlternate('jobStatusSites_ZOMBIE');" onMouseOver="return ''.length>0 ? overlib('') : false;" onMouseOut="return nd();">Zombie</a> |
+                        				<a class="link" href="#" onClick="JavaScript:switchToAlternate('jobStatusSites_ERR');" onMouseOver="return ''.length>0 ? overlib('') : false;" onMouseOut="return nd();">Error</a> </td>
+			    				</tr>
+			    				<tr>
+									<td height=30 class="text">
+				    					<b>Running jobs views</b>: <a class="link" href="#"  onClick="JavaScript:switchToAlternate('jobStatusSites_RUNNING_pie');" value="Pie chart" onMouseOver="return ''.length>0 ? overlib('') : false;" onMouseOut="return nd();">Pie Chart</a> |
+				    					<a class="link" href="#"  onClick="JavaScript:switchToAlternate('jobStatusSites_RUNNING_histogram');" value="Histogram" onMouseOver="return ''.length>0 ? overlib('') : false;" onMouseOut="return nd();">Histogram</a>
+				    					</td>
+                    			</tr>
+                			</table>
+                		</div>
+                	</div>				
+					</td>
+				</tr>
+		    	<tr>
+		        	<td width=100% colspan=2 align=left>
+		    	    	<div id="div_series"  style="display: none">
+		    	    		(<a class="link" href="JavaScript:checkall();" class="link">check all</a> | <a class="link" href="JavaScript:uncheckall();" class="link">uncheck all</a>)<br>
+			    <nobr><input type="checkbox" name="plot_series" value="Aalborg" id="Aalborg"  class="input_checkbox"><a class="link" class="link" href="JavaScript:reverse('Aalborg');" onMouseOver="return overlib('Show/hide <b>Aalborg</b>' + ('Aalborg'.toLowerCase()=='Aalborg'.toLowerCase() ? '' : ' (Aalborg)'));" onMouseOut="return nd();" onMouseDown="return IE(event,'Aalborg');" onMouseUp="return NS(event,'Aalborg');" onContextMenu="return false;" class=stats valign=middle>Aalborg</a> &nbsp;</nobr>
+<nobr><input type="checkbox" name="plot_series" value="Athens" id="Athens"  class="input_checkbox"><a class="link" href="JavaScript:reverse('Athens');" onMouseOver="return overlib('Show/hide <b>Athens</b>' + ('Athens'.toLowerCase()=='Athens'.toLowerCase() ? '' : ' (Athens)'));" onMouseOut="return nd();" onMouseDown="return IE(event,'Athens');" onMouseUp="return NS(event,'Athens');" onContextMenu="return false;" class=stats valign=middle>Athens</a> &nbsp;</nobr>
+<nobr><input type="checkbox" name="plot_series" value="Bari" id="Bari" checked class="input_checkbox"><a class="link" href="JavaScript:reverse('Bari');" onMouseOver="return overlib('Show/hide <b>Bari</b>' + ('Bari'.toLowerCase()=='Bari'.toLowerCase() ? '' : ' (Bari)'));" onMouseOut="return nd();" onMouseDown="return IE(event,'Bari');" onMouseUp="return NS(event,'Bari');" onContextMenu="return false;" class=stats valign=middle>Bari</a> &nbsp;</nobr>
+<nobr><input type="checkbox" name="plot_series" value="Birmingham" id="Birmingham" class="input_checkbox"><a class="link" href="JavaScript:reverse('Birmingham');" onMouseOver="return overlib('Show/hide <b>Birmingham</b>' + ('Birmingham'.toLowerCase()=='Birmingham'.toLowerCase() ? '' : ' (Birmingham)'));" onMouseOut="return nd();" onMouseDown="return IE(event,'Birmingham');" onMouseUp="return NS(event,'Birmingham');" onContextMenu="return false;" class=stats valign=middle>Birmingham</a> &nbsp;</nobr>
+<nobr><input type="checkbox" name="plot_series" value="BITP" id="BITP" checked class="input_checkbox"><a class="link" href="JavaScript:reverse('BITP');" onMouseOver="return overlib('Show/hide <b>BITP</b>' + ('BITP'.toLowerCase()=='BITP'.toLowerCase() ? '' : ' (BITP)'));" onMouseOut="return nd();" onMouseDown="return IE(event,'BITP');" onMouseUp="return NS(event,'BITP');" onContextMenu="return false;" class=stats valign=middle>BITP</a> &nbsp;</nobr>
+<nobr><input type="checkbox" name="plot_series" value="Bologna" id="Bologna" checked class="input_checkbox"><a class="link" href="JavaScript:reverse('Bologna');" onMouseOver="return overlib('Show/hide <b>Bologna</b>' + ('Bologna'.toLowerCase()=='Bologna'.toLowerCase() ? '' : ' (Bologna)'));" onMouseOut="return nd();" onMouseDown="return IE(event,'Bologna');" onMouseUp="return NS(event,'Bologna');" onContextMenu="return false;" class=stats valign=middle>Bologna</a> &nbsp;</nobr>
+
+			    	<hr size=2 noshade color="#FFFFFF"><nobr><input type="checkbox" name="plot_series" value="_TOTALS_" id="_TOTALS_" checked style="width:13px;height:13px"><a class="link" href="JavaScript:reverse('_TOTALS_');" onMouseOver="return overlib('Show/hide <b>SUM</b>' + ('SUM'.toLowerCase()=='_TOTALS_'.toLowerCase() ? '' : ' (_TOTALS_)'));" onMouseOut="return nd();" onMouseDown="return IE(event,'_TOTALS_');" onMouseUp="return NS(event,'_TOTALS_');" onContextMenu="return false;" class=stats valign=middle>SUM</a> &nbsp;</nobr>
+
+			    	<hr size=2 noshade color="#FFFFFF">
+			    		</div>
+		        	</td>
+		    	</tr>
+		    	<tr>
+					<td colspan=2 align=left>
+			    		<div id="div_options" style="display: none;">
+			    		<table border=0 cellspacing=0 cellpadding=0  style="font-family:Helvetica;font-size:10px" width="100%">
+							<tr>
+							    <td align=left nowrap class="text">Annotations <select name="annotation.enabled"  class="input_select" onChange="JavaScript:modify();"><option value="true">enabled</option><option value="false">disabled</option></select>&nbsp;&nbsp;&nbsp;</td>
+							    <td align=left nowrap class="text">Show annotation text <select name="annotation.show_text"  class="input_select" onChange="JavaScript:modify();"><option value="true" selected>yes</option><option value="false">no</option></select>&nbsp;&nbsp;&nbsp;</td>
+							    <td align=right nowrap class="text">
+							        <nobr>Image size: <select name="imgsize" onChange="JavaScript:modify();"  class="input_select">
+			
+								    </select><script language=JavaScript>
+									displayImgResOptions(document.form1.imgsize);
+								    </script></nobr>
+							    </td>
+							</tr>
+			   			 </table>
+			   			 <hr size=2 noshade color="#FFFFFF">
+			    		</div>
+					</td>
+		    	</tr>
+		    	<tr>
+				<td width=100% style="padding-left: 5px">
+				    <table width=100% border=0 cellspacing=0 cellpadding=0  style="font-family:Helvetica;font-size:10px">
+				    	<tr valign=bottom>
+				    		<td nowrap  class="text">
+										<!-- INTERVAL SELECTION -->
+							Interval selection:
+							<select name="quick_interval" onChange="javascript:quick_jump();" class="input_select">
+							    <option value="-1">- choose -</option>
+							    <option value="3600000">last hour</option>
+							    <option value="86400000">last day</option>
+						
+							    <option value="604800000">last week</option>
+							    <option value="2628000000">last month</option>
+							    <option value="5256000000">2 months</option>
+							    <option value="7884000000">3 months</option>
+							    <option value="10512000000">4 months</option>
+							    <option value="15768000000">6 months</option>
+						
+							    <option value="31536000000">last year</option>
+							</select>
+	
+							</td>
+							<td align=center nowrap valign=bottom>&nbsp;&nbsp;or&nbsp;&nbsp;</td>
+							<td align=left width=100% nowrap valign=bottom>
+							
+								<a class="link" href="javascript:move_back();" onmouseover="return overlib('Previous interval');" onmouseout="return nd();"><font style="font-family:Arial;font-size:14px;font-weight:bold">&laquo;</font></a>
+								&nbsp;
+							
+								
+								<a class="link" href="javascript:cal1.popup();" onmouseover="return overlib('Select start date');" onmouseout="return nd();"><img src="img/cal.gif" border=0 hspace=2 vspace=2 style="vertical-align:bottom"></a>
+								<input type="text" name="interval_date_low"  size=10 readonly onChange="javascript:recalc();" class="input_text">
+								<select name="interval_hour_low" onChange="javascript:recalc();" class="input_select"></select>
+								&nbsp;&nbsp;-&nbsp;&nbsp;
+								<a class="link" href="javascript:cal2.popup();" onmouseover="return overlib('Select end date');" onmouseout="return nd();"><img src="img/cal.gif" border=0 hspace=2 vspace=2 style="vertical-align:bottom"></a>
+								<input type="text" name="interval_date_high" size=10 readonly onChange="javascript:recalc();" class="input_text">
+								<select name="interval_hour_high" onChange="javascript:recalc();" class="input_select"></select>
+								
+								<input type=hidden name="interval.min" value="3600000">
+							
+								<input type=hidden name="interval.max" value="0">
+							
+								<script language="JavaScript">
+								<!--
+								var now = new Date("3/19/2007 10:00:00");
+								-->
+								</script>
+								<script language="JavaScript" src="/js/date_time.js">
+								</script>
+								&nbsp;
+								<a class="link" href="javascript:move_next();" onmouseover="return overlib('Next interval');" onmouseout="return nd();"><font style="font-family:Arial;font-size:14px;font-weight:bold">&raquo;</font></a>
+								
+											
+											<!-- /INTERVAL SELECTION -->
+
+								</td>
+							</tr>
+						</table>
+					</td>
+					<td align=right style="padding-right: 5px">
+					    <input type=submit name="submit_plot" value="Plot" class="input_submit">
+					</td>
+		    	</tr>
+			</table>
+	    </td>
+	</tr>
+</table>
+</body>
+</html>

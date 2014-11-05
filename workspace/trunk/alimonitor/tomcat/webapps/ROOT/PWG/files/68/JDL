@@ -1,0 +1,35 @@
+Executable = "aliroot_new";
+Jobtag={"comment:pp, gamma jets (11 pt bins, 100 K each) ID #68"};
+
+Packages={"VO_ALICE@AliRoot::v4-16-Rev-01","VO_ALICE@GEANT3::v1-9-6","VO_ALICE@ROOT::v5-21-01-alice","VO_ALICE@APISCONFIG::V2.4"};
+
+TTL = "72000";
+Price = 1;
+
+Requirements =  member(other.GridPartitions,"PDC08_2");
+
+Validationcommand ="/alice/cern.ch/user/a/aliprod/prod2007/configs_pbpb_hijing/validation.sh";
+
+InputFile= {"LF:/alice/cern.ch/user/a/aliprod/LHC08d9/CheckESD.C",
+            "LF:/alice/cern.ch/user/a/aliprod/LHC08d9/Config.C",
+            "LF:/alice/cern.ch/user/a/aliprod/LHC08d9/rec.C",
+            "LF:/alice/cern.ch/user/a/aliprod/LHC08d9/sim.C",
+            "LF:/alice/cern.ch/user/a/aliprod/LHC08d9/simrun.C",
+            "LF:/alice/cern.ch/user/a/aliprod/LHC08d9/tag.C"};
+
+
+OutputArchive={"log_archive:*.log,stdout,stderr@Alice::ISS::File,ALICE::RRC-KI::DPM","root_archive.zip:*.tag.root,galice.root,geometry.root,Kinematics.root,TrackRefs.root,AliESDs.root,AliESDfriends.root,pyxsec.root@Alice::Subatech::DPM,ALICE::NIHAM::File,ALICE::CERN::CASTOR2"};
+
+
+OutputDir="/alice/sim/PDC_08b/LHC08d9/$1/#alien_counter_03i#";
+
+
+JDLVariables={"Packages", "OutputDir"};
+GUIDFILE="guid.txt";
+
+splitarguments="simrun.C --run $1 --event #alien_counter# --process kPyGammaJetEMCAL  --ecms 14000 --trigger 0";
+split="production:1-1000";
+
+Workdirectorysize={"4000MB"};
+
+

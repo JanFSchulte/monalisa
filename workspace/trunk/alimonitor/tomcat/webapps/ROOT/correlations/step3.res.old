@@ -1,0 +1,98 @@
+<script language="javascript">
+var currentemlcount = 1;
+var currentemlid = 1;
+
+function anotherpredicate() {
+//    alert("predicate"+currentemlcount);
+ //   alert(document.forms["step3"].elements["predicate"+currentemlcount].value);
+    currentemlcount++;
+    currentemlid++;
+    
+    if (currentemlcount > 6) {
+	currentemlcount--;
+	alert('Only 6 predicates allowed!');
+	return;
+    }
+    
+    if (document.all) {
+	newemlplace = document.all['div_predicate'+currentemlid];
+    }
+    
+    if (document.getElementById) {
+	newemlplace = document.getElementById('div_predicate'+currentemlid);
+    }
+
+    newemlname = 'predicate'+currentemlid;
+    
+    nextpredicate = currentemlid+1;
+    
+    newemlplace.innerHTML += '<p id="'+newemlname+'"><label for="'+newemlname+'">Predicate '+currentemlid+':</label>'+
+	'<br /><input type="text" size="80" name="'+newemlname+'" id="'+newemlname+'" class="input_text"/>'+
+	'  <a href="javascript: void(0);" onclick="removepredicate(this)" class="link">Delete predicate</a></p>'+
+	    '<div id="div_predicate'+nextpredicate+'"></div>';
+	    
+    
+    document.forms["step3"].elements[newemlname] = ;
+    
+}
+
+function removepredicate(tref) {
+    tref.parentNode.parentNode.removeChild(tref.parentNode);
+    tref.parentNode.parentNode.removeChild(tref.parentNode.elements['div_predicate'+currentemlcount]);    
+    currentemlcount--;
+    currentemlid--;
+}
+
+function alertsomething(){
+    alert(document.forms["step3"].elements["predicate1"].value);
+    alert(document.forms["step3"].elements["predicate2"].value);
+    alert(document.forms["step3"].elements["predicate3"].value);
+}
+</script>
+<table cellspacing="0" cellpadding="0" border="0" align="left">
+<tr><td><<:info:>></td></tr>
+<tr><td><<:charts:>></td></tr>
+<tr><td><<:series:>></td></tr>
+<tr><td>
+<table cellpadding="7" cellspacing="1" border="0" align="left" class="text">
+    <form name="step3" action="/correlations/correlations_action.jsp" method="post">
+    <input type="hidden" name="step" value="3">
+    <input type="hidden" name="prop" value="<<:prop:>>">
+    <input type="hidden" name="chart" value="<<:chart:>>">
+    <input type="hidden" name="serie" value="<<:title:>>">
+    <tr>
+	<td colspan="2" align="left"><h2><<:action:>> serie for "<<:title_chart:>>"</h2></td>
+    </tr>
+    <tr>
+	<td colspan="2" align="left"><font class="grey">Fields marked with an asterisk <font class="error">*</font> are required</font></td>
+    </tr>
+    <tr>
+	<td class="correlations" align="right">Title:</td>
+	<td class="correlations" nowrap><input type="text" name="alias" value="<<:alias:>>" class="input_text" size="80"><font class="error">*</font></td>
+    </tr>
+    <tr>
+	<td class="correlations" align="right" valign="top">Predicates</td>
+	<td valign="top" class="correlations" nowrap>
+	    <table cellpadding="2" cellspacing="0" border="0" align="left" class="text">
+		<tr>
+		    <td align="right" nowrap><a href="javascript: void(0);" class="link" onclick="anotherpredicate();" title="Add another predicate">Add another predicate</a><td>
+		</tr>
+		<tr>
+		    <td>
+			Predicate 1<br>
+			<input type="text" id="predicate1" name="predicate1" value="<<:predicate:>>" class="input_text" size="80"><font class="error">*</font>
+			<div id="div_predicate2"></div>
+		    </td>
+		</tr>
+	    </table>
+	</td>
+    </tr>
+    <tr>
+	<td class="correlations" align="right"></td>
+	<td class="correlations">
+	    <input type="submit" value="Submit" class="input_submit" onclick="alertsomething(); return false;">
+	</td>
+    </tr>
+    </form>
+</table>
+</td></tr></table>

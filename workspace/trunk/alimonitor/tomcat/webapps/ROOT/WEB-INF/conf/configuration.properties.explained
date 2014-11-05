@@ -1,0 +1,95 @@
+#   This is a sample configuration file for drawing a chart.
+#
+#   Each FILENAME.properties will be referenced from any web page using a link like :
+# display?conf=FILENAME
+#
+#   You can modify the menu of the right side of the default repository web page by
+# editing the file REPOSITORY_HOME/tomcat/webapps/ROOT/tree1_nodes.js
+#
+#
+#   First of all you must specify the destination web page.
+#   Currently you have two options : 
+# hist   -  draws a history chart on the intervals you specified in the App.properties
+# rt     -  real-time (last received value, not older than 5 minutes)
+
+page=hist
+
+#   For this type of chart you can specify:
+# Farms=list,of,farm,names,separated,by,comma
+
+Farms=ascc,ucsd,cern,ufl,fnal,caltech,upb
+
+# Clusters=list,of,clusters
+
+Clusters=PN%
+# this means any cluster which has it's name starting with PN
+
+# Nodes=list,of,nodes
+
+# Functions=list,of,functions
+
+Functions=Load_51
+
+# If one of the Farms, Nodes, Clusters or Functions parameters is not specified
+# then any data will be matched.
+
+# FuncSuff=string,list
+# You will use this parameter if you want to add strings to all the functions you
+# specified above.
+
+# Wildcards=[F|C|N|f]
+#   This parameter defines which of the Farms / Clusters / Nodes / Functions
+# parameter will be used as a pivot. For example if you want to draw the evolution
+# of a single function (Load_51 in this case) for multiple farms you choose
+# "F" as the value for Wildcards. If you want to plot 2 functions for one
+# Farm/Cluster/Node combination you will choose "f".
+
+Wildcards=F
+
+# ylabel=String
+
+ylabel=Number of nodes
+
+# title=String
+
+title=The number of Nodes with load > 0.5
+
+# showtotal=true|false
+#   If the overall sum value will be shown. The default is false.
+#   Use this if the value you plot is some sort of traffic size, I/O size ...
+
+
+# size=true|false
+#   This parameter will be used if the values are sizes and you want
+#   to show human-readable values (automatic conversion to Kbps / Mbps / Gbps)
+
+
+##################
+
+#   For a rt-page you have many common parameters with the "hist"-pages (Farms,
+#   Clusters, Nodes, Functions, Wildcards, ylabel, tooltipsmu, FuncSuff)
+
+# descr=list,of,short,descriptions,for,the,functions
+
+#   For example take a look at the following config file:
+
+#page=rt
+#Farms=
+#Clusters=WAN
+#Functions=Chicago-Cern,MREN,ABILENE,EsNet,STARTAP
+#FuncSuff=_IN,_OUT
+#Wildcards=f
+#ylabel=Mbps
+#title=The Real-Time WAN Traffic from the PoP in Chicago
+#descr=IN,OUT
+
+#   This will be translated as :
+# draw the functions Chicago-Cern_IN,Chicago-Cern_OUT, MREN_IN, MREN_OUT, ABILENE_IN, ABILENE_OUT,EsNet_IN,EsNet_OUT, STARTAP_IN, STARTAP_OUT
+# (in pairs of _IN, _OUT, with 2 different bar colors), for Cluster WAN, from any Farm, 
+# and the descriptions for the 2 functions will be IN and OUT
+
+####################
+
+#   Any parameters you put in global.properties will be applied for all the pages.
+#   Any parameter you specifiy in both global.properties and the page properties files
+# will be taken from the page properties (the value from the global.properties will be ignored).

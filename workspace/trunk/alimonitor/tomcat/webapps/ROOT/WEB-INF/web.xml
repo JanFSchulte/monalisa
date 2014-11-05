@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.2//EN" "http://java.sun.com/j2ee/dtds/web-app_2_2.dtd">
+
+<web-app>
+   <filter>  
+    <description>Set cache-related HTTP headers</description>  
+    <filter-name>ExpiresHeaderFilter</filter-name>  
+    <filter-class>tomcat.ExpiresHeaderFilter</filter-class>  
+   </filter>  
+   <filter-mapping>
+    <filter-name>ExpiresHeaderFilter</filter-name>  
+    <url-pattern>*.gif</url-pattern>  
+    <dispatcher>REQUEST</dispatcher>  
+   </filter-mapping>  
+   <filter-mapping>
+    <filter-name>ExpiresHeaderFilter</filter-name>  
+    <url-pattern>*.jpg</url-pattern>  
+    <dispatcher>REQUEST</dispatcher>  
+   </filter-mapping>  
+   <filter-mapping>
+    <filter-name>ExpiresHeaderFilter</filter-name>  
+    <url-pattern>*.png</url-pattern>  
+    <dispatcher>REQUEST</dispatcher>  
+   </filter-mapping>  
+   <filter-mapping>
+    <filter-name>ExpiresHeaderFilter</filter-name>  
+    <url-pattern>*.css</url-pattern>  
+    <dispatcher>REQUEST</dispatcher>  
+   </filter-mapping>  
+   <filter-mapping>
+    <filter-name>ExpiresHeaderFilter</filter-name>  
+    <url-pattern>*.js</url-pattern>  
+    <dispatcher>REQUEST</dispatcher>  
+   </filter-mapping>  
+
+  <servlet>
+    <servlet-name>display</servlet-name>
+    <display-name>display</display-name>
+    <servlet-class>
+	lia.web.servlets.web.display
+    </servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+
+  <servlet>
+    <servlet-name>stats</servlet-name>
+    <display-name>stats</display-name>
+    <servlet-class>
+	lia.web.servlets.web.stats
+    </servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+
+  <servlet>
+    <servlet-name>genimage</servlet-name>
+    <display-name>genimage</display-name>
+    <servlet-class>
+	lia.web.servlets.web.genimage
+    </servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+
+  <servlet>
+    <servlet-name>abping</servlet-name>
+    <display-name>abping</display-name>
+    <servlet-class>
+	lia.web.servlets.web.ABPing
+    </servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+
+  <servlet>
+    <servlet-name>show</servlet-name>
+    <display-name>show</display-name>
+    <servlet-class>
+        lia.web.servlets.map2d.show
+    </servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  
+	
+  <!-- .............................. -->
+
+  <servlet-mapping>
+    <servlet-name>display</servlet-name>
+    <url-pattern>/display</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>stats</servlet-name>
+    <url-pattern>/stats</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>genimage</servlet-name>
+    <url-pattern>/genimage</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>abping</servlet-name>
+    <url-pattern>/abping</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>show</servlet-name>
+    <url-pattern>/show</url-pattern>
+  </servlet-mapping>
+
+
+    <servlet>
+      <servlet-name>simple</servlet-name>
+      <display-name>simple</display-name>
+      <servlet-class>
+	  lia.web.servlets.web.simple
+      </servlet-class>
+      <load-on-startup>1</load-on-startup>
+    </servlet>
+                                    
+
+    <servlet-mapping>
+      <servlet-name>simple</servlet-name>
+      <url-pattern>/simple</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+      <servlet-name>Correlations</servlet-name>
+      <display-name>Correlations</display-name>
+      <servlet-class>
+	  lia.web.servlets.web.Correlations
+      </servlet-class>
+      <load-on-startup>1</load-on-startup>
+    </servlet>
+                                    
+
+    <servlet-mapping>
+      <servlet-name>Correlations</servlet-name>
+      <url-pattern>/Correlations</url-pattern>
+    </servlet-mapping>
+            
+
+  <!-- .............................. -->
+
+  <welcome-file-list>
+    <welcome-file>
+      index.jsp
+    </welcome-file>
+  </welcome-file-list>
+
+  <!-- SECURITY CONSTRAINT -->
+
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>ApMon configuration</web-resource-name>
+      <url-pattern>/apmon</url-pattern>
+      <http-method>GET</http-method>
+      <http-method>POST</http-method>
+    </web-resource-collection>
+
+    <auth-constraint>
+      <role-name>webadmin</role-name>
+    </auth-constraint>
+  </security-constraint>
+
+
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>ABPing configuration</web-resource-name>
+      <url-pattern>/abping</url-pattern>
+      <http-method>GET</http-method>
+      <http-method>POST</http-method>
+    </web-resource-collection>
+
+    <auth-constraint>
+      <role-name>webadmin</role-name>
+    </auth-constraint>
+  </security-constraint>
+
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>Documentation edit</web-resource-name>
+      <url-pattern>/doc/edit.jsp</url-pattern>
+      <http-method>GET</http-method>
+      <http-method>POST</http-method>
+    </web-resource-collection>
+
+    <auth-constraint>
+      <role-name>webadmin</role-name>
+    </auth-constraint>
+  </security-constraint>
+  
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>Annotations editor</web-resource-name>
+      <url-pattern>/annotation.jsp</url-pattern>
+      <http-method>GET</http-method>
+      <http-method>POST</http-method>
+    </web-resource-collection>
+
+    <auth-constraint>
+      <role-name>webadmin</role-name>
+    </auth-constraint>
+  </security-constraint>
+
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>Job runs editor</web-resource-name>
+      <url-pattern>/job_remarks.jsp</url-pattern>
+      <http-method>GET</http-method>
+      <http-method>POST</http-method>
+    </web-resource-collection>
+
+    <auth-constraint>
+      <role-name>webadmin</role-name>
+    </auth-constraint>
+  </security-constraint>
+
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>Pledged resources editor</web-resource-name>
+      <url-pattern>/pledged.jsp</url-pattern>
+      <http-method>GET</http-method>
+      <http-method>POST</http-method>
+    </web-resource-collection>
+
+    <auth-constraint>
+      <role-name>webadmin</role-name>
+    </auth-constraint>
+  </security-constraint>
+
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>Services manager</web-resource-name>
+      <url-pattern>/services_command.jsp</url-pattern>
+      <http-method>GET</http-method>
+      <http-method>POST</http-method>
+    </web-resource-collection>
+
+    <auth-constraint>
+      <role-name>webadmin</role-name>
+    </auth-constraint>
+  </security-constraint>
+
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>Services manager</web-resource-name>
+      <url-pattern>/services.jsp</url-pattern>
+      <http-method>GET</http-method>
+      <http-method>POST</http-method>
+    </web-resource-collection>
+
+    <auth-constraint>
+      <role-name>webadmin</role-name>
+    </auth-constraint>
+  </security-constraint>
+
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>Administrative priviledges required</web-resource-name>
+      <url-pattern>/dologin.jsp</url-pattern>
+      <http-method>GET</http-method>
+      <http-method>POST</http-method>
+    </web-resource-collection>
+
+    <auth-constraint>
+      <role-name>webadmin</role-name>
+    </auth-constraint>
+  </security-constraint>
+
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>Admistrative priviledges required</web-resource-name>
+      <url-pattern>/console.jsp</url-pattern>
+      <http-method>GET</http-method>
+      <http-method>POST</http-method>
+    </web-resource-collection>
+
+    <auth-constraint>
+      <role-name>webadmin</role-name>
+    </auth-constraint>
+  </security-constraint>
+
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>Admistrative priviledges required</web-resource-name>
+      <url-pattern>/console_command.jsp</url-pattern>
+      <http-method>GET</http-method>
+      <http-method>POST</http-method>
+    </web-resource-collection>
+
+    <auth-constraint>
+      <role-name>webadmin</role-name>
+    </auth-constraint>
+  </security-constraint>
+
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>Admistrative priviledges required</web-resource-name>
+      <url-pattern>/admin/*</url-pattern>
+      <http-method>GET</http-method>
+      <http-method>POST</http-method>
+    </web-resource-collection>
+
+    <auth-constraint>
+      <role-name>webadmin</role-name>
+    </auth-constraint>
+  </security-constraint>
+
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>Admistrative priviledges required</web-resource-name>
+      <url-pattern>/grid/*</url-pattern>
+      <http-method>GET</http-method>
+      <http-method>POST</http-method>
+    </web-resource-collection>
+
+    <auth-constraint>
+      <role-name>users</role-name>
+    </auth-constraint>
+  </security-constraint>
+
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>Admistrative priviledges required</web-resource-name>
+      <url-pattern>/admin.jsp</url-pattern>
+      <http-method>GET</http-method>
+      <http-method>POST</http-method>
+    </web-resource-collection>
+
+    <auth-constraint>
+      <role-name>webadmin</role-name>
+    </auth-constraint>
+  </security-constraint>
+
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>Admistrative priviledges required</web-resource-name>
+      <url-pattern>/PWG/admin/*</url-pattern>
+      <http-method>GET</http-method>
+      <http-method>POST</http-method>
+    </web-resource-collection>
+
+    <auth-constraint>
+      <role-name>pwgadmin</role-name>
+    </auth-constraint>
+  </security-constraint>
+
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>Admistrative priviledges required</web-resource-name>
+      <url-pattern>/PWG/work/*</url-pattern>
+      <http-method>GET</http-method>
+      <http-method>POST</http-method>
+    </web-resource-collection>
+
+    <auth-constraint>
+      <role-name>pwg</role-name>
+    </auth-constraint>
+  </security-constraint>
+
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>Admistrative priviledges required</web-resource-name>
+      <url-pattern>/OCDB/*</url-pattern>
+      <http-method>GET</http-method>
+      <http-method>POST</http-method>
+    </web-resource-collection>
+
+    <auth-constraint>
+      <role-name>ocdbadmin</role-name>
+    </auth-constraint>
+  </security-constraint>
+
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>Admistrative priviledges required</web-resource-name>
+      <url-pattern>/dproof/admin/*</url-pattern>
+      <http-method>GET</http-method>
+      <http-method>POST</http-method>
+    </web-resource-collection>
+
+    <auth-constraint>
+      <role-name>dproofadmin</role-name>
+    </auth-constraint>
+  </security-constraint>
+
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>Certificate required</web-resource-name>
+      <url-pattern>/users/*</url-pattern>
+      <http-method>GET</http-method>
+      <http-method>POST</http-method>
+    </web-resource-collection>
+
+    <auth-constraint>
+      <role-name>users</role-name>
+    </auth-constraint>
+  </security-constraint>
+
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>Certificate required</web-resource-name>
+      <url-pattern>/trains/*</url-pattern>
+      <http-method>GET</http-method>
+      <http-method>POST</http-method>
+    </web-resource-collection>
+
+    <auth-constraint>
+      <role-name>users</role-name>
+    </auth-constraint>
+  </security-constraint>
+
+  <login-config>
+    <auth-method>BASIC</auth-method>
+    <realm-name>MonALISA restricted access</realm-name>
+  </login-config>
+
+</web-app>

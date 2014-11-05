@@ -1,0 +1,35 @@
+page=rt
+kind=rt
+
+include=castor2/include
+
+Clusters=${ClustersAll}
+
+Functions=cs2_disk_free,\
+          cs2_disk_used
+
+size=true
+sizein=M
+datainbits=false
+
+stack=true
+3d=false
+
+ylabel=
+title=
+
+descr=Free,\
+      Used
+
+cs2_disk_free.descr=Free
+cs2_disk_used.descr=Used
+
+cs2_disk_free.color=0 255 0
+cs2_disk_used.color=255 0 0
+
+Free.color=${cs2_disk_free.color}
+Used.color=${cs2_disk_used.color}
+
+urls.prefix=/castor2/index.jsp
+urls.series_parameter_name=i
+urls.category_parameter_name=cluster

@@ -1,0 +1,50 @@
+Executable = "/alice/bin/aliroot_new";
+Jobtag={"comment:Embedding test job, pp in Therminator"};
+
+Packages={"VO_ALICE@ROOT::v5-19-02a","VO_ALICE@AliRoot::v4-12-Rev-02","VO_ALICE@GEANT3::v1-9-3","VO_ALICE@APISCONFIG::V2.4"};
+
+TTL = "72000";
+
+Requirements =  member(other.GridPartitions,"rawreco");
+
+#Validationcommand ="/alice/cern.ch/user/a/akisiel/Embedding/validation.sh";
+
+InputFile= {
+	   "LF:/alice/cern.ch/user/a/akisiel/Embedding/OneJob/Config.C",
+	   "LF:/alice/cern.ch/user/a/akisiel/Embedding/OneJob/rec.C",
+	   "LF:/alice/cern.ch/user/a/akisiel/Embedding/OneJob/sim.C",
+	   "LF:/alice/cern.ch/user/a/akisiel/Embedding/OneJob/simrun.C"
+	   };
+
+OutputArchive={
+	"job_log_archive.zip:stdout,stderr,*.log@Alice::NIHAM::File",
+	"back_log_archive.zip:Background/*.out,Background/*.err,Background/*.log@Alice::NIHAM::File",
+	"merg_log_archive.zip:Merged/*.out,Merged/*.err,Merged/*.log@Alice::NIHAM::File",
+	"sign_log_archive.zip:Signal/*.out,Signal/*.err,Signal/*.log@Alice::NIHAM::File",
+	"back_root_archive.zip:Background/galice.root,Background/Kinematics.root,Background/TrackRefs.root,Background/AliESDs.root,Background/AliESDfriends.root@Alice::CERN::CASTOR2",
+	"merg_root_archive.zip:Merged/galice.root,Merged/Kinematics.root,Merged/TrackRefs.root,Merged/AliESDs.root,Merged/AliESDfriends.root@Alice::CERN::CASTOR2",
+	"sign_root_archive.zip:Signal/galice.root,Signal/Kinematics.root,Signal/TrackRefs.root,Signal/AliESDs.root,Signal/AliESDfriends.root@Alice::CERN::CASTOR2"
+	};
+
+
+#OutputArchive={"job_log_archive.zip:stdout,stderr,*.log@Alice::NIHAM::File"};	
+
+#OutputArchive={
+#	"job_log_archive.zip:*.log@Alice::Catania::DPM",
+#	"back_log_archive.zip:Background/*.log@Alice::Catania::DPM",
+#	"merg_log_archive.zip:Merged/*.log@Alice::Catania::DPM",
+#	"back_root_archive.zip:Background/galice.root,Background/Kinematics.root,Background/TrackRefs.root,Background/AliESDs.root,Background/AliESDfriends.root@Alice::CERN::CASTOR2",
+#	"merg_root_archive.zip:Merged/galice.root,Merged/Kinematics.root,Merged/TrackRefs.root,Merged/AliESDs.root,Merged/AliESDfriends.root@Alice::CERN::CASTOR2"
+#	};
+
+#OutputFile={"Run*.root@Alice::CERN::SE","raw.root@Alice::CERN::Castor2"};
+
+OutputDir="/alice/cern.ch/user/a/akisiel/Embedding/OneJob/$1/#alien_counter_03i#";
+
+JDLVariables={"Packages", "OutputDir"};
+GUIDFILE="guid.txt";
+
+splitarguments="simrun.C --run $1 --event #alien_counter# --process kPythia6 --field k5kG --energy 900" ;
+split="production:1-10";
+
+Workdirectorysize={"4000MB"};

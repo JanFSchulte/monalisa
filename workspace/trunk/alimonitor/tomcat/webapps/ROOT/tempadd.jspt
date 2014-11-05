@@ -1,0 +1,22 @@
+<%@ page import="lia.web.servlets.web.display" %>
+<%@ page import="lia.web.utils.Formatare" %>
+<%@ page import="java.util.*" %>
+<%@ page import="java.io.*" %>
+<%@ page import="lia.Monitor.monitor.*" %>
+<%@ page import="lia.Monitor.Store.Cache" %>
+<%@ page import="lia.Monitor.Store.Fast.DB" %>
+<%@ page import="lia.web.utils.Page" %>
+<%
+    String sSite = request.getParameter("site");
+    String sChart = request.getParameter("chart");
+    String sSensor = request.getParameter("sensor");
+    
+    if (sSite!=null && sChart!=null && sSensor!=null){
+	DB db = new DB();
+	
+	if (db.query("DELETE FROM temp_assoc WHERE site='"+Formatare.mySQLEscape(sSite)+"' AND chart='"+Formatare.mySQLEscape(sChart)+"';"))
+	    db.query("INSERT INTO temp_assoc (site, chart, sensor) VALUES ('"+Formatare.mySQLEscape(sSite)+"', '"+Formatare.mySQLEscape(sChart)+"', '"+Formatare.mySQLEscape(sSensor)+"');");
+    }
+
+    response.sendRedirect("/temp.jsp?site="+sSite);
+%>

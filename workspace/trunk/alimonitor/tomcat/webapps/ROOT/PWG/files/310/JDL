@@ -1,0 +1,66 @@
+Executable = "aliroot_new";
+
+Jobtag={"comment:PbPb, Starlight, 0.5T, 2760GeV, ultraperipheral"};
+
+Packages=
+   {
+       "VO_ALICE@AliRoot::v5-01-Rev-29",
+       "VO_ALICE@GEANT3::v1-14",
+       "VO_ALICE@ROOT::v5-30-06-1",
+       "VO_ALICE@APISCONFIG::V1.1x"
+   };
+
+TTL = "86400";
+
+Requirements = member(other.GridPartitions,"PDC08_2");
+
+Validationcommand ="/alice/cern.ch/user/a/aliprod/prod2007/configs_pbpb_hijing/validation.sh";
+
+InputFile= {"LF:/alice/cern.ch/user/n/nystrand/starlight/run/centralarm/CheckESD.C",
+            "LF:/alice/cern.ch/user/n/nystrand/starlight/run/centralarm/Config.C",
+            "LF:/alice/cern.ch/user/n/nystrand/starlight/run/centralarm/rec.C",
+            "LF:/alice/cern.ch/user/n/nystrand/starlight/run/centralarm/sim.C",
+            "LF:/alice/cern.ch/user/n/nystrand/starlight/run/centralarm/simrun.C",
+            "LF:/alice/cern.ch/user/n/nystrand/starlight/run/centralarm/tag.C",
+            "LF:/alice/data/2011/LHC11h_2/000$1/ESDs/pass2/OCDB_MC.root",
+            "LF:/alice/data/2011/LHC11h_2/000$1/ESDs/pass2/OCDB_MCrec.root",
+            "LF:/alice/cern.ch/user/n/nystrand/starlight/input/PbPb2011/centralarm/$2/$3/galice.root", 
+            "LF:/alice/cern.ch/user/n/nystrand/starlight/input/PbPb2011/centralarm/$2/$3/Kinematics.root",
+            "LF:/alice/cern.ch/user/n/nystrand/starlight/input/PbPb2011/centralarm/$2/$3/Kinematics1.root",
+            "LF:/alice/cern.ch/user/n/nystrand/starlight/input/PbPb2011/centralarm/$2/$3/Kinematics2.root",
+            "LF:/alice/cern.ch/user/n/nystrand/starlight/input/PbPb2011/centralarm/$2/$3/Kinematics3.root",
+            "LF:/alice/cern.ch/user/n/nystrand/starlight/input/PbPb2011/centralarm/$2/$3/Kinematics4.root",
+            "LF:/alice/cern.ch/user/n/nystrand/starlight/input/PbPb2011/centralarm/$2/$3/Kinematics5.root",
+            "LF:/alice/cern.ch/user/n/nystrand/starlight/input/PbPb2011/centralarm/$2/$3/Kinematics6.root",
+            "LF:/alice/cern.ch/user/n/nystrand/starlight/input/PbPb2011/centralarm/$2/$3/Kinematics7.root",
+            "LF:/alice/cern.ch/user/n/nystrand/starlight/input/PbPb2011/centralarm/$2/$3/Kinematics8.root",
+            "LF:/alice/cern.ch/user/n/nystrand/starlight/input/PbPb2011/centralarm/$2/$3/Kinematics9.root",
+            "LF:/alice/cern.ch/user/n/nystrand/starlight/input/PbPb2011/centralarm/$2/$3/Kinematics10.root",
+            "LF:/alice/cern.ch/user/n/nystrand/starlight/input/PbPb2011/centralarm/$2/$3/Kinematics11.root",
+            "LF:/alice/cern.ch/user/n/nystrand/starlight/input/PbPb2011/centralarm/$2/$3/Kinematics12.root",
+            "LF:/alice/cern.ch/user/n/nystrand/starlight/input/PbPb2011/centralarm/$2/$3/Kinematics13.root",
+            "LF:/alice/cern.ch/user/n/nystrand/starlight/input/PbPb2011/centralarm/$2/$3/Kinematics14.root",
+            "LF:/alice/cern.ch/user/n/nystrand/starlight/input/PbPb2011/centralarm/$2/$3/Kinematics15.root",
+            "LF:/alice/cern.ch/user/n/nystrand/starlight/input/PbPb2011/centralarm/$2/$3/Kinematics16.root",
+            "LF:/alice/cern.ch/user/n/nystrand/starlight/input/PbPb2011/centralarm/$2/$3/Kinematics17.root",
+            "LF:/alice/cern.ch/user/n/nystrand/starlight/input/PbPb2011/centralarm/$2/$3/Kinematics18.root",
+            "LF:/alice/cern.ch/user/n/nystrand/starlight/input/PbPb2011/centralarm/$2/$3/Kinematics19.root",
+            "LF:/alice/cern.ch/user/n/nystrand/starlight/input/PbPb2011/centralarm/$2/$3/Kinematics20.root",
+            "LF:/alice/cern.ch/user/n/nystrand/starlight/input/PbPb2011/centralarm/$2/$3/Kinematics21.root",
+            "LF:/alice/cern.ch/user/n/nystrand/starlight/input/PbPb2011/centralarm/$2/$3/Kinematics22.root",
+            "LF:/alice/cern.ch/user/n/nystrand/starlight/input/PbPb2011/centralarm/$2/$3/Kinematics23.root",
+            "LF:/alice/cern.ch/user/n/nystrand/starlight/input/PbPb2011/centralarm/$2/$3/Kinematics24.root",
+            "LF:/alice/cern.ch/user/n/nystrand/starlight/input/PbPb2011/centralarm/$2/$3/Kinematics25.root"};
+
+OutputArchive={"log_archive:stderr,stdout,sim.log,rec.log,tag.log@disk=1","root_archive.zip:galice.root,Kinematics.root,TrackRefs.root,AliESDs.root,AliESDfriends.root,Run*.root@disk=3"};
+
+OutputDir="/alice/cern.ch/user/n/nystrand/starlight/run/centralarm/$1/#alien_counter_04i#";
+
+JDLVariables={"Packages", "OutputDir"};
+GUIDFILE="guid.txt";
+
+#
+splitarguments="simrun.C --run $1 --event #alien_counter# --process kStarlight --energy 2760" ;
+split="production:1-100";
+
+Workdirectorysize={"20000MB"};

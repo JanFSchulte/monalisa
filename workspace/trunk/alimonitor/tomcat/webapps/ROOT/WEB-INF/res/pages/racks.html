@@ -1,0 +1,56 @@
+<script type="text/javascript">
+    function openServer(name){
+	sHTML = '<iframe src="/centralmachines/'+name+'.html" border=0 frameborder="0" marginwidth="0" marginheight="0" scrolling="auto" align="absmiddle" vspace="0" hspace="0" width=99% height=99%></iframe>';
+
+	showCenteredWindow(sHTML, name);
+    }
+</script>
+<table border=0 cellspacing=0 cellpadding=0 class=text>
+    <tr>
+	<td colspan=3 align=center>
+	    <a target=_blank href="http://aliendb9.cern.ch/racktables/"><h2>Central AliEn machines</h2></a>
+	</td>
+    </tr>
+    <tr>
+	<td valign=top align=right style="padding-right:0px" width=80>
+	    <div style="position:relative; width:100%; height: 800px">
+		<div style="position:absolute;top:70px"><a href="#" onClick="openServer('pcalibuildintel')" onMouseOver="overlib('32bit build server for AliEn and AliROOT')" onMouseOut="nd()" class=link>pcalibuildintel</a></div>
+		<div style="position:absolute;top:87px"><a href="#" onClick="openServer('pcalibuildamd');" onMouseOver="overlib('64bit build server for AliEn and AliROOT')" onMouseOut="nd()" class=link>pcalibuildamd</a></div>
+		<div style="position:absolute;top:110px"><a href="#" onClick="openServer('pcalimonitor');" onMouseOver="overlib('MonALISA repository for ALICE')" onMouseOut="nd()" class=link>pcalimonitor</a></div>
+		<div style="position:absolute;top:142px"><a href="#" onClick="openServer('aliendb7');" onMouseOver="overlib('AliEn Optimizers')" onMouseOut="nd()" class=link>aliendb7</a></div>
+		<div style="position:absolute;top:168px"><a href="#" onClick="openServer('apiserv01');" onMouseOver="overlib('API server 1')" onMouseOut="nd()" class=link>apiserv01</a></div>
+		<div style="position:absolute;top:185px"><a href="#" onClick="openServer('apiserv02');" onMouseOver="overlib('API server 2')" onMouseOut="nd()" class=link>apiserv02</a></div>
+		<div style="position:absolute;top:202px"><a href="#" onClick="openServer('alice-gr01');" onMouseOver="overlib('Xrootd global redirector for ALICE')" onMouseOut="nd()" class=link>alice-gr01</a></div>
+		<div style="position:absolute;top:225px"><a href="#" onClick="openServer('pcalimonitor2');" onMouseOver="overlib('Backup MonALISA repository')" onMouseOut="nd()" class=link>pcalimonitor2</a></div>
+		<div style="position:absolute;top:257px"><a href="#" onClick="openServer('aliendb8');" onMouseOver="overlib('AliEn central services')" onMouseOut="nd()" class=link>aliendb8</a></div>
+		<div style="position:absolute;top:289px"><a href="#" onClick="openServer('aliendb9');" onMouseOver="overlib('MySQL slaves for all DB instances (06a, 06b, 06c)')" onMouseOut="nd()" class=link>aliendb9</a></div>
+		<div style="position:absolute;top:323px"><a href="#" onClick="openServer('pcalienstorage');" onMouseOver="overlib('NFS server hosting AliEn installations for all central services.<br>Backups for all servers.')" onMouseOut="nd()" class=link>pcalienstorage</a></div>
+		<div style="position:absolute;top:365px"><a href="#" onClick="openServer('alienvm1');" onMouseOver="overlib('Host for 32bit virtual machines')" onMouseOut="nd()" class=link>alienvm1</a></div>
+		<div style="position:absolute;top:382px"><a href="#" onClick="openServer('alienvm2');" onMouseOver="overlib('Host for 64bit virtual machines')" onMouseOut="nd()" class=link>alienvm2</a></div>
+		<div style="position:absolute;top:530px"><a href="#" onClick="openServer('UPSs');" onMouseOver="overlib('1x 3000VA&lt;br&gt;3x 2200VA')" onMouseOut="nd()" class=link>UPSs</a></div>
+	    </div>
+	</td>
+	<td valign=top align=center>
+	    <a href="/images/alien_central_machines_2009-02-09_large.jpg" target=_blank><img src="/images/alien_central_machines_2009-02-09_small.jpg" border=0></a>
+	</td>
+	<td valign=top align=left width=80>
+	    <div style="position:relative; width:100%; height: 800px; padding-left: 10px">
+		<div style="position:absolute;top:60px"><a href="#" onClick="openServer('aliendb1');" onMouseOver="overlib('AliEn services: Authen, PackMan, Server, Logger, TransferManager, httpd')" onMouseOut="nd()" class=link>aliendb1</a></div>
+		<div style="position:absolute;top:92px"><a href="#" onClick="openServer('aliendb2');" onMouseOver="overlib('AliEn services: httpd')" onMouseOut="nd()" class=link>aliendb2</a></div>
+		<div style="position:absolute;top:124px"><a href="#" onClick="openServer('aliendb3');" onMouseOver="overlib('AliEn services: Authen, Proxy, httpd, IS')" onMouseOut="nd()" class=link>aliendb3</a></div>
+		<div style="position:absolute;top:156px"><a href="#" onClick="openServer('aliendb4');" onMouseOver="overlib('AliEn services: Proxy')" onMouseOut="nd()" class=link>aliendb4</a></div>
+		<div style="position:absolute;top:188px"><a href="#" onClick="openServer('aliendb5');" onMouseOver="overlib('AliEn services: Proxy, httpd')" onMouseOut="nd()" class=link>aliendb5</a></div>
+		<div style="position:absolute;top:220px"><a href="#" onClick="openServer('aliendb06a');" onMouseOver="overlib('MySQL: Transfer queue<br>LDAP master server')" onMouseOut="nd()" class=link>aliendb06a</a></div>
+		<div style="position:absolute;top:252px"><a href="#" onClick="openServer('aliendb06b');" onMouseOver="overlib('MySQL: Task queue<br>LDAP slave server')" onMouseOut="nd()" class=link>aliendb06b</a></div>
+		<div style="position:absolute;top:284px"><a href="#" onClick="openServer('aliendb06c');" onMouseOver="overlib('MySQL: Catalogue')" onMouseOut="nd()" class=link>aliendb06c</a></div>
+		<div style="position:absolute;top:312px"><a href="#" onClick="openServer('apiserv03');" onMouseOver="overlib('API server 3')" onMouseOut="nd()" class=link>apiserv03</a></div>
+		<div style="position:absolute;top:328px"><a href="#" onClick="openServer('apiserv04');" onMouseOver="overlib('API server 4')" onMouseOut="nd()" class=link>apiserv04</a></div>
+		<div style="position:absolute;top:344px"><a href="#" onClick="openServer('apiserv05');" onMouseOver="overlib('API server 5')" onMouseOut="nd()" class=link>apiserv05</a></div>
+		<div style="position:absolute;top:360px"><a href="#" onClick="openServer('apiserv06');" onMouseOver="overlib('API server 6')" onMouseOut="nd()" class=link>apiserv06</a></div>
+		<div style="position:absolute;top:376px"><a href="#" onClick="openServer('apiserv07');" onMouseOver="overlib('API server 7')" onMouseOut="nd()" class=link>apiserv07</a></div>
+		<div style="position:absolute;top:392px"><a href="#" onClick="openServer('alien');" onMouseOver="overlib('alien.cern.ch and LDAP')" onMouseOut="nd()" class=link>alien</a></div>
+		<div style="position:absolute;top:530px"><a href="#" onClick="openServer('UPSs');" onMouseOver="overlib('1x 3000VA&lt;br&gt;3x 2200VA')" onMouseOut="nd()" class=link>UPSs</a></div>
+	    </div>
+	</td>
+    </tr>
+</table>

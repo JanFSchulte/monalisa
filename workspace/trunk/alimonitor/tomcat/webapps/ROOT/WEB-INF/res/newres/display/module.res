@@ -1,0 +1,1 @@
+<td><input type="checkbox" name="modules" value="<<:name esc:>>" id="<<:name esc:>>" <<:plot check:>>><a href="JavaScript:reverse('<<:name js:>>');"><<:descr esc:>></a></td>

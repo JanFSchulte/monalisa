@@ -1,0 +1,22 @@
+Plots in this page describe the LCG states of JobAgents at a given site, according to several information sources. Please use the 'Set 
+comparison' view, since the 'Parameter comparison' is not completely meaningful.<br>
+<br>
+Please note that LCG states (that actually apply to JobAgents, not to jobs themselves) do not map exactly onto AliEn ones; you can find a 
+description of all LCG states here:<br>
+<br>
+<a target=_blank href="https://edms.cern.ch/file/722398//gLite-3-UserGuide.html#SECTION000120000000000000000">https://edms.cern.ch/file/722398//gLite-3-UserGuide.html</a>
+<br>
+<br>
+In addition to all available LCG states, one more series ('ShortRunning') is shown that does not correspond to a legitimate LCG state. These are JobAgents that finish correctly (from the LCG point of 
+view) with or without a nonzero exit code, after having run for less than three minutes.<br>
+<br>
+<b><u>INFORMATION SOURCES</u></b>:<br>
+<br>
+<b>LocalDB</b>: This is the result of a query to the LB (a component of the Resource Broker) about all JobAgents listed as ACTIVE or QUEUED in the local JOBAGENT DB on the VO-Box.<br>
+<br>
+<b>LastLogged</b>: This is the result of a similar query to the LB about the last 200 JobAgents submitted by the VO-Box, regardlessly whether they're in the VO-Box DB or not. Some discrepancy between this two first plots 
+is expected, specially after changes in the running conditions.<br>
+<br>
+<b>LocalGRIS</b>: This is a query to the CE GRIS (and not the site BDII). Only 'Scheduled' (i.e. queued on the batch system) and 'Running' Jobagents are listed there, since the GRIS does periodically a 'qstat' (or the equivalent) and publishes this information. The name of the CE is taken from the AliEn configuration.<br>
+<br>
+<b>BDII</b>: This is a query to a top-level BDII (the default is the one pointed at by $LCG_GFAL_INFOSYS variable on the VO-Box, but is configurable). These should be the same numbers as above, given some latency since the BDII is actually essentially a cache for info from GRISes.

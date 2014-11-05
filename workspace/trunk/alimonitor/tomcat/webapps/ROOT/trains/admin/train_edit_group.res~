@@ -1,0 +1,94 @@
+<html>
+<head>
+<link type="text/css" rel="StyleSheet" href="/style/style.css" />
+<script type="text/javascript" src="/js/common.js"></script>
+<script type=text/javascript>
+
+function check_insert()
+   {
+var newName=objById("group_name_new").value;
+   if(newName==''){
+     alert('Type a new group name first.');
+     return false;
+   }
+  if (newName.match(/[^a-zA-Z0-9_]/))
+  {
+    alert("Invalid characters in group name. Only alphanumerical characters (a-z, A-Z, 0-9) and underscore (_) are allowed.");
+    return false;
+  }
+ 
+   return true;
+}
+function check_rename()
+   {
+var group=objById("groups").value;
+var newName=objById("group_name_renamed").value;
+   if(group==''){
+     alert('Choose a group to rename.');
+     return false;
+   }
+  if (newName.match(/[^a-zA-Z0-9_]/))
+  {
+    alert("Invalid characters in group name. Only alphanumerical characters (a-z, A-Z, 0-9) and underscore (_) are allowed.");
+    return false;
+  }
+  if(newName=='Default'||newName=='Attic'){
+     alert("You cannot rename a group to "+newName+" because this groups already exist.");
+     return false;
+   } 
+   if(group=='Default'||group=='Attic'){
+     var rename_ok=confirm('The group '+group+' cannot be renamed or removed. Would you like to create a new group with the name '+newName+' and move all wagons of '+group+' into this group?');
+     return rename_ok;
+   } 
+
+   return true;
+}
+function check_delete()
+   {
+var group=objById("groups").value;
+   if(group=='Default'||group=='Attic'){
+     alert('The group '+group+' cannot be deleted.');
+     return false;
+   } 
+   return confirm("The selected group will be deleted. Wagons in the group will be moved to the group Default. Continue?");
+}
+
+function group_selected()
+{
+  objById("group_name_renamed").value = objById("groups").value;
+}
+</script>
+</head>
+<body>
+
+<form name=form2 method=post>
+
+  <table border=0 cellspacing=0 cellpadding=2 class=text>
+    <tr>
+      <td>Groups</td>
+      <td valign=center>
+	<<:com_edit_start:>>
+	  <select name=groups id=groups class=input_select size=10 onChange="group_selected();">
+	    <<:opt_groups:>>
+	  </select>
+        <<:com_edit_end:>>
+	<input type=submit name=submit value="Delete &raquo;" class=input_submit onClick="return check_delete()"></td>
+    </tr>
+    <tr>
+      <td>Rename selected group</td>
+      <td>
+	<input type=text name=group_name_renamed id=group_name_renamed class=input_text>
+	<input type=submit name=submit value="Rename &raquo;" class=input_submit onClick="return check_rename()">
+      </td>
+    <tr>
+      <td>Insert new group</td>
+      <td>
+	<input type=text name=group_name_new id=group_name_new class=input_text>
+	<input type=submit name=submit value="Insert &raquo;" class=input_submit onClick="return check_insert()">
+      </td>
+    </tr>
+  </table>
+  
+</form>
+</body>
+</html>

@@ -1,0 +1,4 @@
+<%@ page import="lia.Monitor.Store.Fast.DB,alimonitor.*,java.util.*,java.io.*,java.text.SimpleDateFormat,lazyj.*"%><%!
+%><%
+    response.sendRedirect("/raw/raw_details.jsp?"+request.getQueryString());
+%>

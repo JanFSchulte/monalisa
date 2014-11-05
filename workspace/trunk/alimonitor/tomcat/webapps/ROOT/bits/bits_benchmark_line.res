@@ -1,0 +1,14 @@
+<tr bgcolor="<<:bgcolor:>>" class="table_row">
+    <td align=left class="table_row"><a class="link" href="/bits/bits_pertest.jsp?test=<<:testkey:>>"><<:date:>></a></td>
+    <td align=left class="table_row"><<:enddate:>></td>
+    <td align=right class="table_row"><<:duration:>></td>
+    <td align=center class="table_row"><a class="link" href="javascript:void(0)" onClick="return setSelectOption(document.forms['form_<<:testname:>>'], 'filter_state', '<<:state js:>>');"><<:state:>></td>
+    <td align=right class="table_row"><a class="link" href="javascript:void(0)" onClick="return setSelectOption(document.forms['form_<<:testname:>>'], 'filter_os', '<<:os js:>>');"><<:os:>></td>
+    <td align=right class="table_row"><a class="link" href="javascript:void(0)" onClick="return setSelectOption(document.forms['form_<<:testname:>>'], 'filter_arch', '<<:arch js:>>');"><<:arch:>></td>
+    <td align=right class="table_row"><a class="link" href="javascript:void(0)" onClick="return setSelectOption(document.forms['form_<<:testname:>>'], 'filter_release', '<<:release js:>>');"><<:release:>></td>
+    <td align=right class="table_row"><<:com_ok_start:>><a class="link" href="javascript:void(0);" onClick="return showChart('<<:testname:>>', '<<:testkey:>>', 'cputime');" onMouseOver="overlib('Click to show evolution in time', CAPTION, 'History');" onMouseOut="nd();"><<:com_ok_end:>><<:cputime:>><<:com_ok_start:>></a><<:com_ok_end:>></td>
+    <td align=right class="table_row"><<:com_ok_start:>><a class="link" href="javascript:void(0);" onClick="return showChart('<<:testname:>>', '<<:testkey:>>', 'realtime');" onMouseOver="overlib('Click to show evolution in time', CAPTION, 'History');" onMouseOut="nd();"><<:com_ok_end:>><<:realtime:>><<:com_ok_start:>></a><<:com_ok_end:>></td>
+    <td align=right class="table_row"><<:com_ok_start:>><a class="link" href="javascript:void(0);" onClick="return showChart('<<:testname:>>', '<<:testkey:>>', 'totmem');" onMouseOver="overlib('Click to show evolution in time', CAPTION, 'History');" onMouseOut="nd();"><<:com_ok_end:>><<:totmem:>><<:com_ok_start:>></a><<:com_ok_end:>></td>
+    <td align=right class="table_row"><<:com_ok_start:>><a class="link" href="javascript:void(0);" onClick="return showChart('<<:testname:>>', '<<:testkey:>>', 'rssmem');" onMouseOver="overlib('Click to show evolution in time', CAPTION, 'History');" onMouseOut="nd();"><<:com_ok_end:>><<:rssmem:>><<:com_ok_start:>></a><<:com_ok_end:>></td>
+    <td align=right class="table_row"><<:com_ok_start:>><a class="link" href="javascript:void(0);" onClick="return showChart('<<:testname:>>', '<<:testkey:>>', '<<:sizeparam:>>');" onMouseOver="overlib('Click to show evolution in time', CAPTION, 'History');" onMouseOut="nd();"><<:com_ok_end:>><<:filesize:>><<:com_ok_start:>></a><<:com_ok_end:>></td>
+</tr>

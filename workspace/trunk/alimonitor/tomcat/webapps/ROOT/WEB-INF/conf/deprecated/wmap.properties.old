@@ -1,0 +1,52 @@
+nodes=KNU,BNL_ATLAS,Caltech-Grid3,Caltech-PG,FNAL_CMS,HU_huatlas,ISI,IU_ATLAS_Tier2,pdsf,Rice-Grid3,UBuffalo-CCR,UCSanDiegoPG,UCSanDiego,UFlorida-Grid3,UFlorida-PG,UM_ATLAS,UNM_HPC,UTA-DPCC,UWMadison,Vanderbilt,UC-Grid3,BU_ATLAS_Tier2
+long=-145,100, -157,-150 ,20,90, -143 ,30,-165,-15,77, -135,-130 ,56,60,47,-80,-23,12,27,27,120
+lat =-55,40, 16,10 ,48,20, 3 ,35,30,-18,53, -5,-10 ,-22,-33,48,10,0,58,17,44,49
+
+width=800
+height=400
+resolution=1500x750
+xcenter=-21
+ycenter=-5
+zoom=0.64
+#speciallink=BNL_ATLAS UBuffalo-CCR,UBuffalo-CCR UM_ATLAS,UM_ATLAS IU_ATLAS_Tier2,UM_ATLAS UWMadison,UWMadison pdsf,pdsf Caltech-PG,FNAL_CMS pdsf,FNAL_CMS Caltech-Grid3,Caltech-PG Caltech-Grid3,Caltech-Grid3 UCSanDiegoPG,UCSanDiegoPG FNAL_CMS,Caltech-PG UNM_HPC,UNM_HPC UTA-DPCC,UNM_HPC Rice-Grid3,UTA-DPCC Vanderbilt,Vanderbilt KNU,Caltech-Grid3 KNU
+title=Grid 3 Status MAP
+description=
+ignorezero=true
+
+routers=false
+
+image.format=jpeg
+image.jpeg.compression=0.9
+
+default.fontsize=12
+default.xlabeloffset=10
+default.ylabeloffset=5
+
+FNAL_CMS.xlabeloffset=-76
+
+BNL_ATLAS.xlabeloffset=-20
+BNL_ATLAS.ylabeloffset=20
+
+BU_ATLAS_Tier2.xlabeloffset=-90
+BU_ATLAS_Tier2.ylabeloffset=15
+
+HU_huatlas.xlabeloffset=-20
+HU_huatlas.ylabeloffset=20
+
+KNU.xlabeloffset=-13
+KNU.ylabeloffset=-12
+
+default.href=display?page=i&farm=$NAME&pTime=1+day
+
+default.preds=$NAME/PN%/*/-1/-1/Load_51 $NAME/PN%/*/-1/-1/Load_05
+default.alternate_data=$NAME/*/*/-1/-1
+default.colors=0 100 255,0 255 0
+
+default.radius=9
+default.tooltip.0=$ALIAS is DOWN
+default.tooltip.1=$ALIAS
+default.tooltip.2=$ALIAS: Busy:$0 Free:$1
+
+scallednodes.enabled=true
+scallednodes.min=7
+scallednodes.max=10

@@ -1,0 +1,29 @@
+Executable = "/alice/bin/aliroot_new";
+Jobtag={"comment: pp, B->J/psi->e+e-, Pythia6, ID #81"};
+
+Packages={"VO_ALICE@AliRoot::v4-16-Rev-08","VO_ALICE@GEANT3::v1-10","VO_ALICE@ROOT::v5-23-02","VO_ALICE@APISCONFIG::V2.4"};
+
+TTL = "72000";
+
+Requirements =  member(other.GridPartitions,"fastmc");
+
+Validationcommand ="/alice/cern.ch/user/a/aliprod/prod2007/configs_pbpb_hijing/validation.sh";
+
+InputFile= {"LF:/alice/cern.ch/user/b/brunog/BtoJpsi/CheckESD.C","LF:/alice/cern.ch/user/b/brunog/BtoJpsi/Config.C","LF:/alice/cern.ch/user/b/brunog/BtoJpsi/rec.C","LF:/alice/cern.ch/user/b/brunog/BtoJpsi/sim.C","LF:/alice/cern.ch/user/b/brunog/BtoJpsi/simrun.C","LF:/alice/cern.ch/user/b/brunog/BtoJpsi/tag.C","LF:/alice/cern.ch/user/b/brunog/BtoJpsi/CreateStandardAODfromESD.C","LF:/alice/cern.ch/user/b/brunog/BtoJpsi/AliAnalysisTaskSEVertexingHFTest.C","LF:/alice/cern.ch/user/b/brunog/BtoJpsi/ConfigVertexingHF.C"};
+
+#OutputArchive={"log_archive:*.log,stdout,stderr,*.log@ALICE::Catania::DPM","root_archive.zip:galice.root,Kinematics.root,TrackRefs.root,AliESDs.root,AliESDfriends.root,AliAOD.root@ALICE::Catania::DPM"};
+#OutputArchive={"log_archive:*.log,stdout,stderr,*.log@ALICE::CNAF::SE","root_archive.zip:galice.root,Kinematics.root,TrackRefs.root,AliESDs.root,AliESDfriends.root,AliAOD.root@ALICE::CNAF::SE"};
+OutputArchive={"log_archive:*.log,stdout,stderr,*.log@ALICE::Torino::DPM","root_archive.zip:galice.root,Kinematics.root,TrackRefs.root,AliESDs.root,AliESDfriends.root,AliAOD.root,AliAOD.VertexingHF.root@ALICE::Torino::DPM"};
+
+#OutputFile={"Run*.root@ALICE::CNAF::SE"};
+OutputFile={"Run*.root@ALICE::Torino::DPM"};
+
+OutputDir="/alice/cern.ch/user/b/brunog/BtoJpsi/production/$1/#alien_counter_03i#";
+
+JDLVariables={"Packages", "OutputDir"};
+GUIDFILE="guid.txt";
+
+splitarguments="simrun.C --run $1 --event #alien_counter# " ;
+split="production:1-999";
+
+Workdirectorysize={"5000MB"};

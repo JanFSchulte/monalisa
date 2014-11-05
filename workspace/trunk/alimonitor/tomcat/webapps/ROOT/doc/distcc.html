@@ -1,0 +1,48 @@
+<b>How to compile faster</b><br>
+<br>
+Intended audience: Offline team in bld 12 using Ubuntu<br>
+<br>
+Figure out the number of cores in your machine:<br>
+<pre>
+$ grep -c ^processor /proc/cpuinfo
+</pre>
+And remember that it is ok to run 1.5x parallel compiler threads as number of cores you have. So: <i><b>JOBS</b></i> = #CORES * 1.5 .<br>
+Now install the following utilities:<br>
+<pre>
+$ sudo apt-get install ccache distcc
+</pre>
+edit (as root) /etc/default/distcc and set:<br>
+<pre>
+STARTDISTCC="true"
+ALLOWEDNETS="127.0.0.1 137.138.170.0/24 137.138.177.0/24 137.138.54.0/24 137.138.55.0/24 137.138.56.0/24 137.138.47.0/24 137.138.99.0/24"
+LISTENER=""
+JOBS="&lt;<i><b>JOBS</b></i>&gt;" 
+ZEROCONF="true"
+</pre>
+Start the daemon:<br>
+<pre>
+$ sudo service distcc start
+</pre>
+Use a larger cache size than default:<br>
+<pre>
+$ ccache -M 10
+</pre>
+edit ~/.bashrc and append:<br>
+<pre>
+export PATH="/usr/lib/ccache:$PATH"
+export CCACHE_PREFIX="distcc"
+
+# Ubuntu 11.04 and 11.10
+export DISTCC_HOSTS="localhost/&lt;<i><b>JOBS</b></i>&gt; pcepalice49/6 pcalice79/12 pcaliense05/32"
+
+# Ubuntu 12.04
+export DISTCC_HOSTS="localhost/&lt;<i><b>JOBS</b></i>&gt; pcalicextreme/18"
+</pre>
+And finally open a new terminal and run:<br>
+<pre>
+$ make -j&lt;N+<i><b>JOBS</b></i>&gt;
+</pre>
+to compile your projects (N=50 for older Ubuntu and 18 for the most recent one). This is the only thing you have to remember from the above.<br>
+<br>
+And if you don't mind contributing to this compilation cluster, send your machine name and the number of slots to be added to the above lists (IP/hostname, JOBS and Ubuntu version).<br>
+<br>

@@ -1,0 +1,229 @@
+<<:begin=changeWidth();startUp();:>>
+<table align="center" class="small">
+	
+	<tr>
+		<td align=center class="dtree" style="color:#000"><b>
+	<form>	
+	<input type="radio" name="pie_type" value="total_jobs" checked onClick="hideID('load_legend');showID('total_jobs_legend');pred=1;setImageForLoad();"> Job Status
+	<input type="radio" name="pie_type" value="load" onClick="hideID('total_jobs_legend');showID('load_legend');pred=2;setImageForLoad();"> Utilisation: Busy / Free Nodes
+
+	<!--
+	<input type="radio" name="pie_type" value="jobs_vo"  onClick="hideID('load_legend');hideID('total_jobs_legend');showID('jobs_vo_legend');pred=3;setImageForLoad();"> Running Jobs per VO
+	-->	
+	</form>	
+		</b>
+		</td>
+	</tr>
+	
+	<tr>
+		<td>
+		<table align="center" class="small" cellspacing=1 cellpadding=0>
+			<tr>
+				<td><a href="javascript:move(-1,1);" title="up-left"><img src="map2Dpictures/ul1_v2.gif" width="15" height="15" class=ch border=0></a></td>
+				<td align="center"><a href="javascript:move(0,1);" title="up"><img src="map2Dpictures/up1_v2.gif" width="21" height="15" class=ch border=0></a></td>
+				<td align="right"><a href="javascript:move(1,1);" title="up-right"><img src="map2Dpictures/ur1_v2.gif" width="15" height="15" class=ch border=0></a></td>
+			</tr>
+
+			<tr>
+				<td><a href="javascript:move(-1,0);" title="left"><img src="map2Dpictures/l1_v2.gif" width="15" height="21" class=ch border=0></a></td>
+				<td><iframe src="no_frame.html" frameborder=0 scrolling="no" id="Map2D" name="Map2D" class="ch" width=780 height=390></iframe></td>
+				<td align="right"><a href="javascript:move(1,0);" title="right"><img src="map2Dpictures/r1_v2.gif" width="15" height="21" class=ch border=0></a></td>
+			</tr>
+			<tr>
+				<td valign="bottom"><a href="javascript:move(-1,-1);" title="down-left"><img src="map2Dpictures/dl1_v2.gif" width="15" height="15" class=ch border=0></a></td>
+				<td align="center" valign="bottom"><a href="javascript:move(0,-1);" title="down"><img src="map2Dpictures/down1_v2.gif" width="21" height="15" class=ch" border=0></a></td>
+				<td align="right" valign="bottom"><a href="javascript:move(1,-1);" title="down-right"><img src="map2Dpictures/dr1_v2.gif" width="15" height="15" class=ch border=0></a></td>
+
+			</tr>
+		</table>
+		</td>
+	</tr>
+	</table>
+	<!--
+	<div align="center"></div>
+	<div ID="jobs_vo_legend" style="position:relative; visibility: hidden;">
+		<table align=center cellpadding="0" cellspacing="4" class="small">
+		<tr class="dtree" style="color:#000">
+		<td width="12" align="center" valign="middle"><img src="1.gif" width="8" height="8" border="1"></td>
+		<td class="dtree" style="color:#000">ATLAS</td>
+		<td width="12" align="center" valign="middle"><img src="2.gif" width="8" height="8"> </td>
+		<td class="dtree" style="color:#000">CMS</td>
+
+		<td width="12" align="center" valign="middle"><img src="3.gif" width="8" height="8"></td>
+		<td class="dtree" style="color:#000">BTeV </td>
+		<td width="12" align="center" valign="middle"><img src="4.gif" width="8" height="8"> </td>
+		<td class="dtree" style="color:#000">GADU </td>
+		<td width="12" align="center" valign="middle"><img src="5.gif" width="8" height="8"> </td>
+		<td class="dtree" style="color:#000">GRASE </td>
+
+		<td width="12" align="center" valign="middle"><img src="6.gif" width="8" height="8"> </td>
+		<td class="dtree" style="color:#000">GRIDEX </td>
+		</tr>
+		</table>
+
+		<table align=center cellspacing="5" class="small">
+		<tr class="dtree">
+		<td width="12" align="center" valign="middle"><img src="7.gif" width="8" height="8"> </td>
+		<td class="dtree" style="color:#000">iVDgL </td>
+		<td width="12" align="center" valign="middle"> <img src="8.gif" width="8" height="8"> </td>
+		<td class="dtree" style="color:#000">LIGO</td>
+
+		<td width="12" align="center" valign="middle"><img src="9.gif" width="8" height="8"> </td>
+		<td class="dtree" style="color:#000">SDSS</td>
+		<td width="12" align="center" valign="middle"><img src="10.gif" width="8" height="8"> </td>
+		<td class="dtree" style="color:#000">CDF </td>
+		<td width="12" align="center" valign="middle"><img src="11.gif" width="8" height="8"> </td>
+		<td class="dtree" style="color:#000">fMRI</td>
+
+		<td width="12" align="center" valign="middle"><img src="12.gif" width="8" height="8"> </td>
+		<td class="dtree" style="color:#000">OSG</td>
+		<td width="12" align="center" valign="middle"><img src="18.png" width="8" height="8"> </td>
+		<td class="dtree" style="color:#000">GridEx</td>
+		</tr>
+		</table>
+		
+
+		<table align=center cellspacing="5" class="small">
+		<tr class="dtree" style="color:#000">
+		<td width="12" align="center" valign="middle" bgcolor="#FFFFFF"><img src="16.gif" width="8" height="8"> </td>
+		<td>No Running Jobs </td>
+		<td width="12" align="center" valign="middle"><img src="17.png" width="8" height="8"> </td>
+		<td>No Data </td>
+		<td width="12" align="center" valign="middle"><img src="13.gif" width="8" height="8"> </td>
+		<td>Farm Down </td>
+		</tr>
+		</table>
+
+
+		
+
+	    
+	</div>
+	-->
+	<div ID="load_legend" style="position:relative; visibility: hidden;">
+		<table align=center cellspacing="5" class="small">
+		<tr class="dtree" style="color:#000">
+		<td width="12" align="center" valign="middle" class="dtree"><img src="14.gif" width="8" height="8"> </td>
+		<td>Free Nodes &nbsp;</td>
+		<td width="12" align="center" valign="middle" class="dtree"><img src="15.gif" width="8" height="8"> </td>
+		<td>Busy Nodes &nbsp;</td>
+		<td width="12" align="center" valign="middle"><img src="17.png" width="8" height="8"> </td>
+		<td>No Data </td>
+		<td width="12" align="center" valign="middle"><img src="13.gif" width="8" height="8"> </td>
+		<td>Farm Down </td>
+		</tr>
+		</table>
+		
+	</div>	
+	
+	<div ID="total_jobs_legend" style="position:relative; visibility: hidden;">
+		<table align=center cellspacing="5" class="small">
+		<tr class="dtree" style="color:#000">
+		  <td width="12" align="center" valign="middle" class="dtree"><img src="14.gif" width="8" height="8"></td>
+		  <td>Running Jobs &nbsp;</td>
+		  <td width="12" align="center" valign="middle" class="dtree"><img src="15.gif" width="8" height="8"></td>
+		  <td>Zombie Jobs &nbsp;</td>
+		  <td width="12" align="center" valign="middle"><img src="17.png" width="8" height="8"> </td>
+		  <td>No Active Jobs </td>
+		  <td width="12" align="center" valign="middle"><img src="13.gif" width="8" height="8"> </td>
+		  <td>ML Service Down </td>
+		 </tr>
+		</table>
+	</div>
+	
+
+	<table align=center class="small">
+	<tr>
+                <td align=center>
+                    <span class="dtree" style="color:#000">
+                        <INPUT TYPE=CHECKBOX NAME="links" checked onclick="showLinks()" id="links_checkbox">Show links<P>
+                    </span>
+                </td>
+        </tr>
+
+
+	<tr>
+		<td align=center><span class="textmenublue">Actions:</span> &nbsp; <span class="dtree" style="color:#000">Left Click - Zoom In</span> &nbsp; <span class="dtree" style="color:#000">Right Click - Zoom Out</span> &nbsp; <span class="dtree" style="color:#000">(Center on the mouse position)</span></td>
+
+	</tr>
+	<tr>
+		<td align=center>
+		<div class="dtree" id="div_load" style="color:#000">Loading...</div>
+		<div id="div_tools"><table align=center class="small">
+
+			<tr>
+			<td align=center><table class="small">
+				<tr>
+				<td><img src="map2Dpictures/ul1.gif" width="8" height="8" class=hand onClick="javascript:move(-1,1);"></td>
+				<td><img src="map2Dpictures/up1.gif" width="11" height="11" class=hand onClick="javascript:move(0,1);"></td>
+				<td><img src="map2Dpictures/ur1.gif" width="8" height="8" class=hand onClick="javascript:move(1,1);"></td>
+				</tr>
+				<tr>
+				<td><img src="map2Dpictures/l1.gif" width="11" height="11" class=ch onClick="javascript:move(-1,0);"></td>
+
+				<td></td>
+				<td><img src="map2Dpictures/r1.gif" width="11" height="11" class=ch onClick="javascript:move(1,0);"></td>
+				</tr>
+				<tr>
+				<td><img src="map2Dpictures/dl1.gif" width="8" height="8" class=ch onClick="javascript:move(-1,-1);"></td>
+				<td><img src="map2Dpictures/down1.gif" width="11" height="11" class=ch onClick="javascript:move(0,-1);"></td>
+				<td><img src="map2Dpictures/dr1.gif" width="8" height="8" class=ch onClick="javascript:move(1,-1);"></td>
+				</tr>
+			</table></td>
+		
+
+			<td align=center><table class="small">
+				<tr>
+					<td><img src="map2Dpictures/zoom_in.gif" border='0' onClick="zoom(1);" class=ch></a></td>
+					<td><img src="map2Dpictures/zoom_out.gif" border='0' onClick="zoom(-1);" class=ch></a></td>
+				<!--	<td><input type=button value="3D/2D" onClick="d3d=(d3d?0:1);zoom(0);"></td> -->
+					
+					<td class="dtree" style="color:#000">&nbsp; Zoom / Translation Factor:&nbsp 1.01 </span></td>
+					<td>	<div class="slider" id="slider-1" tabIndex="1">
+   							<input class="slider-input" id="slider-input-1" name="slider-input-1" size="20"/>
+
+						</div>
+					</td>	
+					<td class="dtree" style="color:#000">&nbsp;2</span></td>
+					<!--
+					<td><img src="map2Dpictures/arrow3Ddown.gif" border='0' onClick="rotate(1);" class=ch></a></td>
+					<td><img src="map2Dpictures/arrow3Dup.gif" border='0' onClick="rotate(-1);" class=ch></a</td>
+					<td>unghi de inclinare: <input type=text readonly disabled value="90" id="angle3d" size=3></td>
+					-->	
+				</tr>
+				
+			</table></td>
+			</tr>
+			<tr align=center><table class="small">
+				<tr>
+				<td class="dtree" style="color:#000">Image size:		<select onchange="dimensiune_changed();" id="dimensiune" class="dtree" style="color:#000">
+						<option value ="0" class="dtree" style="color:#000" id="adaptive" selected>Adaptive</option>
+						<option value ="600x300" class="dtree" style="color:#000">600x300</option>
+						<option value ="780x390" class="dtree" style="color:#000">780x390</option>
+						<option value ="1024x512" class="dtree" style="color:#000">1024x512</option>
+						</select>
+				</td>
+				<td class="dtree" style="color:#000">Select Predefined Map:		<select onchange="map_changed();" id="map" class="dtree" style="color:#000">
+						<option value ="1" class="dtree" style="color:#000" >USA</option>
+						<option value ="3" class="dtree" style="color:#000" selected>Europe</option>
+						<option value ="4" class="dtree" style="color:#000">South America</option>
+						<option value ="5" class="dtree" style="color:#000">Asia</option>
+						<option value ="2" class="dtree" style="color:#000">World</option>
+						</select>
+				</td>
+				</tr></table>
+			</tr>
+		</table></div>
+		</tr></table>		</td>
+		<script type="text/javascript">
+
+			var s = new Slider(document.getElementById("slider-1"),
+                   	document.getElementById("slider-input-1"));
+			s.setMinimum(1);
+			s.setMaximum(100);
+			s.setValue(100);
+			s.onchange = function () {
+				zoom_factor=s.getValue()/100;
+		
+			}
+		</script>

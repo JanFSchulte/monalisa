@@ -1,0 +1,42 @@
+<h2>AliEn Proxy</h2>
+<hr>
+Test runs:<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;grid-proxy-info</code><br>
+Returns the proxy of <code>X509_USER_PROXY</code> environment variable. This should work on all sites.<br>
+<br>
+<h2>Proxy Server</h2>
+<hr>
+In the environment:<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;X509_USER_CERT=X509_USER_PROXY<br>
+&nbsp;&nbsp;&nbsp;&nbsp;X509_USER_KEY=X509_USER_PROXY</code><br>
+Test runs:<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;myproxy-info -d</code><br>
+This returns the time left in the proxy registered in the MyProxy server. <br>
+<h2>Proxy of the machine</h2>
+<hr>
+Test runs:<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;grid-proxy-info -f /opt/vobox/alice/renewal-proxy.pem</code><br>
+This returns the timeleft in the proxy that should be renewed continuously by proxy renewal. If the proxy renewal doesn't work properly, the time will go to zero<br>
+<h2>Delegated proxy</h2>
+<hr>
+Before submitting a JobAgent, CE does 'renewProxy(10000)', so that the new job will start with the longest fresh proxy.<br>
+<br>
+In the environment:<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;Proxy=X509_USER_PROXY<br>
+&nbsp;&nbsp;&nbsp;&nbsp;X509_USER_PROXY=/opt/vobox/alice/renewal-proxy.pem<br>
+&nbsp;&nbsp;&nbsp;&nbsp;time=72    # 3 days</code><br>
+Test runs:<br> 
+<code>&nbsp;&nbsp;&nbsp;&nbsp;myproxy-get-delegation -a Proxy -d -t time -o delegatedFile</code><br>
+<br>
+and if successful, in the environment<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;X509_USER_PROXY=delegatedFile</code><br>
+Test runs<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;vobox-proxy --vo alice query-proxy-timeleft</code><br>
+Returns the proxy timeleft available for running jobs.<br>
+
+<h2>FTS Proxy</h2>
+<hr>
+This is meaningful only at the sites where FTD/FTS is runing:<br>
+<br>
+in the environment of the FTD service, test runs:<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;myproxy-info -d -s myproxy-fts.cern.ch</code><br>

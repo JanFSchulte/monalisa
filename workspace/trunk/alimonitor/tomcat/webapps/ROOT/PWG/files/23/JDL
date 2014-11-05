@@ -1,0 +1,25 @@
+Executable = "aliroot";
+Jobtag={"comment:jet-jet pp, PYTHIA, Pt hard > 100 GeV/c"};
+
+Packages={"VO_ALICE@AliRoot::v4-11-Rev-02","VO_ALICE@GEANT3::v1-9-2","VO_ALICE@ROOT::v5-18-00b","VO_ALICE@APISCONFIG::V2.4"};
+
+TTL = "72000";
+
+Requirements =  member(other.GridPartitions,"CERN");
+
+Validationcommand ="/alice/cern.ch/user/a/aliprod/prod2007/configs_pbpb_hijing/validation.sh";
+
+InputFile= {[:INPUTFILES:],"LF:/alice/cern.ch/user/a/aliprod/PDC_08/LHC08p/DB.tgz"};
+
+OutputArchive={"log_archive:stdout,stderr,*.log@Alice::Torino::DPM","root_archive.zip:galice.root,geometry.root,Kinematics.root,TrackRefs.root,AliESDs.root,AliESDfriends.root,pyxsec.root@Alice::Catania::DPM"};
+OutputFile={"Run*.root@Alice::Catania::DPM"};
+
+OutputDir="[:OUTPUTDIR:]/$1/#alien_counter_03i#";
+
+JDLVariables={"Packages", "OutputDir"};
+GUIDFILE="guid.txt";
+
+splitarguments="simrun.C --run $1 --event #alien_counter# --process kPyJetJet --minhard 100 --maxhard -1 --minpt 0  --quench 0 --qhat 0" ;
+split="production:1-1000";
+
+Workdirectorysize={"4000MB"};

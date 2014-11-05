@@ -1,0 +1,41 @@
+Executable = "aliroot_new";
+
+Jobtag={"comment:pp, jet-jet events 15 < pt hard < 50 GeV, ID #76"};
+
+# sequence is really essential here!! 
+Packages={"VO_ALICE@AliRoot::v4-16-Rev-03","VO_ALICE@GEANT3::v1-9-8","VO_ALICE@ROOT::v5-22-00","VO_ALICE@APISCONFIG::V2.4"};
+TTL = "72000";
+PRICE = 1;
+
+ValidationCommand="/alice/cern.ch/user/a/aliprod/LHC08a1/validation.sh";
+
+InputFile= {"LF:/alice/cern.ch/user/a/aliprod/LHC08a1/Config.C",
+            "LF:/alice/cern.ch/user/a/aliprod/LHC08a1/simrun.C",
+            "LF:/alice/cern.ch/user/a/aliprod/LHC08a1/sim.C",
+            "LF:/alice/cern.ch/user/a/aliprod/LHC08a1/rec.C",
+            "LF:/alice/cern.ch/user/a/aliprod/LHC08a1/rec2.C",
+            "LF:/alice/cern.ch/user/a/aliprod/LHC08a1/tag.C",
+            "LF:/alice/cern.ch/user/a/aliprod/LHC08a1/ConfigJetAnalysis.C",
+            "LF:/alice/cern.ch/user/a/aliprod/LHC08a1/ConfigJetAnalysisMC.C",
+            "LF:/alice/cern.ch/user/a/aliprod/LHC08a1/runAODFilterJets.C",
+            "LF:/alice/cern.ch/user/a/aliprod/LHC08a1/CheckESD.C"};
+
+# OutputArchive={"log_archive:stdout,stderr,*.log@ALICE::Subatech::DPM","root_archive.zip:galice.root,geometry.root,Kinematics.root,TrackRefs.root,AliESDs*.root,AliESDfriends*.root,AliAOD*.root,pyxsec.root@ALICE::CERN::se,ALICE::FZK::dCache"};
+
+
+OutputArchive={"log_archive:stdout,stderr,*.log@Alice::ISS::File,ALICE::RRC-KI::DPM","root_archive.zip:galice.root,geometry.root,Kinematics.root,TrackRefs.root,AliESDs*.root,AliESDfriends*.root,AliAOD*.root,*QA*.root,pyxsec.root@ALICE::FZK::SE,ALICE::Torino::DPM,ALICE::IPNO::DPM"};
+
+
+OutputFile={"Run*.root@ALICE::FZK::SE,ALICE::Torino::DPM,ALICE::IPNO::DPM"};
+
+OutputDir="/alice/sim/PDC_08b/LHC09a1/$1/#alien_counter_03i#";
+
+JDLVariables={"Packages", "OutputDir"};
+GUIDFILE="guid.txt";
+
+
+# pthardbin 0: 15- 50 1: 50-100 2: 100 - inf defined in simrun.C
+splitarguments="simrun.C --run $1 --event 5 --aliencounter #alien_counter# --process kPyJetJet --pthardbin 0  --quench 0 --qhat 0" ;
+split="production:1-1000";
+
+Workdirectorysize={"4000MB"};

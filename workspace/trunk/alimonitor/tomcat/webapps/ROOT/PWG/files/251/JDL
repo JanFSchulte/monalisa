@@ -1,0 +1,30 @@
+Executable = "aliroot_new";
+Jobtag={"comment:pp, Phojet, 0.5T, 7000GeV, LHC10c anchor runs, ID #187a"};
+
+Packages={"VO_ALICE@AliRoot::v4-20-Rev-19","VO_ALICE@GEANT3::v1-11-21","VO_ALICE@ROOT::v5-27-06d","VO_ALICE@APISCONFIG::V1.1x"};
+
+TTL = "79200";
+
+Requirements = member(other.GridPartitions,"PDC08_2");
+
+Validationcommand ="/alice/cern.ch/user/a/aliprod/prod2007/configs_pbpb_hijing/validation.sh";
+
+InputFile= {"LF:/alice/cern.ch/user/a/aliprod/LHC10d4/CheckESD.C",
+            "LF:/alice/cern.ch/user/a/aliprod/LHC10d4/Config.C",
+            "LF:/alice/cern.ch/user/a/aliprod/LHC10d4/rec.C",
+            "LF:/alice/cern.ch/user/a/aliprod/LHC10d4/sim.C",
+            "LF:/alice/cern.ch/user/a/aliprod/LHC10d4/simrun.C",
+            "LF:/alice/cern.ch/user/a/aliprod/LHC10d4/tag.C"};
+
+OutputArchive={"log_archive:stderr,stdout,sim.log,rec.log,tag.log@disk=1","root_archive.zip:galice.root,Kinematics.root,TrackRefs.root,AliESDs.root,AliESDfriends.root,Run*.root@disk=3"};
+
+OutputDir="/alice/sim/LHC10d4a/$1/#alien_counter_03i#";
+
+JDLVariables={"Packages", "OutputDir"};
+GUIDFILE="guid.txt";
+
+#
+splitarguments="simrun.C --run $1 --event #alien_counter# --process kPhojet --energy 7000" ;
+split="production:$2-$3";
+
+Workdirectorysize={"10000MB"};

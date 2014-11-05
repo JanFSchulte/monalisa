@@ -1,0 +1,45 @@
+Packages =
+   {
+      "VO_ALICE@AliRoot::v5-01-Rev-25",
+      "VO_ALICE@ROOT::v5-30-06-1",
+      "VO_ALICE@GEANT3::v1-12-6",
+      "VO_ALICE@APISCONFIG::V1.1x"
+   };
+Jobtag =
+   {
+      "comment:LHC period LHC11h - MUON embedding pass1 - J/psi High pt, ID #XXX"
+   };
+Split = "file";
+OutputDir = "/alice/sim/2012/LHC12a10_bis/$1/$2d/#alienfilename/.root//#";
+Price = 1;
+Executable = "aliroot_new";
+InputFile =
+   {
+      "LF:/alice/cern.ch/user/a/aliprod/LHC12a10/simrun.C",
+      "LF:/alice/cern.ch/user/a/aliprod/LHC12a10/rec.C",
+      "LF:/alice/cern.ch/user/a/aliprod/LHC12a10/sim.C",
+      "LF:/alice/cern.ch/user/a/aliprod/LHC12a10/Config.C",
+      "LF:/alice/cern.ch/user/a/aliprod/LHC12a10/CheckESD.C",
+      "LF:/alice/cern.ch/user/a/aliprod/LHC12a10/AODtrain.C",
+      "LF:/alice/cern.ch/user/a/aliprod/LHC12a10/AddTaskESDFilter.C"
+   };
+splitarguments="simrun.C --run $1 --rawfile /alice/data/2011/LHC11h/000$1/raw/#alienfilename# --energy 2760 --trigger CPBI2_B1-B-NOPF-ALLNOTRD";
+OutputArchive =
+   {
+			"log_archive.zip:stdout,stderr,simBackground.log,sim.log,rec.log,check.log,aod.log,simSignal.log,recSignal.log,checkSignal.log,*.stat@disk=1",
+			"root_archive.zip:galice.root,Trigger.root,TrackRefs.root,Kinematics.root,AliESDs.root,AliAOD.root,AliAOD.Muons.root,AliESDsSignal.root@disk=2"
+   };
+TTL = "86400";
+Workdirectorysize =
+   {
+      "6000MB"
+   };
+MemorySize = "4GB";
+InputDataCollection = "LF:/alice/cern.ch/user/a/aliprod/LHC12a10/000$1$2.xml,nodownload";
+GUIDFILE = "guid.txt";
+JDLVariables =
+   {
+      "Packages",
+      "OutputDir"
+   };
+Validationcommand = "/alice/cern.ch/user/a/aliprod/LHC12a10/validation.sh";

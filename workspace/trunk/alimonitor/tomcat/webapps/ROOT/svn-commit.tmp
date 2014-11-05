@@ -1,0 +1,8 @@
+backend path configurable
+--This line, and those below, will be ignored--
+
+M    trains/index.jsp
+M    trains/train.res
+M    trains/train.jsp
+M    trains/admin/train_edit_run.res
+M    trains/admin/train_edit_run.jsp

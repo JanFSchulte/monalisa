@@ -1,0 +1,15 @@
+chart.type=dialthermo1
+
+values=$CvCERN/ALICE_Sites_Jobs_Summary/_TOTALS_/RUNNING_jobs
+#values=$Cv_TOTALS_/Site_Jobs_Summary/jobs/RUNNING_jobs
+height=160
+width=160
+
+abs.min=500
+abs.max=5000
+
+max.ok=1500
+max.warn=3000
+reversed=true
+
+text=Jobs

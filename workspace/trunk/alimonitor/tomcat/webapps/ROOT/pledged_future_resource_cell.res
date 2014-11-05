@@ -1,0 +1,1 @@
+<td width="55" bgcolor="#<<:color:>>" id="t<<:table:>>_<<:name:>>_<<:quarter:>>_row" align=right class="table_row" onMouseOver="c('t<<:table:>>_<<:name:>>_<<:quarter:>>');" onClick="n('t<<:table:>>_<<:name:>>_<<:quarter:>>');"><p id="t<<:table:>>_<<:name:>>_<<:quarter:>>" class="text_normal"><<:value:>></p></td>

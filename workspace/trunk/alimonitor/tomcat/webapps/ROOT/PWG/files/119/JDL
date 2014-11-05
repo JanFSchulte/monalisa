@@ -1,0 +1,30 @@
+Executable = "aliroot_new";
+Jobtag={"comment:First physics (2009 - stage 2) pp, Phojet, 0.5T, 900GeV, ID #119"};
+
+Packages={"VO_ALICE@AliRoot::v4-17-Rev-06","VO_ALICE@GEANT3::v1-11","VO_ALICE@ROOT::v5-24-00","VO_ALICE@APISCONFIG::V2.4"};
+
+TTL = "72000";
+
+Requirements =  member(other.GridPartitions,"PDC08_2");
+
+Validationcommand ="/alice/cern.ch/user/a/aliprod/prod2007/configs_pbpb_hijing/validation.sh";
+
+InputFile= {"LF:/alice/cern.ch/user/a/aliprod/LHC09b10/CheckESD.C",
+            "LF:/alice/cern.ch/user/a/aliprod/LHC09b10/Config.C",
+            "LF:/alice/cern.ch/user/a/aliprod/LHC09b10/rec.C",
+            "LF:/alice/cern.ch/user/a/aliprod/LHC09b10/sim.C",
+            "LF:/alice/cern.ch/user/a/aliprod/LHC09b1o/simrun.C",
+            "LF:/alice/cern.ch/user/a/aliprod/LHC09b10/tag.C",
+            "LF:/alice/cern.ch/user/a/aliprod/LHC09b10/CreateAODfromESD.C"};
+
+OutputArchive={"log_archive:*.log,stdout,stderr@ALICE::Subatech::SE,ALICE::JINR::SE","root_archive.zip:galice.root,Kinematics.root,TrackRefs.root,AliESDs.root,AliESDfriends.root,AliAODs.root,*QA*.root,ITS.RecPoints.root,Run*.root@ALICE::CERN::ALICEDISK,ALICE::FZK::SE,ALICE::CNAF::SE,ALICE::Legnaro::SE"};
+
+OutputDir="/alice/sim/PDC_09/LHC09b10/$1/#alien_counter_03i#";
+
+JDLVariables={"Packages", "OutputDir"};
+GUIDFILE="guid.txt";
+
+splitarguments="simrun.C --run $1 --event #alien_counter# --process kPhojet --field k5kG --energy 900" ;
+split="production:1-1000";
+
+Workdirectorysize={"10000MB"};

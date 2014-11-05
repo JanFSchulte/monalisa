@@ -1,0 +1,663 @@
+<%@ page import="alimonitor.*,utils.*,lazyj.cache.*,java.net.*,lia.Monitor.monitor.*,lia.web.utils.ThreadedPage,lia.Monitor.Store.Fast.DB,lia.Monitor.Store.Cache,lia.Monitor.Store.FarmBan,lia.web.utils.Formatare,lia.Monitor.monitor.monPredicate,java.io.*,java.util.*,java.net.URLEncoder,lia.web.servlets.web.*,auth.*,java.security.cert.*,lazyj.*" %><%!
+    private static final int CACHE_LIST = 1000 * 2;
+    
+    private static final class StorageElement implements Comparable<StorageElement>{
+	public final String name;
+	
+	public double weight;
+	
+	public Set<String> tags;
+	
+	public Collection<IPClass> ips;
+	
+	public boolean bDisk = false;
+	
+	public boolean bTape = false;
+	
+	public boolean bOCDB = false;
+	
+	public int op;
+	
+	public StorageElement(final String seName, final String tags, final Collection<IPClass> ips, final double seWeight, final int op){
+	    this.name = seName;
+	    this.tags = new HashSet<String>();
+	    this.weight = seWeight;
+	    this.op = op;
+	    
+	    if (tags!=null && tags.length()>0){
+	        final StringTokenizer st = new StringTokenizer(tags, ",");
+	        
+	        final String sTag = st.nextToken().trim().toLowerCase();
+	        
+	        if (sTag.length()>0)
+		    this.tags.add(sTag);
+	    }
+	    
+	    final StringTokenizer st = new StringTokenizer(seName, ":");
+	    
+	    if (st.countTokens() >= 3){
+	        final String sOrg = st.nextToken();
+		final String sSite = st.nextToken();
+	        final String sSEName = st.nextToken();
+	    
+		try{	    
+		    final Set<String> sSEQoS = auth.LDAPHelper.checkLdapInformation("name="+sSEName, "ou=SE,ou=Services,ou="+sSite+",ou=Sites,", "QoS");
+	    	    
+		    for (String s: sSEQoS){
+			if (s.equalsIgnoreCase("disk"))
+			    bDisk = true;
+			else
+			if (s.equalsIgnoreCase("tape"))
+			    bTape = true;
+			else
+			if (s.equalsIgnoreCase("ocdb"))
+			    bOCDB = true;
+		    }
+		}
+		catch (Exception e){
+		    // ignore
+		}
+	    }
+	    
+	    if (! (bTape || bDisk || bOCDB) ){
+		bTape = name.toLowerCase().indexOf("tape")>=0;
+		
+		bOCDB = name.toLowerCase().indexOf("ocdb")>=0;
+	    
+		bDisk = !bTape && !bOCDB;
+		
+	    }
+	    
+	    this.ips = ips;
+	}
+	
+	public StorageElement(final StorageElement copySE){
+	    this.name = copySE.name;
+	    this.weight = copySE.weight;
+	    this.tags = copySE.tags;
+	    this.ips = copySE.ips;
+	    this.bDisk = copySE.bDisk;
+	    this.bTape = copySE.bTape;
+	    this.bOCDB = copySE.bOCDB;
+	    this.op = copySE.op;
+	}
+	
+	@Override
+	public String toString(){
+	    return toString(false);
+	}
+	
+	public String toString(final boolean bDebug){
+	    if (!bDebug)
+		return name;
+	
+	    return name+" (weight="+weight+")";
+	}
+	
+	public boolean isTape(){
+	    return bTape;
+	}
+	
+	public boolean isDisk(){
+	    return bDisk;
+	}
+
+	public boolean isOCDB(){
+	    return bOCDB;
+	}
+	
+	public int compareTo(final StorageElement se){
+	    final double diff = weight - se.weight;
+	    
+	    if (diff<0)
+		return 1;
+		
+	    if (diff>0)
+		return -1;
+		
+	    return 0;
+	}
+	
+	@Override
+	public boolean equals(final Object o){
+	    return this.name.equals( ((StorageElement) o).name );
+	}
+	
+	@Override
+	public int hashCode(){
+	    return this.name.hashCode();
+	}
+    }
+    
+    private static List<StorageElement> activeSEsCacheRead;
+    private static List<StorageElement> activeSEsCacheWrite;
+    
+    private static long lActiveSEsCacheTimestampRead;
+    private static long lActiveSEsCacheTimestampWrite;
+    
+    private static List<StorageElement> copyList(final List<StorageElement> original){
+	final List<StorageElement> ret = new ArrayList<StorageElement>(original.size());
+	
+	for (StorageElement se: original){
+	    ret.add(new StorageElement(se));
+	}
+	
+	return ret;
+    }
+    
+    // in GB
+    private static double getSEFreeSpace(final String sSE){
+	// try to get it from xrootd directly
+
+	monPredicate pred = new monPredicate("%", sSE+"_manager_xrootd_Services", "%", -1, -1, new String[]{"space_free"}, null);
+	
+	Vector<Object> values = Cache.getLastValues(pred);
+	
+	if (values != null && values.size()>0){
+	    
+	    double max = 0;
+	    
+	    for (Object o: values){
+		if (o!=null && (o instanceof Result)){
+		    Result r = (Result) o;
+
+		    double ret = r.param[0] / 1024;
+	    
+		    if (ret>0)
+			max = Math.max(max, ret);
+		}
+	    }
+	    
+	    if (max>0){
+		    //System.err.println("Free space on "+sSE+" (by xrootd) : "+max);
+		    return max;
+	    }
+	}
+    
+	pred = new monPredicate("_TOTALS_", "Site_SE_Status", sSE, -1, -1, new String[]{"avail_gb"}, null);
+    
+	Object o = Cache.getLastValue(pred);
+	
+	if (o!=null && (o instanceof Result)){
+	    Result r = (Result) o;
+
+	    double ret = r.param[0];
+
+	    //System.err.println("Free space on "+sSE+" (by AliEn) : "+ret);
+	    
+	    return ret;
+	}
+	
+	return Double.NaN;
+    }
+    
+    private static double getWeightedHistory(final String sSE, final int op){
+	final DB db = new DB();
+	  
+	db.query("select get_se_weighted_history('"+Format.escSQL(sSE)+"', "+op+");");
+	
+	return db.getd(1);
+    }
+    
+    private static synchronized List<StorageElement> getActiveSEs(final int op){
+	if (System.currentTimeMillis() - (op==0 ? lActiveSEsCacheTimestampWrite : lActiveSEsCacheTimestampRead) < CACHE_LIST && (op==0 ? activeSEsCacheWrite : activeSEsCacheRead) !=null){
+	    return copyList(op==0 ? activeSEsCacheWrite : activeSEsCacheRead);
+	}
+	
+	if (op==0)
+	    activeSEsCacheWrite = new ArrayList<StorageElement>();
+	else
+	    activeSEsCacheRead = new ArrayList<StorageElement>();
+	
+	final DB db = new DB("SELECT list_ses.se_name,tags,ips,weight FROM list_ses "+
+			    "LEFT OUTER JOIN se_testing ON list_ses.se_name=se_testing.se_name AND se_test='"+(op==0 ? "ADD" : "GET")+"' "+
+			    "LEFT OUTER JOIN se_info ON list_ses.se_name=se_info.name "+
+			"WHERE testtime>extract(epoch from now()-'1 week'::interval)::int AND status=0 AND list_ses.se_name not ilike '%sink';");
+	
+	while (db.moveNext()){
+	    final String sSE = db.gets(1);
+	    
+	    //System.err.println(sSE);
+	    
+	    final String tags = db.gets(2);
+	
+	    final String ips = db.gets(3).trim();
+	    
+	    double weight = db.getd(4, 1);
+	    
+	    final Collection<IPClass> iplist = new ArrayList<IPClass>();
+	    
+	    if (ips.length()==0){
+		// we have to discover the IP addresses used by a given SE name
+		
+		final DB db2 = new DB("select distinct split_part(mi_key,'/',3) from monitor_ids "+
+		    "where mi_key ilike '%/"+Format.escSQL(sSE)+"_xrootd_Nodes/%' and mi_lastseen>extract(epoch from now()-'1 week'::interval)::int and split_part(mi_key,'/',3)!='_TOTALS_';");
+		
+		while (db2.moveNext()){
+		    final String sName = db2.gets(1);
+		    
+		    final String sIP = IPUtils.toIP(sName);
+		    
+		    if (sIP==null)
+			continue;
+		    
+		    boolean bFound = false;
+		    
+		    // only take one IP of each class for a given SE
+		    for (IPClass ip: iplist){
+			if (ip.similarTo(sIP)){
+			    bFound = true;
+			    break;
+			}
+		    }
+		    
+		    if (bFound)
+			continue;
+		    
+		    final String sAS = IPUtils.getAS(sIP);
+		    
+		    iplist.add(new IPClass(sIP, sName, sAS));
+		}
+		
+		String sSite = sSE.substring(7);
+		sSite = sSite.substring(0, sSite.indexOf(':')).toLowerCase();
+		
+		String q = "SELECT ip FROM abping_aliases WHERE ";
+		
+		if (sSite.equalsIgnoreCase("NDGF")){
+		    q += "lower(name) IN ('uib', 'uio', 'aalborg', 'csc', 'pdc', 'nsc', 'dscs_ku', 'lunarc')";
+		}
+		else{
+		    q += "lower(name)='"+Format.escSQL(sSite)+"' OR name ILIKE '"+Format.escSQL(sSite)+"-%';";
+		}
+		
+		// include the C class of the vobox if it's not already there
+		//System.err.println(q);
+		db2.query(q);
+		
+		while (db2.moveNext()){
+		    boolean bFound = false;
+		
+		    String sIP = db2.gets(1);
+		
+		    for (IPClass ip: iplist){
+			if (ip.similarTo(sIP)){
+			    bFound = true;
+			    break;
+			}
+		    }
+		    
+		    if (!bFound)
+			iplist.add(new IPClass(sIP, ThreadedPage.getHostName(sIP).toLowerCase(), IPUtils.getAS(sIP)));
+		}
+		
+		if (iplist.size()>0){
+		    String sIPs = "";
+		    
+		    for (IPClass ip: iplist){
+			sIPs = sIPs+ ( sIPs.length()>0 ? "," : "" ) + ip;
+		    }
+		
+		    final String sQuery = "UPDATE se_info SET ips='"+Format.escSQL(sIPs)+"' WHERE name='"+Format.escSQL(sSE)+"';";
+		
+		    db2.query(sQuery);
+		    
+		    if (db2.getUpdateCount()==0)
+			db2.query("INSERT INTO se_info (name, ips) VALUES ('"+Format.escSQL(sSE)+"', '"+Format.escSQL(sIPs)+"');");
+		}
+	    }
+	    else{
+		// the information in cached in the database
+		final StringTokenizer st = new StringTokenizer(ips,",");
+		
+		while (st.hasMoreTokens()){
+		    final StringTokenizer st2 = new StringTokenizer(st.nextToken(), "/");
+		    
+		    if (!st2.hasMoreTokens()) continue;
+		    
+		    final String sIP = st2.nextToken();
+		    
+		    String sHost = null;
+		    String sAS = null;
+		    
+		    if (st2.hasMoreTokens()){
+			sHost = st2.nextToken();
+		    }
+		    else{
+			sHost = ThreadedPage.getHostName(sIP).toLowerCase();
+		    }
+		    
+		    if (st2.hasMoreTokens()){
+			sAS = st2.nextToken();
+		    }
+		    else{
+			sAS = IPUtils.getAS(sIP);
+		    }
+		    
+		    final IPClass ip = new IPClass(sIP, sHost, sAS);
+		    
+		    iplist.add(ip);
+		}
+	    }
+	    
+	    // adjust the weight according to the free space in the given SE
+	
+	    double freeGB = getSEFreeSpace(sSE);
+	    
+	    if (!Double.isNaN(freeGB)){
+		if (freeGB<=0)
+		    freeGB=0.001;
+	    
+	        double adjust = Math.log(freeGB/5000);	// >5 TB: positive, <5TB: negative
+	        
+	        adjust /= 10;
+	        
+		weight += Math.min(adjust, 0.1d);
+	    }
+	    
+	    weight -= getWeightedHistory(sSE, op);
+	    
+	    if (op==0 && sSE.equalsIgnoreCase("ALICE::CERN::ALICEDISK"))
+		weight -= 10;
+	
+	    final StorageElement se = new StorageElement(sSE, tags, iplist, weight, op);
+	    
+	    if (op==0)
+		activeSEsCacheWrite.add(se);
+	    else
+		activeSEsCacheRead.add(se);
+	}
+	
+	if (op==0)
+	    lActiveSEsCacheTimestampWrite = System.currentTimeMillis();
+	else
+	    lActiveSEsCacheTimestampRead = System.currentTimeMillis();
+	
+	return copyList(op==0 ? activeSEsCacheWrite : activeSEsCacheRead);
+    }
+
+    private static void cleanList(final List<StorageElement> ses){
+	final Iterator<StorageElement> it = ses.iterator();
+	
+	while (it.hasNext()){
+	    final StorageElement se = it.next();
+	    
+	    if (se.weight<0)
+		it.remove();
+	}
+    }
+    
+    /**
+     * Get the distance between the given SE and some IP. The return values are between 0 (closest) to 1 (another planet).
+     * @return 
+     *   0 : same site
+     *       same computing centre
+     *       same ip class
+     *       same suffix of the reverse IP
+     *   0.2 : same AS
+     *   0.3 : same country
+     *   0.5 : same continent
+     *   0.9 : other continent
+     *   + [0 .. 0.1) = RTT(seconds)/10
+     */
+    private double getDistance(final StorageElement se, final String sIP){
+	double distance = 1;
+    
+	for (IPClass ip: se.ips){
+	    distance = Math.min(distance, ip.getDistance(sIP));
+	    
+	    if (distance<0.05)
+		return distance;
+	}
+    
+	return distance;
+    }
+    
+%><%
+    final RequestWrapper rw = new RequestWrapper(request);
+    
+    rw.setNotCache(response);
+    response.setContentType("text/plain");
+    
+    int op = rw.geti("op", 1);
+    
+    final List<StorageElement> activeSEs = getActiveSEs(op);
+
+    final String sUser = rw.gets("username");
+    
+    final boolean bDumpAll = rw.getb("dumpall", false);
+    
+    final boolean bSort = rw.getb("sort", false);
+
+    final boolean bDebug = rw.getb("debug", false);
+
+    // adjust weights based on list of SEs specified by the user
+
+    utils.SEUtils.cleanup();
+
+    final double dRandom = rw.getd("random", 0.02);
+
+    if (sUser.equals("sschrein")){
+	for (String s: rw.getValues("se")){
+	    double weight = 1;
+	
+	    final int idx = s.indexOf(';');
+	
+	    if (idx>0){
+		try{
+		    weight = Double.parseDouble(s.substring(idx+1));
+		    s = s.substring(0, idx);
+	        }
+		catch (Exception e){
+		}
+	    }
+	
+	    if (idx<0)
+		out.println(s);
+	}
+	
+	lia.web.servlets.web.Utils.logRequest("/services/getBestSE.jsp?special=sschrein&op="+op, 0, request);
+
+	return;
+    }
+    
+    for (String s: rw.getValues("se")){
+	double weight = 1;
+	
+	final int idx = s.indexOf(';');
+	
+	if (idx>0){
+	    try{
+		weight = Double.parseDouble(s.substring(idx+1));
+		s = s.substring(0, idx);
+	    }
+	    catch (Exception e){
+	    }
+	}
+	
+	for (final StorageElement se: activeSEs){
+	    if (se.name.equalsIgnoreCase(s))
+		se.weight += weight;
+	}
+    }
+    
+    if (bSort){
+	for (final StorageElement se: activeSEs){
+	    if (se.weight <= 1)
+		se.weight = -1;
+	}
+	
+	cleanList(activeSEs);
+    }
+    
+    if (!bDumpAll){
+	for (final StorageElement se: activeSEs){
+	    // ALICE::CERN::SE should be visible only to the production for writing
+	    // normal users shouldn't write to this storage
+	    if (se.name.equalsIgnoreCase("ALICE::CERN::OCDB") && !(sUser.equals("aliprod") || sUser.equals("alidaq")))
+		se.weight -= 2;
+	}
+    
+	cleanList(activeSEs);
+    
+	// filter out the SEs that don't match the given tags
+    
+	final List<String> tags = new ArrayList<String>();
+    
+	for (String s: rw.getValues("tag")){
+	    final String sTag = s.trim().toLowerCase();
+	
+	    if (sTag.length()>0)
+		tags.add(sTag);
+	}
+    
+	if (tags.size()>0){
+	    final Iterator<StorageElement> itSE = activeSEs.iterator();
+	
+	    while (itSE.hasNext()){
+		final StorageElement se = itSE.next();
+	    
+		boolean bFound = false;
+	    
+		for (String sTag: tags){
+		    if (se.tags.contains(sTag)){
+			bFound = true;
+			break;
+		    }
+		}
+	    
+		if (!bFound)
+		    itSE.remove();
+	    }
+	}
+    }
+    
+    // adjust the weight based on the distance to the client and other elements
+    
+    String sIP = rw.gets("ip");
+    
+    if (sIP.length()>0){
+	try{
+	    final InetAddress ia = InetAddress.getByName(sIP);
+	    
+	    sIP = ia.getHostAddress();
+	}
+	catch (Exception e){
+	    sIP = null;
+	}
+    }
+    
+    if (rw.gets("site").trim().length()>0){
+	final DB db = new DB();
+	
+	db.query("SELECT ip FROM abping_aliases WHERE lower(name)='"+Format.escSQL(rw.gets("site").trim().toLowerCase())+"';");
+	
+	if (db.moveNext()){
+	    sIP = db.gets(1);
+	}
+    }
+    
+    if (sIP==null || sIP.length()==0){
+	sIP = request.getRemoteAddr();
+    }
+    
+    //System.err.println("getBestSE.jsp?ip="+sIP);
+    
+    final Iterator<StorageElement> itSE = activeSEs.iterator();
+    
+    final Random r = new Random(System.currentTimeMillis());
+    
+    while (itSE.hasNext()){
+	final StorageElement se = itSE.next();
+	
+	final double distance = getDistance(se, sIP);
+	
+	se.weight -= distance;
+
+	se.weight -= r.nextGaussian() * dRandom;
+
+	if (se.weight<0)
+	    itSE.remove();
+    }
+    
+    if (bDumpAll){
+	Collections.sort(activeSEs);
+	
+	for (StorageElement se: activeSEs)
+	    out.println(se.toString(bDebug));
+    
+        lia.web.servlets.web.Utils.logRequest("/services/getBestSE.jsp?dumpall=true&ip="+sIP+"&op="+op, 0, request);
+
+	return;
+    }
+    
+    // how many entries to return ?
+    
+    int iLimit = rw.geti("count", 2);
+    
+    if (iLimit<0)
+	iLimit = activeSEs.size();
+    
+    int iTape = 0;
+    
+    if (request.getParameter("tape") != null){
+	// if no value is given to the "tape" key, assume 1
+	iTape = rw.geti("tape", 1);
+    }
+
+    int iOCDB = 0;
+
+    if (request.getParameter("ocdb") != null){
+	// if no value is given to the "tape" key, assume 1
+	iOCDB = rw.geti("ocdb", 1);
+	
+	iLimit = iOCDB;
+    }
+    
+    if (iTape > iLimit)
+	iTape = iLimit;
+    
+    Collections.sort(activeSEs);
+
+    final Set<StorageElement> tapeSEs = new HashSet<StorageElement>();
+
+    if (iOCDB>0){
+	for (int i=0; iLimit>0 && iOCDB>0 && i<activeSEs.size(); i++){
+	    final StorageElement se = activeSEs.get(i);
+	
+	    if (se.isOCDB() || bSort){
+		out.println(se.toString(bDebug));
+	        iOCDB--;
+	        iLimit--;
+	    }
+	}
+	
+	iLimit = 0;
+    }
+
+    // first select the best tapes
+    for (int i=0; iLimit>0 && iTape>0 && i<activeSEs.size(); i++){
+	final StorageElement se = activeSEs.get(i);
+	
+	if (se.isTape() || bSort){
+	    out.println(se.toString(bDebug));
+	    iTape--;
+	    iLimit--;
+	    tapeSEs.add(se);
+	}
+    }
+
+    // the rest of the storages are only disks
+    for (int i=0; iLimit>0 && i<activeSEs.size(); i++){
+	final StorageElement se = activeSEs.get(i);
+	
+	if ((se.isDisk() && !tapeSEs.contains(se)) || bSort){
+	    out.println(se.toString(bDebug));
+	    iLimit--;
+	}
+    }
+    
+    lia.web.servlets.web.Utils.logRequest("/services/getBestSE.jsp?ip="+sIP+"&op="+op, 0, request);
+    
+    out.flush();
+%>

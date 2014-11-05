@@ -1,0 +1,14 @@
+Same as LHC10h8, except:
+
+- production path on alien; 
+
+- output archive (no RecPoints and Hits)
+
+- process type in splitarguments
+
+OutputArchive = 
+   {
+      "log_archive:stderr,stdout,sim.log,rec.log,tag.log@disk=1",
+      "root_archive.zip:galice.root,Kinematics.root,TrackRefs.root,AliESDs.root,AliESDfriends.root@disk=3"
+   }; 
+splitarguments = "simrun.C --run 137161 --event #alien_counter# --process kHijing2000HF --energy 2760 --bmin 0. --bmax 30."; 

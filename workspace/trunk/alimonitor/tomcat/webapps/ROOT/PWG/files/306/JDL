@@ -1,0 +1,44 @@
+Packages =
+   {
+      "VO_ALICE@AliRoot::v5-01-Rev-25",
+      "VO_ALICE@ROOT::v5-30-06-1",
+      "VO_ALICE@GEANT3::v1-12",
+      "VO_ALICE@APISCONFIG::V1.1x"
+   };
+Jobtag =
+   {
+      "comment:LHC period LHC10h - MUON embedding pass2 - B"
+   };
+Split = "file";
+OutputDir = "/alice/cern.ch/user/j/jcastill/data/2010/LHC10h/pass2embb/$1/$2/#alienfilename/.root//#";
+Price = 1;
+Executable = "aliroot_new";
+InputFile =
+   {
+      "LF:/alice/cern.ch/user/j/jcastill/data/2010/LHC10h/pass2embb/simrun.C",
+      "LF:/alice/cern.ch/user/j/jcastill/data/2010/LHC10h/pass2embb/rec.C",
+      "LF:/alice/cern.ch/user/j/jcastill/data/2010/LHC10h/pass2embb/sim.C",
+      "LF:/alice/cern.ch/user/j/jcastill/data/2010/LHC10h/pass2embb/Config.C",
+      "LF:/alice/cern.ch/user/j/jcastill/data/2010/LHC10h/pass2embb/CheckESD.C"
+   };
+User = "jcastill";
+splitarguments="simrun.C --run $1 --rawfile /alice/data/2010/LHC10h/000$1/raw/#alienfilename# --energy 2760 --trigger CMBAC-B-NOPF-ALL:CMBACS2-B-NOPF-ALL:CMBACS2-B-NOPF-ALLNOTRD";
+OutputArchive =
+   {
+			"log_archive.zip:stdout,stderr,simBackground.log,sim.log,rec.log,check.log,simSignal.log,recSignal.log,checkSignal.log,*.stat@disk=1",
+			"root_archive.zip:galice.root,Trigger.root,TrackRefs.root,Kinematics.root,AliESDs.root,AliESDsSignal.root@disk=2"
+   };
+TTL = "86400";
+Workdirectorysize =
+   {
+      "6000MB"
+   };
+MemorySize = "4GB";
+InputDataCollection = "LF:/alice/cern.ch/user/j/jcastill/data/2010/LHC10h/collections/000$1$2.xml,nodownload";
+GUIDFILE = "guid.txt";
+JDLVariables =
+   {
+      "Packages",
+      "OutputDir"
+   };
+Validationcommand = "/alice/cern.ch/user/j/jcastill/data/2010/LHC10h/pass2embb/validation.sh";

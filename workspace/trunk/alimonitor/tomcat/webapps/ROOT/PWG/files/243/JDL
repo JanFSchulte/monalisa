@@ -1,0 +1,42 @@
+Packages = 
+   {
+      "VO_ALICE@AliRoot::v4-20-Rev-08",
+      "VO_ALICE@GEANT3::v1-11-18",
+      "VO_ALICE@ROOT::v5-27-06b",
+      "VO_ALICE@APISCONFIG::V1.1x"
+   };
+Jobtag={"comment:pp, ($1), 0.5T, 7 TeV, LHC10d anchor runs, ID #1245"};
+splitarguments="simrun.C --run $2 --event #alien_counter# --process $1 --energy 7000";
+split="production:1-$3";
+OutputDir = "/alice/cern.ch/user/a/amaire/LHC10f6Omega/$1/$2/#alien_counter_03i#"; 
+
+Executable = "aliroot_new";
+# InputData= {"LF:/alice/cern.ch/user/a/amaire/LHC10f6Omega/dummy.txt"};
+
+InputFile= {"LF:/alice/cern.ch/user/a/amaire/LHC10f6Omega/CheckESD.C",
+            "LF:/alice/cern.ch/user/a/amaire/LHC10f6Omega/Config.C",
+            "LF:/alice/cern.ch/user/a/amaire/LHC10f6Omega/rec.C",
+            "LF:/alice/cern.ch/user/a/amaire/LHC10f6Omega/sim.C",
+            "LF:/alice/cern.ch/user/a/amaire/LHC10f6Omega/simrun.C",
+            "LF:/alice/cern.ch/user/a/amaire/LHC10f6Omega/tag.C"};
+
+User = "amaire"; 
+
+OutputArchive = 
+   {
+      "log_archive.zip:stderr,stdout,sim.log,rec.log,tag.log@disk=1",
+      "root_archive.zip:galice.root,Kinematics.root,TrackRefs.root,AliESDs.root,AliESDfriends.root,Run*.root@disk=2"
+   }; 
+
+Requirements = member(other.GridPartitions,"PDC08_2");
+TTL = "72000"; 
+
+Workdirectorysize={"10000MB"};
+GUIDFILE="guid.txt"; 
+JDLVariables = 
+   {
+      "Packages",
+      "OutputDir"
+   }; 
+Validationcommand = "/alice/cern.ch/user/a/aliprod/prod2007/configs_pbpb_hijing/validation.sh";
+

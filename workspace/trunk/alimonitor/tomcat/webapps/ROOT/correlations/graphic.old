@@ -1,0 +1,34 @@
+<table cellpadding="7" cellspacing="1" border="0" align="left" class="text">
+    <tr>
+	<td colspan="2" align="left"><h2>Correlations</h2></td>
+    </tr>
+    <tr>
+	<td class="correlations" align="right">Title:</td>
+	<td class="correlations"><<:title:>></td>
+    </tr>
+    <tr>
+	<td class="correlations" align="right">Width:</td>
+	<td class="correlations"><<:width:>></td>
+    </tr>
+    <tr>
+	<td class="correlations" align="right">Height:</td>
+	<td class="correlations"><<:height:>></td>
+    </tr>
+    <tr>
+	<td class="correlations" align="right">Samerange:</td>
+	<td class="correlations"><<:samerange:>></td>
+    </tr>
+    <tr>
+	<td class="correlations" align="right">Drop Y Above:</td>
+	<td class="correlations"><<:dropyabove:>></td>
+    </tr>
+    <tr>
+	<td class="correlations" align="right">Drop Y Below:</td>
+	<td class="correlations"><<:dropybelow:>></td>
+    </tr>
+    <tr>
+	<td class="correlations" align="right"></td>
+	<td class="correlations"><a href="/correlations/correlations.jsp?prop=<<:prop:>>" class="link"><b>Edit data</b></a></td>
+    </tr>
+    </form>
+</table>
