@@ -271,285 +271,107 @@
 	db.syncUpdateQuery("UPDATE train_run SET lpm_id="+lpm_id+" WHERE train_id="+trainId+" AND id="+runId);
     }
     
-private static final synchronized String startTest(final int trainId, final int runId, final int test_only_full_train, final int splitAll, final int derived_data, final int no_clean_up, final int slow_train_run) throws IOException {
+private static final synchronized String startTest(final int trainId, final int runId, final int test_only_full_train, final int splitAll, final int derived_data, final int no_clean_up, final int slow_train_run, JspWriter out) throws IOException {
 	StringBuilder sb = new StringBuilder(1024);
 
 	DB db = new DB();
 
-	db.query("SELECT globallibraries FROM train_def WHERE train_id="+trainId+";");
-	String globallibraries = db.gets("globallibraries");
-	
-	db.query("select train_wagon.*, train_run_wagon.*, train_subwagon.config, train_subwagon.activated from train_run_wagon natural inner join train_wagon left join train_subwagon ON (train_run_wagon.train_id=train_subwagon.train_id AND train_run_wagon.wagon_name=train_subwagon.wagon_name AND train_run_wagon.subwagon_name=train_subwagon.subwagon_name) where train_run_wagon.train_id="+trainId+" and id="+runId+" and (activated=true or activated is NULL) order by length(dependencies), dependencies;");
-	
-	int needsAliEn = 0;
-	sb.append("TestLine\n");
-	while (db.moveNext()){
-	    sb.append("#_______________________________________________________________________________\n");
-	    sb.append("#Module.Begin        "+db.gets("wagon_name")+((db.gets("subwagon_name").length()>0) ? "_"+db.gets("subwagon_name") : "")+"\n");
-	    sb.append("#Module.Libs         "+globallibraries+((globallibraries.length()>0 && db.gets("libraries").length()>0) ? "," : "")+db.gets("libraries")+"\n");
-	    sb.append("#Module.DataTypes    ESD, AOD, MC\n");
-	    sb.append("#Module.MacroName    $ALICE_ROOT/"+db.gets("macro_path")+"\n");
-	    sb.append("#Module.MacroArgs    "+db.gets("parameters")+((db.gets("subwagon_name").length()>0) ? ", \""+db.gets("subwagon_name")+"\"" : "")+"\n");
-	    sb.append("#Module.Deps         "+db.gets("dependencies")+"\n");
-	    sb.append("#Module.Owner        "+db.gets("username")+"\n");
-	    sb.append("#Module.OutputFile   "+db.gets("outputfile")+"\n");
-	    if (db.gets("terminatefile").length() > 0)
-	      sb.append("#Module.TerminateFile "+db.gets("terminatefile")+"\n");
-	    sb.append("#Module.StartConfig\n");
-	    sb.append(db.gets("macro_body")+"\n");
-	    if(db.gets("subwagon_name").length()>0 && db.getb("activated"))
-		sb.append(db.gets("config")+"\n");
-	    sb.append("#Module.EndConfig\n");
-	    sb.append("\n");
-	    
-	    if (db.getb("addtask_needs_alien", false))
-	      needsAliEn = 1;
-	}
- 
 	db.query("SELECT wg_no,train_name,train_debuglevel,excludefiles,additionalpackages,globalvariables,outputfiles FROM train_def WHERE train_id="+trainId);
 	DB db2 = new DB("SELECT globalvariables_dataset from train_period where train_id="+trainId+" and period_name=(SELECT period_name from train_run_period where train_id="+trainId+" and id="+runId+");");
 
 	final String train_name = db.gets("train_name");
 	String sTestDir = "PWG"+db.gets(1)+"/"+db.gets(2)+"/"+runId+"_"+getDirName();
 	final int debuglevel = db.geti(3, 0);
-	final String excludefiles = db.gets(4);
+	//~ final String excludefiles = db.gets(4);
 	final String additionalpackages = db.gets(5);
 	final String outputfiles = db.gets("outputfiles");
 
+
+
+	sb.append("class trainconfig:\n");
+	
+	sb.append("	class mainConfig:\n");
+	
+	sb.append("		id = "+trainId+"\n");
+	sb.append("		debugLevel = "+debuglevel+"\n");	
+	sb.append("		name = '"+db.gets("train_name")+"'\n");
+	db.query("SELECT outputfiles FROM train_def WHERE train_id="+trainId);
+	String outputFiles = "['";
+	while (db.moveNext()){
+		outputFiles += db.gets(1)+"','";
+		
+	}	
+	outputFiles +="']";
+	sb.append("		outputFiles = "+outputFiles+"\n");	
+	db.query("SELECT excludefiles FROM train_def WHERE train_id="+trainId);
+	String excludefiles = "['";
+	while (db.moveNext()){
+		excludefiles += db.gets(1)+"','";
+		
+	}	
+	excludefiles +="']";
+	sb.append("		excludefiles = "+excludefiles+"\n");	
+	sb.append("	class runConfig:\n");
+	
+	db.query("SELECT ver_aliroot FROM train_run WHERE train_id="+trainId+" and id="+runId);	
+	String cmssw_version = db.gets(1);
+	db.query("SELECT architecture FROM cmssw_releases WHERE release='"+cmssw_version+"'");
+	String arch = db.gets(1);	
+	db.query("SELECT path FROM cmssw_releases WHERE release='"+cmssw_version+"'");
+	String release_path = db.gets(1);	
+	sb.append("		release = '"+cmssw_version+"'\n");
+	sb.append("		scramArchitcture = '"+arch+"'\n");
+	sb.append("		releasePath = '"+release_path+"'\n");	
+	sb.append("		runID = '"+runId+"'\n");	
+
+
+	db.query("select train_period.* from train_run_period natural inner join train_period where train_id="+trainId+" and id="+runId+";");
+	
+	String period_name = db.gets("period_name");
+	sb.append("		dataSetName = '"+period_name+"'\n");
+	
+	
+	db.query("select train_wagon.*, train_run_wagon.*, train_subwagon.config, train_subwagon.activated from train_run_wagon natural inner join train_wagon left join train_subwagon ON (train_run_wagon.train_id=train_subwagon.train_id AND train_run_wagon.wagon_name=train_subwagon.wagon_name AND train_run_wagon.subwagon_name=train_subwagon.subwagon_name) where train_run_wagon.train_id="+trainId+" and id="+runId+" and (activated=true or activated is NULL) order by length(dependencies), dependencies;");
+
+	
+	sb.append("	class wagons:\n");
+	while (db.moveNext()){
+	    sb.append("		class "+db.gets("wagon_name")+":\n");
+	    sb.append("			wagonName = '"+db.gets("wagon_name")+"'\n");
+		sb.append("			userName = '"+db.gets("username")+"'\n");
+		sb.append("			macroPath = '"+db.gets("macro_path")+"'\n");
+		sb.append("			parameters = '"+"--conditions=MCRUN2_72_V0A:All --fast  -n 10 --eventcontent FEVTDEBUGHLT -s GEN,SIM,RECO,EI,HLT:@relval --datatier GEN-SIM-DIGI-RECO --customise SLHCUpgradeSimulations/Configuration/postLS1Customs.customisePostLS1 --magField 38T_PostLS1 --no_exec"+"'\n");		
+	    sb.append("			outputFile = '"+db.gets("outputfile")+"'\n");
+	    sb.append("			cmsCommand = 'cmsDriver.py'\n");
+
+	}
+ 
 	String dirName = basePath+sTestDir;
-
-
-
-
-
 	
 	File f = new File(dirName+"/config");
 	f.mkdirs();
 	
-	FileWriter w = new FileWriter(dirName+"/config/MLTrainDefinition.cfg");
+	FileWriter w = new FileWriter(dirName+"/config/train_cfg.py");
 	w.write(sb.toString());
 	w.flush();
 	w.close();
 
-	sb = new StringBuilder(1024);
 	
-	sb.append("{\n");
-	sb.append(db.gets("globalvariables"));
-	sb.append("\n");
-	sb.append(db2.gets("globalvariables_dataset"));
-	sb.append("\n}\n");
-	
-	w = new FileWriter(dirName+"/config/globalvariables.C");
-	w.write(sb.toString());
-	w.flush();
-	w.close();
 
-	db.query("SELECT * FROM train_handler WHERE train_id="+trainId+" AND enabled=1");
 	
 	sb = new StringBuilder(1024);
-	
-	sb.append("void handlers()\n");
-	sb.append("{\n");
 
-	while (db.moveNext()){
-	    sb.append("  {\n");
-		
-	    String sMacro = db.gets("macro_path");
-	    String sParam = db.gets("parameters");
-	    String sBody  = db.gets("macro_body");
-		
-	    if (sMacro.length()>0){
-		sb.append("    gROOT->LoadMacro(gSystem->ExpandPathName(\"$ALICE_ROOT/"+sMacro+"\"));\n");
-		
-		String functionName = sMacro;
-		
-		if (functionName.indexOf('/')>=0)
-		    functionName = functionName.substring(functionName.lastIndexOf('/')+1);
-		
-		if (functionName.indexOf('.')>=0)
-		    functionName = functionName.substring(0, functionName.indexOf('.'));
-		
-		sb.append("    AliVEventHandler* handler = "+functionName+"("+sParam+");\n");
-	    }
-	    
-	    if (sBody.length()>0)
-	        sb.append(sBody).append('\n');
-		
-	    sb.append("  }\n");
-	}
+	//~ out.println("<script type=text/javascript>alert('SELECT architecture FROM cmssw_releases WHERE release="+cmssw_version+"');</script>");
+
 	
-	sb.append("}\n");
-	
-	w = new FileWriter(dirName+"/config/handlers.C");
-	w.write(sb.toString());
-	w.flush();
-	w.close();
-	
-	db.query("SELECT ver_aliroot FROM train_run WHERE train_id="+trainId+" and id="+runId);
-	
-	sb = new StringBuilder(1024);
-	
-	sb.append("export ALIROOT_VERSION='"+db.gets(1)+"'\n");
-	
-	final alien.catalogue.Package pack = PackageUtils.getPackage(db.gets(1));
-	
-	if (pack!=null){
-    	    for (String dependency: pack.getDependencies()){
-		if (dependency.startsWith("VO_ALICE@ROOT::"))
-		    sb.append("export ROOT_VERSION='"+dependency+"'\n");
-		else
-		if (dependency.startsWith("VO_ALICE@GEANT"))
-		    sb.append("export GEANT_VERSION='"+dependency+"'\n");
-	    }
-	}
-	
-	db.query("select train_period.* from train_run_period natural inner join train_period where train_id="+trainId+" and id="+runId+";");
-	
-	String period_name = db.gets("period_name");
+
 	String gen_macro_body = db.gets("gen_macro_body");
 
 	int analyzed_dataset = db.geti("aod");
 
-	sb.append("export PERIOD_NAME='"+period_name+"'\n");
-	sb.append("export REFERENCE_PRODUCTION='"+db.gets("refprod")+"'\n");
-	sb.append("export TEST_FILES_NO='"+db.geti("test_files_no", 2)+"'\n");
-	sb.append("export SPLIT_MAX_INPUT_FILE_NUMBER='"+db.geti("splitmaxinputfilenumber", 20)+"'\n");
-	sb.append("export MAX_MERGE_FILES='"+db.geti("maxmergefiles", 10)+"'\n");
-	sb.append("export TTL='"+db.geti("ttl", 70000)+"'\n");
-	sb.append("export DEBUG_LEVEL='"+debuglevel+"'\n");
-	sb.append("export EXCLUDE_FILES='"+excludefiles+"'\n");
-	sb.append("export FRIEND_CHAIN_NAMES='"+db.gets("friendchainnames")+"'\n");
-	sb.append("export FRIEND_CHAIN_LIBRARIES='"+db.gets("friendchain_libraries")+"'\n");
-	sb.append("export ADDITIONAL_PACKAGES='"+additionalpackages+"'\n");
-	sb.append("export OUTPUT_FILES='"+outputfiles+"'\n");
-	sb.append("export PP='"+db.getb("pp")+"'\n");
-	sb.append("export AOD='"+db.geti("aod")+"'\n");
-	sb.append("export SUBSELECTION='"+db.gets("subselection")+"'\n");
-	sb.append("export ADDTASK_NEEDS_ALIEN='"+needsAliEn+"'\n");
-	sb.append("export GEN_MACRO_PATH='"+db.gets("gen_macro_path")+"'\n");
-	sb.append("export GEN_PARAMETERS='"+db.gets("gen_parameters")+"'\n");
-	sb.append("export GEN_LIBRARIES='"+db.gets("gen_libraries")+"'\n");
-	sb.append("export GEN_TOTAL_EVENTS='"+db.geti("gen_total_events")+"'\n");
-	sb.append("export TEST_ONLY_FULL_TRAIN='"+test_only_full_train+"'\n");
 
-	String runlist = getRunlist(trainId, period_name, 0, false);//get the runlist from train_period_runlist
 
-	String sPeriod = db.gets("refprod");
-	
-	if (db.geti("aod") == 200){
-	    sb.append("export FILE_PATTERN='"+db.gets("main_file_name")+"'\n");
-	}
-	else if (sPeriod.startsWith("FILTER_") || db.geti("aod") == 1 || db.geti("aod") == 2){
-	    sb.append("export FILE_PATTERN='AliAOD.root'\n");
-	}
-	else if (db.geti("aod") == 3) {
-	    sb.append("export FILE_PATTERN='galice.root'\n");
-	}
-	else if (db.geti("aod") == 4) {
-	    sb.append("export FILE_PATTERN='AliESDs_wSDD.root'\n");
-	}
-	else if (db.geti("aod") == 5) {
-	    sb.append("export FILE_PATTERN='AliESDs_Barrel.root'\n");
-	}
-	else if (db.geti("aod") == 6) {
-	    sb.append("export FILE_PATTERN='AliESDs_Outer.root'\n");
-	}
-	else {
-	    sb.append("export FILE_PATTERN='AliESDs.root'\n");
-	}
 
-	if(splitAll==1){
-	    db.query("select Count(*) from train_period_runlist where train_id="+trainId+" and period_name='"+period_name+"'  AND activated = true;");
-	    int runlists_number = db.geti(1);
-
-	    //need chunks if there are more than one runlist
-	    if(runlists_number==1)
-		sb.append("export SPLITALL='1'\n");
-	    else if(runlists_number>1){
-		sb.append("export SPLITALL='2'\n");
-		//first get runlist with the mentioned runs, so an empty runlist (which should run over all runs) is skipped
-		String runlist2 = getRunlist(trainId, period_name, 0, true);
-		//get Run chunks: if all runs should be processed only the ones which are directly mentioned in one of the runlist are mentioned
-		String runlist_chunk = getRunlistChunk(trainId, period_name, runlist2);
-		sb.append("export RUN_CHUNKS='"+runlist_chunk+"'\n");
-	    }
-	    
-	}
-
-	if(slow_train_run==1)
-	    sb.append("export SLOW_TRAIN_RUN='1'\n");
-	else
-	    sb.append("export SLOW_TRAIN_RUN='0'\n");
-	
-	System.err.println("Period: "+sPeriod);
-	
-
-	if (!sPeriod.startsWith("Derived Data:")){
-	    db.query("SELECT jt_id FROM job_types WHERE jt_field1='"+Format.escSQL(sPeriod)+"';");
-
-	    if (db.moveNext()){
-		int jtId = db.geti(1);
-	    
-		// remove new lines
-		runlist = runlist.replaceAll("\\r\\n", "").replaceAll("\\n", "");
-	    
-		if (runlist.length()>0)
-		    runlist = " AND runno IN ("+Format.escSQL(runlist)+")";
-	    
-		//String q = "select runno,outputdir from job_runs_details inner join job_stats using(pid) where job_types_id="+jtId+" and owner in ('alidaq', 'aliprod', 'alitrain') "+runlist+" order by outputsize DESC limit 1;";
-		String q = "select runno,outputdir,pid from job_runs_details inner join job_stats using(pid)  inner join job_stats_details using(pid) where " +
-				"job_types_id="+jtId+" and owner in ('alidaq', 'aliprod', 'alitrain') and job_stats_details.state='DONE' and cnt>0 "+runlist+" order by outputsize DESC limit 1;";
-		
-		//System.err.println(q);
-	    
-		db.query(q);
-	    
-		if (db.geti(1)>0)
-		    sb.append("export RUNNO='"+db.geti(1)+"'\n");
-	        
-	        String sTestDirPath = db.gets(2);
-	        
-		sb.append("export TEST_DIR='"+sTestDirPath+"'\n");
-		
-		final alien.taskQueue.JDL jdl = new alien.taskQueue.JDL();
-		
-		jdl.set("OutputDir", sTestDirPath);
-		
-		alien.repository.LPMSubmission.decorateJDL(jdl, db.geti(3), db.geti(1));
-		
-		for (final String key: jdl.keySet()){
-		    if (!key.equals("JDLVariables")){
-			sb.append("export ALIEN_JDL_"+key.toUpperCase()+"='"+jdl.gets(key)+"'\n");
-		    }
-		}
-	    }
-	}else if (sPeriod.startsWith("Derived Data:")){
-	    int idx_1 = sPeriod.lastIndexOf("(")+1;
-	    int idx_2 = sPeriod.lastIndexOf(")");
-	    String chain_id = sPeriod.substring(idx_1, idx_2);
-
-	    db.query("select job_runs_details.runno,outputdir from job_runs_details inner join job_stats using(pid) inner join job_stats_details using(pid) inner join lpm_history using(pid) where owner in ('alidaq', 'aliprod', 'alitrain') and job_stats_details.state='DONE' and cnt>0 and chain_id="+chain_id+" order by outputsize DESC limit 1;");
-
-	    sb.append("export RUNNO='"+db.geti(1)+"'\n");
-	        
-	    sb.append("export TEST_DIR='"+db.gets(2)+"'\n");
-
-	}
-	
-	w = new FileWriter(dirName+"/config/env.sh");
-	w.write(sb.toString());
-	w.flush();
-	w.close();
-
-	sb = new StringBuilder(1024);
-	sb.append("void generator_customization(AliGenerator* generator)\n");	
-	sb.append("{\n");
-	sb.append(gen_macro_body);
-	sb.append("\n}\n");
-	w = new FileWriter(dirName+"/config/generator_customization.C");
-	w.write(sb.toString());
-	w.flush();
-	w.close();
 	
 	w = new FileWriter(basePath+"train-queue/tests/"+System.currentTimeMillis());
 	w.write(sTestDir+"\n");
@@ -881,7 +703,7 @@ private static final synchronized String startTest(final int trainId, final int 
 		if(submit.startsWith("Start fast test"))
 		    start_fast_test = 1;
 
-		startTest(train_id, id, start_fast_test, rw.geti("splitAll", 0), rw.geti("derived_data", 0), rw.geti("no_clean_up", 0), rw.geti("slow_run", 0));
+		startTest(train_id, id, start_fast_test, rw.geti("splitAll", 0), rw.geti("derived_data", 0), rw.geti("no_clean_up", 0), rw.geti("slow_run", 0),out);
 
 		if (newEntryCreated)
 		  out.println("<script type=text/javascript>parent.Windows.addObserver(parent.obs);</script>");

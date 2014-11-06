@@ -13,7 +13,7 @@
 	      <td class="table_title">
 		  <table border=0 cellspacing=0 cellpadding=0 width=100%>
 		      <tr>
-			  <td align=left><b>ALICE Analysis Trains</b></td>
+			  <td align=left><b>CMS Analysis Trains</b></td>
 			  <td align=right class=text>Welcome <b><<:account:>></b> - <a class=link  href="https://twiki.cern.ch/twiki/bin/viewauth/ALICE/AnalysisTrains" target="_blank">Help<a/></td>
 		      </tr>
 		  </table>
@@ -33,7 +33,7 @@
 		      </tr>
 		      -->
 		      <tr height=25>
-			  <th class="table_header_stats"><b>PWG</b></th>
+			  <th class="table_header_stats"><b>PAG</b></th>
 			  <th class="table_header_stats"><b>Train name</b></th>
 			  <th class="table_header_stats"><b>I'm in</b></th>
 			  <th class="table_header_stats"><b>Last run</b></th>

@@ -1,8 +1,8 @@
 <<:imports:>><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html  xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml">
 <head>
-<title><<:title esc:>> - ALICE Grid Monitoring with MonALISA</title>
-<meta name="description" content="<<:title esc:>> - MonALISA repository for CERN ALICE Grid">
+<title><<:title esc:>> - Analysis Submission and Monitoring for CMS</title>
+<meta name="description" content="<<:title esc:>> - Analysis Trains for CMS GRID workflows">
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <META NAME="geo.position" CONTENT="46.233086;6.051707">
 <META NAME="geo.country" CONTENT="CH">
@@ -12,8 +12,8 @@
 <meta name="ICBM" content="46.233086, 6.051707">
 <LINK REL="SHORTCUT ICON" HREF="/favicon.gif" type="image/gif">
 <LINK REL="ICON" HREF="/favicon.gif" type="image/gif">
-<link rel="alternate" type="application/atom+xml" title="ALICE - Operational log" href="/atom.jsp?set=1">
-<link rel="alternate" type="application/atom+xml" title="ALICE - Central services" href="/atom.jsp?set=7">
+<link rel="alternate" type="application/atom+xml" title="CMS - Operational log" href="/atom.jsp?set=1">
+<link rel="alternate" type="application/atom+xml" title="CMS - Central services" href="/atom.jsp?set=7">
 
 <link rel="stylesheet" type="text/css" href="/js/combined-1298642474.yui.css">
 <script type="text/javascript" src="/js/combined-1334673986.yui.js"></script>

@@ -161,8 +161,8 @@
     <tr>
 	<td>CMSSW version</td>
 	<td colspan=3>
-<!--
 	    <<:com_edit_start:>>
+<!--
 	    <select name="ver_gcc" class=input_select  onChange="onChangeAction();">
 		 <option value=" slc6_amd64_gcc472">slc6_amd64_gcc472</option>
 		 <option value=" slc6_amd64_gcc480">slc6_amd64_gcc480</option>
